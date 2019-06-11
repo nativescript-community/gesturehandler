@@ -1,0 +1,648 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXAggregateTarget section */
+		D5BCF1D522A7AA4400134E09 /* universal */ = {
+			isa = PBXAggregateTarget;
+			buildConfigurationList = D5BCF1D622A7AA4400134E09 /* Build configuration list for PBXAggregateTarget "universal" */;
+			buildPhases = (
+				D5BCF1D922A7AA4A00134E09 /* ShellScript */,
+			);
+			dependencies = (
+			);
+			name = universal;
+			productName = test;
+		};
+/* End PBXAggregateTarget section */
+
+/* Begin PBXBuildFile section */
+		D511445B22A69EA500E0D0DD /* GestureHandlerEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = D511445322A69EA400E0D0DD /* GestureHandlerEvents.m */; };
+		D511445C22A69EA500E0D0DD /* GestureHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511445422A69EA400E0D0DD /* GestureHandler.m */; };
+		D511445D22A69EA500E0D0DD /* GestureHandlerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D511445A22A69EA500E0D0DD /* GestureHandlerManager.m */; };
+		D511447022A6A1DC00E0D0DD /* FlingHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511446122A6A1DC00E0D0DD /* FlingHandler.m */; };
+		D511447122A6A1DC00E0D0DD /* ForceTouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511446322A6A1DC00E0D0DD /* ForceTouchHandler.m */; };
+		D511447222A6A1DC00E0D0DD /* LongPressHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511446522A6A1DC00E0D0DD /* LongPressHandler.m */; };
+		D511447322A6A1DC00E0D0DD /* NativeViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511446722A6A1DC00E0D0DD /* NativeViewHandler.m */; };
+		D511447422A6A1DC00E0D0DD /* PanHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511446922A6A1DC00E0D0DD /* PanHandler.m */; };
+		D511447522A6A1DC00E0D0DD /* PinchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511446B22A6A1DC00E0D0DD /* PinchHandler.m */; };
+		D511447622A6A1DC00E0D0DD /* RotationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511446D22A6A1DC00E0D0DD /* RotationHandler.m */; };
+		D511447722A6A1DC00E0D0DD /* TapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511446F22A6A1DC00E0D0DD /* TapHandler.m */; };
+		D511447A22A6A35700E0D0DD /* GestureHandlerRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = D511447822A6A35700E0D0DD /* GestureHandlerRegistry.m */; };
+		D57B4CB2223271E600EFC1C9 /* GestureHandlerHeader.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D57B4CAE2232648E00EFC1C9 /* GestureHandlerHeader.h */; };
+		D5BCF16422A6B53700134E09 /* FlingHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D511446022A6A1DC00E0D0DD /* FlingHandler.h */; };
+		D5BCF16522A6B53800134E09 /* ForceTouchHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D511446222A6A1DC00E0D0DD /* ForceTouchHandler.h */; };
+		D5BCF16622A6B53800134E09 /* LongPressHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D511446422A6A1DC00E0D0DD /* LongPressHandler.h */; };
+		D5BCF16722A6B53800134E09 /* NativeViewHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D511446622A6A1DC00E0D0DD /* NativeViewHandler.h */; };
+		D5BCF16822A6B53800134E09 /* PanHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D511446822A6A1DC00E0D0DD /* PanHandler.h */; };
+		D5BCF16922A6B53800134E09 /* PinchHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D511446A22A6A1DC00E0D0DD /* PinchHandler.h */; };
+		D5BCF16A22A6B53800134E09 /* RotationHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D511446C22A6A1DC00E0D0DD /* RotationHandler.h */; };
+		D5BCF16B22A6B53800134E09 /* TapHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D511446E22A6A1DC00E0D0DD /* TapHandler.h */; };
+		D5BCF16C22A6B53800134E09 /* GestureHandler.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D511445E22A6A16800E0D0DD /* GestureHandler.h */; };
+		D5BCF16D22A6B53800134E09 /* GestureHandlerDirection.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D511445622A69EA500E0D0DD /* GestureHandlerDirection.h */; };
+		D5BCF16E22A6B53800134E09 /* GestureHandlerEvents.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D511445722A69EA500E0D0DD /* GestureHandlerEvents.h */; };
+		D5BCF16F22A6B53800134E09 /* GestureHandlerManager.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D511445922A69EA500E0D0DD /* GestureHandlerManager.h */; };
+		D5BCF17022A6B53800134E09 /* GestureHandlerState.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D511445522A69EA500E0D0DD /* GestureHandlerState.h */; };
+		D5BCF17122A6B53800134E09 /* GestureHandlerRegistry.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D511447922A6A35700E0D0DD /* GestureHandlerRegistry.h */; };
+		D5BCF17222A6B53800134E09 /* RootViewGestureRecognizer.h in CopyFiles */ = {isa = PBXBuildFile; fileRef = D5D8251822A6A77200775081 /* RootViewGestureRecognizer.h */; };
+		D5BCF18A22A7A31800134E09 /* FlingHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511446122A6A1DC00E0D0DD /* FlingHandler.m */; };
+		D5BCF18C22A7A31800134E09 /* ForceTouchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511446322A6A1DC00E0D0DD /* ForceTouchHandler.m */; };
+		D5BCF18E22A7A31800134E09 /* LongPressHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511446522A6A1DC00E0D0DD /* LongPressHandler.m */; };
+		D5BCF19022A7A31800134E09 /* NativeViewHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511446722A6A1DC00E0D0DD /* NativeViewHandler.m */; };
+		D5BCF19222A7A31800134E09 /* PanHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511446922A6A1DC00E0D0DD /* PanHandler.m */; };
+		D5BCF19422A7A31800134E09 /* PinchHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511446B22A6A1DC00E0D0DD /* PinchHandler.m */; };
+		D5BCF19622A7A31800134E09 /* RotationHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511446D22A6A1DC00E0D0DD /* RotationHandler.m */; };
+		D5BCF19822A7A31800134E09 /* TapHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511446F22A6A1DC00E0D0DD /* TapHandler.m */; };
+		D5BCF19A22A7A31800134E09 /* GestureHandler.m in Sources */ = {isa = PBXBuildFile; fileRef = D511445422A69EA400E0D0DD /* GestureHandler.m */; };
+		D5BCF19D22A7A31800134E09 /* GestureHandlerEvents.m in Sources */ = {isa = PBXBuildFile; fileRef = D511445322A69EA400E0D0DD /* GestureHandlerEvents.m */; };
+		D5BCF19F22A7A31800134E09 /* GestureHandlerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D511445A22A69EA500E0D0DD /* GestureHandlerManager.m */; };
+		D5BCF1A222A7A31800134E09 /* GestureHandlerRegistry.m in Sources */ = {isa = PBXBuildFile; fileRef = D511447822A6A35700E0D0DD /* GestureHandlerRegistry.m */; };
+		D5BCF1A522A7A31800134E09 /* RootViewGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D8251922A6A77200775081 /* RootViewGestureRecognizer.m */; };
+		D5BCF1A622A7A32A00134E09 /* FlingHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = D511446022A6A1DC00E0D0DD /* FlingHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5BCF1A822A7A32A00134E09 /* ForceTouchHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = D511446222A6A1DC00E0D0DD /* ForceTouchHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5BCF1AA22A7A32A00134E09 /* LongPressHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = D511446422A6A1DC00E0D0DD /* LongPressHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5BCF1AC22A7A32A00134E09 /* NativeViewHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = D511446622A6A1DC00E0D0DD /* NativeViewHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5BCF1AE22A7A32A00134E09 /* PanHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = D511446822A6A1DC00E0D0DD /* PanHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5BCF1B022A7A32A00134E09 /* PinchHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = D511446A22A6A1DC00E0D0DD /* PinchHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5BCF1B222A7A32A00134E09 /* RotationHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = D511446C22A6A1DC00E0D0DD /* RotationHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5BCF1B422A7A32A00134E09 /* TapHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = D511446E22A6A1DC00E0D0DD /* TapHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5BCF1B722A7A32A00134E09 /* GestureHandlerDirection.h in Headers */ = {isa = PBXBuildFile; fileRef = D511445622A69EA500E0D0DD /* GestureHandlerDirection.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5BCF1B822A7A32A00134E09 /* GestureHandlerEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = D511445722A69EA500E0D0DD /* GestureHandlerEvents.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5BCF1BA22A7A32A00134E09 /* GestureHandlerManager.h in Headers */ = {isa = PBXBuildFile; fileRef = D511445922A69EA500E0D0DD /* GestureHandlerManager.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5BCF1BC22A7A32A00134E09 /* GestureHandlerState.h in Headers */ = {isa = PBXBuildFile; fileRef = D511445522A69EA500E0D0DD /* GestureHandlerState.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5BCF1BD22A7A32A00134E09 /* GestureHandlerRegistry.h in Headers */ = {isa = PBXBuildFile; fileRef = D511447922A6A35700E0D0DD /* GestureHandlerRegistry.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5BCF1BF22A7A32A00134E09 /* GestureHandlerHeader.h in Headers */ = {isa = PBXBuildFile; fileRef = D57B4CAE2232648E00EFC1C9 /* GestureHandlerHeader.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5BCF1C022A7A32A00134E09 /* RootViewGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = D5D8251822A6A77200775081 /* RootViewGestureRecognizer.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5BCF1DB22A7B0C800134E09 /* GestureHandler.h in Headers */ = {isa = PBXBuildFile; fileRef = D511445E22A6A16800E0D0DD /* GestureHandler.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		D5D8251A22A6A77200775081 /* RootViewGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = D5D8251922A6A77200775081 /* RootViewGestureRecognizer.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BF6DBD7E1C109B9800FC37E0 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "include/$(PRODUCT_NAME)";
+			dstSubfolderSpec = 16;
+			files = (
+				D57B4CB2223271E600EFC1C9 /* GestureHandlerHeader.h in CopyFiles */,
+				D5BCF16422A6B53700134E09 /* FlingHandler.h in CopyFiles */,
+				D5BCF16522A6B53800134E09 /* ForceTouchHandler.h in CopyFiles */,
+				D5BCF16622A6B53800134E09 /* LongPressHandler.h in CopyFiles */,
+				D5BCF16722A6B53800134E09 /* NativeViewHandler.h in CopyFiles */,
+				D5BCF16822A6B53800134E09 /* PanHandler.h in CopyFiles */,
+				D5BCF16922A6B53800134E09 /* PinchHandler.h in CopyFiles */,
+				D5BCF16A22A6B53800134E09 /* RotationHandler.h in CopyFiles */,
+				D5BCF16B22A6B53800134E09 /* TapHandler.h in CopyFiles */,
+				D5BCF16C22A6B53800134E09 /* GestureHandler.h in CopyFiles */,
+				D5BCF16D22A6B53800134E09 /* GestureHandlerDirection.h in CopyFiles */,
+				D5BCF16E22A6B53800134E09 /* GestureHandlerEvents.h in CopyFiles */,
+				D5BCF16F22A6B53800134E09 /* GestureHandlerManager.h in CopyFiles */,
+				D5BCF17022A6B53800134E09 /* GestureHandlerState.h in CopyFiles */,
+				D5BCF17122A6B53800134E09 /* GestureHandlerRegistry.h in CopyFiles */,
+				D5BCF17222A6B53800134E09 /* RootViewGestureRecognizer.h in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		BF42575A1C16EEAB00E15E71 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = file.bplist; path = Info.plist; sourceTree = "<group>"; };
+		BF6DBD801C109B9800FC37E0 /* libGestureHandlerLib.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libGestureHandlerLib.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		D511445322A69EA400E0D0DD /* GestureHandlerEvents.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureHandlerEvents.m; sourceTree = "<group>"; };
+		D511445422A69EA400E0D0DD /* GestureHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureHandler.m; sourceTree = "<group>"; };
+		D511445522A69EA500E0D0DD /* GestureHandlerState.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureHandlerState.h; sourceTree = "<group>"; };
+		D511445622A69EA500E0D0DD /* GestureHandlerDirection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureHandlerDirection.h; sourceTree = "<group>"; };
+		D511445722A69EA500E0D0DD /* GestureHandlerEvents.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureHandlerEvents.h; sourceTree = "<group>"; };
+		D511445922A69EA500E0D0DD /* GestureHandlerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureHandlerManager.h; sourceTree = "<group>"; };
+		D511445A22A69EA500E0D0DD /* GestureHandlerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = GestureHandlerManager.m; sourceTree = "<group>"; };
+		D511445E22A6A16800E0D0DD /* GestureHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureHandler.h; sourceTree = "<group>"; };
+		D511446022A6A1DC00E0D0DD /* FlingHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlingHandler.h; sourceTree = "<group>"; };
+		D511446122A6A1DC00E0D0DD /* FlingHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlingHandler.m; sourceTree = "<group>"; };
+		D511446222A6A1DC00E0D0DD /* ForceTouchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ForceTouchHandler.h; sourceTree = "<group>"; };
+		D511446322A6A1DC00E0D0DD /* ForceTouchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ForceTouchHandler.m; sourceTree = "<group>"; };
+		D511446422A6A1DC00E0D0DD /* LongPressHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LongPressHandler.h; sourceTree = "<group>"; };
+		D511446522A6A1DC00E0D0DD /* LongPressHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LongPressHandler.m; sourceTree = "<group>"; };
+		D511446622A6A1DC00E0D0DD /* NativeViewHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NativeViewHandler.h; sourceTree = "<group>"; };
+		D511446722A6A1DC00E0D0DD /* NativeViewHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NativeViewHandler.m; sourceTree = "<group>"; };
+		D511446822A6A1DC00E0D0DD /* PanHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PanHandler.h; sourceTree = "<group>"; };
+		D511446922A6A1DC00E0D0DD /* PanHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PanHandler.m; sourceTree = "<group>"; };
+		D511446A22A6A1DC00E0D0DD /* PinchHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PinchHandler.h; sourceTree = "<group>"; };
+		D511446B22A6A1DC00E0D0DD /* PinchHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PinchHandler.m; sourceTree = "<group>"; };
+		D511446C22A6A1DC00E0D0DD /* RotationHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RotationHandler.h; sourceTree = "<group>"; };
+		D511446D22A6A1DC00E0D0DD /* RotationHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RotationHandler.m; sourceTree = "<group>"; };
+		D511446E22A6A1DC00E0D0DD /* TapHandler.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapHandler.h; sourceTree = "<group>"; };
+		D511446F22A6A1DC00E0D0DD /* TapHandler.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapHandler.m; sourceTree = "<group>"; };
+		D511447822A6A35700E0D0DD /* GestureHandlerRegistry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = GestureHandlerRegistry.m; path = GestureHandler/GestureHandlerRegistry.m; sourceTree = SOURCE_ROOT; };
+		D511447922A6A35700E0D0DD /* GestureHandlerRegistry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = GestureHandlerRegistry.h; path = GestureHandler/GestureHandlerRegistry.h; sourceTree = SOURCE_ROOT; };
+		D57B4CAE2232648E00EFC1C9 /* GestureHandlerHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = GestureHandlerHeader.h; sourceTree = "<group>"; };
+		D5BCF18122A7A30A00134E09 /* GestureHandler.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = GestureHandler.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		D5D8251822A6A77200775081 /* RootViewGestureRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RootViewGestureRecognizer.h; sourceTree = "<group>"; };
+		D5D8251922A6A77200775081 /* RootViewGestureRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RootViewGestureRecognizer.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D5BCF17E22A7A30A00134E09 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		031D3E1D991C5AF78F337886 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BF6DBD771C109B9800FC37E0 = {
+			isa = PBXGroup;
+			children = (
+				BF6DBD821C109B9800FC37E0 /* GestureHandler */,
+				BF6DBD811C109B9800FC37E0 /* Products */,
+				031D3E1D991C5AF78F337886 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		BF6DBD811C109B9800FC37E0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BF6DBD801C109B9800FC37E0 /* libGestureHandlerLib.a */,
+				D5BCF18122A7A30A00134E09 /* GestureHandler.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		BF6DBD821C109B9800FC37E0 /* GestureHandler */ = {
+			isa = PBXGroup;
+			children = (
+				D511446022A6A1DC00E0D0DD /* FlingHandler.h */,
+				D511446122A6A1DC00E0D0DD /* FlingHandler.m */,
+				D511446222A6A1DC00E0D0DD /* ForceTouchHandler.h */,
+				D511446322A6A1DC00E0D0DD /* ForceTouchHandler.m */,
+				D511446422A6A1DC00E0D0DD /* LongPressHandler.h */,
+				D511446522A6A1DC00E0D0DD /* LongPressHandler.m */,
+				D511446622A6A1DC00E0D0DD /* NativeViewHandler.h */,
+				D511446722A6A1DC00E0D0DD /* NativeViewHandler.m */,
+				D511446822A6A1DC00E0D0DD /* PanHandler.h */,
+				D511446922A6A1DC00E0D0DD /* PanHandler.m */,
+				D511446A22A6A1DC00E0D0DD /* PinchHandler.h */,
+				D511446B22A6A1DC00E0D0DD /* PinchHandler.m */,
+				D511446C22A6A1DC00E0D0DD /* RotationHandler.h */,
+				D511446D22A6A1DC00E0D0DD /* RotationHandler.m */,
+				D511446E22A6A1DC00E0D0DD /* TapHandler.h */,
+				D511446F22A6A1DC00E0D0DD /* TapHandler.m */,
+				D511445E22A6A16800E0D0DD /* GestureHandler.h */,
+				D511445422A69EA400E0D0DD /* GestureHandler.m */,
+				D511445622A69EA500E0D0DD /* GestureHandlerDirection.h */,
+				D511445722A69EA500E0D0DD /* GestureHandlerEvents.h */,
+				D511445322A69EA400E0D0DD /* GestureHandlerEvents.m */,
+				D511445922A69EA500E0D0DD /* GestureHandlerManager.h */,
+				D511445A22A69EA500E0D0DD /* GestureHandlerManager.m */,
+				D511445522A69EA500E0D0DD /* GestureHandlerState.h */,
+				D511447922A6A35700E0D0DD /* GestureHandlerRegistry.h */,
+				D511447822A6A35700E0D0DD /* GestureHandlerRegistry.m */,
+				D57B4CAE2232648E00EFC1C9 /* GestureHandlerHeader.h */,
+				D5D8251822A6A77200775081 /* RootViewGestureRecognizer.h */,
+				D5D8251922A6A77200775081 /* RootViewGestureRecognizer.m */,
+				BF42575A1C16EEAB00E15E71 /* Info.plist */,
+			);
+			path = GestureHandler;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		D5BCF17C22A7A30A00134E09 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5BCF1A622A7A32A00134E09 /* FlingHandler.h in Headers */,
+				D5BCF1A822A7A32A00134E09 /* ForceTouchHandler.h in Headers */,
+				D5BCF1AA22A7A32A00134E09 /* LongPressHandler.h in Headers */,
+				D5BCF1AC22A7A32A00134E09 /* NativeViewHandler.h in Headers */,
+				D5BCF1AE22A7A32A00134E09 /* PanHandler.h in Headers */,
+				D5BCF1B022A7A32A00134E09 /* PinchHandler.h in Headers */,
+				D5BCF1DB22A7B0C800134E09 /* GestureHandler.h in Headers */,
+				D5BCF1B222A7A32A00134E09 /* RotationHandler.h in Headers */,
+				D5BCF1B422A7A32A00134E09 /* TapHandler.h in Headers */,
+				D5BCF1B722A7A32A00134E09 /* GestureHandlerDirection.h in Headers */,
+				D5BCF1B822A7A32A00134E09 /* GestureHandlerEvents.h in Headers */,
+				D5BCF1BA22A7A32A00134E09 /* GestureHandlerManager.h in Headers */,
+				D5BCF1BC22A7A32A00134E09 /* GestureHandlerState.h in Headers */,
+				D5BCF1BD22A7A32A00134E09 /* GestureHandlerRegistry.h in Headers */,
+				D5BCF1BF22A7A32A00134E09 /* GestureHandlerHeader.h in Headers */,
+				D5BCF1C022A7A32A00134E09 /* RootViewGestureRecognizer.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		BF6DBD7F1C109B9800FC37E0 /* GestureHandlerLib */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BF6DBD891C109B9800FC37E0 /* Build configuration list for PBXNativeTarget "GestureHandlerLib" */;
+			buildPhases = (
+				BF6DBD7C1C109B9800FC37E0 /* Sources */,
+				BF6DBD7E1C109B9800FC37E0 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GestureHandlerLib;
+			productName = canvas;
+			productReference = BF6DBD801C109B9800FC37E0 /* libGestureHandlerLib.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		D5BCF18022A7A30A00134E09 /* GestureHandler */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D5BCF18622A7A30A00134E09 /* Build configuration list for PBXNativeTarget "GestureHandler" */;
+			buildPhases = (
+				D5BCF17C22A7A30A00134E09 /* Headers */,
+				D5BCF17D22A7A30A00134E09 /* Sources */,
+				D5BCF17E22A7A30A00134E09 /* Frameworks */,
+				D5BCF17F22A7A30A00134E09 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = GestureHandler;
+			productName = GestureHandler;
+			productReference = D5BCF18122A7A30A00134E09 /* GestureHandler.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BF6DBD781C109B9800FC37E0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0710;
+				ORGANIZATIONNAME = "Stefan Dragnev";
+				TargetAttributes = {
+					BF6DBD7F1C109B9800FC37E0 = {
+						CreatedOnToolsVersion = 7.1.1;
+					};
+					D5BCF18022A7A30A00134E09 = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = 3UUB5NM43K;
+						ProvisioningStyle = Automatic;
+					};
+					D5BCF1D522A7AA4400134E09 = {
+						CreatedOnToolsVersion = 10.1;
+						DevelopmentTeam = 3UUB5NM43K;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = BF6DBD7B1C109B9800FC37E0 /* Build configuration list for PBXProject "GestureHandler" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BF6DBD771C109B9800FC37E0;
+			productRefGroup = BF6DBD811C109B9800FC37E0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BF6DBD7F1C109B9800FC37E0 /* GestureHandlerLib */,
+				D5BCF18022A7A30A00134E09 /* GestureHandler */,
+				D5BCF1D522A7AA4400134E09 /* universal */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D5BCF17F22A7A30A00134E09 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		D5BCF1D922A7AA4A00134E09 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nFRAMEWORK=GestureHandler\n\nBUILD=build\nFRAMEWORK_PATH=$FRAMEWORK.framework\n\nUNIVERSAL_OUTPUTFOLDER=${PROJECT_DIR}/../../plugin/platforms/ios/\n\n# iOS\nrm -Rf $FRAMEWORK-iOS/$BUILD\nrm -f $FRAMEWORK-iOS.framework.tar.gz\n\nxcodebuild archive -project $FRAMEWORK.xcodeproj -scheme $FRAMEWORK ONLY_ACTIVE_ARCH=NO -configuration Release -sdk iphoneos SYMROOT=$BUILD\nxcodebuild build -project $FRAMEWORK.xcodeproj -target $FRAMEWORK  ONLY_ACTIVE_ARCH=NO -configuration Debug -sdk iphonesimulator SYMROOT=$BUILD\n\ncp -RL $BUILD/Release-iphoneos $BUILD/Release-universal\ncp -RL $BUILD/Release-iphonesimulator/$FRAMEWORK_PATH/Modules/$FRAMEWORK.swiftmodule/* $BUILD/Release-universal/$FRAMEWORK_PATH/Modules/$FRAMEWORK.swiftmodule\n\nlipo -create $BUILD/Release-iphoneos/$FRAMEWORK_PATH/$FRAMEWORK $BUILD/Debug-iphonesimulator/$FRAMEWORK_PATH/$FRAMEWORK -output $BUILD/Release-universal/$FRAMEWORK_PATH/$FRAMEWORK\n\ncp -RL $BUILD/Release-universal/$FRAMEWORK_PATH $UNIVERSAL_OUTPUTFOLDER\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BF6DBD7C1C109B9800FC37E0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D511447722A6A1DC00E0D0DD /* TapHandler.m in Sources */,
+				D511447322A6A1DC00E0D0DD /* NativeViewHandler.m in Sources */,
+				D5D8251A22A6A77200775081 /* RootViewGestureRecognizer.m in Sources */,
+				D511447522A6A1DC00E0D0DD /* PinchHandler.m in Sources */,
+				D511445D22A69EA500E0D0DD /* GestureHandlerManager.m in Sources */,
+				D511447022A6A1DC00E0D0DD /* FlingHandler.m in Sources */,
+				D511445C22A69EA500E0D0DD /* GestureHandler.m in Sources */,
+				D511447422A6A1DC00E0D0DD /* PanHandler.m in Sources */,
+				D511447622A6A1DC00E0D0DD /* RotationHandler.m in Sources */,
+				D511447222A6A1DC00E0D0DD /* LongPressHandler.m in Sources */,
+				D511447122A6A1DC00E0D0DD /* ForceTouchHandler.m in Sources */,
+				D511447A22A6A35700E0D0DD /* GestureHandlerRegistry.m in Sources */,
+				D511445B22A69EA500E0D0DD /* GestureHandlerEvents.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D5BCF17D22A7A30A00134E09 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D5BCF18A22A7A31800134E09 /* FlingHandler.m in Sources */,
+				D5BCF18C22A7A31800134E09 /* ForceTouchHandler.m in Sources */,
+				D5BCF18E22A7A31800134E09 /* LongPressHandler.m in Sources */,
+				D5BCF19022A7A31800134E09 /* NativeViewHandler.m in Sources */,
+				D5BCF19222A7A31800134E09 /* PanHandler.m in Sources */,
+				D5BCF19422A7A31800134E09 /* PinchHandler.m in Sources */,
+				D5BCF19622A7A31800134E09 /* RotationHandler.m in Sources */,
+				D5BCF19822A7A31800134E09 /* TapHandler.m in Sources */,
+				D5BCF19A22A7A31800134E09 /* GestureHandler.m in Sources */,
+				D5BCF19D22A7A31800134E09 /* GestureHandlerEvents.m in Sources */,
+				D5BCF19F22A7A31800134E09 /* GestureHandlerManager.m in Sources */,
+				D5BCF1A222A7A31800134E09 /* GestureHandlerRegistry.m in Sources */,
+				D5BCF1A522A7A31800134E09 /* RootViewGestureRecognizer.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		BF6DBD871C109B9800FC37E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				VALID_ARCHS = "arm64 arm64e armv7 armv7s i386 x86_64";
+			};
+			name = Debug;
+		};
+		BF6DBD881C109B9800FC37E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+				VALID_ARCHS = "arm64 arm64e armv7 armv7s i386 x86_64";
+			};
+			name = Release;
+		};
+		BF6DBD8A1C109B9800FC37E0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		BF6DBD8B1C109B9800FC37E0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		D5BCF18722A7A30A00134E09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3UUB5NM43K;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = GestureHandler/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = module.modulemap;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swmansion.GestureHandler;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		D5BCF18822A7A30A00134E09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ARCHS = "$(ARCHS_STANDARD)";
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEFINES_MODULE = YES;
+				DEVELOPMENT_TEAM = 3UUB5NM43K;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				INFOPLIST_FILE = GestureHandler/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = module.modulemap;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.swmansion.GestureHandler;
+				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		D5BCF1D722A7AA4400134E09 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3UUB5NM43K;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		D5BCF1D822A7AA4400134E09 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 3UUB5NM43K;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BF6DBD7B1C109B9800FC37E0 /* Build configuration list for PBXProject "GestureHandler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF6DBD871C109B9800FC37E0 /* Debug */,
+				BF6DBD881C109B9800FC37E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BF6DBD891C109B9800FC37E0 /* Build configuration list for PBXNativeTarget "GestureHandlerLib" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BF6DBD8A1C109B9800FC37E0 /* Debug */,
+				BF6DBD8B1C109B9800FC37E0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5BCF18622A7A30A00134E09 /* Build configuration list for PBXNativeTarget "GestureHandler" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5BCF18722A7A30A00134E09 /* Debug */,
+				D5BCF18822A7A30A00134E09 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D5BCF1D622A7AA4400134E09 /* Build configuration list for PBXAggregateTarget "universal" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D5BCF1D722A7AA4400134E09 /* Debug */,
+				D5BCF1D822A7AA4400134E09 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = BF6DBD781C109B9800FC37E0 /* Project object */;
+}

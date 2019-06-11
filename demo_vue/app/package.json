@@ -1,0 +1,9 @@
+{
+  "android": {
+    "markingMode": "none",
+    "v8Flags": "--expose_gc"
+  },
+  "main": "main",
+  "name": "com.nativescript.gesturehandlerdemo",
+  "version": "1.0.0"
+}

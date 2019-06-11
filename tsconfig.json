@@ -1,0 +1,34 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "commonjs",
+        "moduleResolution": "node",
+        "declaration": true,
+        "removeComments": false,
+        "noLib": false,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "lib": ["es6", "dom"],
+        "sourceMap": true,
+        "pretty": true,
+        "allowUnreachableCode": false,
+        "allowUnusedLabels": false,
+        "noEmitHelpers": true,
+        "noEmitOnError": false,
+        "noImplicitAny": false,
+        "noImplicitReturns": true,
+        "noImplicitUseStrict": false,
+        "noFallthroughCasesInSwitch": true,
+        "baseUrl": ".",
+        "outDir": "./plugin",
+        "rootDir": "src",
+        "paths": {
+            "nativescript-gesturehandler": ["./src"],
+            "nativescript-gesturehandler/*": ["./src/*"],
+            "*": ["./node_modules/tns-core-modules/*", "./node_modules/*"]
+        }
+    },
+    "include": ["src/**/*.ts", "references.d.ts", "src/references.d.ts"],
+    "exclude": ["node_modules", ".git", ".github", "dist", "demo", "demo_vue", "plugin", "src-native"],
+    "compileOnSave": false
+}

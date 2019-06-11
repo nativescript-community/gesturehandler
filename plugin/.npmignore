@@ -1,0 +1,3 @@
+sync
+platforms/android/carto-mobile-sdk-*.aar*
+platforms/ios/CartoMobileSDK.framework

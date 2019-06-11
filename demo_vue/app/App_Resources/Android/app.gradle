@@ -1,0 +1,10 @@
+android { 
+  defaultConfig {  
+    ndk {
+      abiFilters.clear()
+    }
+  }
+  aaptOptions {  
+    additionalParameters "--no-version-vectors"  
+  }  
+}

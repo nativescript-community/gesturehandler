@@ -1,0 +1,8 @@
+repositories {
+	maven {
+		url  "https://dl.bintray.com/farfromrefug/carto-mobile-sdk"
+	}
+}
+dependencies {
+    compile 'com.akylas:carto-mobile-sdk:4.2.0@aar'
+}

@@ -1,0 +1,29 @@
+{
+    "compilerOptions": {
+        "target": "es5",
+        "module": "esnext",
+        "moduleResolution": "node",
+        "incremental": true,
+        "tsBuildInfoFile": ".tsbuildinfo",
+        "removeComments": false,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "importHelpers": true,
+        "noEmitHelpers": true,
+        "noEmitOnError": true,
+        "preserveSymlinks": true,
+        "esModuleInterop": true,
+        "allowSyntheticDefaultImports": true,
+        "noImplicitUseStrict": true,
+        "lib": ["es6", "dom", "es2015.iterable"],
+        "baseUrl": ".",
+        "paths": {
+            "~/*": ["app/*"],
+            "*": ["./node_modules/tns-core-modules/*", "./node_modules/*"],
+            "nativescript-gesturehandler": ["../src"],
+            "nativescript-gesturehandler/*": ["../src/*"]
+        }
+    },
+    "include": ["app/**/*", "references.d.ts"],
+    "exclude": ["node_modules", "platforms", "**/angular"]
+}
