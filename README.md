@@ -1,70 +1,48 @@
-# Your Plugin Name
+[![npm](https://img.shields.io/npm/v/nativescript-gesturehandler.svg)](https://www.npmjs.com/package/nativescript-gesturehandler)
+[![npm](https://img.shields.io/npm/dt/nativescript-gesturehandler.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-gesturehandler)
+[![GitHub forks](https://img.shields.io/github/forks/Akylas/nativescript-gesturehandler.svg)](https://github.com/Akylas/nativescript-gesturehandler/network)
+[![GitHub stars](https://img.shields.io/github/stars/Akylas/nativescript-gesturehandler.svg)](https://github.com/Akylas/nativescript-gesturehandler/stargazers)
 
-Add your plugin badges here. See [nativescript-urlhandler](https://github.com/hypery2k/nativescript-urlhandler) for example.
-
-Then describe what's the purpose of your plugin. 
-
-In case you develop UI plugin, this is where you can add some screenshots.
-
-## (Optional) Prerequisites / Requirements
-
-Describe the prerequisites that the user need to have installed before using your plugin. See [nativescript-firebase plugin](https://github.com/eddyverbruggen/nativescript-plugin-firebase) for example.
+[![NPM](https://nodei.co/npm/nativescript-gesturehandler.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/nativescript-gesturehandler/)
 
 ## Installation
 
-Describe your plugin installation steps. Ideally it would be something like:
+* `tns plugin add nativescript-gesturehandler`
 
-```javascript
-tns plugin add <your-plugin-name>
-```
+Be sure to run a new build after adding plugins to avoid any issues.
 
-## Usage 
+---
 
-Describe any usage specifics for your plugin. Give examples for Android, iOS, Angular if needed. See [nativescript-drop-down](https://www.npmjs.com/package/nativescript-drop-down) for example.
-	
-	```javascript
-    Usage code snippets here
-    ```)
+This is a port of [react-native-gesturehandler](https://kmagiera.github.io/react-native-gesture-handler/).
+The source is based on the source code by [Krzysztof Magiera](https://github.com/kmagiera). Dont hesitate to go and thank him for his work!
 
-### Android 
-o do this in Android 9 Pie you will have to set a networkSecurityConfig in your Manifest application tag like this:
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<manifest ... >
-    <application android:networkSecurityConfig="@xml/network_security_config">
-    </application>
-</manifest>
-```
-Then in your xml folder you now have to create a file named network_security_config just like the way you have named it in the Manifest and from there the content of your file should be like this to enable all requests without encryptions:
-
-```xml
-<?xml version="1.0" encoding="utf-8"?>
-<network-security-config>
-    <base-config cleartextTrafficPermitted="true">
-        <trust-anchors>
-            <certificates src="system" />
-        </trust-anchors>
-    </base-config>
-</network-security-config>
-```
-From there you are good to go. Now your app will make requests for all types of connections. For additional information read here.
-
-## Generate typings
-
-### Android
-```
-
-### iOS
 
 ## API
 
-Describe your plugin methods and properties here. See [nativescript-feedback](https://github.com/EddyVerbruggen/nativescript-feedback) for example.
-    
-| Property | Default | Description |
-| --- | --- | --- |
-| some property | property default value | property description, default values, etc.. |
-| another property | property default value | property description, default values, etc.. |
-    
-## License
+You create a gesture handler using something like this:
+```typescript 
+import { GestureHandlerTouchEvent, GestureHandlerStateEvent, GestureStateEventData, GestureTouchEventData, HandlerType } from 'nativescript-gesturehandler';
 
-Apache License Version 2.0, January 2004
+
+function onGestureTouch(args: GestureTouchEventData) {
+    const { state, extraData, view } = args.data;
+    view.translateX = extraData.translationX;
+    view.translateY = extraData.translationY;
+}
+function onGestureState(args: GestureStateEventData) {
+    const { state, prevState, extraData, view } = args.data;
+    console.log('onGestureState', state, prevState, view, extraData);
+}
+const manager = Manager.getInstance();
+const gestureHandler = = manager.createGestureHandler(HandlerType.PAN, 10, {
+    shouldCancelWhenOutside: false
+});
+gestureHandler.on(GestureHandlerTouchEvent, onGestureTouch, this);
+gestureHandler.on(GestureHandlerStateEvent, onGestureState, this);
+gestureHandler.attachToView(view);
+```
+
+Right now you must not forget to store the ```gestureHandler``` somewhere or the gesture won't work on iOS (native object being released). This will be fixed in future versions.
+
+Now about the API. All the gestures for the react counterpart exist with the same options and the same event ```extraData```.
+
