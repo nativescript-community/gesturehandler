@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.4](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.0.3...v0.0.4) (2019-06-12)
+
+
+### Bug Fixes
+
+* android one registry per page ([f57fccf](https://github.com/Akylas/nativescript-gesturehandler/commit/f57fccf))
+* check for null ([0f0d83d](https://github.com/Akylas/nativescript-gesturehandler/commit/0f0d83d))
+
+
+
+
+
 ## [0.0.3](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.0.2...v0.0.3) (2019-06-12)
 
 **Note:** Version bump only for package nativescript-gesturehandler
