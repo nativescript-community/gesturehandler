@@ -214,12 +214,18 @@ export const ViewInitEvent = 'ViewInitEvent';
 export const ViewDisposeEvent = 'ViewDisposeEvent';
 class ViewGestureExtended extends View {
     initNativeView() {
-        this.nativeView.nsView = new WeakRef(this);
-        // console.log('initNativeView', this);
+        // console.log(this.constructor.name, 'initNativeView', this.nativeView);
+        if (this.nativeView) {
+            this.nativeView.nsView = new WeakRef(this);
+        }
+
         this.notify({ eventName: ViewInitEvent, object: this });
     }
     disposeNativeView() {
-        this.nativeView.nsView = null;
+        // console.log(this.constructor.name, 'disposeNativeView', this.nativeView);
+        if (this.nativeView) {
+            this.nativeView.nsView = null;
+        }
         // console.log('disposeNativeView', this);
         this.notify({ eventName: ViewDisposeEvent, object: this });
     }
