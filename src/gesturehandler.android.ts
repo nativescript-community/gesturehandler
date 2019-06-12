@@ -76,6 +76,9 @@ export interface PageLayout extends org.nativescript.widgets.GridLayout {
     new (context): PageLayout;
     setShouldIntercept(value: boolean);
     setPassingTouch(value: boolean);
+    initialize();
+    tearDown();
+    registry: com.swmansion.gesturehandler.GestureHandlerRegistryImpl;
 }
 function initPageLayout() {
     if (PageLayout) {
@@ -89,6 +92,7 @@ function initPageLayout() {
         // mGestureRootHelper: GestureHandlerRootHelper;
 
         mOrchestrator: com.swmansion.gesturehandler.GestureHandlerOrchestrator;
+        mRegistry: com.swmansion.gesturehandler.GestureHandlerRegistryImpl;
         configurationHelper: com.swmansion.gesturehandler.ViewConfigurationHelper;
         rootGestureHandler: RootViewGestureHandler;
 
@@ -100,6 +104,10 @@ function initPageLayout() {
         }
         setPassingTouch(value) {
             this.mPassingTouch = value;
+        }
+
+        get registry() {
+            return this.mRegistry;
         }
         // requestDisallowInterceptTouchEvent(disallowIntercept) {
         //     console.log('requestDisallowInterceptTouchEvent');
@@ -173,7 +181,7 @@ function initPageLayout() {
          * default RN behavior.
          */
         initialize() {
-            const registry = Manager.getInstance().registry;
+            this.mRegistry = new com.swmansion.gesturehandler.GestureHandlerRegistryImpl();
             this.configurationHelper = new com.swmansion.gesturehandler.ViewConfigurationHelper({
                 getPointerEventsConfigForView(view: android.view.View) {
                     return view.isEnabled() ? com.swmansion.gesturehandler.PointerEventsConfig.AUTO : com.swmansion.gesturehandler.PointerEventsConfig.NONE;
@@ -185,19 +193,22 @@ function initPageLayout() {
                     return parent.getChildAt(index);
                 }
             });
-            this.mOrchestrator = new com.swmansion.gesturehandler.GestureHandlerOrchestrator(this, registry, this.configurationHelper);
+            this.mOrchestrator = new com.swmansion.gesturehandler.GestureHandlerOrchestrator(this, this.mRegistry, this.configurationHelper);
+            console.log(this.constructor.name, 'initialize', this.mOrchestrator, this.mRegistry);
             this.mOrchestrator.setMinimumAlphaForTraversal(0.01);
 
             initRootViewGestureHandler();
             const tag = -12345;
             this.rootGestureHandler = new RootViewGestureHandler();
             this.rootGestureHandler.setTag(tag);
-            registry.registerHandler(this.rootGestureHandler);
+            this.mRegistry.registerHandler(this.rootGestureHandler);
             // registry.attachHandlerToView(this.rootGestureHandler.getTag(), this);
         }
         tearDown() {
+            console.log(this.constructor.name, 'tearDown', this.mOrchestrator, this.mRegistry);
             this.configurationHelper = null;
             this.mOrchestrator = null;
+            this.mRegistry = null;
             // if (this.mGestureRootHelper != null) {
             //     this.mGestureRootHelper.tearDown();
             //     this.mGestureRootHelper = null;
@@ -208,11 +219,15 @@ function initPageLayout() {
 }
 
 class PageGestureExtended extends Page {
+    nativeView: PageLayout;
     initNativeView() {
         this.nativeView.initialize();
     }
     disposeNativeView() {
         this.nativeView.tearDown();
+    }
+    get registry() {
+        return this.nativeView && this.nativeView.registry;
     }
 }
 export function install() {
@@ -221,6 +236,7 @@ export function install() {
     NSPage.prototype.createNativeView = function() {
         initPageLayout();
         const layout = new PageLayout(this._context);
+        this.gestureRegistry = layout.registry;
         layout.addRow(new org.nativescript.widgets.ItemSpec(1, org.nativescript.widgets.GridUnitType.auto));
         layout.addRow(new org.nativescript.widgets.ItemSpec(1, org.nativescript.widgets.GridUnitType.star));
         return layout;
@@ -347,7 +363,6 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
         if (this.native) {
             this.native.setTag(tag);
         }
-        console.log('setTag', tag);
     }
     getTag() {
         return this.tag;
@@ -586,13 +601,13 @@ export class Manager extends ManagerBase {
         }
         return this._interactionManager;
     }
-    _registry: com.swmansion.gesturehandler.GestureHandlerRegistryImpl;
-    get registry() {
-        if (!this._registry) {
-            this._registry = new com.swmansion.gesturehandler.GestureHandlerRegistryImpl();
-        }
-        return this._registry;
-    }
+    // _registry: com.swmansion.gesturehandler.GestureHandlerRegistryImpl;
+    // get registry() {
+    //     if (!this._registry) {
+    //         this._registry = new com.swmansion.gesturehandler.GestureHandlerRegistryImpl();
+    //     }
+    //     return this._registry;
+    // }
 
     static sManager: Manager;
     static getInstance() {
@@ -632,23 +647,34 @@ export class Manager extends ManagerBase {
         }
         return handler as any;
     }
-    attachGestureHandlerToView(handler: Handler<any, any>, view) {
+    attachGestureHandlerToView(handler: Handler<any, any>, view: View) {
         const nHandler = handler.getNative();
         if (nHandler) {
-            this.registry.registerHandler(nHandler);
-            this.registry.attachHandlerToView(nHandler.getTag(), view);
+            const registry = (view.page as PageGestureExtended).registry;
+            if (registry) {
+                registry.registerHandler(nHandler);
+                registry.attachHandlerToView(nHandler.getTag(), view.nativeView);
+            }
+        }
+    }
+
+    detachGestureHandlerFromView(handler: Handler<any, any>, view: View) {
+        const nHandler = handler.getNative();
+        if (nHandler) {
+            const registry = (view.page as PageGestureExtended).registry;
+            if (registry) {
+                registry.dropHandler(handler.getNative());
+            }
         }
     }
 
     viewListeners = new Map<View, Map<number, { init: () => void; dispose: () => void }>>();
     attachGestureHandler(handler: Handler<any, any>, view: View) {
         if (view.nativeView) {
-            this.attachGestureHandlerToView(handler, view.nativeView);
+            this.attachGestureHandlerToView(handler, view);
         }
-        const onInit = () => {
-            this.attachGestureHandlerToView(handler, view.nativeView);
-        };
-        const onDispose = () => this.registry.dropHandler(handler.getNative());
+        const onInit = () => this.attachGestureHandlerToView(handler, view);
+        const onDispose = () => this.detachGestureHandlerFromView(handler, view);
         view.on(ViewInitEvent, onInit, this);
         view.on(ViewDisposeEvent, onDispose, this);
         let viewListeners = this.viewListeners.get(view);
@@ -676,6 +702,6 @@ export class Manager extends ManagerBase {
                 }
             }
         }
-        this.registry.dropHandler(handler.getTag());
+        this.detachGestureHandlerFromView(handler, view);
     }
 }
