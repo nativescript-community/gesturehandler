@@ -76,3 +76,4 @@ Pods
 /plugin/package-lock.json
 plugin/**/*.d.ts
 /schema
+/plugin/README.md
