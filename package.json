@@ -31,10 +31,10 @@
         "email": "martin@akylas.fr"
     },
     "bugs": {
-        "url": "https://github.com/Akylas/nativescript-label/issues"
+        "url": "https://github.com/Akylas/nativescript-gesturehandler/issues"
     },
     "license": "Apache-2.0",
-    "homepage": "https://github.com/Akylas/nativescript-label",
+    "homepage": "https://github.com/Akylas/nativescript-gesturehandler",
     "readmeFilename": "README.md",
     "devDependencies": {
         "@commitlint/cli": "^8.0.0",
