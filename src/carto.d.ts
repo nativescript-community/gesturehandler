@@ -1,1 +1,0 @@
-../plugin/carto.d.ts
