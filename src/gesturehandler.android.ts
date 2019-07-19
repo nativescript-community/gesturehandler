@@ -537,7 +537,7 @@ function initGestureHandlerInteractionController() {
         configureInteractions<T extends com.swmansion.gesturehandler.GestureHandler<any>, U extends HandlerOptions>(handler: com.swmansion.gesturehandler.GestureHandler<T>, config: U) {
             handler.setInteractionController(this);
             if (config) {
-                console.log('configureInteractions', handler.getTag(), config);
+                // console.log('configureInteractions', handler.getTag(), config);
                 if (config.waitFor) {
                     this.mWaitForRelations[handler.getTag()] = config.waitFor;
                 }

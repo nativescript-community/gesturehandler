@@ -192,7 +192,7 @@ export class Manager extends ManagerBase {
             this.manager.attachGestureHandlerToView(handlerTag, view.nativeView);
         }
         const onInit = () => {
-            console.log('attachGestureHandlerToView', handlerTag, view.nativeView);
+            // console.log('attachGestureHandlerToView', handlerTag, view.nativeView);
             this.manager.attachGestureHandlerToView(handlerTag, view.nativeView);
         };
         const onDispose = () => this.manager.dropGestureHandler(handlerTag);
