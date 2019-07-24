@@ -194,7 +194,7 @@ function initPageLayout() {
                 }
             });
             this.mOrchestrator = new com.swmansion.gesturehandler.GestureHandlerOrchestrator(this, this.mRegistry, this.configurationHelper);
-            console.log(this.constructor.name, 'initialize', this.mOrchestrator, this.mRegistry);
+            // console.log(this.constructor.name, 'initialize', this.mOrchestrator, this.mRegistry);
             this.mOrchestrator.setMinimumAlphaForTraversal(0.01);
 
             initRootViewGestureHandler();
