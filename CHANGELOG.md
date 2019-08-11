@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.8](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.0.7...v0.0.8) (2019-08-11)
+
+
+### Bug Fixes
+
+* signature ([6ed89bf](https://github.com/Akylas/nativescript-gesturehandler/commit/6ed89bf))
+* throw error is view has no parent page ([e7f67a4](https://github.com/Akylas/nativescript-gesturehandler/commit/e7f67a4))
+
+
+
+
+
 ## [0.0.7](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.0.6...v0.0.7) (2019-07-24)
 
 **Note:** Version bump only for package nativescript-gesturehandler
