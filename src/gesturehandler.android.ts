@@ -650,18 +650,24 @@ export class Manager extends ManagerBase {
     attachGestureHandlerToView(handler: Handler<any, any>, view: View) {
         const nHandler = handler.getNative();
         if (nHandler) {
-            const registry = (view.page as PageGestureExtended).registry;
-            if (registry) {
-                registry.registerHandler(nHandler);
-                registry.attachHandlerToView(nHandler.getTag(), view.nativeView);
+            const page = view.page as PageGestureExtended;
+            if (page) {
+                const registry = page.registry;
+                if (registry) {
+                    registry.registerHandler(nHandler);
+                    registry.attachHandlerToView(nHandler.getTag(), view.nativeView);
+                }
+            } else {
+                throw new Error('a page is needed to attach a gesture');
             }
+            
         }
     }
 
     detachGestureHandlerFromView(handler: Handler<any, any>, view: View) {
         const nHandler = handler.getNative();
         if (nHandler) {
-            const registry = (view.page as PageGestureExtended).registry;
+            const registry = view.page && (view.page as PageGestureExtended).registry;
             if (registry) {
                 registry.dropHandler(handler.getNative());
             }
