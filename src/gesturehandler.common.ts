@@ -154,6 +154,7 @@ export enum GestureState {
 }
 
 export interface GestureStateEventData extends EventData {
+    object: Handler<any, any>;
     data: {
         state: GestureState;
         prevState: GestureState;
@@ -166,6 +167,7 @@ export interface GestureStateEventData extends EventData {
     };
 }
 export interface GestureTouchEventData extends EventData {
+    object: Handler<any, any>;
     data: {
         state: GestureState;
         ios?: any; // native View
