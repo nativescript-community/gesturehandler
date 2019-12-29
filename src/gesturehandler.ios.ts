@@ -13,8 +13,8 @@ import {
     ViewDisposeEvent,
     ViewInitEvent
 } from './gesturehandler.common';
-import { View } from 'tns-core-modules/ui/core/view';
-import { getClass } from 'tns-core-modules/utils/types';
+import { View } from '@nativescript/core/ui/core/view';
+import { getClass } from '@nativescript/core/utils/types';
 import { HandlerOptions, nativeProperty } from './gesturehandler';
 export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType, install, ViewInitEvent, ViewDisposeEvent };
 

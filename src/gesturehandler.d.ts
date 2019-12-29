@@ -1,5 +1,5 @@
-import { Observable } from 'tns-core-modules/data/observable';
-import { View } from 'tns-core-modules/ui/page/page';
+import { Observable } from '@nativescript/core/data/observable';
+import { View } from '@nativescript/core/ui/page/page';
 import { HandlerType, OptionsTypeMap, TypeMap } from './gesturehandler.common';
 
 export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType } from './gesturehandler.common';

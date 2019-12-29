@@ -15,9 +15,9 @@ import {
     ViewDisposeEvent,
     ViewInitEvent
 } from './gesturehandler.common';
-import { View } from 'tns-core-modules/ui/core/view';
-import { layout } from 'tns-core-modules/utils/utils';
-import { android as androidApp } from 'tns-core-modules/application/application';
+import { View } from '@nativescript/core/ui/core/view';
+import { layout } from '@nativescript/core/utils/utils';
+import { android as androidApp } from '@nativescript/core/application/application';
 import {
     FlingGestureHandlerOptions,
     HandlerOptions,
@@ -28,7 +28,7 @@ import {
     RotationGestureHandlerOptions,
     TapGestureHandlerOptions
 } from './gesturehandler';
-import { Page } from 'tns-core-modules/ui/page/page';
+import { Page } from '@nativescript/core/ui/page/page';
 export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType, ViewInitEvent, ViewDisposeEvent };
 
 export let RootViewGestureHandler: RootViewGestureHandler;
@@ -232,7 +232,7 @@ class PageGestureExtended extends Page {
 }
 export function install() {
     installBase();
-    const NSPage = require('tns-core-modules/ui/page/page').Page;
+    const NSPage = require('@nativescript/core/ui/page/page').Page;
     NSPage.prototype.createNativeView = function() {
         initPageLayout();
         const layout = new PageLayout(this._context);

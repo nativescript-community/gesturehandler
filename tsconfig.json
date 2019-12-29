@@ -25,7 +25,7 @@
         "paths": {
             "nativescript-gesturehandler": ["./src"],
             "nativescript-gesturehandler/*": ["./src/*"],
-            "*": ["./node_modules/tns-core-modules/*", "./node_modules/*"]
+            "*": ["./node_modules/*"]
         }
     },
     "include": ["src/**/*.ts", "references.d.ts", "src/references.d.ts"],

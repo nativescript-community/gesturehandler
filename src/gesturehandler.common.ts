@@ -1,5 +1,5 @@
-import { EventData, Observable } from 'tns-core-modules/data/observable';
-import { View } from 'tns-core-modules/ui/core/view';
+import { EventData, Observable } from '@nativescript/core/data/observable';
+import { View } from '@nativescript/core/ui/core/view';
 import {
     FlingGestureHandler,
     FlingGestureHandlerOptions,
@@ -21,7 +21,7 @@ import {
     TapGestureHandler,
     TapGestureHandlerOptions
 } from './gesturehandler';
-import { isAndroid } from 'tns-core-modules/platform/platform';
+import { isAndroid } from '@nativescript/core/platform/platform';
 
 export const GestureHandlerStateEvent = 'GestureHandlerStateEvent';
 export const GestureHandlerTouchEvent = 'GestureHandlerTouchEvent';
@@ -233,7 +233,7 @@ class ViewGestureExtended extends View {
     }
 }
 export function overrideViewBase() {
-    const NSView = require('tns-core-modules/ui/core/view').View;
+    const NSView = require('@nativescript/core/ui/core/view').View;
     applyMixins(NSView, [ViewGestureExtended]);
 }
 

@@ -6,8 +6,8 @@
     "typings": "gesturehandler.d.ts",
     "nativescript": {
         "platforms": {
-            "android": "4.2.0",
-            "ios": "4.2.0"
+            "android": "6.2.1",
+            "ios": "6.2.1"
         }
     },
     "keywords": [
