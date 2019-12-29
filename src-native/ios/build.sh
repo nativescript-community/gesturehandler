@@ -7,4 +7,4 @@ SOURCE_NAME="GestureHandler"
 IOS_SOURCE_DIR="$CURRENT_DIR"
 
 cd $IOS_SOURCE_DIR
-xcodebuild -project GestureHandler.xcodeproj -scheme universal
+xcodebuild -project GestureHandler.xcodeproj -scheme universal -sdk iphonesimulator
