@@ -1,6 +1,6 @@
 {
     "name": "nativescript-gesturehandler",
-    "version": "0.0.11",
+    "version": "0.1.0",
     "description": "Nativescript plugin for Carto Mobile SDK",
     "main": "gesturehandler",
     "typings": "gesturehandler.d.ts",
@@ -26,6 +26,6 @@
     "homepage": "https://github.com/farfromrefug/nativescript-gesture-handler",
     "bootstrapper": "nativescript-plugin-seed",
     "dependencies": {
-        "nativescript-observable":"^2.0.2"
+        "nativescript-observable": "^2.0.2"
     }
 }
