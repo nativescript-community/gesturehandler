@@ -1,4 +1,5 @@
-import { EventData, Observable } from '@nativescript/core/data/observable';
+import Observable from 'nativescript-observable';
+import { EventData } from '@nativescript/core/data/observable';
 import { View } from '@nativescript/core/ui/core/view';
 import {
     FlingGestureHandler,
@@ -132,7 +133,7 @@ export abstract class BaseNative<T, U extends {}> extends Observable {
             this.initNativeView(this.native, this.options);
         }
         return this.native;
-    }
+    };
     abstract createNative(options: U): T;
 
     log(...args) {

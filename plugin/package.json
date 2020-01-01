@@ -24,5 +24,8 @@
     },
     "license": "Apache-2.0",
     "homepage": "https://github.com/farfromrefug/nativescript-gesture-handler",
-    "bootstrapper": "nativescript-plugin-seed"
+    "bootstrapper": "nativescript-plugin-seed",
+    "dependencies": {
+        "nativescript-observable":"^2.0.2"
+    }
 }
