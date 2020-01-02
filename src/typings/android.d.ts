@@ -68,6 +68,7 @@ declare module com {
 				public getLastAbsolutePositionX(): number;
 				public onCancel(): void;
 				public getY(): number;
+				public getYAtIndex(index: number): number;
 				public shouldWaitForHandlerFailure(param0: com.swmansion.gesturehandler.GestureHandler<any>): boolean;
 				public handle(param0: globalAndroid.view.MotionEvent): void;
 				public setHitSlop(param0: number): T;
@@ -83,6 +84,7 @@ declare module com {
 				public stopTrackingPointer(param0: number): void;
 				public setInteractionController(param0: com.swmansion.gesturehandler.GestureHandlerInteractionController): T;
 				public getX(): number;
+				public getXAtIndex(index:number): number;
 				public startTrackingPointer(param0: number): void;
 				public activate(): void;
 				public shouldBeCancelledBy(param0: com.swmansion.gesturehandler.GestureHandler<any>): boolean;
@@ -297,6 +299,8 @@ declare module com {
 				public getVelocity(): number;
 				public getFocalPointX(): number;
 				public getFocalPointY(): number;
+				public getMinSpan(): number;
+				public setMinSpan(span: number);
 				public onHandle(param0: globalAndroid.view.MotionEvent): void;
 				public constructor();
 			}

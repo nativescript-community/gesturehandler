@@ -71,7 +71,7 @@ function createGetter(key: string, options: NativePropertyOptions) {
         } else {
             result = this.options[key] || options.defaultValue;
         }
-        result = converter ? converter.fromNative.call(this, result, key) : result;
+        result = converter && converter.fromNative ? converter.fromNative.call(this, result, key) : result;
         // console.log('getter', key, options, nativeGetterName, !!getConverter, result);
         return result;
     };
@@ -79,12 +79,11 @@ function createGetter(key: string, options: NativePropertyOptions) {
 function createSetter(key, options: NativePropertyOptions) {
     const nativeSetterName = ((isAndroid ? options.android : options.ios) || options).nativeSetterName || 'set' + key.charAt(0).toUpperCase() + key.slice(1);
     return function(newVal) {
-        // console.log('setter', key, newVal, Array.isArray(newVal), typeof newVal, nativeSetterName, options.converter);
         this.options[key] = newVal;
         if (this.native && this.native[nativeSetterName]) {
-            const actualVal = options.converter ? options.converter.toNative.call(this, newVal, key) : newVal;
+            const actualVal = options.converter && options.converter.toNative ? options.converter.toNative.call(this, newVal, key) : newVal;
+            console.log('setter', key, newVal, Array.isArray(newVal), typeof newVal, actualVal, nativeSetterName, options.converter, this.native && this.native[nativeSetterName]);
             (this.native[nativeSetterName] as Function).call(this.native, ...actualVal);
-            this._buildStyle = null;
         }
     };
 }

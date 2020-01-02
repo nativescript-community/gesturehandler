@@ -308,8 +308,17 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
     touchListener: com.swmansion.gesturehandler.OnTouchEventListener<T>;
 
     getExtraData(handler: T) {
+        const numberOfPointers = handler.getNumberOfPointers();
+        const positions = [];
+        for (let index = 0; index < numberOfPointers; index++) {
+            positions.push(handler.getXAtIndex(index));
+            positions.push(handler.getYAtIndex(index));
+        }
         return {
-            numberOfPointers: handler.getNumberOfPointers()
+            // x: layout.toDeviceIndependentPixels(handler.getX()),
+            // y: layout.toDeviceIndependentPixels(handler.getY()),
+            positions,
+            numberOfPointers
         };
     }
     initNativeView(native: T, options: U) {
@@ -440,6 +449,7 @@ export class PanGestureHandler extends Handler<com.swmansion.gesturehandler.PanG
 }
 
 export class PinchGestureHandler extends Handler<com.swmansion.gesturehandler.PinchGestureHandler, PinchGestureHandlerOptions> {
+    @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) minSpan: number;
     createNative(options) {
         return new com.swmansion.gesturehandler.PinchGestureHandler();
     }
@@ -660,7 +670,6 @@ export class Manager extends ManagerBase {
             } else {
                 throw new Error('a page is needed to attach a gesture');
             }
-            
         }
     }
 
