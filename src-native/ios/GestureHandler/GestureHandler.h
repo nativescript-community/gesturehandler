@@ -50,9 +50,9 @@ if (value != nil) recognizer.prop = [value type]; \
 @protocol GestureHandlerDelegate
 
 - (void)gestureHandler:(nullable GestureHandler *)gestureHandler
- didChangeState:(GestureHandlerState)state prevState:(GestureHandlerState)state extraData:(GestureHandlerEventExtraData *)data view:(nullable UIView *)view;
+ didChangeState:(GestureHandlerState)state prevState:(GestureHandlerState)state extraData:(nullable NSDictionary *)data view:(nullable UIView *)view;
 - (void)gestureHandler:(nullable GestureHandler *)gestureHandler
- touchEventOnView:(nullable UIView *)view state:(GestureHandlerState)state extraData:(GestureHandlerEventExtraData *)data;
+ touchEventOnView:(nullable UIView *)view state:(GestureHandlerState)state extraData:(nullable NSDictionary *)data;
 
 @end
 
@@ -80,12 +80,12 @@ if (value != nil) recognizer.prop = [value type]; \
 - (void)handleGesture:(nonnull id)recognizer;
 - (BOOL)containsPointInView;
 - (GestureHandlerState)state;
-- (nullable GestureHandlerEventExtraData *)eventExtraData:(nonnull id)recognizer;
+- (nullable NSMutableDictionary *)eventExtraData:(nonnull id)recognizer;
 
 - (void)reset;
 - (void)sendEventsInState:(GestureHandlerState)state
            forView:(nonnull UIView *)view
-            withExtraData:(GestureHandlerEventExtraData *)extraData;
+            withExtraData:(nullable NSDictionary*)extraData;
 
 @end
 

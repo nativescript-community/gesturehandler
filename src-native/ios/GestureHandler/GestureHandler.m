@@ -139,23 +139,37 @@ CGRect GHHitSlopInsetRect(CGRect rect, RNGHHitSlop hitSlop) {
     self.recognizer.delegate = nil;
 }
 
-- (GestureHandlerEventExtraData *)eventExtraData:(UIGestureRecognizer *)recognizer
+- (NSMutableDictionary *)eventExtraData:(UIGestureRecognizer *)recognizer
 {
-    return [GestureHandlerEventExtraData
-            forPosition:[recognizer locationInView:recognizer.view]
-            withAbsolutePosition:[recognizer locationInView:recognizer.view.window]
-            withNumberOfTouches:recognizer.numberOfTouches];
+  CGPoint position = [recognizer locationInView:recognizer.view];
+  CGPoint absolutePosition = [recognizer locationInView:recognizer.view.window];
+  NSMutableDictionary* result = [NSMutableDictionary new];
+  NSUInteger numberOfTouches = recognizer.numberOfTouches;
+  [result setObject:@(numberOfTouches) forKey:@"numberOfPointers"];
+  [result setObject:@(position.x) forKey:@"x"];
+  [result setObject:@(position.y) forKey:@"y"];
+  [result setObject:@(absolutePosition.y) forKey:@"absoluteX"];
+  [result setObject:@(absolutePosition.y) forKey:@"absoluteY"];
+  NSMutableArray* positions = [NSMutableArray arrayWithCapacity:2*numberOfTouches];
+  for (NSUInteger i = 0; i <numberOfTouches; i++) {
+    CGPoint pos = [recognizer locationOfTouch:i inView:recognizer.view];
+
+    [positions insertObject:@(pos.x) atIndex:i];
+    [positions insertObject:@(pos.y) atIndex:i+1];
+  }
+  [result setObject:positions forKey:@"positions"];
+  return result;
 }
 
 - (void)handleGesture:(UIGestureRecognizer *)recognizer
 {
-    GestureHandlerEventExtraData *eventData = [self eventExtraData:recognizer];
+    NSMutableDictionary *eventData = [self eventExtraData:recognizer];
     [self sendEventsInState:self.state forView:recognizer.view withExtraData:eventData];
 }
 
 - (void)sendEventsInState:(GestureHandlerState)state
            forView:(nonnull UIView *)view
-            withExtraData:(GestureHandlerEventExtraData *)extraData
+            withExtraData:(nullable NSDictionary *)extraData
 {
 //    id touchEvent = [[GestureHandlerEvent alloc] initWithView:view
 //                                                        handlerTag:_tag

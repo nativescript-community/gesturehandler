@@ -225,14 +225,16 @@
   [recognizer updateHasCustomActivationCriteria];
 }
 
-- (GestureHandlerEventExtraData *)eventExtraData:(UIPanGestureRecognizer *)recognizer
+- (NSMutableDictionary *)eventExtraData:(UIPanGestureRecognizer *)recognizer
 {
-  return [GestureHandlerEventExtraData
-          forPan:[recognizer locationInView:recognizer.view]
-          withAbsolutePosition:[recognizer locationInView:recognizer.view.window]
-          withTranslation:[recognizer translationInView:recognizer.view]
-          withVelocity:[recognizer velocityInView:recognizer.view.window]
-          withNumberOfTouches:recognizer.numberOfTouches];
+  CGPoint translation = [recognizer translationInView:recognizer.view];
+  CGPoint velocity = [recognizer velocityInView:recognizer.view.window];
+  NSMutableDictionary* result = [super eventExtraData:recognizer];
+  [result setObject:@(translation.x) forKey:@"translationX"];
+  [result setObject:@(translation.y) forKey:@"translationY"];
+  [result setObject:SAFE_VELOCITY(velocity.x) forKey:@"velocityX"];
+  [result setObject:SAFE_VELOCITY(velocity.y) forKey:@"velocityY"];
+  return result;
 }
 
 @end

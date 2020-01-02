@@ -49,7 +49,7 @@
     _maxDeltaX = NAN;
     _maxDeltaY = NAN;
     _maxDistSq = NAN;
-    self.shouldCancelWhenOutside = YES;
+    _gestureHandler.shouldCancelWhenOutside = YES;
   }
   return self;
 }

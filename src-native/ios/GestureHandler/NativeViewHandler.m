@@ -111,24 +111,23 @@
             }
         }
     }
-
     [self sendEventsInState:GestureHandlerStateActive
              forView:sender
-              withExtraData:[GestureHandlerEventExtraData forPointerInside:YES]];
+              withExtraData:@{@"pointerInside": @(YES)}];
 }
 
 - (void)handleTouchUpOutside:(UIView *)sender forEvent:(UIEvent *)event
 {
     [self sendEventsInState:GestureHandlerStateEnd
              forView:sender
-              withExtraData:[GestureHandlerEventExtraData forPointerInside:NO]];
+              withExtraData:@{@"pointerInside": @(NO)}];
 }
 
 - (void)handleTouchUpInside:(UIView *)sender forEvent:(UIEvent *)event
 {
     [self sendEventsInState:GestureHandlerStateEnd
              forView:sender
-              withExtraData:[GestureHandlerEventExtraData forPointerInside:YES]];
+              withExtraData:@{@"pointerInside": @(YES)}];
 }
 
 - (void)handleDragExit:(UIView *)sender forEvent:(UIEvent *)event
@@ -139,11 +138,11 @@
         [control cancelTrackingWithEvent:event];
         [self sendEventsInState:GestureHandlerStateEnd
                  forView:sender
-                  withExtraData:[GestureHandlerEventExtraData forPointerInside:NO]];
+                  withExtraData:@{@"pointerInside": @(NO)}];
     } else {
         [self sendEventsInState:GestureHandlerStateActive
                  forView:sender
-                  withExtraData:[GestureHandlerEventExtraData forPointerInside:NO]];
+                  withExtraData:@{@"pointerInside": @(NO)}];
     }
 }
 
@@ -151,14 +150,14 @@
 {
     [self sendEventsInState:GestureHandlerStateActive
              forView:sender
-              withExtraData:[GestureHandlerEventExtraData forPointerInside:YES]];
+              withExtraData:@{@"pointerInside": @(YES)}];
 }
 
 - (void)handleTouchCancel:(UIView *)sender forEvent:(UIEvent *)event
 {
     [self sendEventsInState:GestureHandlerStateCancelled
              forView:sender
-              withExtraData:[GestureHandlerEventExtraData forPointerInside:NO]];
+              withExtraData:@{@"pointerInside": @(NO)}];
 }
 
 @end

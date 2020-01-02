@@ -21,13 +21,14 @@
 }
 
 #if !TARGET_OS_TV
-- (GestureHandlerEventExtraData *)eventExtraData:(UIPinchGestureRecognizer *)recognizer
+- (NSMutableDictionary *)eventExtraData:(UIPinchGestureRecognizer *)recognizer
 {
-    return [GestureHandlerEventExtraData
-            forPinch:recognizer.scale
-            withFocalPoint:[recognizer locationInView:recognizer.view]
-            withVelocity:recognizer.velocity
-            withNumberOfTouches:recognizer.numberOfTouches];
+  NSMutableDictionary* result = [super eventExtraData:recognizer];
+  [result setObject:@(recognizer.scale) forKey:@"scale"];
+  [result setObject:SAFE_VELOCITY(recognizer.velocity) forKey:@"velocity"];
+  [result setObject:[result objectForKey:@"x"] forKey:@"focalX"];
+  [result setObject:[result objectForKey:@"y"] forKey:@"focalY"];
+  return result;
 }
 #endif
 

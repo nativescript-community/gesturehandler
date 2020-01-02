@@ -12,7 +12,7 @@ public class PinchGestureHandler extends GestureHandler<PinchGestureHandler> {
   private double mLastVelocity;
 
   private float mStartingSpan;
-  private float mSpanSlop;
+  private float mSpanSlop = -1;
 
   private ScaleGestureDetector.OnScaleGestureListener mGestureListener =
           new ScaleGestureDetector.OnScaleGestureListener() {
@@ -56,8 +56,11 @@ public class PinchGestureHandler extends GestureHandler<PinchGestureHandler> {
       mLastVelocity = 0f;
       mLastScaleFactor = 1f;
       mScaleGestureDetector = new ScaleGestureDetector(context, mGestureListener);
-      ViewConfiguration configuration = ViewConfiguration.get(context);
-      mSpanSlop = configuration.getScaledTouchSlop();
+      if (mSpanSlop == -1) {
+        ViewConfiguration configuration = ViewConfiguration.get(context);
+        mSpanSlop = configuration.getScaledTouchSlop();
+      }
+      
 
       begin();
     }
@@ -91,6 +94,13 @@ public class PinchGestureHandler extends GestureHandler<PinchGestureHandler> {
 
   public double getVelocity() {
     return mLastVelocity;
+  }
+  public float getMinSpan() {
+    return mSpanSlop;
+  }
+  public PinchGestureHandler setMinSpan(float minSpan) {
+    mSpanSlop = minSpan;
+    return this;
   }
 
   public float getFocalPointX() {

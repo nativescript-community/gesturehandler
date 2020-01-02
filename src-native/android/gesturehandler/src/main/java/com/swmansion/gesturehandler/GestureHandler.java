@@ -53,6 +53,8 @@ public class GestureHandler<T extends GestureHandler> {
   private View mView;
   private int mState = STATE_UNDETERMINED;
   private float mX, mY;
+  private final float[] mXs = new float[MAX_POINTERS_COUNT];
+  private final float[] mYs = new float[MAX_POINTERS_COUNT];
   private boolean mWithinBounds;
   private boolean mEnabled = true;
   private float mHitSlop[];
@@ -163,9 +165,15 @@ public class GestureHandler<T extends GestureHandler> {
   public float getX() {
     return mX;
   }
+  public float getXAtIndex(int index) {
+    return mXs[index];
+  }
 
   public float getY() {
     return mY;
+  }
+  public float getYAtIndex(int index) {
+    return mYs[index];
   }
 
   public int getNumberOfPointers() {
@@ -296,10 +304,13 @@ public class GestureHandler<T extends GestureHandler> {
       return;
     }
     MotionEvent event = adaptEvent(origEvent);
+    mNumberOfPointers = event.getPointerCount();
     mX = event.getX();
     mY = event.getY();
-    mNumberOfPointers = event.getPointerCount();
-
+    for (int index = 0, size = mNumberOfPointers; index < size; index++) {
+      mXs[index] = event.getX(index);
+      mYs[index] = event.getY(index);
+    }
     mWithinBounds = isWithinBounds(mView, mX, mY);
     if (mShouldCancelWhenOutside && !mWithinBounds) {
       if (mState == STATE_ACTIVE) {

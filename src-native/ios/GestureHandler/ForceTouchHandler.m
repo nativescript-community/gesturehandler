@@ -160,13 +160,11 @@
 //  return [NSNumber numberWithBool: ((ForceTouchGestureRecognizer *)_recognizer).feedbackOnActivation];
 //}
 
-- (GestureHandlerEventExtraData *)eventExtraData:(ForceTouchGestureRecognizer *)recognizer
+- (NSMutableDictionary *)eventExtraData:(ForceTouchGestureRecognizer *)recognizer
 {
-  return [GestureHandlerEventExtraData
-          forForce: recognizer.force
-          forPosition:[recognizer locationInView:recognizer.view]
-          withAbsolutePosition:[recognizer locationInView:recognizer.view.window]
-          withNumberOfTouches:recognizer.numberOfTouches];
+  NSMutableDictionary* result = [super eventExtraData:recognizer];
+  [result setObject:@(recognizer.force) forKey:@"force"];
+  return result;
 }
 
 @end

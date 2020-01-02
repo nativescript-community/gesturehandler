@@ -21,13 +21,14 @@
 }
 
 #if !TARGET_OS_TV
-- (GestureHandlerEventExtraData *)eventExtraData:(UIRotationGestureRecognizer *)recognizer
+- (NSMutableDictionary *)eventExtraData:(UIRotationGestureRecognizer *)recognizer
 {
-    return [GestureHandlerEventExtraData
-            forRotation:recognizer.rotation
-            withAnchorPoint:[recognizer locationInView:recognizer.view]
-            withVelocity:recognizer.velocity
-            withNumberOfTouches:recognizer.numberOfTouches];
+  NSMutableDictionary* result = [super eventExtraData:recognizer];
+  [result setObject:@(recognizer.velocity) forKey:@"velocity"];
+  [result setObject:@(recognizer.rotation) forKey:@"rotation"];
+  [result setObject:[result objectForKey:@"x"] forKey:@"anchorX"];
+  [result setObject:[result objectForKey:@"y"] forKey:@"anchorY"];
+  return result;
 }
 #endif
 
