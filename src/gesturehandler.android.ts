@@ -205,7 +205,6 @@ function initPageLayout() {
             // registry.attachHandlerToView(this.rootGestureHandler.getTag(), this);
         }
         tearDown() {
-            console.log(this.constructor.name, 'tearDown', this.mOrchestrator, this.mRegistry);
             this.configurationHelper = null;
             this.mOrchestrator = null;
             this.mRegistry = null;
@@ -547,7 +546,6 @@ function initGestureHandlerInteractionController() {
         configureInteractions<T extends com.swmansion.gesturehandler.GestureHandler<any>, U extends HandlerOptions>(handler: com.swmansion.gesturehandler.GestureHandler<T>, config: U) {
             handler.setInteractionController(this);
             if (config) {
-                // console.log('configureInteractions', handler.getTag(), config);
                 if (config.waitFor) {
                     this.mWaitForRelations[handler.getTag()] = config.waitFor;
                 }
@@ -559,7 +557,6 @@ function initGestureHandlerInteractionController() {
 
         shouldWaitForHandlerFailure(handler: com.swmansion.gesturehandler.GestureHandler<any>, otherHandler: com.swmansion.gesturehandler.GestureHandler<any>) {
             const waitForTags = this.mWaitForRelations[handler.getTag()];
-            console.log('shouldWaitForHandlerFailure', handler.getTag(), waitForTags);
             if (waitForTags != null) {
                 for (let i = 0; i < waitForTags.length; i++) {
                     if (waitForTags[i] === otherHandler.getTag()) {
@@ -580,7 +577,6 @@ function initGestureHandlerInteractionController() {
 
         shouldRecognizeSimultaneously(handler: com.swmansion.gesturehandler.GestureHandler<any>, otherHandler: com.swmansion.gesturehandler.GestureHandler<any>) {
             const simultHandlerTags = this.mSimultaneousRelations[handler.getTag()];
-            console.log('shouldRecognizeSimultaneously', handler.getTag(), simultHandlerTags);
             if (simultHandlerTags != null) {
                 for (let i = 0; i < simultHandlerTags.length; i++) {
                     if (simultHandlerTags[i] === otherHandler.getTag()) {
