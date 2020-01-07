@@ -82,7 +82,6 @@ function createSetter(key, options: NativePropertyOptions) {
         this.options[key] = newVal;
         if (this.native && this.native[nativeSetterName]) {
             const actualVal = options.converter && options.converter.toNative ? options.converter.toNative.call(this, newVal, key) : newVal;
-            console.log('setter', key, newVal, Array.isArray(newVal), typeof newVal, actualVal, nativeSetterName, options.converter, this.native && this.native[nativeSetterName]);
             (this.native[nativeSetterName] as Function).call(this.native, ...actualVal);
         }
     };
