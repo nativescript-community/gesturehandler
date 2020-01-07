@@ -15,6 +15,8 @@ import java.util.Comparator;
 
 import android.support.annotation.Nullable;
 
+import android.util.Log;
+
 public class GestureHandlerOrchestrator {
     private final String TAG = "GestureHandler";
 
@@ -283,6 +285,7 @@ public class GestureHandlerOrchestrator {
       handler.cancel();
       return;
     }
+    Log.d("GestureHandlerOrchestrator", "deliverEventToGestureHandler " + handler.wantEvents());
     if (!handler.wantEvents()) {
       return;
     }

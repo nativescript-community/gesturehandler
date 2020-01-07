@@ -2,7 +2,6 @@ package com.swmansion.gesturehandler;
 
 import android.content.Context;
 import android.view.MotionEvent;
-import android.view.ScaleGestureDetector;
 import android.view.ViewConfiguration;
 
 public class PinchGestureHandler extends GestureHandler<PinchGestureHandler> {
@@ -12,7 +11,8 @@ public class PinchGestureHandler extends GestureHandler<PinchGestureHandler> {
   private double mLastVelocity;
 
   private float mStartingSpan;
-  private float mSpanSlop = -1;
+  private int mSpanSlop = -1;
+  private int mMinSpan = -1;
 
   private ScaleGestureDetector.OnScaleGestureListener mGestureListener =
           new ScaleGestureDetector.OnScaleGestureListener() {
@@ -51,14 +51,17 @@ public class PinchGestureHandler extends GestureHandler<PinchGestureHandler> {
 
   @Override
   protected void onHandle(MotionEvent event) {
+
     if (getState() == STATE_UNDETERMINED) {
       Context context = getView().getContext();
       mLastVelocity = 0f;
       mLastScaleFactor = 1f;
       mScaleGestureDetector = new ScaleGestureDetector(context, mGestureListener);
-      if (mSpanSlop == -1) {
-        ViewConfiguration configuration = ViewConfiguration.get(context);
-        mSpanSlop = configuration.getScaledTouchSlop();
+      if (mSpanSlop != -1) {
+          mScaleGestureDetector.setSpanSlop(mSpanSlop);
+      }
+      if (mMinSpan != -1) {
+          mScaleGestureDetector.setMinSpan(mMinSpan);
       }
       
 
@@ -96,10 +99,23 @@ public class PinchGestureHandler extends GestureHandler<PinchGestureHandler> {
     return mLastVelocity;
   }
   public float getMinSpan() {
-    return mSpanSlop;
+    return (float)mMinSpan;
   }
-  public PinchGestureHandler setMinSpan(float minSpan) {
-    mSpanSlop = minSpan;
+  public PinchGestureHandler setMinSpan(float value) {
+    mMinSpan = (int)value;
+    if (mScaleGestureDetector != null) {
+      mScaleGestureDetector.setMinSpan(mMinSpan);
+    }
+    return this;
+  }
+  public float getSpanSlop() {
+    return (float)mSpanSlop;
+  }
+  public PinchGestureHandler setSpanSlop(float value) {
+    mSpanSlop = (int)value;
+    if (mScaleGestureDetector != null) {
+      mScaleGestureDetector.setSpanSlop(mSpanSlop);
+    }
     return this;
   }
 
