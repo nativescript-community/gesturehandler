@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.0...v0.1.1) (2020-01-07)
+
+
+### Bug Fixes
+
+* custom ScaleGestureDetector to control minSpan ([1b7c739](https://github.com/Akylas/nativescript-gesturehandler/commit/1b7c739dd681b4d1c131b0c142549ecf3d94db9e))
+* remove logs ([6c43171](https://github.com/Akylas/nativescript-gesturehandler/commit/6c431715c034c4973f431842dba71e930714ccfd))
+
+
+### Features
+
+* report all pointers locations for ios ([e5d42d1](https://github.com/Akylas/nativescript-gesturehandler/commit/e5d42d13486c79dd3f487cb16a6f01a41b2a2053))
+* report all touch positions ([f147149](https://github.com/Akylas/nativescript-gesturehandler/commit/f1471490bdf163f21c76bd5858dc93d53fc52805))
+
+
+
+
+
 # [0.1.0](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.0.11...v0.1.0) (2020-01-01)
 
 

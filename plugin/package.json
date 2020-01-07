@@ -1,6 +1,6 @@
 {
     "name": "nativescript-gesturehandler",
-    "version": "0.1.0",
+    "version": "0.1.1",
     "description": "Nativescript plugin for Carto Mobile SDK",
     "main": "gesturehandler",
     "typings": "gesturehandler.d.ts",
