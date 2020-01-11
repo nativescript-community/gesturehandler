@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.2](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.1...v0.1.2) (2020-01-11)
+
+
+### Bug Fixes
+
+* doc fixed ([f6ecc31](https://github.com/Akylas/nativescript-gesturehandler/commit/f6ecc31df0fe39b9e96fa8a39f973e95e8f5a5ce))
+* some fixes ([18b8295](https://github.com/Akylas/nativescript-gesturehandler/commit/18b8295f73cf582cbc10933db9be96bf582d340d))
+
+
+
+
+
 ## [0.1.1](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.0...v0.1.1) (2020-01-07)
 
 
