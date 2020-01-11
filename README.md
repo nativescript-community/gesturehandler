@@ -19,6 +19,17 @@ The source is based on the source code by [Krzysztof Magiera](https://github.com
 
 ## API
 
+First you need to install the plugin:
+```shell
+tns plugin add nativescript-gesturehandler
+```
+We need to do some wiring when your app starts, so open `app.ts` and add this before creating any View/App/Frame:
+##### TypeScript
+```ts
+import { install } from "nativescript-gesturehandler";
+install();
+```
+
 You create a gesture handler using something like this:
 ```typescript 
 import { GestureHandlerTouchEvent, GestureHandlerStateEvent, GestureStateEventData, GestureTouchEventData, HandlerType } from 'nativescript-gesturehandler';
