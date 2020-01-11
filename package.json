@@ -1,7 +1,7 @@
 {
     "name": "nativescript-gesturehandler",
     "version": "1.0.0",
-    "description": "Nativescript plugin for Carto Mobile SDK",
+    "description": "Nativescript plugin for gestures",
     "scripts": {
         "tsc": "cpy '**/*.d.ts' '../plugin' --parents --cwd=src && tsc -skipLibCheck",
         "clean": "rimraf ./plugin/**/*.d.ts ./plugin/**/*.js ./plugin/**/*.js.map plugin/node_modules plugin/package-lock.json",
@@ -66,7 +66,7 @@
         },
         "build.ios": {
             "patterns": [
-                "./src-native/ios/CartoAdditions"
+                "./src-native/ios/GestureHandler"
             ],
             "extensions": "h,m"
         }

@@ -1,8 +1,3 @@
-## android typings
-
-```
-java -jar build/libs/dts-generator.jar -skip-declarations -input /Volumes/data/dev/carto/mobile-sdk/dist/android/carto-mobile-sdk.jar
-```
 
 ### clean up typings
 
