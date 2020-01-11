@@ -155,29 +155,29 @@ declare var GestureHandlerEventEmitter: {
 	prototype: GestureHandlerEventEmitter;
 };
 
-declare class GestureHandlerEventExtraData extends NSObject {
+declare class GestureHandlerEventExtraData extends NSDictionary<any, any> {
 
-	static alloc(): GestureHandlerEventExtraData; // inherited from NSObject
+	// static alloc(): GestureHandlerEventExtraData; // inherited from NSObject
 
-	static forForceForPositionWithAbsolutePositionWithNumberOfTouches(force: number, position: CGPoint, absolutePosition: CGPoint, numberOfTouches: number): GestureHandlerEventExtraData;
+	// static forForceForPositionWithAbsolutePositionWithNumberOfTouches(force: number, position: CGPoint, absolutePosition: CGPoint, numberOfTouches: number): GestureHandlerEventExtraData;
 
-	static forPanWithAbsolutePositionWithTranslationWithVelocityWithNumberOfTouches(position: CGPoint, absolutePosition: CGPoint, translation: CGPoint, velocity: CGPoint, numberOfTouches: number): GestureHandlerEventExtraData;
+	// static forPanWithAbsolutePositionWithTranslationWithVelocityWithNumberOfTouches(position: CGPoint, absolutePosition: CGPoint, translation: CGPoint, velocity: CGPoint, numberOfTouches: number): GestureHandlerEventExtraData;
 
-	static forPinchWithFocalPointWithVelocityWithNumberOfTouches(scale: number, focalPoint: CGPoint, velocity: number, numberOfTouches: number): GestureHandlerEventExtraData;
+	// static forPinchWithFocalPointWithVelocityWithNumberOfTouches(scale: number, focalPoint: CGPoint, velocity: number, numberOfTouches: number): GestureHandlerEventExtraData;
 
-	static forPointerInside(pointerInside: boolean): GestureHandlerEventExtraData;
+	// static forPointerInside(pointerInside: boolean): GestureHandlerEventExtraData;
 
-	static forPositionWithAbsolutePositionWithNumberOfTouches(position: CGPoint, absolutePosition: CGPoint, numberOfTouches: number): GestureHandlerEventExtraData;
+	// static forPositionWithAbsolutePositionWithNumberOfTouches(position: CGPoint, absolutePosition: CGPoint, numberOfTouches: number): GestureHandlerEventExtraData;
 
-	static forRotationWithAnchorPointWithVelocityWithNumberOfTouches(rotation: number, anchorPoint: CGPoint, velocity: number, numberOfTouches: number): GestureHandlerEventExtraData;
+	// static forRotationWithAnchorPointWithVelocityWithNumberOfTouches(rotation: number, anchorPoint: CGPoint, velocity: number, numberOfTouches: number): GestureHandlerEventExtraData;
 
-	static new(): GestureHandlerEventExtraData; // inherited from NSObject
+	// static new(): GestureHandlerEventExtraData; // inherited from NSObject
 
-	readonly data: NSDictionary<any, any>;
+	// readonly data: NSDictionary<any, any>;
 
-	constructor(o: { data: NSDictionary<any, any>; });
+	// constructor(o: { data: NSDictionary<any, any>; });
 
-	initWithData(data: NSDictionary<any, any>): this;
+	// initWithData(data: NSDictionary<any, any>): this;
 }
 
 declare class GestureHandlerManager extends NSObject {

@@ -57,10 +57,10 @@ function getValueForClass(val) {
     switch (getClass(val)) {
         case 'NSArray':
         case 'NSMutableArray':
-            return this.toJsObject(val);
+            return toJsObject(val);
         case 'NSDictionary':
         case 'NSMutableDictionary':
-            return this.toJsObject(val);
+            return toJsObject(val);
         case 'String':
             return String(val);
         case 'Boolean':
@@ -107,7 +107,7 @@ export class HandlerDelegate extends NSObject implements GestureHandlerDelegate 
                     state,
                     prevState,
                     ios: view,
-                    extraData: toJsObject(extraData.data),
+                    extraData: toJsObject(extraData),
                     view: view.nsView ? view.nsView.get() : null
                 }
             });
@@ -122,7 +122,7 @@ export class HandlerDelegate extends NSObject implements GestureHandlerDelegate 
                 data: {
                     state,
                     ios: view,
-                    extraData: toJsObject(extraData.data),
+                    extraData: toJsObject(extraData),
                     view: view.nsView ? view.nsView.get() : null
                 }
             });
@@ -147,7 +147,7 @@ export class Handler<T extends GestureHandler, U extends HandlerOptions> extends
     detachFromView(view: View) {
         const tag = this.native.tag;
         this.delegate = this.native.delegate = null;
-        this.manager.get().attachGestureHandler(tag, view);
+        this.manager.get().detachGestureHandler(tag, view);
     }
     getTag() {
         return this.native.tag;
@@ -210,7 +210,7 @@ export class Manager extends ManagerBase {
     }
     detachGestureHandler(handlerTag: number, view: View) {
         if (view.nativeView) {
-            this.manager.attachGestureHandlerToView(handlerTag, view.nativeView);
+            this.manager.dropGestureHandler(handlerTag);
         }
         if (view) {
             const viewListeners = this.viewListeners.get(view);
