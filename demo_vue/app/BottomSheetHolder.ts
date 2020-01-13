@@ -1,8 +1,8 @@
 import { GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureState, GestureStateEventData, GestureTouchEventData, HandlerType, Manager, PanGestureHandler } from 'nativescript-gesturehandler';
-import { View } from 'tns-core-modules/ui/core/view';
-import { layout } from 'tns-core-modules/utils/utils';
+import { View } from '@nativescript/core/ui/core/view';
+import { layout } from '@nativescript/core/utils/utils';
 import { Component, Prop } from 'vue-property-decorator';
-import * as Animation from '~/animation';
+import TWEEN from 'nativescript-tween';
 import BaseVueComponent from './BaseVueComponent';
 import BottomSheet from './BottomSheet';
 
@@ -182,9 +182,9 @@ export default class BottomSheetHolder extends BaseVueComponent {
 
     scrollSheetToPosition(position, duration = OPEN_DURATION) {
         const viewTop = this.currentViewHeight - this.viewHeight;
-        new Animation.Animation({ value: viewTop })
+        new TWEEN.Tween({ value: viewTop })
             .to({ value: -position }, OPEN_DURATION)
-            .easing(Animation.Easing.Quadratic.Out)
+            .easing(TWEEN.Easing.Quadratic.Out)
             .onUpdate(obj => {
                 this.currentViewHeight = this.viewHeight + obj.value;
             })

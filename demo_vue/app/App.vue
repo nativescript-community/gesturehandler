@@ -3,26 +3,23 @@
         <ActionBar title="GestureHandler Demo" />
 
         <BottomSheetHolder ref="bottomSheetHolder" :peekerSteps="[70, 120, 400]" :scrollViewTag="12">
-
             <GridLayout ref="testView" backgroundColor="white">
                 <button ref="button" text="test" @tap="onButtonTap" verticalAlignment="top" />
                 <StackLayout ref="subView" width="50" height="50" backgroundColor="yellow" horizontalAlignment="center" verticalAlignment="center" :translateX="translateX" :translateY="translateY" />
             </GridLayout>
             <BottomSheet slot="bottomSheet" />
         </BottomSheetHolder>
-
     </Page>
 </template>
 
 <script lang="ts">
-import { GC } from 'utils/utils';
+import { GC } from '@nativescript/core/utils/utils';
 import BaseVueComponent from './BaseVueComponent';
 import BottomSheetHolder from './BottomSheetHolder';
 import BottomSheet from './BottomSheet';
 import Component from 'vue-class-component';
-import { Manager } from 'nativescript-gesturehandler';
-import { GestureHandlerTouchEvent, GestureHandlerStateEvent, GestureStateEventData, GestureTouchEventData, HandlerType } from 'nativescript-gesturehandler';
-import { View } from 'tns-core-modules/ui/page/page';
+import { GestureState, GestureHandlerTouchEvent, GestureHandlerStateEvent, GestureStateEventData, GestureTouchEventData, HandlerType, Manager } from 'nativescript-gesturehandler';
+import { View } from '@nativescript/core/ui/core/view';
 import { Provide } from 'vue-property-decorator';
 
 // const samples = [
@@ -168,15 +165,35 @@ export default class App extends BaseVueComponent {
     //     return this.listViewAllowScroll;
     // }
     gestureHandler;
+    tapGestureHandler
+    doubleGestureHandler
     mounted() {
         super.mounted();
         const manager = Manager.getInstance();
-        const gestureHandler = (this.gestureHandler = manager.createGestureHandler(HandlerType.PAN, 10, {
-            shouldCancelWhenOutside: false
-        }));
-        gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouch, this);
-        gestureHandler.on(GestureHandlerStateEvent, this.onGestureState, this);
-        gestureHandler.attachToView((this.$refs.subView as any).nativeView);
+        // const gestureHandler = (this.gestureHandler = manager.createGestureHandler(HandlerType.PAN, 10, {
+        //     shouldCancelWhenOutside: false
+        // }))
+        //     .on(GestureHandlerTouchEvent, this.onGestureTouch, this)
+            // .on(GestureHandlerStateEvent, this.onGestureState, this);
+        const doubleGestureHandler = this.doubleGestureHandler = manager.createGestureHandler(HandlerType.TAP, 13, { numberOfTaps: 2 }).on(GestureHandlerStateEvent, this.onDoubleTapGesture, this);
+        const tapGestureHandler = this.tapGestureHandler = manager.createGestureHandler(HandlerType.TAP, 12, { waitFor: [13] }).on(GestureHandlerStateEvent, this.onTapGesture, this);
+        
+        // gestureHandler.attachToView((this.$refs.subView as any).nativeView);
+        console.log('app mounted about to attach tap gesture');
+        tapGestureHandler.attachToView((this.$refs.subView as any).nativeView);
+        doubleGestureHandler.attachToView((this.$refs.subView as any).nativeView);
+    }
+    onDoubleTapGesture(event: GestureStateEventData) {
+        // console.log('onDoubleTapGesture', event.data.extraData, event.data.state, event.data.prevState);
+        if (event.data.state === GestureState.END && event.data.prevState === GestureState.ACTIVE) {
+            console.log('onDoubleTapGesture', event.data.extraData.x, event.data.extraData.y, event.data.extraData);
+        }
+    }
+    onTapGesture(event: GestureStateEventData) {
+        // console.log('onTapGesture', event.data.extraData, event.data.state, event.data.prevState);
+        if (event.data.state === GestureState.END && event.data.prevState === GestureState.ACTIVE) {
+            console.log('onTapGesture', event.data.extraData.x, event.data.extraData.y, event.data.extraData);
+        }
     }
     onGestureTouch(args: GestureTouchEventData) {
         const { state, extraData, view } = args.data;

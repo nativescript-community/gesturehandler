@@ -1,13 +1,12 @@
 {
     "compilerOptions": {
         "target": "es5",
-        "module": "esnext",
+        "module": "commonjs",
         "moduleResolution": "node",
-        "incremental": true,
-        "tsBuildInfoFile": ".tsbuildinfo",
         "removeComments": false,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true,
+        "sourceMap": true,
         "importHelpers": true,
         "noEmitHelpers": true,
         "noEmitOnError": true,
@@ -19,11 +18,14 @@
         "baseUrl": ".",
         "paths": {
             "~/*": ["app/*"],
-            "*": ["./node_modules/tns-core-modules/*", "./node_modules/*"],
+            "nativescript-vue": ["./node_modules/nativescript-akylas-vue"],
+            "tns-core-modules": ["./node_modules/@nativescript/core"],
+            "tns-core-modules/*": ["./node_modules/@nativescript/core/*"],
             "nativescript-gesturehandler": ["../src"],
-            "nativescript-gesturehandler/*": ["../src/*"]
+            "nativescript-gesturehandler/*": ["../src/*"],
+            "*": ["node_modules/*"]
         }
     },
-    "include": ["app/**/*", "references.d.ts"],
+    "include": ["app/**/*", "../src/**/*.ts", "references.d.ts" , "vue-shims.d.ts"],
     "exclude": ["node_modules", "platforms", "**/angular"]
 }
