@@ -9,4 +9,5 @@
 #import "GestureHandler.h"
 
 @interface TapGestureHandler : GestureHandler
+-(void)resetStored;
 @end

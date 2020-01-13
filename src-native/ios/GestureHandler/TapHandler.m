@@ -31,7 +31,7 @@
 @end
 
 @implementation BetterTapGestureRecognizer {
-  __weak GestureHandler *_gestureHandler;
+  __weak TapGestureHandler *_gestureHandler;
   NSUInteger _tapsSoFar;
   CGPoint _initPosition;
   NSInteger _maxNumberOfTouches;
@@ -66,6 +66,7 @@
 
 - (void)touchesBegan:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
 {
+  [_gestureHandler resetStored];
   [super touchesBegan:touches withEvent:event];
   if (_tapsSoFar == 0) {
     _initPosition = [self locationInView:self.view];
@@ -166,7 +167,10 @@
 
 @end
 
-@implementation TapGestureHandler
+@implementation TapGestureHandler {
+  __weak NSMutableDictionary *_lastExtraEventData;
+}
+
 
 - (instancetype)initWithTag:(NSNumber *)tag
 {
@@ -201,6 +205,23 @@
     CGFloat dist = [prop floatValue];
     recognizer.maxDistSq = dist * dist;
   }
+}
+
+- (void)resetStored
+{
+    _lastExtraEventData = NULL;
+}
+- (NSMutableDictionary *)eventExtraData:(UIGestureRecognizer *)recognizer
+{
+  if (recognizer.numberOfTouches == 0 && _lastExtraEventData != NULL) {
+    return _lastExtraEventData;
+  }
+  NSMutableDictionary *result = [super eventExtraData:recognizer];
+  if (recognizer.numberOfTouches != 0)
+  {
+    _lastExtraEventData = result;
+  } 
+  return result;
 }
 
 @end
