@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.5](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.4...v0.1.5) (2020-01-17)
+
+
+### Bug Fixes
+
+* wrong positions return on ios ([b63ec94](https://github.com/Akylas/nativescript-gesturehandler/commit/b63ec94eabca89b756cb3c2f9f46f1e85dbe944c))
+
+
+
+
+
 ## [0.1.4](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.3...v0.1.4) (2020-01-13)
 
 
