@@ -154,8 +154,8 @@ CGRect GHHitSlopInsetRect(CGRect rect, RNGHHitSlop hitSlop) {
   for (NSUInteger i = 0; i <numberOfTouches; i++) {
     CGPoint pos = [recognizer locationOfTouch:i inView:recognizer.view];
 
-    [positions insertObject:@(pos.x) atIndex:i];
-    [positions insertObject:@(pos.y) atIndex:i+1];
+    [positions insertObject:@(pos.x) atIndex:2*i];
+    [positions insertObject:@(pos.y) atIndex:2*i+1];
   }
   [result setObject:positions forKey:@"positions"];
   return result;
