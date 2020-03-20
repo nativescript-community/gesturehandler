@@ -177,11 +177,12 @@ export default class App extends BaseVueComponent {
             // .on(GestureHandlerStateEvent, this.onGestureState, this);
         const doubleGestureHandler = this.doubleGestureHandler = manager.createGestureHandler(HandlerType.TAP, 13, { numberOfTaps: 2 }).on(GestureHandlerStateEvent, this.onDoubleTapGesture, this);
         const tapGestureHandler = this.tapGestureHandler = manager.createGestureHandler(HandlerType.TAP, 12, { waitFor: [13] }).on(GestureHandlerStateEvent, this.onTapGesture, this);
+        const pinchGestureHandler = this.tapGestureHandler = manager.createGestureHandler(HandlerType.PINCH, 14).on(GestureHandlerStateEvent, this.onPinchGesture, this);
         
         // gestureHandler.attachToView((this.$refs.subView as any).nativeView);
-        console.log('app mounted about to attach tap gesture');
         tapGestureHandler.attachToView((this.$refs.subView as any).nativeView);
         doubleGestureHandler.attachToView((this.$refs.subView as any).nativeView);
+        pinchGestureHandler.attachToView(this.nativeView);
     }
     onDoubleTapGesture(event: GestureStateEventData) {
         // console.log('onDoubleTapGesture', event.data.extraData, event.data.state, event.data.prevState);
@@ -194,6 +195,10 @@ export default class App extends BaseVueComponent {
         if (event.data.state === GestureState.END && event.data.prevState === GestureState.ACTIVE) {
             console.log('onTapGesture', event.data.extraData.x, event.data.extraData.y, event.data.extraData);
         }
+    }
+    onPinchGesture(event: GestureStateEventData) {
+        // console.log('onTapGesture', event.data.extraData, event.data.state, event.data.prevState);
+            console.log('onPinchGesture', event.data.extraData.positions);
     }
     onGestureTouch(args: GestureTouchEventData) {
         const { state, extraData, view } = args.data;
