@@ -64,7 +64,7 @@ declare class GestureHandler extends NSObject implements UIGestureRecognizerDele
 
 	containsPointInView(): boolean;
 
-	eventExtraData(recognizer: any): GestureHandlerEventExtraData;
+	eventExtraData(recognizer: any): NSDictionary<any, any>;
 
 	gestureRecognizerShouldBeRequiredToFailByGestureRecognizer(gestureRecognizer: UIGestureRecognizer, otherGestureRecognizer: UIGestureRecognizer): boolean;
 
@@ -102,7 +102,7 @@ declare class GestureHandler extends NSObject implements UIGestureRecognizerDele
 
 	self(): this;
 
-	sendEventsInStateForViewWithExtraData(state: GestureHandlerState, view: UIView, extraData: GestureHandlerEventExtraData): void;
+	sendEventsInStateForViewWithExtraData(state: GestureHandlerState, view: UIView, extraData: NSDictionary<any, any>): void;
 
 	state(): GestureHandlerState;
 
@@ -111,9 +111,9 @@ declare class GestureHandler extends NSObject implements UIGestureRecognizerDele
 
 interface GestureHandlerDelegate {
 
-	gestureHandlerDidChangeStatePrevStateExtraDataView(handler: GestureHandler, state: GestureHandlerState, prevState: GestureHandlerState, extraData: GestureHandlerEventExtraData, view: UIView): void;
+	gestureHandlerDidChangeStatePrevStateExtraDataView(handler: GestureHandler, state: GestureHandlerState, prevState: GestureHandlerState, extraData: NSDictionary<any, any>, view: UIView): void;
 
-	gestureHandlerTouchEventOnViewStateExtraData(handler: GestureHandler, view: UIView, state: GestureHandlerState, extraData: GestureHandlerEventExtraData): void;
+	gestureHandlerTouchEventOnViewStateExtraData(handler: GestureHandler, view: UIView, state: GestureHandlerState, extraData: NSDictionary<any, any>): void;
 }
 declare var GestureHandlerDelegate: {
 
@@ -139,9 +139,9 @@ declare class GestureHandlerEvent extends NSObject {
 
 	readonly view: UIView;
 
-	constructor(o: { view: UIView; handlerTag: number; state: GestureHandlerState; extraData: GestureHandlerEventExtraData; });
+	constructor(o: { view: UIView; handlerTag: number; state: GestureHandlerState; extraData: NSDictionary<any, any>; });
 
-	initWithViewHandlerTagStateExtraData(view: UIView, handlerTag: number, state: GestureHandlerState, extraData: GestureHandlerEventExtraData): this;
+	initWithViewHandlerTagStateExtraData(view: UIView, handlerTag: number, state: GestureHandlerState, extraData: NSDictionary<any, any>): this;
 }
 
 interface GestureHandlerEventEmitter {
@@ -155,30 +155,6 @@ declare var GestureHandlerEventEmitter: {
 	prototype: GestureHandlerEventEmitter;
 };
 
-declare class GestureHandlerEventExtraData extends NSDictionary<any, any> {
-
-	// static alloc(): GestureHandlerEventExtraData; // inherited from NSObject
-
-	// static forForceForPositionWithAbsolutePositionWithNumberOfTouches(force: number, position: CGPoint, absolutePosition: CGPoint, numberOfTouches: number): GestureHandlerEventExtraData;
-
-	// static forPanWithAbsolutePositionWithTranslationWithVelocityWithNumberOfTouches(position: CGPoint, absolutePosition: CGPoint, translation: CGPoint, velocity: CGPoint, numberOfTouches: number): GestureHandlerEventExtraData;
-
-	// static forPinchWithFocalPointWithVelocityWithNumberOfTouches(scale: number, focalPoint: CGPoint, velocity: number, numberOfTouches: number): GestureHandlerEventExtraData;
-
-	// static forPointerInside(pointerInside: boolean): GestureHandlerEventExtraData;
-
-	// static forPositionWithAbsolutePositionWithNumberOfTouches(position: CGPoint, absolutePosition: CGPoint, numberOfTouches: number): GestureHandlerEventExtraData;
-
-	// static forRotationWithAnchorPointWithVelocityWithNumberOfTouches(rotation: number, anchorPoint: CGPoint, velocity: number, numberOfTouches: number): GestureHandlerEventExtraData;
-
-	// static new(): GestureHandlerEventExtraData; // inherited from NSObject
-
-	// readonly data: NSDictionary<any, any>;
-
-	// constructor(o: { data: NSDictionary<any, any>; });
-
-	// initWithData(data: NSDictionary<any, any>): this;
-}
 
 declare class GestureHandlerManager extends NSObject {
 
@@ -233,9 +209,9 @@ declare class GestureHandlerStateChange extends NSObject {
 
 	readonly view: UIView;
 
-	constructor(o: { view: UIView; handlerTag: number; state: GestureHandlerState; prevState: GestureHandlerState; extraData: GestureHandlerEventExtraData; });
+	constructor(o: { view: UIView; handlerTag: number; state: GestureHandlerState; prevState: GestureHandlerState; extraData: NSDictionary<any, any>; });
 
-	initWithViewHandlerTagStatePrevStateExtraData(view: UIView, handlerTag: number, state: GestureHandlerState, prevState: GestureHandlerState, extraData: GestureHandlerEventExtraData): this;
+	initWithViewHandlerTagStatePrevStateExtraData(view: UIView, handlerTag: number, state: GestureHandlerState, prevState: GestureHandlerState, extraData: NSDictionary<any, any>): this;
 }
 
 declare class LongPressGestureHandler extends GestureHandler {

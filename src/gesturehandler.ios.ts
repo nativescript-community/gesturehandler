@@ -88,15 +88,21 @@ export class HandlerDelegate extends NSObject implements GestureHandlerDelegate 
     static new(): HandlerDelegate {
         return super.new() as HandlerDelegate;
     }
-    public initWithOwner(owner: WeakRef<Handler<any, any>>): HandlerDelegate {
-        this._owner = owner;
-        return this;
+    // public initWithOwner(owner: WeakRef<Handler<any, any>>): HandlerDelegate {
+    //     this._owner = owner;
+    //     return this;
+    // }
+
+    public static initWithOwner(owner: WeakRef<Handler<any, any>>): HandlerDelegate {
+        const impl = <HandlerDelegate>HandlerDelegate.new();
+        impl._owner = owner;
+        return impl;
     }
     gestureHandlerDidChangeStatePrevStateExtraDataView(
         handler: GestureHandler,
         state: GestureHandlerState,
         prevState: GestureHandlerState,
-        extraData: GestureHandlerEventExtraData,
+        extraData: NSDictionary<any, any>,
         view: UIView & { nsView?: WeakRef<View> }
     ): void {
         const owner = this._owner && this._owner.get();
@@ -114,7 +120,7 @@ export class HandlerDelegate extends NSObject implements GestureHandlerDelegate 
             });
         }
     }
-    gestureHandlerTouchEventOnViewStateExtraData(handler: GestureHandler, view: UIView & { nsView?: WeakRef<View> }, state: GestureHandlerState, extraData: GestureHandlerEventExtraData): void {
+    gestureHandlerTouchEventOnViewStateExtraData(handler: GestureHandler, view: UIView & { nsView?: WeakRef<View> }, state: GestureHandlerState, extraData: NSDictionary<any, any>): void {
         const owner = this._owner && this._owner.get();
         if (owner) {
             owner.notify({
@@ -141,7 +147,7 @@ export class Handler<T extends GestureHandler, U extends HandlerOptions> extends
     }
     attachToView(view: View) {
         const tag = this.native.tag;
-        this.delegate = HandlerDelegate.new().initWithOwner(new WeakRef(this));
+        this.delegate = HandlerDelegate.initWithOwner(new WeakRef(this));
         this.native.delegate = this.delegate;
         this.manager.get().attachGestureHandler(tag, view);
     }
