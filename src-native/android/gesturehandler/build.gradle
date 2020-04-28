@@ -58,6 +58,7 @@ android {
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
     implementation 'com.android.support:support-annotations:' + computeSupportVersion()
+    implementation files('/Volumes/dev/nativescript/nativescript-gesturehandler/node_modules/.pnpm/registry.npmjs.org/tns-core-modules-widgets/6.5.0/node_modules/tns-core-modules-widgets/platforms/android/widgets-release.aar')
     // implementation 'com.android.support:support-v4:' + computeSupportVersion()
 }
 
