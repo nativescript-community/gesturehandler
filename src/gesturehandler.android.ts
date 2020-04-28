@@ -13,11 +13,11 @@ import {
     OptionsTypeMap,
     TypeMap,
     ViewDisposeEvent,
-    ViewInitEvent
+    ViewInitEvent,
 } from './gesturehandler.common';
 import { View } from '@nativescript/core/ui/core/view';
 import { layout } from '@nativescript/core/utils/utils';
-import { android as androidApp } from '@nativescript/core/application/application';
+import { android as androidApp } from '@nativescript/core/application';
 import {
     FlingGestureHandlerOptions,
     HandlerOptions,
@@ -26,199 +26,14 @@ import {
     PanGestureHandlerOptions,
     PinchGestureHandlerOptions,
     RotationGestureHandlerOptions,
-    TapGestureHandlerOptions
+    TapGestureHandlerOptions,
 } from './gesturehandler';
-import { Page } from '@nativescript/core/ui/page/page';
+import { Page } from '@nativescript/core/ui/page';
 export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType, ViewInitEvent, ViewDisposeEvent };
 
-export let RootViewGestureHandler: RootViewGestureHandler;
-export interface RootViewGestureHandler extends com.swmansion.gesturehandler.GestureHandler<RootViewGestureHandler> {
-    // tslint:disable-next-line: no-misused-new
-    new (): RootViewGestureHandler;
-}
-function initRootViewGestureHandler() {
-    if (RootViewGestureHandler) {
-        return;
-    }
-    class RootViewGestureHandlerImpl extends com.swmansion.gesturehandler.GestureHandler<RootViewGestureHandler> {
-        constructor() {
-            super();
-            return global.__native(this);
-        }
-
-        getView() {
-            return super.getView() as PageLayout;
-        }
-        onHandle(event) {
-            const currentState = this.getState();
-            if (currentState === com.swmansion.gesturehandler.GestureHandler.STATE_UNDETERMINED) {
-                this.begin();
-                this.getView().setShouldIntercept(true);
-            }
-            if (event.getActionMasked() === android.view.MotionEvent.ACTION_UP) {
-                this.end();
-            }
-        }
-
-        onCancel() {
-            this.getView().setShouldIntercept(false);
-            const time = android.os.SystemClock.uptimeMillis();
-            const event = android.view.MotionEvent.obtain(time, time, android.view.MotionEvent.ACTION_CANCEL, 0, 0, 0);
-            event.setAction(android.view.MotionEvent.ACTION_CANCEL);
-        }
-    }
-    RootViewGestureHandler = RootViewGestureHandlerImpl as any;
-}
-
-export let PageLayout: PageLayout;
-export interface PageLayout extends org.nativescript.widgets.GridLayout {
-    // tslint:disable-next-line: no-misused-new
-    new (context): PageLayout;
-    setShouldIntercept(value: boolean);
-    setPassingTouch(value: boolean);
-    initialize();
-    tearDown();
-    registry: com.swmansion.gesturehandler.GestureHandlerRegistryImpl;
-}
-function initPageLayout() {
-    if (PageLayout) {
-        return;
-    }
-    class PageLayoutImpl extends org.nativescript.widgets.GridLayout {
-        constructor(context) {
-            super(context);
-            return global.__native(this);
-        }
-        // mGestureRootHelper: GestureHandlerRootHelper;
-
-        mOrchestrator: com.swmansion.gesturehandler.GestureHandlerOrchestrator;
-        mRegistry: com.swmansion.gesturehandler.GestureHandlerRegistryImpl;
-        configurationHelper: com.swmansion.gesturehandler.ViewConfigurationHelper;
-        rootGestureHandler: RootViewGestureHandler;
-
-        mShouldIntercept = false;
-        mPassingTouch = false;
-
-        setShouldIntercept(value) {
-            this.mShouldIntercept = value;
-        }
-        setPassingTouch(value) {
-            this.mPassingTouch = value;
-        }
-
-        get registry() {
-            return this.mRegistry;
-        }
-        // requestDisallowInterceptTouchEvent(disallowIntercept) {
-        //     console.log('requestDisallowInterceptTouchEvent');
-        //     if (this.mGestureRootHelper != null) {
-        //         this.mGestureRootHelper.requestDisallowInterceptTouchEvent(disallowIntercept);
-        //     }
-        //     super.requestDisallowInterceptTouchEvent(disallowIntercept);
-        // }
-
-        // dispatchTouchEvent(ev) {
-        //     if (this.mGestureRootHelper != null && this.mGestureRootHelper.dispatchTouchEvent(ev)) {
-        //         return true;
-        //     }
-        //     return super.dispatchTouchEvent(ev);
-        // }
-        tryCancelAllHandlers() {
-            // In order to cancel handlers we activate handler that is hooked to the root view
-            if (this.rootGestureHandler != null && this.rootGestureHandler.getState() === com.swmansion.gesturehandler.GestureHandler.STATE_BEGAN) {
-                // Try activate main JS handler
-                this.rootGestureHandler.activate();
-                this.rootGestureHandler.end();
-            }
-        }
-
-        requestDisallowInterceptTouchEvent(disallowIntercept) {
-            // console.log('requestDisallowInterceptTouchEvent', disallowIntercept);
-            // If this method gets called it means that some native view is attempting to grab lock for
-            // touch event delivery. In that case we cancel all gesture recognizers
-            if (this.mOrchestrator != null && !this.mPassingTouch) {
-                // if we are in the process of delivering touch events via GH orchestrator, we don't want to
-                // treat it as a native gesture capturing the lock
-                this.tryCancelAllHandlers();
-            }
-            super.requestDisallowInterceptTouchEvent(disallowIntercept);
-        }
-
-        dispatchTouchEventToOrchestrator(ev: android.view.MotionEvent) {
-            // console.log('dispatchTouchEventToOrchestrator', ev, this.mShouldIntercept);
-            this.mPassingTouch = true;
-            this.mOrchestrator.onTouchEvent(ev);
-            this.mPassingTouch = false;
-
-            return this.mShouldIntercept;
-        }
-
-        dispatchTouchEvent(ev: android.view.MotionEvent) {
-            if (this.dispatchTouchEventToOrchestrator(ev)) {
-                return true;
-            }
-            const handled = super.dispatchTouchEvent(ev);
-            // console.log('dispatchTouchEvent', ev, handled, this.mShouldIntercept);
-            // we need to always return true or gestures wont work on layouts because they don't handle touch so dispatchTouchEvent returns false
-            return true;
-        }
-
-        // onInterceptTouchEvent(ev: android.view.MotionEvent) {
-        //     return this.mShouldIntercept;
-        // }
-
-        // onTouchEvent(ev: android.view.MotionEvent) {
-        //     console.log('onTouchEvent', ev);
-        //     this.mOrchestrator.onTouchEvent(ev);
-        //     return super.onTouchEvent(ev);
-        // }
-
-        /**
-         * This method is used to enable root view to start processing touch events through the gesture
-         * handler library logic. Unless this method is called (which happens as a result of instantiating
-         * new gesture handler from JS) the root view component will just proxy all touch related methods
-         * to its superclass. Thus in the "disabled" state all touch related events will fallback to
-         * default RN behavior.
-         */
-        initialize() {
-            this.mRegistry = new com.swmansion.gesturehandler.GestureHandlerRegistryImpl();
-            this.configurationHelper = new com.swmansion.gesturehandler.ViewConfigurationHelper({
-                getPointerEventsConfigForView(view: android.view.View) {
-                    return view.isEnabled() ? com.swmansion.gesturehandler.PointerEventsConfig.AUTO : com.swmansion.gesturehandler.PointerEventsConfig.NONE;
-                },
-                isViewClippingChildren(parent: android.view.ViewGroup) {
-                    return false;
-                },
-                getChildInDrawingOrderAtIndex(parent: android.view.ViewGroup, index: number) {
-                    return parent.getChildAt(index);
-                }
-            });
-            this.mOrchestrator = new com.swmansion.gesturehandler.GestureHandlerOrchestrator(this, this.mRegistry, this.configurationHelper);
-            // console.log(this.constructor.name, 'initialize', this.mOrchestrator, this.mRegistry);
-            this.mOrchestrator.setMinimumAlphaForTraversal(0.01);
-
-            initRootViewGestureHandler();
-            const tag = -12345;
-            this.rootGestureHandler = new RootViewGestureHandler();
-            this.rootGestureHandler.setTag(tag);
-            this.mRegistry.registerHandler(this.rootGestureHandler);
-            // registry.attachHandlerToView(this.rootGestureHandler.getTag(), this);
-        }
-        tearDown() {
-            this.configurationHelper = null;
-            this.mOrchestrator = null;
-            this.mRegistry = null;
-            // if (this.mGestureRootHelper != null) {
-            //     this.mGestureRootHelper.tearDown();
-            //     this.mGestureRootHelper = null;
-            // }
-        }
-    }
-    PageLayout = PageLayoutImpl as any;
-}
-
+let PageLayout: typeof com.nativescript.gesturehandler.PageLayout;
 class PageGestureExtended extends Page {
-    nativeView: PageLayout;
+    nativeView: com.nativescript.gesturehandler.PageLayout;
     initNativeView() {
         this.nativeView.initialize();
     }
@@ -226,18 +41,18 @@ class PageGestureExtended extends Page {
         this.nativeView.tearDown();
     }
     get registry() {
-        return this.nativeView && this.nativeView.registry;
+        return this.nativeView && this.nativeView.registry();
     }
 }
 export function install() {
     installBase();
-    const NSPage = require('@nativescript/core/ui/page/page').Page;
-    NSPage.prototype.createNativeView = function() {
-        initPageLayout();
+    const NSPage = require('@nativescript/core/ui/page').Page;
+    NSPage.prototype.createNativeView = function () {
+        if (!PageLayout) {
+            PageLayout = com.nativescript.gesturehandler.PageLayout;
+        }
         const layout = new PageLayout(this._context);
         this.gestureRegistry = layout.registry;
-        layout.addRow(new org.nativescript.widgets.ItemSpec(1, org.nativescript.widgets.GridUnitType.auto));
-        layout.addRow(new org.nativescript.widgets.ItemSpec(1, org.nativescript.widgets.GridUnitType.star));
         return layout;
     };
     applyMixins(NSPage, [PageGestureExtended]);
@@ -297,8 +112,8 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
                     }
                     return [left, top, right, bottom, width, height];
                 }
-            }
-        }
+            },
+        },
     })
     hitSlop;
     @nativeProperty enabled: boolean;
@@ -317,7 +132,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
             // x: layout.toDeviceIndependentPixels(handler.getX()),
             // y: layout.toDeviceIndependentPixels(handler.getY()),
             positions,
-            numberOfPointers
+            numberOfPointers,
         };
     }
     initNativeView(native: T, options: U) {
@@ -334,8 +149,8 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
                         state: handler.getState(),
                         android: view,
                         extraData: this.getExtraData(handler),
-                        view: view.nsView ? view.nsView.get() : null
-                    }
+                        view: view.nsView ? view.nsView.get() : null,
+                    },
                 });
             },
             onStateChange: (handler, state, prevState) => {
@@ -348,10 +163,10 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
                         prevState,
                         android: view,
                         extraData: this.getExtraData(handler),
-                        view: view.nsView ? view.nsView.get() : null
-                    }
+                        view: view.nsView ? view.nsView.get() : null,
+                    },
                 });
-            }
+            },
         });
         native.setOnTouchEventListener(this.touchListener);
         this.manager.get().configureInteractions(this, options);
@@ -407,7 +222,7 @@ export class TapGestureHandler extends Handler<com.swmansion.gesturehandler.TapG
             x: layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
             y: layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
             absoluteX: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
-            absoluteY: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY())
+            absoluteY: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY()),
         });
     }
 }
@@ -442,7 +257,7 @@ export class PanGestureHandler extends Handler<com.swmansion.gesturehandler.PanG
             translationX: layout.toDeviceIndependentPixels(handler.getTranslationX()),
             translationY: layout.toDeviceIndependentPixels(handler.getTranslationY()),
             velocityX: layout.toDeviceIndependentPixels(handler.getVelocityX()),
-            velocityY: layout.toDeviceIndependentPixels(handler.getVelocityY())
+            velocityY: layout.toDeviceIndependentPixels(handler.getVelocityY()),
         });
     }
 }
@@ -457,7 +272,7 @@ export class PinchGestureHandler extends Handler<com.swmansion.gesturehandler.Pi
             scale: handler.getScale(),
             focalX: layout.toDeviceIndependentPixels(handler.getFocalPointX()),
             focalY: layout.toDeviceIndependentPixels(handler.getFocalPointY()),
-            velocity: handler.getVelocity()
+            velocity: handler.getVelocity(),
         });
     }
 }
@@ -502,7 +317,7 @@ export class RotationGestureHandler extends Handler<com.swmansion.gesturehandler
             rotation: handler.getRotation(),
             anchorX: layout.toDeviceIndependentPixels(handler.getAnchorX()),
             anchorY: layout.toDeviceIndependentPixels(handler.getAnchorY()),
-            velocity: handler.getVelocity()
+            velocity: handler.getVelocity(),
         });
     }
 }
@@ -515,105 +330,23 @@ export class NativeViewGestureHandler extends Handler<com.swmansion.gesturehandl
     }
     getExtraData(handler: com.swmansion.gesturehandler.NativeViewGestureHandler) {
         return Object.assign(super.getExtraData(handler), {
-            pointerInside: handler.isWithinBounds()
+            pointerInside: handler.isWithinBounds(),
         });
     }
 }
-export let GestureHandlerInteractionController: GestureHandlerInteractionController;
-export interface GestureHandlerInteractionController extends com.swmansion.gesturehandler.GestureHandlerInteractionController {
-    // tslint:disable-next-line: no-misused-new
-    new (): GestureHandlerInteractionController;
-    configureInteractions<T extends com.swmansion.gesturehandler.GestureHandler<any>, U extends HandlerOptions>(handler: com.swmansion.gesturehandler.GestureHandler<T>, config: U);
-    // owner: WeakRef<Pager>;
-}
-function initGestureHandlerInteractionController() {
-    if (GestureHandlerInteractionController) {
-        return;
-    }
-    class GestureHandlerInteractionControllerImpl extends com.swmansion.gesturehandler.GestureHandlerInteractionController {
-        constructor() {
-            super();
-            return global.__native(this);
-        }
-        mWaitForRelations: { [k: number]: number[] } = {};
-        mSimultaneousRelations: { [k: number]: number[] } = {};
-
-        dropRelationsForHandlerWithTag(handlerTag: number) {
-            delete this.mWaitForRelations[handlerTag];
-            delete this.mSimultaneousRelations[handlerTag];
-        }
-
-        configureInteractions<T extends com.swmansion.gesturehandler.GestureHandler<any>, U extends HandlerOptions>(handler: com.swmansion.gesturehandler.GestureHandler<T>, config: U) {
-            handler.setInteractionController(this);
-            if (config) {
-                if (config.waitFor) {
-                    this.mWaitForRelations[handler.getTag()] = config.waitFor;
-                }
-                if (config.simultaneousHandlers) {
-                    this.mSimultaneousRelations[handler.getTag()] = config.simultaneousHandlers;
-                }
-            }
-        }
-
-        shouldWaitForHandlerFailure(handler: com.swmansion.gesturehandler.GestureHandler<any>, otherHandler: com.swmansion.gesturehandler.GestureHandler<any>) {
-            const waitForTags = this.mWaitForRelations[handler.getTag()];
-            if (waitForTags != null) {
-                for (let i = 0; i < waitForTags.length; i++) {
-                    if (waitForTags[i] === otherHandler.getTag()) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        shouldRequireHandlerToWaitForFailure(handler: com.swmansion.gesturehandler.GestureHandler<any>, otherHandler: com.swmansion.gesturehandler.GestureHandler<any>) {
-            return false;
-        }
-
-        shouldHandlerBeCancelledBy(handler: com.swmansion.gesturehandler.GestureHandler<any>, otherHandler: com.swmansion.gesturehandler.GestureHandler<any>) {
-            return false;
-        }
-
-        shouldRecognizeSimultaneously(handler: com.swmansion.gesturehandler.GestureHandler<any>, otherHandler: com.swmansion.gesturehandler.GestureHandler<any>) {
-            const simultHandlerTags = this.mSimultaneousRelations[handler.getTag()];
-            if (simultHandlerTags != null) {
-                for (let i = 0; i < simultHandlerTags.length; i++) {
-                    if (simultHandlerTags[i] === otherHandler.getTag()) {
-                        return true;
-                    }
-                }
-            }
-            return false;
-        }
-
-        reset() {
-            this.mWaitForRelations = {};
-            this.mSimultaneousRelations = {};
-        }
-    }
-    GestureHandlerInteractionController = GestureHandlerInteractionControllerImpl as any;
-}
 
 export class Manager extends ManagerBase {
-    _interactionManager: GestureHandlerInteractionController;
-    configureInteractions<T extends com.swmansion.gesturehandler.GestureHandler<any>, U extends HandlerOptions>(handler: Handler<T, U>, options: U) {
-        this.interactionManager.configureInteractions(handler.getNative(), options);
+    _interactionManager: com.nativescript.gesturehandler.GestureHandlerInteractionController;
+    configureInteractions<T extends com.swmansion.gesturehandler.GestureHandler<any>, U extends HandlerOptions>(handler: Handler<T, U>, options: U = {} as any) {
+        this.interactionManager.configureInteractions(handler.getNative(), options.waitFor, options.simultaneousHandlers);
     }
     get interactionManager() {
         if (!this._interactionManager) {
-            initGestureHandlerInteractionController();
-            this._interactionManager = new GestureHandlerInteractionController();
+            // initGestureHandlerInteractionController();
+            this._interactionManager = new com.nativescript.gesturehandler.GestureHandlerInteractionController();
         }
         return this._interactionManager;
     }
-    // _registry: com.swmansion.gesturehandler.GestureHandlerRegistryImpl;
-    // get registry() {
-    //     if (!this._registry) {
-    //         this._registry = new com.swmansion.gesturehandler.GestureHandlerRegistryImpl();
-    //     }
-    //     return this._registry;
-    // }
 
     static sManager: Manager;
     static getInstance() {
@@ -695,7 +428,7 @@ export class Manager extends ManagerBase {
         }
         viewListeners.set(handler.getTag(), {
             init: onInit,
-            dispose: onDispose
+            dispose: onDispose,
         });
     }
     detachGestureHandler(handler: Handler<any, any>, view: View) {
