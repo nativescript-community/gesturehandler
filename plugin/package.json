@@ -1,6 +1,6 @@
 {
     "name": "nativescript-gesturehandler",
-    "version": "0.1.7",
+    "version": "0.1.8",
     "description": "Nativescript plugin for gestures",
     "main": "gesturehandler",
     "typings": "gesturehandler.d.ts",
