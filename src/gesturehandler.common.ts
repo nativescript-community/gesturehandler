@@ -22,7 +22,7 @@ import {
     TapGestureHandler,
     TapGestureHandlerOptions
 } from './gesturehandler';
-import { isAndroid } from '@nativescript/core/platform/platform';
+import { isAndroid } from '@nativescript/core/platform';
 
 export const GestureHandlerStateEvent = 'GestureHandlerStateEvent';
 export const GestureHandlerTouchEvent = 'GestureHandlerTouchEvent';
@@ -82,7 +82,7 @@ function createSetter(key, options: NativePropertyOptions) {
         this.options[key] = newVal;
         if (this.native && this.native[nativeSetterName]) {
             const actualVal = options.converter && options.converter.toNative ? options.converter.toNative.call(this, newVal, key) : newVal;
-            (this.native[nativeSetterName] as Function).call(this.native, ...actualVal);
+            (this.native[nativeSetterName] as Function).call(this.native, actualVal);
         }
     };
 }
