@@ -7,7 +7,7 @@ const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const TerserPlugin = require('terser-webpack-plugin');
 
 const VueLoaderPlugin = require('vue-loader/lib/plugin');
-const NsVueTemplateCompiler = require('nativescript-akylas-vue-template-compiler');
+const NsVueTemplateCompiler = require('nativescript-vue-template-compiler');
 
 const nsWebpack = require('nativescript-dev-webpack');
 const nativescriptTarget = require('nativescript-dev-webpack/nativescript-target');
@@ -59,11 +59,10 @@ module.exports = env => {
     const appFullPath = resolve(projectRoot, appPath);
     const hasRootLevelScopedModules = nsWebpack.hasRootLevelScopedModules({ projectDir: projectRoot });
     let coreModulesPackageName = 'tns-core-modules';
-    const alias = {
+    let alias = {
         '~': appFullPath,
         '@': appFullPath,
-        vue: 'nativescript-akylas-vue',
-        'nativescript-vue': 'nativescript-akylas-vue'
+        vue: 'nativescript-vue',
     };
 
     if (hasRootLevelScopedModules) {
@@ -72,8 +71,11 @@ module.exports = env => {
     }
 
     if (!!development) {
-        // alias['nativescript-gesturehandler'] = resolve(projectRoot, '..', 'src');
-
+        const srcFullPath = resolve(projectRoot, '..', 'src');
+        alias = Object.assign(alias, {
+            '#': srcFullPath,
+            'nativescript-gesturehandler$': '#/gesturehandler.' + platform,
+        });
     }
 
     const appResourcesFullPath = resolve(projectRoot, appResourcesPath);
@@ -261,11 +263,6 @@ module.exports = env => {
             ]
         },
         plugins: [
-            new webpack.ProgressPlugin({
-                entries: true,
-                modules: true,
-                profile: true
-            }),
             // ... Vue Loader plugin omitted
             // make sure to include the plugin!
             new VueLoaderPlugin(),

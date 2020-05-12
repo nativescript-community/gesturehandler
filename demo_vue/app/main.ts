@@ -1,9 +1,12 @@
 // require('./ts_helpers');
-import { install as GestureInstall } from 'nativescript-gesturehandler';
-GestureInstall();
+import { install as installGestures } from 'nativescript-gesturehandler';
+installGestures(true);
 import Vue from 'nativescript-vue';
 import App from './App.vue';
 import { knownFolders } from '@nativescript/core/file-system';
+
+import ButtonPlugin from 'nativescript-material-button/vue';
+Vue.use(ButtonPlugin);
 
 import CollectionViewPlugin from 'nativescript-collectionview/vue';
 Vue.use(CollectionViewPlugin);

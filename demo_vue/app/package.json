@@ -4,6 +4,7 @@
     "v8Flags": "--expose_gc"
   },
   "main": "main",
+  "profiling": "timeline",
   "name": "com.nativescript.gesturehandlerdemo",
   "version": "1.0.0"
 }
