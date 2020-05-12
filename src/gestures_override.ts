@@ -3,16 +3,17 @@ import { GestureEventData } from '@nativescript/core/ui/gestures';
 import { View, EventData } from '@nativescript/core/ui/core/view';
 
 // Types.
-import { toString, TouchAction, GestureTypes } from '@nativescript/core/ui/gestures';
+import { toString, TouchAction, GestureTypes, observe as nGestureObserve } from '@nativescript/core/ui/gestures';
 
 // Import layout from utils directly to avoid circular references
 import { layout } from '@nativescript/core/utils/utils';
 
 import { Manager, PanGestureHandler, FlingGestureHandler, RotationGestureHandler, PinchGestureHandler, TapGestureHandler, LongPressGestureHandler } from './gesturehandler';
-import { HandlerType, GestureHandlerStateEvent, GestureStateEventData, GestureState } from './gesturehandler.common';
+import { HandlerType, GestureHandlerStateEvent, GestureStateEventData, GestureState, GestureHandlerTouchEvent } from './gesturehandler.common';
 
 export function observe(target: View, type: GestureTypes, callback: (args: GestureEventData) => void, context?: any): GesturesObserver {
     // const startTime = Date.now();
+    // return nGestureObserve(target, type, callback) as any;
     const observer = new GesturesObserver(target, callback, context);
     observer.observe(type);
     // console.log('observe', type, Date.now() - startTime, 'ms')
@@ -123,6 +124,19 @@ export class GesturesObserver {
     }
     private onGestureStateChange(type: GestureTypes) {
         return (event: GestureStateEventData) => {
+            if (this.callback) {
+                this.callback.call(this._context, {
+                    eventName: toString(type),
+                    object: event.data.view,
+                    type,
+                    ...event.data,
+                    ...event.data.extraData,
+                });
+            }
+        };
+    }
+    private onGestureTouchChange(type: GestureTypes) {
+        return (event: GestureStateEventData) => {
             if (this.callback && event.data.state === GestureState.ACTIVE) {
                 this.callback.call(this._context, {
                     eventName: toString(type),
@@ -134,8 +148,7 @@ export class GesturesObserver {
             }
         };
     }
-    private _attach(target: View, type: GestureTypes) {
-
+    private _attach(target: View, type: GestureTypes) { 
         if (type & GestureTypes.touch) {
             this._notifyTouch = true;
         }
@@ -143,11 +156,13 @@ export class GesturesObserver {
         if (type & GestureTypes.tap) {
             const gestureHandler = (this._tapGestureHandler = manager.createGestureHandler(HandlerType.TAP, TAG++));
             gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.tap), this);
+            gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.tap), this);
             gestureHandler.attachToView(target);
         }
         if (type & GestureTypes.longPress) {
             const gestureHandler = (this._longpressGestureHandler = manager.createGestureHandler(HandlerType.LONG_PRESS, TAG++));
             gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.longPress), this);
+            gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.longPress), this);
             gestureHandler.attachToView(target);
         }
         if (type & GestureTypes.doubleTap) {
@@ -155,34 +170,37 @@ export class GesturesObserver {
                 numberOfTaps: 2,
             }));
             gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.doubleTap), this);
+            gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.doubleTap), this);
             gestureHandler.attachToView(target);
         }
 
         if (type & GestureTypes.pinch) {
             const gestureHandler = (this._pinchGestureHandler = manager.createGestureHandler(HandlerType.PINCH, TAG++));
             gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.pinch), this);
+            gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.pinch), this);
             gestureHandler.attachToView(target);
         }
 
         if (type & GestureTypes.swipe) {
             const gestureHandler = (this._flingGestureHandler = manager.createGestureHandler(HandlerType.FLING, TAG++));
             gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.swipe), this);
+            gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.swipe), this);
             gestureHandler.attachToView(target);
         }
 
         if (type & GestureTypes.pan) {
             const gestureHandler = (this._panGestureHandler = manager.createGestureHandler(HandlerType.PAN, TAG++, {}));
             gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.pan), this);
+            gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.pan), this);
             gestureHandler.attachToView(target);
         }
 
         if (type & GestureTypes.rotation) {
             const gestureHandler = (this._rotationGestureHandler = manager.createGestureHandler(HandlerType.ROTATION, TAG++, {}));
             gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.rotation), this);
+            gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.rotation), this);
             gestureHandler.attachToView(target);
         }
-
-        
     }
 
     public androidOnTouchEvent(motionEvent: android.view.MotionEvent) {

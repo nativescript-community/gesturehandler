@@ -67,7 +67,6 @@ export function install(overrideNGestures = false) {
     if (overrideNGestures === true) {
         const NSView = require('@nativescript/core/ui/core/view').View;
         NSView.prototype._observe = function (type: GestureTypes, callback: (args: GestureEventData) => void, thisArg?: any): void {
-            console.log('overriden observe');
             if (!this._gestureObservers[type]) {
                 this._gestureObservers[type] = [];
             }
@@ -87,7 +86,6 @@ export function install(overrideNGestures = false) {
                 this.touchListener ||
                 new android.view.View.OnTouchListener({
                     onTouch: (view: android.view.View, event: android.view.MotionEvent) => {
-                        console.log('overriden onTouch', !!this.handleGestureTouch);
                         this.handleGestureTouch(event);
 
                         let nativeView = this.nativeViewProtected;
