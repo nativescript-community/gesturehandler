@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.9](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.8...v0.1.9) (2020-05-12)
+
+
+### Bug Fixes
+
+* multi direction fling support ([4eec691](https://github.com/Akylas/nativescript-gesturehandler/commit/4eec6915a90be8dc1e86199c3b979f7b6c81dbc7))
+
+
+
+
+
 ## [0.1.8](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.7...v0.1.8) (2020-04-28)
 
 
