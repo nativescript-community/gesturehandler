@@ -12,10 +12,10 @@ import { Manager, PanGestureHandler, FlingGestureHandler, RotationGestureHandler
 import { HandlerType, GestureHandlerStateEvent, GestureStateEventData, GestureState } from './gesturehandler.common';
 
 export function observe(target: View, type: GestureTypes, callback: (args: GestureEventData) => void, context?: any): GesturesObserver {
-    const startTime = Date.now();
+    // const startTime = Date.now();
     const observer = new GesturesObserver(target, callback, context);
     observer.observe(type);
-    console.log('observe', type, Date.now() - startTime, 'ms')
+    // console.log('observe', type, Date.now() - startTime, 'ms')
     return observer;
 }
 
@@ -139,7 +139,6 @@ export class GesturesObserver {
         if (type & GestureTypes.touch) {
             this._notifyTouch = true;
         }
-        console.log('_attach', target, type);
         const manager = Manager.getInstance();
         if (type & GestureTypes.tap) {
             const gestureHandler = (this._tapGestureHandler = manager.createGestureHandler(HandlerType.TAP, TAG++));
