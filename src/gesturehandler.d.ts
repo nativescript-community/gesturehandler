@@ -137,4 +137,4 @@ export class Manager extends Observable {
     static getInstance(): Manager;
     createGestureHandler<T extends HandlerType>(handlerName: T, handlerTag: number, config?: OptionsTypeMap[T]): TypeMap[T];
 }
-export function install();
+export function install(overrideNGestures?: boolean);

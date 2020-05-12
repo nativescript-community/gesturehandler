@@ -6,19 +6,44 @@ import {
     GestureStateEventData,
     GestureTouchEventData,
     HandlerType,
-    install,
+    install as installBase,
     Manager as ManagerBase,
     nativeProperty,
     OptionsTypeMap,
     TypeMap,
     ViewDisposeEvent,
-    ViewInitEvent
+    ViewInitEvent,
 } from './gesturehandler.common';
 import { View } from '@nativescript/core/ui/core/view';
 import { getClass } from '@nativescript/core/utils/types';
-import { HandlerOptions,  } from './gesturehandler';
-export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType, install, ViewInitEvent, ViewDisposeEvent };
+import { HandlerOptions } from './gesturehandler';
+export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType, ViewInitEvent, ViewDisposeEvent };
+import { observe as gestureObserve } from './gestures_override';
+import { GestureTypes, GestureEventData } from '@nativescript/core/ui/gestures';
 
+
+let installed = false;
+export function install(overrideNGestures = false) {
+    if (installed) {
+        return;
+    }
+    installed = true;
+    installBase();
+    if (overrideNGestures === true) {
+        const NSView = require('@nativescript/core/ui/core/view').View;
+        NSView.prototype._observe = function (type: GestureTypes, callback: (args: GestureEventData) => void, thisArg?: any): void {
+            if (!this._gestureObservers[type]) {
+                this._gestureObservers[type] = [];
+            }
+
+            this._gestureObservers[type].push(gestureObserve(this, type, callback, thisArg));
+            if (type & GestureTypes.touch && this.isLoaded && !this.touchListenerIsSet) {
+                this.setOnTouchListener();
+            }
+        };
+        
+    }
+}
 function toJsObject(objCObj) {
     if (objCObj === null || typeof objCObj !== 'object') {
         return objCObj;
@@ -115,8 +140,8 @@ export class HandlerDelegate extends NSObject implements GestureHandlerDelegate 
                     prevState,
                     ios: view,
                     extraData: toJsObject(extraData),
-                    view: view.nsView ? view.nsView.get() : null
-                }
+                    view: view.nsView ? view.nsView.get() : null,
+                },
             });
         }
     }
@@ -130,8 +155,8 @@ export class HandlerDelegate extends NSObject implements GestureHandlerDelegate 
                     state,
                     ios: view,
                     extraData: toJsObject(extraData),
-                    view: view.nsView ? view.nsView.get() : null
-                }
+                    view: view.nsView ? view.nsView.get() : null,
+                },
             });
         }
     }
@@ -199,7 +224,6 @@ export class Manager extends ManagerBase {
             this.manager.attachGestureHandlerToView(handlerTag, view.nativeView);
         }
         const onInit = () => {
-            // console.log('attachGestureHandlerToView', handlerTag, view.nativeView);
             this.manager.attachGestureHandlerToView(handlerTag, view.nativeView);
         };
         const onDispose = () => this.manager.dropGestureHandler(handlerTag);
@@ -212,7 +236,7 @@ export class Manager extends ManagerBase {
         }
         viewListeners.set(handlerTag, {
             init: onInit,
-            dispose: onDispose
+            dispose: onDispose,
         });
     }
     detachGestureHandler(handlerTag: number, view: View) {

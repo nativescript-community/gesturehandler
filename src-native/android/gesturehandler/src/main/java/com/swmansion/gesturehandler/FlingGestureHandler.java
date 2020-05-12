@@ -6,7 +6,7 @@ import android.view.MotionEvent;
 public class FlingGestureHandler extends GestureHandler<FlingGestureHandler> {
   private static final long DEFAULT_MAX_DURATION_MS = 800;
   private static final long DEFAULT_MIN_ACCEPTABLE_DELTA = 160;
-  private static final int DEFAULT_DIRECTION = DIRECTION_RIGHT;
+  private static final int DEFAULT_DIRECTION = DIRECTION_RIGHT | DIRECTION_LEFT | DIRECTION_UP | DIRECTION_DOWN;
   private static final int DEFAULT_NUMBER_OF_TOUCHES_REQUIRED = 1;
   
   private long mMaxDurationMs = DEFAULT_MAX_DURATION_MS;
@@ -14,7 +14,7 @@ public class FlingGestureHandler extends GestureHandler<FlingGestureHandler> {
   private int mDirection = DEFAULT_DIRECTION;
   private int mNumberOfPointersRequired = DEFAULT_NUMBER_OF_TOUCHES_REQUIRED;
   private float mStartX, mStartY;
-
+  private int mLastDirection = -1;
   private Handler mHandler;
   private int mMaxNumberOfPointersSimultaneously;
 
@@ -33,6 +33,10 @@ public class FlingGestureHandler extends GestureHandler<FlingGestureHandler> {
     mDirection = direction;
   }
 
+  public int getRecognizedDirection() {
+    return mLastDirection;
+  }
+
   private void startFling(MotionEvent event) {
     mStartX = event.getRawX();
     mStartY = event.getRawY();
@@ -47,15 +51,19 @@ public class FlingGestureHandler extends GestureHandler<FlingGestureHandler> {
   }
 
   private boolean tryEndFling(MotionEvent event) {
-    if (mMaxNumberOfPointersSimultaneously == mNumberOfPointersRequired &&
-            (((mDirection & DIRECTION_RIGHT) != 0 &&
-                    event.getRawX() - mStartX > mMinAcceptableDelta) ||
-                    ((mDirection & DIRECTION_LEFT) !=0 &&
-                            mStartX - event.getRawX() > mMinAcceptableDelta) ||
-                    ((mDirection & DIRECTION_UP) !=0 &&
-                            mStartY - event.getRawY() > mMinAcceptableDelta) ||
-                    ((mDirection & DIRECTION_DOWN) !=0 &&
-                            event.getRawY() - mStartY > mMinAcceptableDelta))) {
+    mLastDirection = -1;
+    if (mMaxNumberOfPointersSimultaneously == mNumberOfPointersRequired) {
+      if ((mDirection & DIRECTION_RIGHT) != 0 &&  event.getRawX() - mStartX > mMinAcceptableDelta) {
+        mLastDirection = DIRECTION_RIGHT;
+      } else if ((mDirection & DIRECTION_LEFT) !=0 && mStartX - event.getRawX() > mMinAcceptableDelta) {
+        mLastDirection = DIRECTION_LEFT;
+      } else if ((mDirection & DIRECTION_UP) !=0 && mStartY - event.getRawY() > mMinAcceptableDelta) {
+        mLastDirection = DIRECTION_UP;
+      } else if ((mDirection & DIRECTION_DOWN) !=0 && event.getRawY() - mStartY > mMinAcceptableDelta) {
+        mLastDirection = DIRECTION_DOWN;
+      }
+    }
+    if (mLastDirection != -1) {
       mHandler.removeCallbacksAndMessages(null);
       activate();
       end();

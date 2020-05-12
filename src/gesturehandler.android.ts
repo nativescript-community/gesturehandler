@@ -15,6 +15,8 @@ import {
     ViewDisposeEvent,
     ViewInitEvent,
 } from './gesturehandler.common';
+
+import { observe as gestureObserve } from './gestures_override';
 import { View } from '@nativescript/core/ui/core/view';
 import { layout } from '@nativescript/core/utils/utils';
 import { android as androidApp } from '@nativescript/core/application';
@@ -29,6 +31,7 @@ import {
     TapGestureHandlerOptions,
 } from './gesturehandler';
 import { Page } from '@nativescript/core/ui/page';
+import { GestureTypes, GestureEventData } from '@nativescript/core/ui/gestures';
 export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType, ViewInitEvent, ViewDisposeEvent };
 
 let PageLayout: typeof com.nativescript.gesturehandler.PageLayout;
@@ -44,7 +47,12 @@ class PageGestureExtended extends Page {
         return this.nativeView && this.nativeView.registry();
     }
 }
-export function install() {
+let installed = false;
+export function install(overrideNGestures = false) {
+    if (installed) {
+        return;
+    }
+    installed = true;
     installBase();
     const NSPage = require('@nativescript/core/ui/page').Page;
     NSPage.prototype.createNativeView = function () {
@@ -56,6 +64,49 @@ export function install() {
         return layout;
     };
     applyMixins(NSPage, [PageGestureExtended]);
+    if (overrideNGestures === true) {
+        const NSView = require('@nativescript/core/ui/core/view').View;
+        NSView.prototype._observe = function (type: GestureTypes, callback: (args: GestureEventData) => void, thisArg?: any): void {
+            console.log('overriden observe');
+            if (!this._gestureObservers[type]) {
+                this._gestureObservers[type] = [];
+            }
+
+            this._gestureObservers[type].push(gestureObserve(this, type, callback, thisArg));
+            if (type & GestureTypes.touch && this.isLoaded && !this.touchListenerIsSet) {
+                this.setOnTouchListener();
+            }
+        };
+        NSView.prototype.setOnTouchListener = function () {
+            if (!this.nativeViewProtected || !this.getGestureObservers(GestureTypes.touch)) {
+                return;
+            }
+            // do not set noop listener that handles the event (disabled listener) if IsUserInteractionEnabled is
+            // false as we might need the ability for the event to pass through to a parent view
+            this.touchListener =
+                this.touchListener ||
+                new android.view.View.OnTouchListener({
+                    onTouch: (view: android.view.View, event: android.view.MotionEvent) => {
+                        console.log('overriden onTouch', !!this.handleGestureTouch);
+                        this.handleGestureTouch(event);
+
+                        let nativeView = this.nativeViewProtected;
+                        if (!nativeView || !nativeView.onTouchEvent) {
+                            return false;
+                        }
+
+                        return nativeView.onTouchEvent(event);
+                    },
+                });
+            this.nativeViewProtected.setOnTouchListener(this.touchListener);
+
+            this.touchListenerIsSet = true;
+
+            if (this.nativeViewProtected.setClickable) {
+                this.nativeViewProtected.setClickable(this.isUserInteractionEnabled);
+            }
+        };
+    }
 }
 
 const KEY_HIT_SLOP_LEFT = 'left';
@@ -139,34 +190,8 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
         super.initNativeView(native, options);
         this.native.setTag(this.tag);
         this.touchListener = new com.swmansion.gesturehandler.OnTouchEventListener({
-            onTouchEvent: (handler, event: android.view.MotionEvent) => {
-                // console.log('onTouchEvent', handler, event.getAction());
-                const view = handler.getView() as any;
-                this.notify({
-                    eventName: GestureHandlerTouchEvent,
-                    object: this,
-                    data: {
-                        state: handler.getState(),
-                        android: view,
-                        extraData: this.getExtraData(handler),
-                        view: view.nsView ? view.nsView.get() : null,
-                    },
-                });
-            },
-            onStateChange: (handler, state, prevState) => {
-                const view = handler.getView() as any;
-                this.notify({
-                    eventName: GestureHandlerStateEvent,
-                    object: this,
-                    data: {
-                        state,
-                        prevState,
-                        android: view,
-                        extraData: this.getExtraData(handler),
-                        view: view.nsView ? view.nsView.get() : null,
-                    },
-                });
-            },
+            onTouchEvent: this.onTouchEvent.bind(this),
+            onStateChange: this.onStateChange.bind(this),
         });
         native.setOnTouchEventListener(this.touchListener);
         this.manager.get().configureInteractions(this, options);
@@ -177,8 +202,33 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
         this.touchListener = null;
         super.disposeNativeView();
     }
-    onTouchEvent(handler: T, event: android.view.MotionEvent) {}
-    onStateChange(handler: T, state: number, prevState: number) {}
+    onTouchEvent(handler: T, event: android.view.MotionEvent) {
+        const view = handler.getView() as any;
+        this.notify({
+            eventName: GestureHandlerTouchEvent,
+            object: this,
+            data: {
+                state: handler.getState(),
+                android: view,
+                extraData: this.getExtraData(handler),
+                view: view.nsView ? view.nsView.get() : null,
+            },
+        });
+    }
+    onStateChange(handler: T, state: number, prevState: number) {
+        const view = handler.getView() as any;
+        this.notify({
+            eventName: GestureHandlerStateEvent,
+            object: this,
+            data: {
+                state,
+                prevState,
+                android: view,
+                extraData: this.getExtraData(handler),
+                view: view.nsView ? view.nsView.get() : null,
+            },
+        });
+    }
 
     tag: number = 0;
     setTag(tag: number) {
@@ -277,20 +327,43 @@ export class PinchGestureHandler extends Handler<com.swmansion.gesturehandler.Pi
     }
 }
 
+function directionToString(direction: number) {
+    switch (direction) {
+        case com.swmansion.gesturehandler.GestureHandler.DIRECTION_RIGHT:
+            return 'right';
+        case com.swmansion.gesturehandler.GestureHandler.DIRECTION_UP:
+            return 'up';
+        case com.swmansion.gesturehandler.GestureHandler.DIRECTION_DOWN:
+            return 'down';
+        default:
+            return 'left';
+    }
+}
+
+function directionFromString(direction: string) {
+    switch (direction) {
+        case 'right':
+            return com.swmansion.gesturehandler.GestureHandler.DIRECTION_RIGHT;
+        case 'up':
+            return com.swmansion.gesturehandler.GestureHandler.DIRECTION_UP;
+        case 'down':
+            return com.swmansion.gesturehandler.GestureHandler.DIRECTION_DOWN;
+        default:
+            return com.swmansion.gesturehandler.GestureHandler.DIRECTION_LEFT;
+    }
+}
+
 export class FlingGestureHandler extends Handler<com.swmansion.gesturehandler.FlingGestureHandler, TapGestureHandlerOptions> {
     @nativeProperty numberOfPointers: number;
-    @nativeProperty direction: number;
+    @nativeProperty({ converter: { fromNative: directionToString, toNative: directionFromString } }) direction: string;
     createNative(options) {
         return new com.swmansion.gesturehandler.FlingGestureHandler();
     }
-    // getExtraData(handler: com.swmansion.gesturehandler.FlingGestureHandler) {
-    //     return Object.assign(super.getExtraData(handler), {
-    //         scale: handler.getScale(),
-    //         focalX: layout.toDeviceIndependentPixels(handler.getFocalPointX()),
-    //         focalY: layout.toDeviceIndependentPixels(handler.getFocalPointY()),
-    //         velocity: handler.getVelocity()
-    //     });
-    // }
+    getExtraData(handler: com.swmansion.gesturehandler.FlingGestureHandler) {
+        return Object.assign(super.getExtraData(handler), {
+            direction: directionToString(handler.getRecognizedDirection()),
+        });
+    }
 }
 export class LongPressGestureHandler extends Handler<com.swmansion.gesturehandler.LongPressGestureHandler, LongPressGestureHandlerOptions> {
     @nativeProperty minDurationMs: number;

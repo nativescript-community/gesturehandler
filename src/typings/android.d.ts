@@ -40,6 +40,7 @@ declare module com {
 				public setDirection(param0: number): void;
 				public onCancel(): void;
 				public setNumberOfPointersRequired(param0: number): void;
+				public getRecognizedDirection(): number;
 				public onHandle(param0: globalAndroid.view.MotionEvent): void;
 				public constructor();
 			}

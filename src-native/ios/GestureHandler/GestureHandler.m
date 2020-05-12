@@ -164,36 +164,20 @@ CGRect GHHitSlopInsetRect(CGRect rect, RNGHHitSlop hitSlop) {
 - (void)handleGesture:(UIGestureRecognizer *)recognizer
 {
     NSMutableDictionary *eventData = [self eventExtraData:recognizer];
-    [self sendEventsInState:self.state forView:recognizer.view withExtraData:eventData];
+  [self sendEventsInState:[self stateForRecognizer:recognizer] forView:recognizer.view withExtraData:eventData];
 }
 
 - (void)sendEventsInState:(GestureHandlerState)state
            forView:(nonnull UIView *)view
             withExtraData:(nullable NSDictionary *)extraData
 {
-//    id touchEvent = [[GestureHandlerEvent alloc] initWithView:view
-//                                                        handlerTag:_tag
-//                                                             state:state
-//                                                         extraData:extraData];
-
     if (state != _lastState) {
         if (state == GestureHandlerStateEnd && _lastState != GestureHandlerStateActive) {
-//            [self sendStateChangeEvent:[[GestureHandlerStateChange alloc] initWithView:view
-//                                                                                         handlerTag:_tag
-//                                                                                              state:GestureHandlerStateActive
-//                                                                                          prevState:_lastState
-//                                                                                          extraData:extraData]];
           if (self.delegate) {
             [self.delegate gestureHandler:self didChangeState:GestureHandlerStateActive prevState:_lastState extraData:extraData view:view];
           }
             _lastState = GestureHandlerStateActive;
         }
-//        id stateEvent = [[GestureHandlerStateChange alloc] initWithView:view
-//                                                                  handlerTag:_tag
-//                                                                       state:state
-//                                                                   prevState:_lastState
-//                                                                   extraData:extraData];
-//        [self sendStateChangeEvent:stateEvent];
         if (self.delegate) {
           [self.delegate gestureHandler:self didChangeState:state prevState:_lastState extraData:extraData view:view];
         }
@@ -204,13 +188,29 @@ CGRect GHHitSlopInsetRect(CGRect rect, RNGHHitSlop hitSlop) {
       if (self.delegate) {
         [self.delegate gestureHandler:self touchEventOnView:view state:state extraData:extraData];
       }
-//        [self sendTouchEvent:touchEvent];
     }
 }
 
 - (GestureHandlerState)state
 {
     switch (_recognizer.state) {
+        case UIGestureRecognizerStateBegan:
+        case UIGestureRecognizerStatePossible:
+            return GestureHandlerStateBegan;
+        case UIGestureRecognizerStateEnded:
+            return GestureHandlerStateEnd;
+        case UIGestureRecognizerStateFailed:
+            return GestureHandlerStateFailed;
+        case UIGestureRecognizerStateCancelled:
+            return GestureHandlerStateCancelled;
+        case UIGestureRecognizerStateChanged:
+            return GestureHandlerStateActive;
+    }
+    return GestureHandlerStateUndetermined;
+}
+- (GestureHandlerState)stateForRecognizer:(UIGestureRecognizer*)recognizer
+{
+    switch (recognizer.state) {
         case UIGestureRecognizerStateBegan:
         case UIGestureRecognizerStatePossible:
             return GestureHandlerStateBegan;
@@ -285,6 +285,9 @@ shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecog
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
 shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
+   if (gestureRecognizer.view == otherGestureRecognizer.view && [gestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]]  && [otherGestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]]) {
+      return YES;
+    }
     if (_recognizer.state == UIGestureRecognizerStateBegan && _recognizer.state == UIGestureRecognizerStatePossible) {
         return YES;
     }

@@ -159,7 +159,7 @@ export interface GestureStateEventData extends EventData {
         prevState: GestureState;
         ios?: any; // native View
         android?: any; // native View
-        view?: View; // native View
+        view: View;
         extraData: {
             [k: string]: number;
         };
@@ -178,9 +178,21 @@ export interface GestureTouchEventData extends EventData {
     };
 }
 
-export function applyMixins(derivedCtor: any, baseCtors: any[]) {
+export function applyMixins(
+    derivedCtor: any,
+    baseCtors: any[],
+    options?: {
+        after?: boolean;
+        override?: boolean;
+        omit?: Array<string | symbol>;
+    }
+) {
+    const omits = options && options.omit ? options.omit : [];
     baseCtors.forEach(baseCtor => {
         Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+            if (omits.indexOf(name) !== -1) {
+                return;
+            }
             const descriptor = Object.getOwnPropertyDescriptor(baseCtor.prototype, name);
 
             if (name === 'constructor') return;
@@ -192,25 +204,53 @@ export function applyMixins(derivedCtor: any, baseCtors: any[]) {
                     derivedCtor.prototype[name] = baseCtor.prototype[name];
                 } else {
                     derivedCtor.prototype[name] = function(...args) {
-                        oldImpl.apply(this, args);
-                        baseCtor.prototype[name].apply(this, args);
+                        if (options) {
+                            if (!!options.override) {
+                                return baseCtor.prototype[name].apply(this, args);
+                            } else if (!!options.after) {
+                                oldImpl.apply(this, args);
+                                return baseCtor.prototype[name].apply(this, args);
+                            } else {
+                                baseCtor.prototype[name].apply(this, args);
+                                return oldImpl.apply(this, args);
+                            }
+                        } else {
+                            baseCtor.prototype[name].apply(this, args);
+                            return oldImpl.apply(this, args);
+                        }
                     };
                 }
             }
         });
         Object.getOwnPropertySymbols(baseCtor.prototype).forEach(symbol => {
+            if (omits.indexOf(symbol) !== -1) {
+                return;
+            }
             const oldImpl: Function = derivedCtor.prototype[symbol];
             if (!oldImpl) {
                 derivedCtor.prototype[symbol] = baseCtor.prototype[symbol];
             } else {
                 derivedCtor.prototype[symbol] = function(...args) {
-                    oldImpl.apply(this, args);
-                    baseCtor.prototype[symbol].apply(this, args);
+                    if (options) {
+                        if (!!options.override) {
+                            return baseCtor.prototype[symbol].apply(this, args);
+                        } else if (!!options.after) {
+                            oldImpl.apply(this, args);
+                            return baseCtor.prototype[symbol].apply(this, args);
+                        } else {
+                            baseCtor.prototype[symbol].apply(this, args);
+                            return oldImpl.apply(this, args);
+                        }
+                    } else {
+                        baseCtor.prototype[symbol].apply(this, args);
+                        return oldImpl.apply(this, args);
+                    }
                 };
             }
         });
     });
 }
+
 export const ViewInitEvent = 'ViewInitEvent';
 export const ViewDisposeEvent = 'ViewDisposeEvent';
 class ViewGestureExtended extends View {
@@ -230,12 +270,19 @@ class ViewGestureExtended extends View {
         // console.log('disposeNativeView', this);
         this.notify({ eventName: ViewDisposeEvent, object: this });
     }
+    
 }
+
+let installed  = false;
 export function overrideViewBase() {
     const NSView = require('@nativescript/core/ui/core/view').View;
     applyMixins(NSView, [ViewGestureExtended]);
 }
 
 export function install() {
+    if (installed) {
+        return;
+    }
+    installed = true;
     overrideViewBase();
 }
