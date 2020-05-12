@@ -77,3 +77,4 @@ Pods
 plugin/**/*.d.ts
 /schema
 /plugin/README.md
+times.html
