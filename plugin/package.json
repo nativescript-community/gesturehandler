@@ -3,6 +3,7 @@
     "version": "0.1.11",
     "description": "Nativescript plugin for gestures",
     "main": "gesturehandler",
+    "module": "gesturehandler.mjs",
     "typings": "gesturehandler.d.ts",
     "nativescript": {
         "platforms": {
