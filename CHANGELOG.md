@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.12](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.11...v0.1.12) (2020-05-21)
+
+
+### Bug Fixes
+
+* full esm support ([ee732cf](https://github.com/Akylas/nativescript-gesturehandler/commit/ee732cf3c568045059fe10e5593c0f732a2a40b1))
+
+
+
+
+
 ## [0.1.11](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.10...v0.1.11) (2020-05-12)
 
 
