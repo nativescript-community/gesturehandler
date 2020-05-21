@@ -1,6 +1,6 @@
 {
     "name": "nativescript-gesturehandler",
-    "version": "0.1.12",
+    "version": "0.1.13",
     "description": "Nativescript plugin for gestures",
     "main": "gesturehandler",
     "module": "gesturehandler.mjs",
