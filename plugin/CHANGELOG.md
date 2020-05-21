@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.14](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.13...v0.1.14) (2020-05-21)
+
+
+### Bug Fixes
+
+* sideEffects for tree shacking ([6c69498](https://github.com/Akylas/nativescript-gesturehandler/commit/6c6949809142f75429ff1745b1a2298b21d85ad6))
+
+
+
+
+
 ## [0.1.13](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.12...v0.1.13) (2020-05-21)
 
 **Note:** Version bump only for package nativescript-gesturehandler
