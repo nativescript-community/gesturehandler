@@ -1,266 +1,244 @@
-
+/* eslint-disable no-var */
+/* eslint-disable no-redeclare */
 declare class DummyGestureRecognizer extends UIGestureRecognizer {
+    static alloc(): DummyGestureRecognizer; // inherited from NSObject
 
-	static alloc(): DummyGestureRecognizer; // inherited from NSObject
-
-	static new(): DummyGestureRecognizer; // inherited from NSObject
+    static new(): DummyGestureRecognizer; // inherited from NSObject
 }
 
 declare class FlingGestureHandler extends GestureHandler {
+    static alloc(): FlingGestureHandler; // inherited from NSObject
 
-	static alloc(): FlingGestureHandler; // inherited from NSObject
-
-	static new(): FlingGestureHandler; // inherited from NSObject
+    static new(): FlingGestureHandler; // inherited from NSObject
 }
 
 declare class ForceTouchHandler extends GestureHandler {
+    static alloc(): ForceTouchHandler; // inherited from NSObject
 
-	static alloc(): ForceTouchHandler; // inherited from NSObject
-
-	static new(): ForceTouchHandler; // inherited from NSObject
+    static new(): ForceTouchHandler; // inherited from NSObject
 }
 
 declare class GestureHandler extends NSObject implements UIGestureRecognizerDelegate {
+    static alloc(): GestureHandler; // inherited from NSObject
 
-	static alloc(): GestureHandler; // inherited from NSObject
+    static findGestureHandlerByRecognizer(recognizer: UIGestureRecognizer): GestureHandler;
 
-	static findGestureHandlerByRecognizer(recognizer: UIGestureRecognizer): GestureHandler;
+    static new(): GestureHandler; // inherited from NSObject
 
-	static new(): GestureHandler; // inherited from NSObject
+    delegate: GestureHandlerDelegate;
 
-	delegate: GestureHandlerDelegate;
+    emitter: GestureHandlerEventEmitter;
 
-	emitter: GestureHandlerEventEmitter;
+    enabled: boolean;
 
-	enabled: boolean;
+    readonly recognizer: UIGestureRecognizer;
 
-	readonly recognizer: UIGestureRecognizer;
+    shouldCancelWhenOutside: boolean;
 
-	shouldCancelWhenOutside: boolean;
+    readonly tag: number;
 
-	readonly tag: number;
+    readonly debugDescription: string; // inherited from NSObjectProtocol
 
-	readonly debugDescription: string; // inherited from NSObjectProtocol
+    readonly description: string; // inherited from NSObjectProtocol
 
-	readonly description: string; // inherited from NSObjectProtocol
+    readonly hash: number; // inherited from NSObjectProtocol
 
-	readonly hash: number; // inherited from NSObjectProtocol
+    readonly isProxy: boolean; // inherited from NSObjectProtocol
 
-	readonly isProxy: boolean; // inherited from NSObjectProtocol
+    readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
 
-	readonly superclass: typeof NSObject; // inherited from NSObjectProtocol
+    readonly; // inherited from NSObjectProtocol
 
-	readonly  // inherited from NSObjectProtocol
+    constructor(o: { tag: number });
 
-	constructor(o: { tag: number; });
+    bindToView(view: UIView): void;
 
-	bindToView(view: UIView): void;
+    class(): typeof NSObject;
 
-	class(): typeof NSObject;
+    configure(config: NSDictionary<any, any>): void;
 
-	configure(config: NSDictionary<any, any>): void;
+    conformsToProtocol(aProtocol: any /* Protocol */): boolean;
 
-	conformsToProtocol(aProtocol: any /* Protocol */): boolean;
+    containsPointInView(): boolean;
 
-	containsPointInView(): boolean;
+    eventExtraData(recognizer: any): NSDictionary<any, any>;
 
-	eventExtraData(recognizer: any): NSDictionary<any, any>;
+    gestureRecognizerShouldBeRequiredToFailByGestureRecognizer(gestureRecognizer: UIGestureRecognizer, otherGestureRecognizer: UIGestureRecognizer): boolean;
 
-	gestureRecognizerShouldBeRequiredToFailByGestureRecognizer(gestureRecognizer: UIGestureRecognizer, otherGestureRecognizer: UIGestureRecognizer): boolean;
+    gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer): boolean;
 
-	gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer): boolean;
+    gestureRecognizerShouldReceivePress(gestureRecognizer: UIGestureRecognizer, press: UIPress): boolean;
 
-	gestureRecognizerShouldReceivePress(gestureRecognizer: UIGestureRecognizer, press: UIPress): boolean;
+    gestureRecognizerShouldReceiveTouch(gestureRecognizer: UIGestureRecognizer, touch: UITouch): boolean;
 
-	gestureRecognizerShouldReceiveTouch(gestureRecognizer: UIGestureRecognizer, touch: UITouch): boolean;
+    gestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer(gestureRecognizer: UIGestureRecognizer, otherGestureRecognizer: UIGestureRecognizer): boolean;
 
-	gestureRecognizerShouldRecognizeSimultaneouslyWithGestureRecognizer(gestureRecognizer: UIGestureRecognizer, otherGestureRecognizer: UIGestureRecognizer): boolean;
+    gestureRecognizerShouldRequireFailureOfGestureRecognizer(gestureRecognizer: UIGestureRecognizer, otherGestureRecognizer: UIGestureRecognizer): boolean;
 
-	gestureRecognizerShouldRequireFailureOfGestureRecognizer(gestureRecognizer: UIGestureRecognizer, otherGestureRecognizer: UIGestureRecognizer): boolean;
+    handleGesture(recognizer: any): void;
 
-	handleGesture(recognizer: any): void;
+    initWithTag(tag: number): this;
 
-	initWithTag(tag: number): this;
+    isEqual(object: any): boolean;
 
-	isEqual(object: any): boolean;
+    isKindOfClass(aClass: typeof NSObject): boolean;
 
-	isKindOfClass(aClass: typeof NSObject): boolean;
+    isMemberOfClass(aClass: typeof NSObject): boolean;
 
-	isMemberOfClass(aClass: typeof NSObject): boolean;
+    performSelector(aSelector: string): any;
 
-	performSelector(aSelector: string): any;
+    performSelectorWithObject(aSelector: string, object: any): any;
 
-	performSelectorWithObject(aSelector: string, object: any): any;
+    performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
 
-	performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
+    reset(): void;
 
-	reset(): void;
+    respondsToSelector(aSelector: string): boolean;
 
-	respondsToSelector(aSelector: string): boolean;
+    retainCount(): number;
 
-	retainCount(): number;
+    self(): this;
 
-	self(): this;
+    sendEventsInStateForViewWithExtraData(state: GestureHandlerState, view: UIView, extraData: NSDictionary<any, any>): void;
 
-	sendEventsInStateForViewWithExtraData(state: GestureHandlerState, view: UIView, extraData: NSDictionary<any, any>): void;
+    state(): GestureHandlerState;
 
-	state(): GestureHandlerState;
-
-	unbindFromView(): void;
+    unbindFromView(): void;
 }
 
 interface GestureHandlerDelegate {
+    gestureHandlerDidChangeStatePrevStateExtraDataView(handler: GestureHandler, state: GestureHandlerState, prevState: GestureHandlerState, extraData: NSDictionary<any, any>, view: UIView): void;
 
-	gestureHandlerDidChangeStatePrevStateExtraDataView(handler: GestureHandler, state: GestureHandlerState, prevState: GestureHandlerState, extraData: NSDictionary<any, any>, view: UIView): void;
-
-	gestureHandlerTouchEventOnViewStateExtraData(handler: GestureHandler, view: UIView, state: GestureHandlerState, extraData: NSDictionary<any, any>): void;
+    gestureHandlerTouchEventOnViewStateExtraData(handler: GestureHandler, view: UIView, state: GestureHandlerState, extraData: NSDictionary<any, any>): void;
 }
 declare var GestureHandlerDelegate: {
-
-	prototype: GestureHandlerDelegate;
+    prototype: GestureHandlerDelegate;
 };
 
 declare const enum GestureHandlerDirection {
+    Right = 1,
 
-	Right = 1,
+    Left = 2,
 
-	Left = 2,
+    Up = 4,
 
-	Up = 4,
-
-	Down = 8
+    Down = 8,
 }
 
 declare class GestureHandlerEvent extends NSObject {
+    static alloc(): GestureHandlerEvent; // inherited from NSObject
 
-	static alloc(): GestureHandlerEvent; // inherited from NSObject
+    static new(): GestureHandlerEvent; // inherited from NSObject
 
-	static new(): GestureHandlerEvent; // inherited from NSObject
+    readonly view: UIView;
 
-	readonly view: UIView;
+    constructor(o: { view: UIView; handlerTag: number; state: GestureHandlerState; extraData: NSDictionary<any, any> });
 
-	constructor(o: { view: UIView; handlerTag: number; state: GestureHandlerState; extraData: NSDictionary<any, any>; });
-
-	initWithViewHandlerTagStateExtraData(view: UIView, handlerTag: number, state: GestureHandlerState, extraData: NSDictionary<any, any>): this;
+    initWithViewHandlerTagStateExtraData(view: UIView, handlerTag: number, state: GestureHandlerState, extraData: NSDictionary<any, any>): this;
 }
 
 interface GestureHandlerEventEmitter {
+    sendStateChangeEvent(event: GestureHandlerStateChange): void;
 
-	sendStateChangeEvent(event: GestureHandlerStateChange): void;
-
-	sendTouchEvent(event: GestureHandlerEvent): void;
+    sendTouchEvent(event: GestureHandlerEvent): void;
 }
 declare var GestureHandlerEventEmitter: {
-
-	prototype: GestureHandlerEventEmitter;
+    prototype: GestureHandlerEventEmitter;
 };
 
-
 declare class GestureHandlerManager extends NSObject {
+    static alloc(): GestureHandlerManager; // inherited from NSObject
 
-	static alloc(): GestureHandlerManager; // inherited from NSObject
+    static new(): GestureHandlerManager; // inherited from NSObject
 
-	static new(): GestureHandlerManager; // inherited from NSObject
+    attachGestureHandlerToView(handlerTag: number, view: UIView): void;
 
-	attachGestureHandlerToView(handlerTag: number, view: UIView): void;
+    createGestureHandlerTagConfig(handlerName: string, handlerTag: number, config: NSDictionary<any, any>): GestureHandler;
 
-	createGestureHandlerTagConfig(handlerName: string, handlerTag: number, config: NSDictionary<any, any>): GestureHandler;
+    dropGestureHandler(handlerTag: number): void;
 
-	dropGestureHandler(handlerTag: number): void;
-
-	updateGestureHandlerConfig(handlerTag: number, config: NSDictionary<any, any>): void;
+    updateGestureHandlerConfig(handlerTag: number, config: NSDictionary<any, any>): void;
 }
 
 declare class GestureHandlerRegistry extends NSObject {
+    static alloc(): GestureHandlerRegistry; // inherited from NSObject
 
-	static alloc(): GestureHandlerRegistry; // inherited from NSObject
+    static new(): GestureHandlerRegistry; // inherited from NSObject
 
-	static new(): GestureHandlerRegistry; // inherited from NSObject
+    attachHandlerWithTagToView(handlerTag: number, view: UIView): void;
 
-	attachHandlerWithTagToView(handlerTag: number, view: UIView): void;
+    dropHandlerWithTag(handlerTag: number): void;
 
-	dropHandlerWithTag(handlerTag: number): void;
+    handlerWithTag(handlerTag: number): GestureHandler;
 
-	handlerWithTag(handlerTag: number): GestureHandler;
-
-	registerGestureHandler(gestureHandler: GestureHandler): void;
+    registerGestureHandler(gestureHandler: GestureHandler): void;
 }
 
 declare const enum GestureHandlerState {
+    Undetermined = 0,
 
-	Undetermined = 0,
+    Failed = 1,
 
-	Failed = 1,
+    Began = 2,
 
-	Began = 2,
+    Cancelled = 3,
 
-	Cancelled = 3,
+    Active = 4,
 
-	Active = 4,
-
-	End = 5
+    End = 5,
 }
 
 declare class GestureHandlerStateChange extends NSObject {
+    static alloc(): GestureHandlerStateChange; // inherited from NSObject
 
-	static alloc(): GestureHandlerStateChange; // inherited from NSObject
+    static new(): GestureHandlerStateChange; // inherited from NSObject
 
-	static new(): GestureHandlerStateChange; // inherited from NSObject
+    readonly view: UIView;
 
-	readonly view: UIView;
+    constructor(o: { view: UIView; handlerTag: number; state: GestureHandlerState; prevState: GestureHandlerState; extraData: NSDictionary<any, any> });
 
-	constructor(o: { view: UIView; handlerTag: number; state: GestureHandlerState; prevState: GestureHandlerState; extraData: NSDictionary<any, any>; });
-
-	initWithViewHandlerTagStatePrevStateExtraData(view: UIView, handlerTag: number, state: GestureHandlerState, prevState: GestureHandlerState, extraData: NSDictionary<any, any>): this;
+    initWithViewHandlerTagStatePrevStateExtraData(view: UIView, handlerTag: number, state: GestureHandlerState, prevState: GestureHandlerState, extraData: NSDictionary<any, any>): this;
 }
 
 declare class LongPressGestureHandler extends GestureHandler {
+    static alloc(): LongPressGestureHandler; // inherited from NSObject
 
-	static alloc(): LongPressGestureHandler; // inherited from NSObject
-
-	static new(): LongPressGestureHandler; // inherited from NSObject
+    static new(): LongPressGestureHandler; // inherited from NSObject
 }
 
 declare class NativeViewGestureHandler extends GestureHandler {
+    static alloc(): NativeViewGestureHandler; // inherited from NSObject
 
-	static alloc(): NativeViewGestureHandler; // inherited from NSObject
-
-	static new(): NativeViewGestureHandler; // inherited from NSObject
+    static new(): NativeViewGestureHandler; // inherited from NSObject
 }
 
 declare class PanGestureHandler extends GestureHandler {
+    static alloc(): PanGestureHandler; // inherited from NSObject
 
-	static alloc(): PanGestureHandler; // inherited from NSObject
-
-	static new(): PanGestureHandler; // inherited from NSObject
+    static new(): PanGestureHandler; // inherited from NSObject
 }
 
 declare class PinchGestureHandler extends GestureHandler {
+    static alloc(): PinchGestureHandler; // inherited from NSObject
 
-	static alloc(): PinchGestureHandler; // inherited from NSObject
-
-	static new(): PinchGestureHandler; // inherited from NSObject
+    static new(): PinchGestureHandler; // inherited from NSObject
 }
 
 interface RootViewGestureRecognizerDelegate extends UIGestureRecognizerDelegate {
-
-	gestureRecognizerDidActivateInRootView(gestureRecognizer: UIGestureRecognizer, rootView: UIView): void;
+    gestureRecognizerDidActivateInRootView(gestureRecognizer: UIGestureRecognizer, rootView: UIView): void;
 }
 declare var RootViewGestureRecognizerDelegate: {
-
-	prototype: RootViewGestureRecognizerDelegate;
+    prototype: RootViewGestureRecognizerDelegate;
 };
 
 declare class RotationGestureHandler extends GestureHandler {
+    static alloc(): RotationGestureHandler; // inherited from NSObject
 
-	static alloc(): RotationGestureHandler; // inherited from NSObject
-
-	static new(): RotationGestureHandler; // inherited from NSObject
+    static new(): RotationGestureHandler; // inherited from NSObject
 }
 
 declare class TapGestureHandler extends GestureHandler {
+    static alloc(): TapGestureHandler; // inherited from NSObject
 
-	static alloc(): TapGestureHandler; // inherited from NSObject
-
-	static new(): TapGestureHandler; // inherited from NSObject
+    static new(): TapGestureHandler; // inherited from NSObject
 }

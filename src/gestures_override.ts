@@ -1,15 +1,8 @@
-// Definitions.
-import { GestureEventData } from '@nativescript/core/ui/gestures';
-import { View, EventData } from '@nativescript/core/ui/core/view';
-
-// Types.
-import { toString, TouchAction, GestureTypes, observe as nGestureObserve } from '@nativescript/core/ui/gestures';
-
-// Import layout from utils directly to avoid circular references
+import { EventData, View } from '@nativescript/core';
+import { GestureEventData, GestureTypes, TouchAction, toString } from '@nativescript/core/ui/gestures';
 import { layout } from '@nativescript/core/utils/utils';
-
-import { Manager, PanGestureHandler, FlingGestureHandler, RotationGestureHandler, PinchGestureHandler, TapGestureHandler, LongPressGestureHandler } from './gesturehandler';
-import { HandlerType, GestureHandlerStateEvent, GestureStateEventData, GestureState, GestureHandlerTouchEvent } from './gesturehandler.common';
+import { FlingGestureHandler, LongPressGestureHandler, Manager, PanGestureHandler, PinchGestureHandler, RotationGestureHandler, TapGestureHandler } from './gesturehandler';
+import { GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureState, GestureStateEventData, HandlerType } from './gesturehandler.common';
 
 export function observe(target: View, type: GestureTypes, callback: (args: GestureEventData) => void, context?: any): GesturesObserver {
     // const startTime = Date.now();
@@ -61,7 +54,7 @@ export class GesturesObserver {
         // clears target, context and callback references
         // remove gesture observer from map
         if (this.target) {
-            let list = this.target.getGestureObservers(this.type);
+            const list = this.target.getGestureObservers(this.type);
             if (list && list.length > 0) {
                 for (let i = 0; i < list.length; i++) {
                     if (list[i].callback === this.callback) {
@@ -148,7 +141,7 @@ export class GesturesObserver {
             }
         };
     }
-    private _attach(target: View, type: GestureTypes) { 
+    private _attach(target: View, type: GestureTypes) {
         if (type & GestureTypes.touch) {
             this._notifyTouch = true;
         }
@@ -240,8 +233,8 @@ class TouchGestureEventData implements TouchGestureEventData {
     android: android.view.MotionEvent;
     object: any;
 
-    private _activePointers: Array<Pointer>;
-    private _allPointers: Array<Pointer>;
+    private _activePointers: Pointer[];
+    private _allPointers: Pointer[];
 
     public prepare(view: View, e: android.view.MotionEvent) {
         this.view = view;
@@ -257,7 +250,7 @@ class TouchGestureEventData implements TouchGestureEventData {
         return this.android.getPointerCount();
     }
 
-    getActivePointers(): Array<Pointer> {
+    getActivePointers(): Pointer[] {
         // Only one active pointer in Android
         if (!this._activePointers) {
             this._activePointers = [new Pointer(this.android.getActionIndex(), this.android)];
@@ -266,7 +259,7 @@ class TouchGestureEventData implements TouchGestureEventData {
         return this._activePointers;
     }
 
-    getAllPointers(): Array<Pointer> {
+    getAllPointers(): Pointer[] {
         if (!this._allPointers) {
             this._allPointers = [];
             for (let i = 0; i < this.getPointerCount(); i++) {
@@ -308,6 +301,6 @@ class TouchGestureEventData implements TouchGestureEventData {
 
 function _executeCallback(observer: GesturesObserver, args: GestureEventData) {
     if (observer && observer.callback) {
-        observer.callback.call((<any>observer)._context, args);
+        observer.callback.call((observer as any)._context, args);
     }
 }

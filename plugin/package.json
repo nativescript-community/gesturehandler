@@ -1,5 +1,5 @@
 {
-    "name": "nativescript-gesturehandler",
+    "name": "@nativescript-community/gesturehandler",
     "version": "0.1.16",
     "description": "Nativescript plugin for gestures",
     "main": "gesturehandler",
@@ -21,12 +21,12 @@
         "email": "martin.guillon@akylas.fr"
     },
     "bugs": {
-        "url": "https://github.com/Akylas/nativescript-gesturehandler/issues"
+        "url": "https://github.com/nativescript-community/gesturehandler/issues"
     },
     "license": "Apache-2.0",
-    "homepage": "https://github.com/Akylas/nativescript-gesturehandler",
+    "homepage": "https://github.com/nativescript-community/gesturehandler",
     "bootstrapper": "nativescript-plugin-seed",
     "dependencies": {
-        "nativescript-observable": "^2.0.2"
+        "@nativescript-community/observable": "^2.0.2"
     }
 }

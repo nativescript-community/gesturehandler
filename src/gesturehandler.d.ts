@@ -1,5 +1,6 @@
+/* eslint-disable no-redeclare */
 import { Observable } from '@nativescript/core/data/observable';
-import { View } from '@nativescript/core/ui/page/page';
+import { View } from '@nativescript/core';
 import { HandlerType, OptionsTypeMap, TypeMap } from './gesturehandler.common';
 
 export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType } from './gesturehandler.common';

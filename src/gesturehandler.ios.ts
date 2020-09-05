@@ -6,20 +6,20 @@ import {
     GestureStateEventData,
     GestureTouchEventData,
     HandlerType,
-    install as installBase,
     Manager as ManagerBase,
-    nativeProperty,
     OptionsTypeMap,
     TypeMap,
     ViewDisposeEvent,
     ViewInitEvent,
+    install as installBase,
+    nativeProperty,
 } from './gesturehandler.common';
 import { View } from '@nativescript/core/ui/core/view';
 import { getClass } from '@nativescript/core/utils/types';
 import { HandlerOptions } from './gesturehandler';
 export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType, ViewInitEvent, ViewDisposeEvent };
 import { observe as gestureObserve } from './gestures_override';
-import { GestureTypes, GestureEventData } from '@nativescript/core/ui/gestures';
+import { GestureEventData, GestureTypes } from '@nativescript/core/ui/gestures';
 
 
 let installed = false;
@@ -41,7 +41,7 @@ export function install(overrideNGestures = false) {
                 this.setOnTouchListener();
             }
         };
-        
+
     }
 }
 function toJsObject(objCObj) {
@@ -99,7 +99,7 @@ function getValueForClass(val) {
 
         default:
             console.log(
-                "Please report this at https://github.com/farfromrefug/nativescript-gesturehandler-febase/issues: iOS toJsObject is missing a converter for class '" +
+                "Please report this at https://github.com/farfromrefug/@nativescript-community/gesturehandler-febase/issues: iOS toJsObject is missing a converter for class '" +
                     getClass(val) +
                     "'. Casting to String as a fallback."
             );
@@ -107,6 +107,7 @@ function getValueForClass(val) {
     }
 }
 
+@NativeClass
 export class HandlerDelegate extends NSObject implements GestureHandlerDelegate {
     public static ObjCProtocols = [GestureHandlerDelegate];
     private _owner: WeakRef<Handler<any, any>>;
@@ -119,7 +120,7 @@ export class HandlerDelegate extends NSObject implements GestureHandlerDelegate 
     // }
 
     public static initWithOwner(owner: WeakRef<Handler<any, any>>): HandlerDelegate {
-        const impl = <HandlerDelegate>HandlerDelegate.new();
+        const impl = HandlerDelegate.new();
         impl._owner = owner;
         return impl;
     }

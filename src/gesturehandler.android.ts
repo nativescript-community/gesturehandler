@@ -1,5 +1,4 @@
 import {
-    applyMixins,
     BaseNative,
     GestureHandlerStateEvent,
     GestureHandlerTouchEvent,
@@ -7,13 +6,14 @@ import {
     GestureStateEventData,
     GestureTouchEventData,
     HandlerType,
-    install as installBase,
     Manager as ManagerBase,
-    nativeProperty,
     OptionsTypeMap,
     TypeMap,
     ViewDisposeEvent,
     ViewInitEvent,
+    applyMixins,
+    install as installBase,
+    nativeProperty,
 } from './gesturehandler.common';
 
 import { observe as gestureObserve } from './gestures_override';
@@ -31,7 +31,7 @@ import {
     TapGestureHandlerOptions,
 } from './gesturehandler';
 import { Page } from '@nativescript/core/ui/page';
-import { GestureTypes, GestureEventData } from '@nativescript/core/ui/gestures';
+import { GestureEventData, GestureTypes } from '@nativescript/core/ui/gestures';
 export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType, ViewInitEvent, ViewDisposeEvent };
 
 let PageLayout: typeof com.nativescript.gesturehandler.PageLayout;
@@ -88,7 +88,7 @@ export function install(overrideNGestures = false) {
                     onTouch: (view: android.view.View, event: android.view.MotionEvent) => {
                         this.handleGestureTouch(event);
 
-                        let nativeView = this.nativeViewProtected;
+                        const nativeView = this.nativeViewProtected;
                         if (!nativeView || !nativeView.onTouchEvent) {
                             return false;
                         }

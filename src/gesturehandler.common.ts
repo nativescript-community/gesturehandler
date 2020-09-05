@@ -1,4 +1,5 @@
-import Observable from 'nativescript-observable';
+/* eslint-disable no-redeclare */
+import Observable from '@nativescript-community/observable';
 import { EventData } from '@nativescript/core/data/observable';
 import { View } from '@nativescript/core/ui/core/view';
 import {
@@ -184,7 +185,7 @@ export function applyMixins(
     options?: {
         after?: boolean;
         override?: boolean;
-        omit?: Array<string | symbol>;
+        omit?: (string | symbol)[];
     }
 ) {
     const omits = options && options.omit ? options.omit : [];
@@ -270,7 +271,7 @@ class ViewGestureExtended extends View {
         // console.log('disposeNativeView', this);
         this.notify({ eventName: ViewDisposeEvent, object: this });
     }
-    
+
 }
 
 let installed  = false;

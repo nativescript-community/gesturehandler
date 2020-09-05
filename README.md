@@ -1,13 +1,13 @@
-[![npm](https://img.shields.io/npm/v/nativescript-gesturehandler.svg)](https://www.npmjs.com/package/nativescript-gesturehandler)
-[![npm](https://img.shields.io/npm/dt/nativescript-gesturehandler.svg?label=npm%20downloads)](https://www.npmjs.com/package/nativescript-gesturehandler)
-[![GitHub forks](https://img.shields.io/github/forks/Akylas/nativescript-gesturehandler.svg)](https://github.com/Akylas/nativescript-gesturehandler/network)
-[![GitHub stars](https://img.shields.io/github/stars/Akylas/nativescript-gesturehandler.svg)](https://github.com/Akylas/nativescript-gesturehandler/stargazers)
+[![npm](https://img.shields.io/npm/v/@nativescript-community/gesturehandler.svg)](https://www.npmjs.com/package/@nativescript-community/gesturehandler)
+[![npm](https://img.shields.io/npm/dt/@nativescript-community/gesturehandler.svg?label=npm%20downloads)](https://www.npmjs.com/package/@nativescript-community/gesturehandler)
+[![GitHub forks](https://img.shields.io/github/forks/@nativescript-community/gesturehandler.svg)](https://github.com/nativescript-community/gesturehandler/network)
+[![GitHub stars](https://img.shields.io/github/stars/@nativescript-community/gesturehandler.svg)](https://github.com/nativescript-community/gesturehandler/stargazers)
 
-[![NPM](https://nodei.co/npm/nativescript-gesturehandler.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/nativescript-gesturehandler/)
+[![NPM](https://nodei.co/npm/@nativescript-community/gesturehandler.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/@nativescript-community/gesturehandler/)
 
 ## Installation
 
-* `tns plugin add nativescript-gesturehandler`
+* `tns plugin add @nativescript-community/gesturehandler`
 
 Be sure to run a new build after adding plugins to avoid any issues.
 
@@ -21,18 +21,18 @@ The source is based on the source code by [Krzysztof Magiera](https://github.com
 
 First you need to install the plugin:
 ```shell
-tns plugin add nativescript-gesturehandler
+tns plugin add @nativescript-community/gesturehandler
 ```
 We need to do some wiring when your app starts, so open `app.ts` and add this before creating any View/App/Frame:
 ##### TypeScript
 ```ts
-import { install } from "nativescript-gesturehandler";
+import { install } from "@nativescript-community/gesturehandler";
 install();
 ```
 
 You create a gesture handler using something like this:
 ```typescript 
-import { GestureHandlerTouchEvent, GestureHandlerStateEvent, GestureStateEventData, GestureTouchEventData, HandlerType } from 'nativescript-gesturehandler';
+import { GestureHandlerTouchEvent, GestureHandlerStateEvent, GestureStateEventData, GestureTouchEventData, HandlerType } from '@nativescript-community/gesturehandler';
 
 
 function onGestureTouch(args: GestureTouchEventData) {
