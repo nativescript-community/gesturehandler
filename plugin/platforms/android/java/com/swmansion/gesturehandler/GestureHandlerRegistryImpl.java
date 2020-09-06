@@ -15,7 +15,8 @@ public class GestureHandlerRegistryImpl implements GestureHandlerRegistry {
 
   private final SparseArray<GestureHandler> mHandlers = new SparseArray<>();
   private final SparseArray<View> mAttachedTo = new SparseArray<>();
-  // private final SparseArray<ArrayList<GestureHandler>> mHandlersForView = new SparseArray<>();
+  // private final SparseArray<ArrayList<GestureHandler>> mHandlersForView = new
+  // SparseArray<>();
   private WeakHashMap<View, ArrayList<GestureHandler>> mHandlersForView = new WeakHashMap<>();
 
   public synchronized void registerHandler(GestureHandler handler) {
@@ -65,8 +66,10 @@ public class GestureHandlerRegistryImpl implements GestureHandlerRegistry {
       }
     }
     if (handler.getView() != null) {
-      // Handler is in "prepared" state which means it is registered in the orchestrator and can
-      // receive touch events. This means that before we remove it from the registry we need to
+      // Handler is in "prepared" state which means it is registered in the
+      // orchestrator and can
+      // receive touch events. This means that before we remove it from the registry
+      // we need to
       // "cancel" it so that orchestrator does no longer keep a reference to it.
       handler.cancel();
     }

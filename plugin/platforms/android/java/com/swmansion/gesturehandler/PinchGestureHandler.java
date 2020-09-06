@@ -14,8 +14,7 @@ public class PinchGestureHandler extends GestureHandler<PinchGestureHandler> {
   private int mSpanSlop = -1;
   private int mMinSpan = -1;
 
-  private ScaleGestureDetector.OnScaleGestureListener mGestureListener =
-          new ScaleGestureDetector.OnScaleGestureListener() {
+  private ScaleGestureDetector.OnScaleGestureListener mGestureListener = new ScaleGestureDetector.OnScaleGestureListener() {
 
     @Override
     public boolean onScale(ScaleGestureDetector detector) {
@@ -25,8 +24,7 @@ public class PinchGestureHandler extends GestureHandler<PinchGestureHandler> {
       if (delta > 0) {
         mLastVelocity = (mLastScaleFactor - prevScaleFactor) / delta;
       }
-      if (Math.abs(mStartingSpan - detector.getCurrentSpan()) >= mSpanSlop
-              && getState() == STATE_BEGAN) {
+      if (Math.abs(mStartingSpan - detector.getCurrentSpan()) >= mSpanSlop && getState() == STATE_BEGAN) {
         activate();
       }
       return true;
@@ -40,8 +38,10 @@ public class PinchGestureHandler extends GestureHandler<PinchGestureHandler> {
 
     @Override
     public void onScaleEnd(ScaleGestureDetector detector) {
-      // ScaleGestureDetector thinks that when fingers are 27mm away that's a sufficiently good
-      // reason to trigger this method giving us no other choice but to ignore it completely.
+      // ScaleGestureDetector thinks that when fingers are 27mm away that's a
+      // sufficiently good
+      // reason to trigger this method giving us no other choice but to ignore it
+      // completely.
     }
   };
 
@@ -58,12 +58,11 @@ public class PinchGestureHandler extends GestureHandler<PinchGestureHandler> {
       mLastScaleFactor = 1f;
       mScaleGestureDetector = new ScaleGestureDetector(context, mGestureListener);
       if (mSpanSlop != -1) {
-          mScaleGestureDetector.setSpanSlop(mSpanSlop);
+        mScaleGestureDetector.setSpanSlop(mSpanSlop);
       }
       if (mMinSpan != -1) {
-          mScaleGestureDetector.setMinSpan(mMinSpan);
+        mScaleGestureDetector.setMinSpan(mMinSpan);
       }
-      
 
       begin();
     }
@@ -98,21 +97,25 @@ public class PinchGestureHandler extends GestureHandler<PinchGestureHandler> {
   public double getVelocity() {
     return mLastVelocity;
   }
+
   public float getMinSpan() {
-    return (float)mMinSpan;
+    return (float) mMinSpan;
   }
+
   public PinchGestureHandler setMinSpan(float value) {
-    mMinSpan = (int)value;
+    mMinSpan = (int) value;
     if (mScaleGestureDetector != null) {
       mScaleGestureDetector.setMinSpan(mMinSpan);
     }
     return this;
   }
+
   public float getSpanSlop() {
-    return (float)mSpanSlop;
+    return (float) mSpanSlop;
   }
+
   public PinchGestureHandler setSpanSlop(float value) {
-    mSpanSlop = (int)value;
+    mSpanSlop = (int) value;
     if (mScaleGestureDetector != null) {
       mScaleGestureDetector.setSpanSlop(mSpanSlop);
     }

@@ -58,6 +58,7 @@ public class TapGestureHandler extends GestureHandler<TapGestureHandler> {
     mMaxDeltaY = deltaY;
     return this;
   }
+
   public TapGestureHandler setMaxDist(float maxDist) {
     mMaxDistSq = maxDist * maxDist;
     return this;
@@ -145,7 +146,7 @@ public class TapGestureHandler extends GestureHandler<TapGestureHandler> {
         begin();
       }
       startTap();
-  } else if (state == STATE_BEGAN) {
+    } else if (state == STATE_BEGAN) {
       if (action == MotionEvent.ACTION_UP) {
         endTap();
       } else if (action == MotionEvent.ACTION_DOWN) {

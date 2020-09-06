@@ -20,9 +20,10 @@ public class NativeViewGestureHandler extends GestureHandler<NativeViewGestureHa
   }
 
   /**
-   * Set this to {@code true} when wrapping native components that are supposed to be an exclusive
-   * target for a touch stream. Like for example switch or slider component which when activated
-   * aren't supposed to be cancelled by scrollview or other container that may also handle touches.
+   * Set this to {@code true} when wrapping native components that are supposed to
+   * be an exclusive target for a touch stream. Like for example switch or slider
+   * component which when activated aren't supposed to be cancelled by scrollview
+   * or other container that may also handle touches.
    */
   public NativeViewGestureHandler setDisallowInterruption(boolean disallowInterruption) {
     mDisallowInterruption = disallowInterruption;
@@ -37,13 +38,17 @@ public class NativeViewGestureHandler extends GestureHandler<NativeViewGestureHa
   @Override
   public boolean shouldRecognizeSimultaneously(GestureHandler handler) {
     if (handler instanceof NativeViewGestureHandler) {
-      // Special case when the peer handler is also an instance of NativeViewGestureHandler:
-      // For the `disallowInterruption` to work correctly we need to check the property when
-      // accessed as a peer, because simultaneous recognizers can be set on either side of the
+      // Special case when the peer handler is also an instance of
+      // NativeViewGestureHandler:
+      // For the `disallowInterruption` to work correctly we need to check the
+      // property when
+      // accessed as a peer, because simultaneous recognizers can be set on either
+      // side of the
       // connection.
       NativeViewGestureHandler nativeWrapper = (NativeViewGestureHandler) handler;
       if (nativeWrapper.getState() == STATE_ACTIVE && nativeWrapper.mDisallowInterruption) {
-        // other handler is active and it disallows interruption, we don't want to get into its way
+        // other handler is active and it disallows interruption, we don't want to get
+        // into its way
         return false;
       }
     }
@@ -53,8 +58,10 @@ public class NativeViewGestureHandler extends GestureHandler<NativeViewGestureHa
     int otherState = handler.getState();
 
     if (state == STATE_ACTIVE && otherState == STATE_ACTIVE && canBeInterrupted) {
-      // if both handlers are active and the current handler can be interruped it we return `false`
-      // as it means the other handler has turned active and returning `true` would prevent it from
+      // if both handlers are active and the current handler can be interruped it we
+      // return `false`
+      // as it means the other handler has turned active and returning `true` would
+      // prevent it from
       // interrupting the current handler
       return false;
     }

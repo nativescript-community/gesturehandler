@@ -5,8 +5,7 @@ import android.view.MotionEvent;
 public class GestureUtils {
     public static float getLastPointerX(MotionEvent event, boolean averageTouches) {
         float offset = event.getRawX() - event.getX();
-        int excludeIndex = event.getActionMasked() == MotionEvent.ACTION_POINTER_UP ?
-                event.getActionIndex() : -1;
+        int excludeIndex = event.getActionMasked() == MotionEvent.ACTION_POINTER_UP ? event.getActionIndex() : -1;
 
         if (averageTouches) {
             float sum = 0f;
@@ -29,8 +28,7 @@ public class GestureUtils {
 
     public static float getLastPointerY(MotionEvent event, boolean averageTouches) {
         float offset = event.getRawY() - event.getY();
-        int excludeIndex = event.getActionMasked() == MotionEvent.ACTION_POINTER_UP ?
-                event.getActionIndex() : -1;
+        int excludeIndex = event.getActionMasked() == MotionEvent.ACTION_POINTER_UP ? event.getActionIndex() : -1;
 
         if (averageTouches) {
             float sum = 0f;

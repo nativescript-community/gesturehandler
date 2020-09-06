@@ -13,14 +13,15 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 import android.util.Log;
 
 public class GestureHandlerOrchestrator {
-    private final String TAG = "GestureHandler";
+  private final String TAG = "GestureHandler";
 
-  // The limit doesn't necessarily need to exists, it was just simpler to implement it that way
+  // The limit doesn't necessarily need to exists, it was just simpler to
+  // implement it that way
   // it is also more allocation-wise efficient to have a fixed limit
   private static final int SIMULTANEOUS_GESTURE_HANDLER_LIMIT = 20;
   // Be default fully transparent views can receive touch
@@ -31,39 +32,35 @@ public class GestureHandlerOrchestrator {
   private static final Matrix sInverseMatrix = new Matrix();
   private static final float[] sTempCoords = new float[2];
 
-  private static final Comparator<GestureHandler> sHandlersComparator =
-          new Comparator<GestureHandler>() {
-            @Override
-            public int compare(GestureHandler a, GestureHandler b) {
-              if (a.mIsActive && b.mIsActive || a.mIsAwaiting && b.mIsAwaiting) {
-                // both A and B are either active or awaiting activation, in which case we prefer one that
-                // has activated (or turned into "awaiting" state) earlier
-                return Integer.signum(b.mActivationIndex - a.mActivationIndex);
-              } else if (a.mIsActive) {
-                return -1; // only A is active
-              } else if (b.mIsActive) {
-                return 1; // only B is active
-              } else if (a.mIsAwaiting) {
-                return -1; // only A is awaiting, B is inactive
-              } else if (b.mIsAwaiting) {
-                return 1; // only B is awaiting, A is inactive
-              }
-              return 0; // both A and B are inactive, stable order matters
-            }
-          };
+  private static final Comparator<GestureHandler> sHandlersComparator = new Comparator<GestureHandler>() {
+    @Override
+    public int compare(GestureHandler a, GestureHandler b) {
+      if (a.mIsActive && b.mIsActive || a.mIsAwaiting && b.mIsAwaiting) {
+        // both A and B are either active or awaiting activation, in which case we
+        // prefer one that
+        // has activated (or turned into "awaiting" state) earlier
+        return Integer.signum(b.mActivationIndex - a.mActivationIndex);
+      } else if (a.mIsActive) {
+        return -1; // only A is active
+      } else if (b.mIsActive) {
+        return 1; // only B is active
+      } else if (a.mIsAwaiting) {
+        return -1; // only A is awaiting, B is inactive
+      } else if (b.mIsAwaiting) {
+        return 1; // only B is awaiting, A is inactive
+      }
+      return 0; // both A and B are inactive, stable order matters
+    }
+  };
 
   private final ViewGroup mWrapperView;
   private final GestureHandlerRegistry mHandlerRegistry;
   private final ViewConfigurationHelper mViewConfigHelper;
 
-  private final GestureHandler[] mGestureHandlers
-          = new GestureHandler[SIMULTANEOUS_GESTURE_HANDLER_LIMIT];
-  private final GestureHandler[] mAwaitingHandlers
-          = new GestureHandler[SIMULTANEOUS_GESTURE_HANDLER_LIMIT];
-  private final GestureHandler[] mPreparedHandlers
-          = new GestureHandler[SIMULTANEOUS_GESTURE_HANDLER_LIMIT];
-  private final GestureHandler[] mHandlersToCancel
-          = new GestureHandler[SIMULTANEOUS_GESTURE_HANDLER_LIMIT];
+  private final GestureHandler[] mGestureHandlers = new GestureHandler[SIMULTANEOUS_GESTURE_HANDLER_LIMIT];
+  private final GestureHandler[] mAwaitingHandlers = new GestureHandler[SIMULTANEOUS_GESTURE_HANDLER_LIMIT];
+  private final GestureHandler[] mPreparedHandlers = new GestureHandler[SIMULTANEOUS_GESTURE_HANDLER_LIMIT];
+  private final GestureHandler[] mHandlersToCancel = new GestureHandler[SIMULTANEOUS_GESTURE_HANDLER_LIMIT];
   private int mGestureHandlersCount = 0;
   private int mAwaitingHandlersCount = 0;
 
@@ -74,19 +71,18 @@ public class GestureHandlerOrchestrator {
 
   private float mMinAlphaForTraversal = DEFAULT_MIN_ALPHA_FOR_TRAVERSAL;
 
-  public GestureHandlerOrchestrator(
-          ViewGroup wrapperView,
-          GestureHandlerRegistry registry,
-          ViewConfigurationHelper viewConfigurationHelper) {
+  public GestureHandlerOrchestrator(ViewGroup wrapperView, GestureHandlerRegistry registry,
+      ViewConfigurationHelper viewConfigurationHelper) {
     mWrapperView = wrapperView;
     mHandlerRegistry = registry;
     mViewConfigHelper = viewConfigurationHelper;
   }
 
   /**
-   * Minimum alpha (value from 0 to 1) that should be set to a view so that it can be treated as a
-   * gesture target. E.g. if set to 0.1 then views that less than 10% opaque will be ignored when
-   * traversing view hierarchy and looking for gesture handlers.
+   * Minimum alpha (value from 0 to 1) that should be set to a view so that it can
+   * be treated as a gesture target. E.g. if set to 0.1 then views that less than
+   * 10% opaque will be ignored when traversing view hierarchy and looking for
+   * gesture handlers.
    */
   public void setMinimumAlphaForTraversal(float alpha) {
     mMinAlphaForTraversal = alpha;
@@ -147,8 +143,7 @@ public class GestureHandlerOrchestrator {
   private boolean hasOtherHandlerToWaitFor(GestureHandler handler) {
     for (int i = 0; i < mGestureHandlersCount; i++) {
       GestureHandler otherHandler = mGestureHandlers[i];
-      if (!isFinished(otherHandler.getState())
-              && shouldHandlerWaitForOther(handler, otherHandler)) {
+      if (!isFinished(otherHandler.getState()) && shouldHandlerWaitForOther(handler, otherHandler)) {
         return true;
       }
     }
@@ -176,10 +171,11 @@ public class GestureHandlerOrchestrator {
     mAwaitingHandlersCount = out;
   }
 
-  /*package*/ void onHandlerStateChange(GestureHandler handler, int newState, int prevState) {
+  /* package */ void onHandlerStateChange(GestureHandler handler, int newState, int prevState) {
     mHandlingChangeSemaphore += 1;
     if (isFinished(newState)) {
-      // if there were handlers awaiting completion of this handler, we can trigger active state
+      // if there were handlers awaiting completion of this handler, we can trigger
+      // active state
       for (int i = 0; i < mAwaitingHandlersCount; i++) {
         GestureHandler otherHandler = mAwaitingHandlers[i];
         if (shouldHandlerWaitForOther(otherHandler, handler)) {
@@ -216,7 +212,8 @@ public class GestureHandlerOrchestrator {
     handler.mActivationIndex = mActivationIndex++;
 
     int toCancelCount = 0;
-    // Cancel all handlers that are required to be cancel upon current handler's activation
+    // Cancel all handlers that are required to be cancel upon current handler's
+    // activation
     for (int i = 0; i < mGestureHandlersCount; i++) {
       GestureHandler otherHandler = mGestureHandlers[i];
       if (shouldHandlerBeCancelledBy(otherHandler, handler)) {
@@ -238,7 +235,8 @@ public class GestureHandlerOrchestrator {
     }
     cleanupAwaitingHandlers();
 
-    // Dispatch state change event if handler is no longer in the active state we should also
+    // Dispatch state change event if handler is no longer in the active state we
+    // should also
     // trigger END state change and UNDETERMINED state change if necessary
     handler.dispatchStateChange(GestureHandler.STATE_ACTIVE, GestureHandler.STATE_BEGAN);
     if (currentState != GestureHandler.STATE_ACTIVE) {
@@ -250,14 +248,19 @@ public class GestureHandlerOrchestrator {
   }
 
   public void deliverEventToGestureHandlers(MotionEvent event) {
-    // Copy handlers to "prepared handlers" array, because the list of active handlers can change
+    // Copy handlers to "prepared handlers" array, because the list of active
+    // handlers can change
     // as a result of state updates
     int handlersCount = mGestureHandlersCount;
     System.arraycopy(mGestureHandlers, 0, mPreparedHandlers, 0, handlersCount);
-    // We want to deliver events to active handlers first in order of their activation (handlers
-    // that activated first will first get event delivered). Otherwise we deliver events in the
-    // order in which handlers has been added ("most direct" children goes first). Therefore we rely
-    // on Arrays.sort providing a stable sort (as children are registered in order in which they
+    // We want to deliver events to active handlers first in order of their
+    // activation (handlers
+    // that activated first will first get event delivered). Otherwise we deliver
+    // events in the
+    // order in which handlers has been added ("most direct" children goes first).
+    // Therefore we rely
+    // on Arrays.sort providing a stable sort (as children are registered in order
+    // in which they
     // should be tested)
     Arrays.sort(mPreparedHandlers, 0, handlersCount, sHandlersComparator);
     for (int i = 0; i < handlersCount; i++) {
@@ -269,7 +272,8 @@ public class GestureHandlerOrchestrator {
     for (int i = mAwaitingHandlersCount - 1; i >= 0; i--) {
       mAwaitingHandlers[i].cancel();
     }
-    // Copy handlers to "prepared handlers" array, because the list of active handlers can change
+    // Copy handlers to "prepared handlers" array, because the list of active
+    // handlers can change
     // as a result of state updates
     int handlersCount = mGestureHandlersCount;
     for (int i = 0; i < handlersCount; i++) {
@@ -290,7 +294,7 @@ public class GestureHandlerOrchestrator {
       return;
     }
     int action = event.getActionMasked();
-  if (handler.mIsAwaiting && action == MotionEvent.ACTION_MOVE) {
+    if (handler.mIsAwaiting && action == MotionEvent.ACTION_MOVE) {
       return;
     }
     float[] coords = sTempCoords;
@@ -299,9 +303,12 @@ public class GestureHandlerOrchestrator {
     float oldY = event.getY();
     // TODO: we may conside scaling events if necessary using MotionEvent.transform
     // for now the events are only offset to the top left corner of the view but if
-    // view or any ot the parents is scaled the other pointers position will not reflect
-    // their actual place in the view. On the other hand not scaling seems like a better
-    // approach when we want to use pointer coordinates to calculate velocity or distance
+    // view or any ot the parents is scaled the other pointers position will not
+    // reflect
+    // their actual place in the view. On the other hand not scaling seems like a
+    // better
+    // approach when we want to use pointer coordinates to calculate velocity or
+    // distance
     // for pinch so I don't know yet if we should transform or not...
     event.setLocation(coords[0], coords[1]);
     handler.handle(event);
@@ -309,7 +316,8 @@ public class GestureHandlerOrchestrator {
       handler.dispatchTouchEvent(event);
     }
     event.setLocation(oldX, oldY);
-    // if event was of type UP or POINTER_UP we request handler to stop tracking now that
+    // if event was of type UP or POINTER_UP we request handler to stop tracking now
+    // that
     // the event has been dispatched
     if (action == MotionEvent.ACTION_UP || action == MotionEvent.ACTION_POINTER_UP) {
       int pointerId = event.getPointerId(event.getActionIndex());
@@ -318,11 +326,12 @@ public class GestureHandlerOrchestrator {
   }
 
   /**
-   * isViewAttachedUnderWrapper checks whether all of parents for view related to handler
-   * view are attached. Since there might be an issue rarely observed when view
-   * has been detached and handler's state hasn't been change to canceled, failed or
-   * ended yet. Probably it's a result of some race condition and stopping delivering
-   * for this handler and changing its state to failed of end appear to be good enough solution.
+   * isViewAttachedUnderWrapper checks whether all of parents for view related to
+   * handler view are attached. Since there might be an issue rarely observed when
+   * view has been detached and handler's state hasn't been change to canceled,
+   * failed or ended yet. Probably it's a result of some race condition and
+   * stopping delivering for this handler and changing its state to failed of end
+   * appear to be good enough solution.
    */
   private boolean isViewAttachedUnderWrapper(@Nullable View view) {
     if (view == null) {
@@ -331,7 +340,8 @@ public class GestureHandlerOrchestrator {
     if (view == mWrapperView) {
       return true;
     }
-    @Nullable ViewParent parent = view.getParent();
+    @Nullable
+    ViewParent parent = view.getParent();
     while (parent != null && parent != mWrapperView) {
       parent = parent.getParent();
     }
@@ -423,7 +433,8 @@ public class GestureHandlerOrchestrator {
         coords[1] = childPoint.y;
         boolean found = false;
         if (!isClipping(child) || isTransformedTouchPointInView(coords[0], coords[1], child)) {
-          // we only consider the view if touch is inside the view bounds or if the view's children
+          // we only consider the view if touch is inside the view bounds or if the view's
+          // children
           // can render outside of the view bounds (overflow visible)
           found = traverseWithPointerEvents(child, coords, pointerId);
         }
@@ -438,11 +449,14 @@ public class GestureHandlerOrchestrator {
   }
 
   private static boolean shouldHandlerlessViewBecomeTouchTarget(View view, float coords[]) {
-    // The following code is to match the iOS behavior where transparent parts of the views can
+    // The following code is to match the iOS behavior where transparent parts of
+    // the views can
     // pass touch events through them allowing sibling nodes to handle them.
 
-    // TODO: this is not an ideal solution as we only consider ViewGroups that has no background set
-    // TODO: ideally we should determine the pixel color under the given coordinates and return
+    // TODO: this is not an ideal solution as we only consider ViewGroups that has
+    // no background set
+    // TODO: ideally we should determine the pixel color under the given coordinates
+    // and return
     // false if the color is transparent
     boolean isLeafOrTransparent = !(view instanceof ViewGroup) || view.getBackground() != null;
     return isLeafOrTransparent && isTransformedTouchPointInView(coords[0], coords[1], view);
@@ -456,7 +470,7 @@ public class GestureHandlerOrchestrator {
     } else if (pointerEvents == PointerEventsConfig.BOX_ONLY) {
       // This view is the target, its children don't matter
       return recordViewHandlersForPointer(view, coords, pointerId)
-              || shouldHandlerlessViewBecomeTouchTarget(view, coords);
+          || shouldHandlerlessViewBecomeTouchTarget(view, coords);
     } else if (pointerEvents == PointerEventsConfig.BOX_NONE) {
       // This view can't be the target, but its children might
       if (view instanceof ViewGroup) {
@@ -469,11 +483,10 @@ public class GestureHandlerOrchestrator {
       if (view instanceof ViewGroup) {
         found = extractGestureHandlers((ViewGroup) view, coords, pointerId);
       }
-      return recordViewHandlersForPointer(view, coords, pointerId)
-              || found || shouldHandlerlessViewBecomeTouchTarget(view, coords);
+      return recordViewHandlersForPointer(view, coords, pointerId) || found
+          || shouldHandlerlessViewBecomeTouchTarget(view, coords);
     } else {
-      throw new IllegalArgumentException(
-              "Unknown pointer event type: " + pointerEvents.toString());
+      throw new IllegalArgumentException("Unknown pointer event type: " + pointerEvents.toString());
     }
   }
 
@@ -481,12 +494,8 @@ public class GestureHandlerOrchestrator {
     return view.getVisibility() == View.VISIBLE && view.getAlpha() >= mMinAlphaForTraversal;
   }
 
-  private static void transformTouchPointToViewCoords(
-          float x,
-          float y,
-          ViewGroup parent,
-          View child,
-          PointF outLocalPoint) {
+  private static void transformTouchPointToViewCoords(float x, float y, ViewGroup parent, View child,
+      PointF outLocalPoint) {
     float localX = x + parent.getScrollX() - child.getLeft();
     float localY = y + parent.getScrollY() - child.getTop();
     Matrix matrix = child.getMatrix();
@@ -504,7 +513,8 @@ public class GestureHandlerOrchestrator {
   }
 
   private boolean isClipping(View view) {
-    // if view is not a view group it is clipping, otherwise we check for `getClipChildren` flag to
+    // if view is not a view group it is clipping, otherwise we check for
+    // `getClipChildren` flag to
     // be turned on and also confirm with the ViewConfigHelper implementation
     return !(view instanceof ViewGroup) || mViewConfigHelper.isViewClippingChildren((ViewGroup) view);
   }
@@ -514,8 +524,8 @@ public class GestureHandlerOrchestrator {
   }
 
   private static boolean shouldHandlerWaitForOther(GestureHandler handler, GestureHandler other) {
-    return handler != other && (handler.shouldWaitForHandlerFailure(other)
-            || other.shouldRequireToWaitForFailure(handler));
+    return handler != other
+        && (handler.shouldWaitForHandlerFailure(other) || other.shouldRequireToWaitForFailure(handler));
   }
 
   private static boolean canRunSimultaneously(GestureHandler a, GestureHandler b) {
@@ -525,18 +535,21 @@ public class GestureHandlerOrchestrator {
   private static boolean shouldHandlerBeCancelledBy(GestureHandler handler, GestureHandler other) {
 
     if (!handler.hasCommonPointers(other)) {
-      // if two handlers share no common pointer one can never trigger cancel for the other
+      // if two handlers share no common pointer one can never trigger cancel for the
+      // other
       return false;
     }
     if (canRunSimultaneously(handler, other)) {
-      // if handlers are allowed to run simultaneously, when first activates second can still remain
+      // if handlers are allowed to run simultaneously, when first activates second
+      // can still remain
       // in began state
       return false;
     }
-    if (handler != other &&
-            (handler.mIsAwaiting || handler.getState() == GestureHandler.STATE_ACTIVE)) {
-      // in every other case as long as the handler is about to be activated or already in active
-      // state, we delegate the decision to the implementation of GestureHandler#shouldBeCancelledBy
+    if (handler != other && (handler.mIsAwaiting || handler.getState() == GestureHandler.STATE_ACTIVE)) {
+      // in every other case as long as the handler is about to be activated or
+      // already in active
+      // state, we delegate the decision to the implementation of
+      // GestureHandler#shouldBeCancelledBy
       return handler.shouldBeCancelledBy(other);
     }
     return true;
@@ -544,6 +557,6 @@ public class GestureHandlerOrchestrator {
 
   private static boolean isFinished(int state) {
     return state == GestureHandler.STATE_CANCELLED || state == GestureHandler.STATE_FAILED
-            || state == GestureHandler.STATE_END;
+        || state == GestureHandler.STATE_END;
   }
 }

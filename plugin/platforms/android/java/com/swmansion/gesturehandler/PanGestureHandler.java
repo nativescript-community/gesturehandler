@@ -8,7 +8,7 @@ import android.view.VelocityTracker;
 import android.view.ViewConfiguration;
 
 public class PanGestureHandler extends GestureHandler<PanGestureHandler> {
-    private final String TAG = "PanGestureHandler";
+  private final String TAG = "PanGestureHandler";
 
   private static float MIN_VALUE_IGNORE = Float.MAX_VALUE;
   private static float MAX_VALUE_IGNORE = Float.MIN_VALUE;
@@ -45,16 +45,19 @@ public class PanGestureHandler extends GestureHandler<PanGestureHandler> {
   private boolean mAverageTouches;
 
   /**
-   * On Android when there are multiple pointers on the screen pan gestures most often just consider
-   * the last placed pointer. The behaviour on iOS is quite different where the x and y component
-   * of the pan pointer is calculated as an average out of all the pointers placed on the screen.
+   * On Android when there are multiple pointers on the screen pan gestures most
+   * often just consider the last placed pointer. The behaviour on iOS is quite
+   * different where the x and y component of the pan pointer is calculated as an
+   * average out of all the pointers placed on the screen.
    *
-   * This behaviour can be customized on android by setting averageTouches property of the handler
-   * object. This could be useful in particular for the usecases when we attach other handlers that
-   * recognizes multi-finger gestures such as rotation. In that case when we only rely on the last
-   * placed finger it is easier for the gesture handler to trigger when we do a rotation gesture
-   * because each finger when treated separately will travel some distance, whereas the average
-   * position of all the fingers will remain still while doing a rotation gesture.
+   * This behaviour can be customized on android by setting averageTouches
+   * property of the handler object. This could be useful in particular for the
+   * usecases when we attach other handlers that recognizes multi-finger gestures
+   * such as rotation. In that case when we only rely on the last placed finger it
+   * is easier for the gesture handler to trigger when we do a rotation gesture
+   * because each finger when treated separately will travel some distance,
+   * whereas the average position of all the fingers will remain still while doing
+   * a rotation gesture.
    */
   public PanGestureHandler(Context context) {
     ViewConfiguration vc = ViewConfiguration.get(context);
@@ -165,14 +168,14 @@ public class PanGestureHandler extends GestureHandler<PanGestureHandler> {
     }
 
     float vx = mLastVelocityX;
-    if (mMinVelocityX != MIN_VALUE_IGNORE &&
-            ((mMinVelocityX < 0 && vx <= mMinVelocityX) || (mMinVelocityX >= 0 && vx >= mMinVelocityX))) {
+    if (mMinVelocityX != MIN_VALUE_IGNORE
+        && ((mMinVelocityX < 0 && vx <= mMinVelocityX) || (mMinVelocityX >= 0 && vx >= mMinVelocityX))) {
       return true;
     }
 
     float vy = mLastVelocityY;
-    if (mMinVelocityY != MIN_VALUE_IGNORE &&
-            ((mMinVelocityY < 0 && vx <= mMinVelocityY) || (mMinVelocityY >= 0 && vx >= mMinVelocityY))) {
+    if (mMinVelocityY != MIN_VALUE_IGNORE
+        && ((mMinVelocityY < 0 && vx <= mMinVelocityY) || (mMinVelocityY >= 0 && vx >= mMinVelocityY))) {
       return true;
     }
 
@@ -194,7 +197,6 @@ public class PanGestureHandler extends GestureHandler<PanGestureHandler> {
     if (mFailOffsetXEnd != MIN_VALUE_IGNORE && dx > mFailOffsetXEnd) {
       return true;
     }
-
 
     float dy = mLastY - mStartY + mOffsetY;
     if (mFailOffsetYStart != MAX_VALUE_IGNORE && dy < mFailOffsetYStart) {
@@ -250,17 +252,21 @@ public class PanGestureHandler extends GestureHandler<PanGestureHandler> {
         fail();
       }
     } else if (action == MotionEvent.ACTION_POINTER_DOWN && event.getPointerCount() > mMaxPointers) {
-      // When new finger is placed down (POINTER_DOWN) we check if MAX_POINTERS is not exceeded
+      // When new finger is placed down (POINTER_DOWN) we check if MAX_POINTERS is not
+      // exceeded
       if (state == STATE_ACTIVE) {
         cancel();
       } else {
         fail();
       }
     } else if (action == MotionEvent.ACTION_POINTER_UP && state == STATE_ACTIVE
-            && event.getPointerCount() < mMinPointers) {
-      // When finger is lifted up (POINTER_UP) and the number of pointers falls below MIN_POINTERS
-      // threshold, we only want to take an action when the handler has already activated. Otherwise
-      // we can still expect more fingers to be placed on screen and fulfill MIN_POINTERS criteria.
+        && event.getPointerCount() < mMinPointers) {
+      // When finger is lifted up (POINTER_UP) and the number of pointers falls below
+      // MIN_POINTERS
+      // threshold, we only want to take an action when the handler has already
+      // activated. Otherwise
+      // we can still expect more fingers to be placed on screen and fulfill
+      // MIN_POINTERS criteria.
       fail();
     } else if (state == STATE_BEGAN) {
       if (shouldFail()) {
@@ -298,12 +304,11 @@ public class PanGestureHandler extends GestureHandler<PanGestureHandler> {
     return mLastVelocityY;
   }
 
-
   /**
-   * This method adds movement to {@class VelocityTracker} first resetting offset of the event so
-   * that the velocity is calculated based on the absolute position of touch pointers. This is
-   * because if the underlying view moves along with the finger using relative x/y coords yields
-   * incorrect results.
+   * This method adds movement to {@class VelocityTracker} first resetting offset
+   * of the event so that the velocity is calculated based on the absolute
+   * position of touch pointers. This is because if the underlying view moves
+   * along with the finger using relative x/y coords yields incorrect results.
    */
   private static void addVelocityMovement(VelocityTracker tracker, MotionEvent event) {
     float offsetX = event.getRawX() - event.getX();

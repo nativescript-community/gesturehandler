@@ -18,8 +18,8 @@ public enum PointerEventsConfig {
   BOX_ONLY,
 
   /**
-   * Container and all of its children receive touch events (like pointerEvents is unspecified).
+   * Container and all of its children receive touch events (like pointerEvents is
+   * unspecified).
    */
-  AUTO,
-  ;
+  AUTO,;
 }

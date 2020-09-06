@@ -138,8 +138,8 @@ public class RotationGestureDetector {
   }
 
   /**
-   * Return the time difference in milliseconds between the previous
-   * accepted rotation event and the current rotation event.
+   * Return the time difference in milliseconds between the previous accepted
+   * rotation event and the current rotation event.
    *
    * @return Time difference since the last rotation event in milliseconds.
    */
@@ -148,8 +148,9 @@ public class RotationGestureDetector {
   }
 
   /**
-   * Returns X coordinate of the rotation anchor point relative to the view that the provided motion
-   * event coordinates (usually relative to the view event was sent to).
+   * Returns X coordinate of the rotation anchor point relative to the view that
+   * the provided motion event coordinates (usually relative to the view event was
+   * sent to).
    *
    * @return X coordinate of the rotation anchor point
    */
@@ -158,8 +159,9 @@ public class RotationGestureDetector {
   }
 
   /**
-   * Returns Y coordinate of the rotation anchor point relative to the view that the provided motion
-   * event coordinates (usually relative to the view event was sent to).
+   * Returns Y coordinate of the rotation anchor point relative to the view that
+   * the provided motion event coordinates (usually relative to the view event was
+   * sent to).
    *
    * @return Y coordinate of the rotation anchor point
    */
