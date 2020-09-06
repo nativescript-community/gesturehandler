@@ -7199,7 +7199,7 @@ packages:
 specifiers:
   '@commitlint/cli': ^9.1.2
   '@commitlint/config-conventional': ^9.1.2
-  '@nativescript-community/observable': ^2.0.3
+  '@nativescript-community/observable': ^2.0.8
   '@nativescript/core': 7.0.0
   '@nativescript/types-android': 7.0.2
   '@nativescript/types-ios': 7.0.1
