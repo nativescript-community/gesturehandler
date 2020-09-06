@@ -9,7 +9,7 @@ import com.swmansion.gesturehandler.GestureHandlerRegistry;
 import java.util.ArrayList;
 import java.util.WeakHashMap;
 
-import android.support.annotation.Nullable;
+import androidx.annotation.Nullable;
 
 public class GestureHandlerRegistryImpl implements GestureHandlerRegistry {
 

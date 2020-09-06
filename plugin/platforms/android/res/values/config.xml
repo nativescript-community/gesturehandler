@@ -9,5 +9,5 @@
          For best results, care should be taken such that this value remains
          larger than the minimum reported touchMajor/touchMinor values
          reported by the hardware. -->
-         <dimen name="config_ƒ">27mm</dimen>
+         <dimen name="config_minPinchSpan">27mm</dimen>
 </resources>
