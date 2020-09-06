@@ -3,8 +3,8 @@ import { Component, Inject, Prop, Watch } from 'vue-property-decorator';
 // import { GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, Manager } from 'nativescript-gesturehandler';
 import BottomSheetHolder, { PAN_GESTURE_TAG } from './BottomSheetHolder';
 import Vue from 'nativescript-vue';
-import { GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureState, GestureStateEventData, GestureTouchEventData, HandlerType, Manager, PanGestureHandler } from 'nativescript-gesturehandler';
-import { View } from '@nativescript/core/ui/page';
+import { GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureState, GestureStateEventData, GestureTouchEventData, HandlerType, Manager, PanGestureHandler } from '@nativescript-community/gesturehandler';
+import { View } from '@nativescript/core';
 
 @Component({})
 export default class BottomSheet extends BaseVueComponent {

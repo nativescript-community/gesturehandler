@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
-        "target": "es5",
-        "module": "commonjs",
+        "target": "es2017",
+        "module": "esnext",
         "moduleResolution": "node",
         "removeComments": false,
         "experimentalDecorators": true,
@@ -18,11 +18,10 @@
         "baseUrl": ".",
         "paths": {
             "~/*": ["app/*"],
-            "nativescript-vue": ["./node_modules/nativescript-akylas-vue"],
             "tns-core-modules": ["./node_modules/@nativescript/core"],
             "tns-core-modules/*": ["./node_modules/@nativescript/core/*"],
-            "nativescript-gesturehandler": ["../src"],
-            "nativescript-gesturehandler/*": ["../src/*"],
+            "@nativescript-community/gesturehandler": ["../src"],
+            "@nativescript-community/gesturehandler/*": ["../src/*"],
             "*": ["node_modules/*"]
         }
     },

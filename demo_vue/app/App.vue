@@ -5,7 +5,7 @@
         <BottomSheetHolder ref="bottomSheetHolder" :peekerSteps="[70, 120, 400]" :scrollViewTag="12">
             <GridLayout ref="testView" backgroundColor="white">
                 <MDButton ref="button" text="test" @tap="onButtonTap" verticalAlignment="top" />
-                <Label text="test label for gestures"  @doubletap="printGestureResult" @swipe="printGestureResult" marginTop="100"  verticalAlignment="top"/>
+                <Label text="test label for gestures" @doubletap="printGestureResult" @swipe="printGestureResult" marginTop="100" verticalAlignment="top" />
                 <StackLayout ref="subView" width="50" height="50" backgroundColor="yellow" horizontalAlignment="center" verticalAlignment="center" :translateX="translateX" :translateY="translateY" />
             </GridLayout>
             <BottomSheet slot="bottomSheet" />
@@ -19,15 +19,15 @@ import BaseVueComponent from './BaseVueComponent';
 import BottomSheetHolder from './BottomSheetHolder';
 import BottomSheet from './BottomSheet';
 import Component from 'vue-class-component';
-import { GestureState, GestureHandlerTouchEvent, GestureHandlerStateEvent, GestureStateEventData, GestureTouchEventData, HandlerType, Manager } from 'nativescript-gesturehandler';
-import { View } from '@nativescript/core/ui/core/view';
+import { GestureState, GestureHandlerTouchEvent, GestureHandlerStateEvent, GestureStateEventData, GestureTouchEventData, HandlerType, Manager } from '@nativescript-community/gesturehandler';
+import { View } from '@nativescript/core';
 import { Provide } from 'vue-property-decorator';
 
 @Component({
     components: {
         BottomSheetHolder,
-        BottomSheet,
-    },
+        BottomSheet
+    }
 })
 export default class App extends BaseVueComponent {
     // itemList = samples;
@@ -63,7 +63,7 @@ export default class App extends BaseVueComponent {
         super.mounted();
         const manager = Manager.getInstance();
         const gestureHandler = (this.gestureHandler = manager.createGestureHandler(HandlerType.PAN, 10, {
-            shouldCancelWhenOutside: false,
+            shouldCancelWhenOutside: false
         }))
             .on(GestureHandlerTouchEvent, this.onGestureTouch, this)
             .on(GestureHandlerStateEvent, this.onGestureState, this);
@@ -113,7 +113,6 @@ export default class App extends BaseVueComponent {
     }
 
     printGestureResult(e) {
-
         const { object, view, ...others } = e;
         console.log('onGesture', others);
     }

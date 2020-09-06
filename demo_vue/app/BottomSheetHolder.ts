@@ -1,8 +1,8 @@
-import { GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureState, GestureStateEventData, GestureTouchEventData, HandlerType, Manager, PanGestureHandler } from 'nativescript-gesturehandler';
+import { GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureState, GestureStateEventData, GestureTouchEventData, HandlerType, Manager, PanGestureHandler } from '@nativescript-community/gesturehandler';
 import { View } from '@nativescript/core/ui/core/view';
 import { layout } from '@nativescript/core/utils/utils';
 import { Component, Prop } from 'vue-property-decorator';
-import TWEEN from 'nativescript-tween';
+import TWEEN from '@nativescript-community/tween';
 import BaseVueComponent from './BaseVueComponent';
 import BottomSheet from './BottomSheet';
 
@@ -188,7 +188,7 @@ export default class BottomSheetHolder extends BaseVueComponent {
             .onUpdate(obj => {
                 this.currentViewHeight = this.viewHeight + obj.value;
             })
-            .start();
+            .start(0);
         if (position === 0) {
             this.opened = false;
         } else {

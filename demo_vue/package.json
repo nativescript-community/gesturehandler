@@ -4,36 +4,27 @@
     "description": "A native application built with NativeScript-Vue",
     "author": "Martin Guillon <martin.guillon@akylas.fr>",
     "license": "MIT",
-    "nativescript": {
-        "id": "com.nativescript.gesturehandlerdemo",
-        "tns-ios": {
-            "version": "6.3.0"
-        },
-        "tns-android": {
-            "version": "6.4.1"
-        }
-    },
     "dependencies": {
-        "@nativescript/core": "6.5.1",
-        "nativescript-collectionview": "^2.0.17",
-        "nativescript-gesturehandler": "../plugin",
-        "nativescript-material-button": "^3.2.2",
-        "nativescript-tween": "^0.0.6",
-        "nativescript-vue": "^2.6.1"
+        "@nativescript/core": "7.0.0",
+        "@nativescript-community/ui-collectionview": "^3.0.5",
+        "@nativescript-community/gesturehandler": "../plugin",
+        "@nativescript-community/ui-material-button": "^4.0.10",
+        "@nativescript-community/tween": "^0.0.11",
+        "nativescript-vue": "^2.8.1"
     },
     "devDependencies": {
-        "@babel/core": "~7.9.6",
+        "@nativescript/android": "7.0.0",
+        "@nativescript/ios": "7.0.0",
+        "@babel/core": "~7.11.6",
         "babel-loader": "~8.1.0",
-        "fork-ts-checker-webpack-plugin": "^4.1.3",
-        "nativescript-dev-webpack": "1.5.1",
-        "nativescript-vue-template-compiler": "2.6.1",
+        "@nativescript/types": "7.0.1",
+        "@nativescript/webpack": "3.0.1",
+        "nativescript-vue-template-compiler": "2.8.1",
         "node-sass": "^4.14.1",
-        "terser-webpack-plugin": "^3.0.1",
-        "tns-platform-declarations": "6.5.1",
-        "tslib": "^1.11.2",
-        "typescript": "3.8.3",
-        "vue": "^2.6.11",
-        "vue-loader": "~15.9.2",
-        "vue-property-decorator": "^8.4.2"
+        "tslib": "^2.0.1",
+        "typescript": "3.9.7",
+        "vue": "^2.6.12",
+        "vue-loader": "~15.9.3",
+        "vue-property-decorator": "^8.5.1"
     }
 }
