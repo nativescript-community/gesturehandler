@@ -27,6 +27,6 @@
     "homepage": "https://github.com/nativescript-community/gesturehandler",
     "bootstrapper": "nativescript-plugin-seed",
     "dependencies": {
-        "@nativescript-community/observable": "^2.0.2"
+        "@nativescript-community/observable": "^2.0.8"
     }
 }
