@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.21](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.20...v0.1.21) (2020-09-09)
+
+
+### Bug Fixes
+
+* **ios:** plugin not building ([153403f](https://github.com/Akylas/nativescript-gesturehandler/commit/153403f77c1f23b5105c3e17f9d9bcbffb32b005))
+
+
+
+
+
 ## [0.1.20](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.19...v0.1.20) (2020-09-08)
 
 **Note:** Version bump only for package @nativescript-community/gesturehandler
