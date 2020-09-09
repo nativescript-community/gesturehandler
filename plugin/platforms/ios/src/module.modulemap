@@ -1,6 +1,5 @@
-framework module GestureHandler {
+ module GestureHandler {
   umbrella header "GestureHandlerHeader.h"
-
   export *
   module * { export * }
 }

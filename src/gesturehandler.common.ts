@@ -1,6 +1,11 @@
 /* eslint-disable no-redeclare */
+// import { launchEvent } from '@nativescript/core/application';
+// console.log(launchEvent);
+// console.log('gestures common', global.NativeScriptHasInitGlobal);
+
 import Observable from '@nativescript-community/observable';
 import { EventData } from '@nativescript/core/data/observable';
+import { isAndroid } from '@nativescript/core/platform';
 import { View } from '@nativescript/core/ui/core/view';
 import {
     FlingGestureHandler,
@@ -8,7 +13,6 @@ import {
     ForceTouchGestureHandler,
     ForceTouchGestureHandlerOptions,
     Handler,
-    HandlerOptions,
     LongPressGestureHandler,
     LongPressGestureHandlerOptions,
     NativePropertyOptions,
@@ -21,9 +25,8 @@ import {
     RotationGestureHandler,
     RotationGestureHandlerOptions,
     TapGestureHandler,
-    TapGestureHandlerOptions
+    TapGestureHandlerOptions,
 } from './gesturehandler';
-import { isAndroid } from '@nativescript/core/platform';
 
 export const GestureHandlerStateEvent = 'GestureHandlerStateEvent';
 export const GestureHandlerTouchEvent = 'GestureHandlerTouchEvent';
@@ -36,7 +39,7 @@ export enum HandlerType {
     NATIVE_VIEW = 'nativeView',
     PINCH = 'pinch',
     ROTATION = 'rotation',
-    FORCE_TOUCH = 'forceTouch'
+    FORCE_TOUCH = 'forceTouch',
 }
 
 export interface OptionsTypeMap {
@@ -64,7 +67,7 @@ function createGetter(key: string, options: NativePropertyOptions) {
     // console.log('createGetter', key, options);
     const nativeGetterName = ((isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
     const converter = options.converter;
-    return function() {
+    return function () {
         let result;
         // console.log('getter', key, nativeGetterName);
         if (this.native && this.native[nativeGetterName]) {
@@ -79,7 +82,7 @@ function createGetter(key: string, options: NativePropertyOptions) {
 }
 function createSetter(key, options: NativePropertyOptions) {
     const nativeSetterName = ((isAndroid ? options.android : options.ios) || options).nativeSetterName || 'set' + key.charAt(0).toUpperCase() + key.slice(1);
-    return function(newVal) {
+    return function (newVal) {
         this.options[key] = newVal;
         if (this.native && this.native[nativeSetterName]) {
             const actualVal = options.converter && options.converter.toNative ? options.converter.toNative.call(this, newVal, key) : newVal;
@@ -93,7 +96,7 @@ function nativePropertyGenerator(target: Object, key: string, options?: NativePr
         get: createGetter(key, options),
         set: createSetter(key, options),
         enumerable: true,
-        configurable: true
+        configurable: true,
     });
 }
 export function nativeProperty(target: any, k?, desc?: PropertyDescriptor): any;
@@ -101,7 +104,7 @@ export function nativeProperty(options: NativePropertyOptions): (target: any, k?
 export function nativeProperty(...args) {
     if (args.length === 1) {
         /// this must be a factory
-        return function(target: any, key?: string, descriptor?: PropertyDescriptor) {
+        return function (target: any, key?: string, descriptor?: PropertyDescriptor) {
             return nativePropertyGenerator(target, key, args[0] || {});
         };
     } else {
@@ -150,7 +153,7 @@ export enum GestureState {
     BEGAN,
     CANCELLED,
     ACTIVE,
-    END
+    END,
 }
 
 export interface GestureStateEventData extends EventData {
@@ -189,8 +192,8 @@ export function applyMixins(
     }
 ) {
     const omits = options && options.omit ? options.omit : [];
-    baseCtors.forEach(baseCtor => {
-        Object.getOwnPropertyNames(baseCtor.prototype).forEach(name => {
+    baseCtors.forEach((baseCtor) => {
+        Object.getOwnPropertyNames(baseCtor.prototype).forEach((name) => {
             if (omits.indexOf(name) !== -1) {
                 return;
             }
@@ -204,7 +207,7 @@ export function applyMixins(
                 if (!oldImpl) {
                     derivedCtor.prototype[name] = baseCtor.prototype[name];
                 } else {
-                    derivedCtor.prototype[name] = function(...args) {
+                    derivedCtor.prototype[name] = function (...args) {
                         if (options) {
                             if (!!options.override) {
                                 return baseCtor.prototype[name].apply(this, args);
@@ -223,7 +226,7 @@ export function applyMixins(
                 }
             }
         });
-        Object.getOwnPropertySymbols(baseCtor.prototype).forEach(symbol => {
+        Object.getOwnPropertySymbols(baseCtor.prototype).forEach((symbol) => {
             if (omits.indexOf(symbol) !== -1) {
                 return;
             }
@@ -231,7 +234,7 @@ export function applyMixins(
             if (!oldImpl) {
                 derivedCtor.prototype[symbol] = baseCtor.prototype[symbol];
             } else {
-                derivedCtor.prototype[symbol] = function(...args) {
+                derivedCtor.prototype[symbol] = function (...args) {
                     if (options) {
                         if (!!options.override) {
                             return baseCtor.prototype[symbol].apply(this, args);
@@ -271,10 +274,9 @@ class ViewGestureExtended extends View {
         // console.log('disposeNativeView', this);
         this.notify({ eventName: ViewDisposeEvent, object: this });
     }
-
 }
 
-let installed  = false;
+let installed = false;
 export function overrideViewBase() {
     const NSView = require('@nativescript/core/ui/core/view').View;
     applyMixins(NSView, [ViewGestureExtended]);
