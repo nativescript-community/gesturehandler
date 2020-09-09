@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.22](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.21...v0.1.22) (2020-09-09)
+
+
+### Bug Fixes
+
+* dont bundle aar ([08e0b22](https://github.com/Akylas/nativescript-gesturehandler/commit/08e0b2207d95128326bc36cc7b7ed523dd811dd3))
+
+
+
+
+
 ## [0.1.21](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.20...v0.1.21) (2020-09-09)
 
 
