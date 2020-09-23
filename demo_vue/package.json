@@ -3,13 +3,14 @@
     "version": "1.0.0",
     "description": "A native application built with NativeScript-Vue",
     "author": "Martin Guillon <martin.guillon@akylas.fr>",
+    "main": "main.js",
     "license": "MIT",
     "dependencies": {
         "@nativescript-community/gesturehandler": "../plugin",
         "@nativescript-community/tween": "^0.0.11",
-        "@nativescript-community/ui-collectionview": "^3.0.5",
-        "@nativescript-community/ui-material-button": "^4.0.10",
-        "@nativescript/core": "7.0.0",
+        "@nativescript-community/ui-collectionview": "^4.0.1",
+        "@nativescript-community/ui-material-button": "^5.0.6",
+        "@nativescript/core": "~7.0.0",
         "nativescript-vue": "^2.8.1"
     },
     "devDependencies": {

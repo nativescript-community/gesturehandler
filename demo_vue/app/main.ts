@@ -1,9 +1,8 @@
 // require('./ts_helpers');
+import Vue from 'nativescript-vue';
 import { install as installGestures } from '@nativescript-community/gesturehandler';
 installGestures(true);
-import Vue from 'nativescript-vue';
 import App from './App.vue';
-import { knownFolders } from '@nativescript/core/file-system';
 
 import ButtonPlugin from '@nativescript-community/ui-material-button/vue';
 Vue.use(ButtonPlugin);
