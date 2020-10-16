@@ -1,7 +1,7 @@
 [![npm](https://img.shields.io/npm/v/@nativescript-community/gesturehandler.svg)](https://www.npmjs.com/package/@nativescript-community/gesturehandler)
 [![npm](https://img.shields.io/npm/dt/@nativescript-community/gesturehandler.svg?label=npm%20downloads)](https://www.npmjs.com/package/@nativescript-community/gesturehandler)
-[![GitHub forks](https://img.shields.io/github/forks/@nativescript-community/gesturehandler.svg)](https://github.com/nativescript-community/gesturehandler/network)
-[![GitHub stars](https://img.shields.io/github/stars/@nativescript-community/gesturehandler.svg)](https://github.com/nativescript-community/gesturehandler/stargazers)
+[![GitHub forks](https://img.shields.io/github/forks/nativescript-community/gesturehandler.svg)](https://github.com/nativescript-community/gesturehandler/network)
+[![GitHub stars](https://img.shields.io/github/stars/nativescript-community/gesturehandler.svg)](https://github.com/nativescript-community/gesturehandler/stargazers)
 
 [![NPM](https://nodei.co/npm/@nativescript-community/gesturehandler.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/@nativescript-community/gesturehandler/)
 
