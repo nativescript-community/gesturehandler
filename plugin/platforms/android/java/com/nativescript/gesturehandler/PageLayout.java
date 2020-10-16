@@ -64,7 +64,6 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
     }
 
     public void requestDisallowInterceptTouchEvent(boolean disallowIntercept) {
-        // console.log('requestDisallowInterceptTouchEvent', disallowIntercept);
         // If this method gets called it means that some native view is attempting to grab lock for
         // touch event delivery. In that case we cancel all gesture recognizers
         if (this.mOrchestrator != null && !this.mPassingTouch) {
@@ -76,7 +75,6 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
     }
 
     public boolean dispatchTouchEventToOrchestrator(MotionEvent ev) {
-        // console.log('dispatchTouchEventToOrchestrator', ev, this.mShouldIntercept);
         this.mPassingTouch = true;
         this.mOrchestrator.onTouchEvent(ev);
         this.mPassingTouch = false;
