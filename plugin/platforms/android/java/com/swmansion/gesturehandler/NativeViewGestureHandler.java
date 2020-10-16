@@ -5,6 +5,8 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.util.Log;
+
 public class NativeViewGestureHandler extends GestureHandler<NativeViewGestureHandler> {
 
   private boolean mShouldActivateOnStart = false;
@@ -112,6 +114,6 @@ public class NativeViewGestureHandler extends GestureHandler<NativeViewGestureHa
     long time = SystemClock.uptimeMillis();
     MotionEvent event = MotionEvent.obtain(time, time, MotionEvent.ACTION_CANCEL, 0, 0, 0);
     event.setAction(MotionEvent.ACTION_CANCEL);
-    getView().onTouchEvent(event);
+    getView().dispatchTouchEvent(event);
   }
 }
