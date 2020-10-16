@@ -31,7 +31,7 @@ public class GestureHandler<T extends GestureHandler> {
   public static final int DIRECTION_UP = 4;
   public static final int DIRECTION_DOWN = 8;
 
-  private static int MAX_POINTERS_COUNT = 11;
+  private static int MAX_POINTERS_COUNT = 12;
   private static MotionEvent.PointerProperties[] sPointerProps;
   private static MotionEvent.PointerCoords[] sPointerCoords;
 
@@ -401,7 +401,7 @@ public class GestureHandler<T extends GestureHandler> {
         left -= padLeft;
       }
       if (hitSlopSet(padTop)) {
-        top -= padBottom;
+        top -= padTop;
       }
       if (hitSlopSet(padRight)) {
         right += padRight;
@@ -420,9 +420,9 @@ public class GestureHandler<T extends GestureHandler> {
         }
       }
       if (hitSlopSet(height)) {
-        if (!hitSlopSet(top)) {
+        if (!hitSlopSet(padTop)) {
           top = bottom - height;
-        } else if (!hitSlopSet(bottom)) {
+        } else if (!hitSlopSet(padBottom)) {
           bottom = top + height;
         }
       }
