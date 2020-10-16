@@ -3,6 +3,21 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.23](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.22...v0.1.23) (2020-10-16)
+
+
+### Bug Fixes
+
+* android fix taken from rn ([e8145e6](https://github.com/Akylas/nativescript-gesturehandler/commit/e8145e6339765679135ac22b6068977058a34fa8))
+* android nativeviewgesture dispatch cancel ([d5bb774](https://github.com/Akylas/nativescript-gesturehandler/commit/d5bb774f22beec6460e02cc1e87ff7e128080828))
+* Demo app commands not working. ([9e3701b](https://github.com/Akylas/nativescript-gesturehandler/commit/9e3701ba395d843a8e3b0e817fa9ef3b37a0fe52))
+* github stats not being visualized ([cb00f9c](https://github.com/Akylas/nativescript-gesturehandler/commit/cb00f9cfe4760171f28da409d3f062ae61796d1a))
+* multiple fixes for the overrides ([1be0719](https://github.com/Akylas/nativescript-gesturehandler/commit/1be0719e1f114451f87f123ad398108bdf7ace20))
+
+
+
+
+
 ## [0.1.22](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.21...v0.1.22) (2020-09-09)
 
 
