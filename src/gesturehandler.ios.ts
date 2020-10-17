@@ -1,3 +1,7 @@
+import { View } from '@nativescript/core/ui';
+import { GestureEventData, GestureTypes } from '@nativescript/core/ui/gestures';
+import { getClass } from '@nativescript/core/utils/types';
+import { HandlerOptions } from './gesturehandler';
 import {
     BaseNative,
     GestureHandlerStateEvent,
@@ -14,13 +18,8 @@ import {
     install as installBase,
     nativeProperty,
 } from './gesturehandler.common';
-import { View } from '@nativescript/core/ui/core/view';
-import { getClass } from '@nativescript/core/utils/types';
-import { HandlerOptions } from './gesturehandler';
-export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType, ViewInitEvent, ViewDisposeEvent };
 import { observe as gestureObserve } from './gestures_override';
-import { GestureEventData, GestureTypes } from '@nativescript/core/ui/gestures';
-
+export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType, ViewInitEvent, ViewDisposeEvent };
 
 let installed = false;
 export function install(overrideNGestures = false) {
@@ -41,7 +40,6 @@ export function install(overrideNGestures = false) {
                 this.setOnTouchListener();
             }
         };
-
     }
 }
 function toJsObject(objCObj) {

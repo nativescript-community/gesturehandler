@@ -1,7 +1,7 @@
 import { EventData, View } from '@nativescript/core';
-import { GestureEventData, GestureTypes, TouchAction, toString } from '@nativescript/core/ui/gestures';
+import { GestureEventData, GestureTypes, TouchAction, toString as gestureToString } from '@nativescript/core/ui/gestures';
 import { layout } from '@nativescript/core/utils/utils';
-import { FlingGestureHandler, LongPressGestureHandler, Manager, PanGestureHandler, PinchGestureHandler, RotationGestureHandler, TapGestureHandler } from './gesturehandler';
+import { Manager } from './gesturehandler';
 import { GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureState, GestureStateEventData, HandlerType } from './gesturehandler.common';
 
 export function observe(target: View, type: GestureTypes, callback: (args: GestureEventData) => void, context?: any): GesturesObserver {
@@ -114,7 +114,7 @@ export class GesturesObserver {
             }
             if (this.callback) {
                 this.callback.call(this._context, {
-                    eventName: toString(type),
+                    eventName: gestureToString(type),
                     object: event.data.view,
                     type,
                     ...event.data,
@@ -127,7 +127,7 @@ export class GesturesObserver {
         return (event: GestureStateEventData) => {
             if (this.callback && event.data.state === GestureState.ACTIVE) {
                 this.callback.call(this._context, {
-                    eventName: toString(type),
+                    eventName: gestureToString(type),
                     object: event.data.view,
                     type,
                     ...event.data,
@@ -224,7 +224,7 @@ class Pointer implements Pointer {
     }
 }
 class TouchGestureEventData implements TouchGestureEventData {
-    eventName: string = toString(GestureTypes.touch);
+    eventName: string = gestureToString(GestureTypes.touch);
     type: GestureTypes = GestureTypes.touch;
     ios: any = undefined;
     action: string;

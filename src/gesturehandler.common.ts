@@ -4,9 +4,8 @@
 // console.log('gestures common', global.NativeScriptHasInitGlobal);
 
 import Observable from '@nativescript-community/observable';
-import { EventData } from '@nativescript/core/data/observable';
-import { isAndroid } from '@nativescript/core/platform';
-import { View } from '@nativescript/core/ui/core/view';
+import { EventData } from '@nativescript/core';
+import { View } from '@nativescript/core/ui';
 import {
     FlingGestureHandler,
     FlingGestureHandlerOptions,
@@ -65,7 +64,7 @@ export interface TypeMap {
 
 function createGetter(key: string, options: NativePropertyOptions) {
     // console.log('createGetter', key, options);
-    const nativeGetterName = ((isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
+    const nativeGetterName = ((global.isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
     const converter = options.converter;
     return function () {
         let result;
@@ -81,7 +80,7 @@ function createGetter(key: string, options: NativePropertyOptions) {
     };
 }
 function createSetter(key, options: NativePropertyOptions) {
-    const nativeSetterName = ((isAndroid ? options.android : options.ios) || options).nativeSetterName || 'set' + key.charAt(0).toUpperCase() + key.slice(1);
+    const nativeSetterName = ((global.isAndroid ? options.android : options.ios) || options).nativeSetterName || 'set' + key.charAt(0).toUpperCase() + key.slice(1);
     return function (newVal) {
         this.options[key] = newVal;
         if (this.native && this.native[nativeSetterName]) {

@@ -1,3 +1,16 @@
+import { Application, View } from '@nativescript/core';
+import { GestureEventData, GestureTypes } from '@nativescript/core/ui/gestures';
+import { Page } from '@nativescript/core/ui/page';
+import { layout } from '@nativescript/core/utils/utils';
+import {
+    HandlerOptions,
+    LongPressGestureHandlerOptions,
+    NativeViewGestureHandlerOptions,
+    PanGestureHandlerOptions,
+    PinchGestureHandlerOptions,
+    RotationGestureHandlerOptions,
+    TapGestureHandlerOptions,
+} from './gesturehandler';
 import {
     BaseNative,
     GestureHandlerStateEvent,
@@ -15,23 +28,8 @@ import {
     install as installBase,
     nativeProperty,
 } from './gesturehandler.common';
-
 import { observe as gestureObserve } from './gestures_override';
-import { View } from '@nativescript/core/ui/core/view';
-import { layout } from '@nativescript/core/utils/utils';
-import { android as androidApp } from '@nativescript/core/application';
-import {
-    FlingGestureHandlerOptions,
-    HandlerOptions,
-    LongPressGestureHandlerOptions,
-    NativeViewGestureHandlerOptions,
-    PanGestureHandlerOptions,
-    PinchGestureHandlerOptions,
-    RotationGestureHandlerOptions,
-    TapGestureHandlerOptions,
-} from './gesturehandler';
-import { Page } from '@nativescript/core/ui/page';
-import { GestureEventData, GestureTypes } from '@nativescript/core/ui/gestures';
+
 export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType, ViewInitEvent, ViewDisposeEvent };
 
 let PageLayout: typeof com.nativescript.gesturehandler.PageLayout;
@@ -293,7 +291,7 @@ export class PanGestureHandler extends Handler<com.swmansion.gesturehandler.PanG
     @nativeProperty({ nativeSetterName: 'setAverageTouches' }) avgTouches: number;
     @nativeProperty numberOfPointers: number;
     createNative(options) {
-        const context = androidApp.context as android.content.Context;
+        const context = Application.android.context as android.content.Context;
         return new com.swmansion.gesturehandler.PanGestureHandler(context);
     }
     getExtraData(handler: com.swmansion.gesturehandler.PanGestureHandler) {
@@ -367,7 +365,7 @@ export class LongPressGestureHandler extends Handler<com.swmansion.gesturehandle
     @nativeProperty minDurationMs: number;
     @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) maxDist: number;
     createNative(options) {
-        const context = androidApp.context as android.content.Context;
+        const context = Application.android.context as android.content.Context;
         return new com.swmansion.gesturehandler.LongPressGestureHandler(context);
     }
     // getExtraData(handler: com.swmansion.gesturehandler.LongPressGestureHandler) {
