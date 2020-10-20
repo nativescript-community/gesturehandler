@@ -253,7 +253,6 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
             this.detachFromView(this.attachedView);
         }
         this.attachedView = view;
-        console.log('attachToView', view);
         this.manager.get().attachGestureHandler(this, view);
     }
     detachFromView(view?: View) {
@@ -470,7 +469,6 @@ export class Manager extends ManagerBase {
     }
     attachGestureHandlerToView(handler: Handler<any, any>, view: View) {
         const nHandler = handler.getNative();
-        console.log('attachGestureHandlerToView', nHandler, view);
         if (nHandler) {
             const page = view.page as PageGestureExtended;
             if (page) {
@@ -497,7 +495,6 @@ export class Manager extends ManagerBase {
 
     viewListeners = new Map<View, Map<number, { init: () => void; dispose: () => void }>>();
     attachGestureHandler(handler: Handler<any, any>, view: View) {
-        console.log('attachGestureHandler', view, view.nativeView);
         if (view.nativeView) {
             this.attachGestureHandlerToView(handler, view);
         }
