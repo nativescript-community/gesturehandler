@@ -49,10 +49,10 @@ export abstract class Handler<T, U extends HandlerOptions> extends BaseNative<T,
     shouldCancelWhenOutside: boolean;
     setTag(tag: number);
     getTag(): number;
-    getView(): any;
+    getView(): View;
     cancel();
     attachToView(view: View);
-    detachFromView(view: View);
+    detachFromView(view?: View);
 }
 export interface TapGestureHandlerOptions extends HandlerOptions {
     numberOfTaps?: number;

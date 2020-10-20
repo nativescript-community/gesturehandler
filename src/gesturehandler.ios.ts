@@ -169,16 +169,28 @@ export class Handler<T extends GestureHandler, U extends HandlerOptions> extends
     createNative() {
         return null;
     }
+    attachedView: View;
     attachToView(view: View) {
+        if (view === this.attachedView) {
+            return;
+        }
+        if (this.attachedView) {
+            this.detachFromView(this.attachedView);
+        }
+        this.attachedView = view;
         const tag = this.native.tag;
         this.delegate = HandlerDelegate.initWithOwner(new WeakRef(this));
         this.native.delegate = this.delegate;
         this.manager.get().attachGestureHandler(tag, view);
     }
-    detachFromView(view: View) {
+    detachFromView(view?: View) {
+        if (view && view !== this.attachedView) {
+            return;
+        }
         const tag = this.native.tag;
         this.delegate = this.native.delegate = null;
-        this.manager.get().detachGestureHandler(tag, view);
+        this.manager.get().detachGestureHandler(tag, this.attachedView);
+        this.attachedView = null;
     }
     getTag() {
         return this.native.tag;
@@ -187,7 +199,7 @@ export class Handler<T extends GestureHandler, U extends HandlerOptions> extends
         // cant change tag on ios
     }
     getView() {
-        return null;
+        return this.attachedView;
     }
     cancel() {
         this.native.reset();

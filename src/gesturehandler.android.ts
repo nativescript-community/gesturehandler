@@ -227,6 +227,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
     }
 
     tag: number = 0;
+    attachedView: View;
     setTag(tag: number) {
         this.tag = tag;
         if (this.native) {
@@ -245,10 +246,22 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
     }
 
     attachToView(view: View) {
+        if (view === this.attachedView) {
+            return;
+        }
+        if (this.attachedView) {
+            this.detachFromView(this.attachedView);
+        }
+        this.attachedView = view;
+        console.log('attachToView', view);
         this.manager.get().attachGestureHandler(this, view);
     }
-    detachFromView(view: View) {
-        this.manager.get().detachGestureHandler(this, view);
+    detachFromView(view?: View) {
+        if (view && view !== this.attachedView) {
+            return;
+        }
+        this.manager.get().detachGestureHandler(this, this.attachedView);
+        this.attachedView = null;
     }
 }
 
@@ -457,6 +470,7 @@ export class Manager extends ManagerBase {
     }
     attachGestureHandlerToView(handler: Handler<any, any>, view: View) {
         const nHandler = handler.getNative();
+        console.log('attachGestureHandlerToView', nHandler, view);
         if (nHandler) {
             const page = view.page as PageGestureExtended;
             if (page) {
@@ -483,6 +497,7 @@ export class Manager extends ManagerBase {
 
     viewListeners = new Map<View, Map<number, { init: () => void; dispose: () => void }>>();
     attachGestureHandler(handler: Handler<any, any>, view: View) {
+        console.log('attachGestureHandler', view, view.nativeView);
         if (view.nativeView) {
             this.attachGestureHandlerToView(handler, view);
         }
