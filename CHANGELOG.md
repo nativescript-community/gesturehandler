@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.24](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.23...v0.1.24) (2020-10-20)
+
+
+### Bug Fixes
+
+* a few fixes ([ca5b220](https://github.com/Akylas/nativescript-gesturehandler/commit/ca5b220f9daa6c785e4c7507c6663df44664c854))
+* some fixes to prevent multiple attach ([5bcdb57](https://github.com/Akylas/nativescript-gesturehandler/commit/5bcdb57de1fad78fb6b1fe817ecc842137ac2b01))
+
+
+
+
+
 ## [0.1.23](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.22...v0.1.23) (2020-10-16)
 
 
