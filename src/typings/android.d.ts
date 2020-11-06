@@ -54,7 +54,7 @@ declare namespace com {
 declare namespace com {
     export namespace swmansion {
         export namespace gesturehandler {
-            export class GestureHandler<T>  extends java.lang.Object {
+            export class GestureHandler<T> extends java.lang.Object {
                 public static class: java.lang.Class<GestureHandler<any>>;
                 public static STATE_UNDETERMINED: number;
                 public static STATE_FAILED: number;
@@ -102,7 +102,7 @@ declare namespace com {
                 public toString(): string;
                 public begin(): void;
                 public setShouldCancelWhenOutside(param0: boolean): T;
-                public wantEvents(): boolean;
+                public wantEvents(event: globalAndroid.view.MotionEvent): boolean;
                 public onReset(): void;
                 public setOnTouchEventListener(param0: OnTouchEventListener<T>): GestureHandler<any>;
                 public getState(): number;
@@ -123,8 +123,8 @@ declare namespace com {
             export class GestureHandlerInteractionController {
                 public static class: java.lang.Class<GestureHandlerInteractionController>;
                 /**
-				 * Constructs a new instance of the com.swmansion.gesturehandler.GestureHandlerInteractionController interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
-				 */
+                 * Constructs a new instance of the com.swmansion.gesturehandler.GestureHandlerInteractionController interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+                 */
                 public constructor(implementation: {
                     shouldWaitForHandlerFailure(param0: GestureHandler<any>, param1: GestureHandler<any>): boolean;
                     shouldRequireHandlerToWaitForFailure(param0: GestureHandler<any>, param1: GestureHandler<any>): boolean;
@@ -161,11 +161,9 @@ declare namespace com {
             export class GestureHandlerRegistry {
                 public static class: java.lang.Class<GestureHandlerRegistry>;
                 /**
-				 * Constructs a new instance of the com.swmansion.gesturehandler.GestureHandlerRegistry interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
-				 */
-                public constructor(implementation: {
-                    getHandlersForView(param0: globalAndroid.view.View): java.util.ArrayList<GestureHandler<any>>;
-                });
+                 * Constructs a new instance of the com.swmansion.gesturehandler.GestureHandlerRegistry interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+                 */
+                public constructor(implementation: { getHandlersForView(param0: globalAndroid.view.View): java.util.ArrayList<GestureHandler<any>> });
                 public constructor();
                 public getHandlersForView(param0: globalAndroid.view.View): java.util.ArrayList<GestureHandler<any>>;
             }
@@ -179,15 +177,15 @@ declare namespace com {
             export class GestureHandlerRegistryImpl extends GestureHandlerRegistry {
                 public static class: java.lang.Class<GestureHandlerRegistryImpl>;
                 public getHandlersForView(param0: globalAndroid.view.View): java.util.ArrayList<GestureHandler<any>>;
-                public attachHandlerToView( handlerTag: number,  view: globalAndroid.view.View): boolean
-                public registerHandler( handler: GestureHandler<any>)
-                public dropHandler( handlerTag: number)
-                public getHandler( handlerTag: number)
-                public detachHandler( handler: GestureHandler<any>)
-                public getHandlersForView( view: globalAndroid.view.View )
+                public attachHandlerToView(handlerTag: number, view: globalAndroid.view.View): boolean;
+                public registerHandler(handler: GestureHandler<any>);
+                public dropHandler(handlerTag: number);
+                public getHandler(handlerTag: number);
+                public detachHandler(handler: GestureHandler<any>);
+                public getHandlersForView(view: globalAndroid.view.View);
                 public registerHandlerForView(param0: globalAndroid.view.View, param1: GestureHandler<any>): GestureHandler<any>;
                 public constructor();
-                public dropAllHandlers()
+                public dropAllHandlers();
             }
         }
     }
@@ -243,16 +241,18 @@ declare namespace com {
 declare namespace com {
     export namespace swmansion {
         export namespace gesturehandler {
-            export class OnTouchEventListener<T>  extends java.lang.Object {
+            export class OnTouchEventListener<T> extends java.lang.Object {
                 public static class: java.lang.Class<OnTouchEventListener<any>>;
                 /**
-				 * Constructs a new instance of the com.swmansion.gesturehandler.OnTouchEventListener<any> interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
-				 */
+                 * Constructs a new instance of the com.swmansion.gesturehandler.OnTouchEventListener<any> interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+                 */
                 public constructor(implementation: {
+                    shouldStartGesture(param0: T, event: globalAndroid.view.MotionEvent): boolean;
                     onTouchEvent(param0: T, param1: globalAndroid.view.MotionEvent): void;
                     onStateChange(param0: T, param1: number, param2: number): void;
                 });
                 public constructor();
+                public shouldStartGesture(param0: T, event: globalAndroid.view.MotionEvent): boolean;
                 public onStateChange(param0: T, param1: number, param2: number): void;
                 public onTouchEvent(param0: T, param1: globalAndroid.view.MotionEvent): void;
             }
@@ -376,8 +376,8 @@ declare namespace com {
                 export class OnRotationGestureListener {
                     public static class: java.lang.Class<OnRotationGestureListener>;
                     /**
-					 * Constructs a new instance of the com.swmansion.gesturehandler.RotationGestureDetector$OnRotationGestureListener interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
-					 */
+                     * Constructs a new instance of the com.swmansion.gesturehandler.RotationGestureDetector$OnRotationGestureListener interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+                     */
                     public constructor(implementation: {
                         onRotation(param0: RotationGestureDetector): boolean;
                         onRotationBegin(param0: RotationGestureDetector): boolean;
@@ -437,8 +437,8 @@ declare namespace com {
             export class ViewConfigurationHelper {
                 public static class: java.lang.Class<ViewConfigurationHelper>;
                 /**
-				 * Constructs a new instance of the com.swmansion.gesturehandler.ViewConfigurationHelper interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
-				 */
+                 * Constructs a new instance of the com.swmansion.gesturehandler.ViewConfigurationHelper interface with the provided implementation. An empty constructor exists calling super() when extending the interface class.
+                 */
                 public constructor(implementation: {
                     getPointerEventsConfigForView(param0: globalAndroid.view.View): PointerEventsConfig;
                     getChildInDrawingOrderAtIndex(param0: globalAndroid.view.ViewGroup, param1: number): globalAndroid.view.View;
@@ -456,4 +456,3 @@ declare namespace com {
 //Generics information:
 //com.swmansion.gesturehandler.GestureHandler:1
 //com.swmansion.gesturehandler.OnTouchEventListener:1
-

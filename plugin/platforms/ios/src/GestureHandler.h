@@ -41,7 +41,7 @@ if (value != nil) recognizer.prop = [value type]; \
 @protocol RootViewGestureRecognizerDelegate <UIGestureRecognizerDelegate>
 
 @required
-- (void)gestureRecognizer:(nullable UIGestureRecognizer *)gestureRecognizer
+- (BOOL)gestureRecognizer:(nullable UIGestureRecognizer *)gestureRecognizer
     didActivateInRootView:(nullable UIView *)rootView;
 
 @end
@@ -49,6 +49,9 @@ if (value != nil) recognizer.prop = [value type]; \
 
 @class GestureHandler;
 @protocol GestureHandlerDelegate  <NSObject>
+
+@optional
+- (BOOL)gestureHandler:(nullable GestureHandler *)gestureHandler shouldActivateForEvent:(nullable NSDictionary *)data;
 
 @required
 - (void)gestureHandler:(nullable GestureHandler *)gestureHandler

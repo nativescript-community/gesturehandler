@@ -159,6 +159,12 @@ export class HandlerDelegate extends NSObject implements GestureHandlerDelegate 
             });
         }
     }
+    gestureHandlerShouldActivateForEvent(handler: GestureHandler, extraData: NSDictionary<any, any>) {
+        const owner = this._owner && this._owner.get();
+        if (owner && owner.options && owner.options.shouldStartGesture) {
+            return owner.options.shouldStartGesture(toJsObject(extraData));
+        }
+    }
 }
 
 export class Handler<T extends GestureHandler, U extends HandlerOptions> extends BaseNative<T, U> {

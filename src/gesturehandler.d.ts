@@ -43,6 +43,7 @@ export interface HandlerOptions {
     shouldCancelWhenOutside?: boolean;
     waitFor?: number[];
     simultaneousHandlers?: number[];
+    shouldStartGesture?: (event) => boolean;
 }
 export abstract class Handler<T, U extends HandlerOptions> extends BaseNative<T, U> {
     enabled: boolean;

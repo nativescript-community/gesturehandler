@@ -8,6 +8,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewParent;
+import android.os.SystemClock;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -171,7 +172,7 @@ public class GestureHandlerOrchestrator {
     mAwaitingHandlersCount = out;
   }
 
-  /* package */ void onHandlerStateChange(GestureHandler handler, int newState, int prevState) {
+  void onHandlerStateChange(GestureHandler handler, int newState, int prevState) {
     mHandlingChangeSemaphore += 1;
     if (isFinished(newState)) {
       // if there were handlers awaiting completion of this handler, we can trigger
@@ -210,6 +211,13 @@ public class GestureHandlerOrchestrator {
     handler.mIsAwaiting = false;
     handler.mIsActive = true;
     handler.mActivationIndex = mActivationIndex++;
+
+    // TODO: for now we do it the same as android and disable
+    // native gestures once a gesture is recognized
+    long time = SystemClock.uptimeMillis();
+    MotionEvent event = MotionEvent.obtain(time, time, MotionEvent.ACTION_CANCEL, 0, 0, 0);
+    event.setAction(MotionEvent.ACTION_CANCEL); 
+    handler.getView().dispatchTouchEvent(event);
 
     int toCancelCount = 0;
     // Cancel all handlers that are required to be cancel upon current handler's
@@ -289,8 +297,7 @@ public class GestureHandlerOrchestrator {
       handler.cancel();
       return;
     }
-    Log.d("GestureHandlerOrchestrator", "deliverEventToGestureHandler " + handler.wantEvents());
-    if (!handler.wantEvents()) {
+    if (!handler.wantEvents(event)) {
       return;
     }
     int action = event.getActionMasked();

@@ -8,7 +8,7 @@ import android.view.View;
 import java.util.Arrays;
 
 public class GestureHandler<T extends GestureHandler> {
-    private final String TAG = "GestureHandler";
+  private final String TAG = "GestureHandler";
 
   public static final int STATE_UNDETERMINED = 0;
   public static final int STATE_FAILED = 1;
@@ -68,21 +68,23 @@ public class GestureHandler<T extends GestureHandler> {
   private GestureHandlerOrchestrator mOrchestrator;
   private OnTouchEventListener<T> mListener;
   private GestureHandlerInteractionController mInteractionController;
-  /*package*/ int mActivationIndex; // set and accessed only by the orchestrator
-  /*package*/ boolean mIsActive; // set and accessed only by the orchestrator
-  /*package*/ boolean mIsAwaiting; // set and accessed only by the orchestrator
+  int mActivationIndex;
+  // set and accessed only by the orchestrator
+  boolean mIsActive;
+  // set and accessed only by the orchestrator
+  boolean mIsAwaiting; // set and accessed only by the orchestrator
 
   private static boolean hitSlopSet(float value) {
     return !Float.isNaN(value);
   }
 
-  /*package*/ void dispatchStateChange(int newState, int prevState) {
+  void dispatchStateChange(int newState, int prevState) {
     if (mListener != null) {
       mListener.onStateChange((T) this, newState, prevState);
     }
   }
 
-  /*package*/ void dispatchTouchEvent(MotionEvent event) {
+  void dispatchTouchEvent(MotionEvent event) {
     if (mListener != null) {
       mListener.onTouchEvent((T) this, event);
     }
@@ -104,7 +106,8 @@ public class GestureHandler<T extends GestureHandler> {
 
   public T setEnabled(boolean enabled) {
     if (mView != null) {
-      // If view is set then handler is in "active" state. In that case we want to "cancel" handler
+      // If view is set then handler is in "active" state. In that case we want to
+      // "cancel" handler
       // when it changes enabled state so that it gets cleared from the orchestrator
       cancel();
     }
@@ -165,6 +168,7 @@ public class GestureHandler<T extends GestureHandler> {
   public float getX() {
     return mX;
   }
+
   public float getXAtIndex(int index) {
     return mXs[index];
   }
@@ -172,6 +176,7 @@ public class GestureHandler<T extends GestureHandler> {
   public float getY() {
     return mY;
   }
+
   public float getYAtIndex(int index) {
     return mYs[index];
   }
@@ -278,29 +283,19 @@ public class GestureHandler<T extends GestureHandler> {
         count++;
       }
     }
-    MotionEvent result = MotionEvent.obtain(
-            event.getDownTime(),
-            event.getEventTime(),
-            action,
-            count,
-            sPointerProps, /* props are copied and hence it is safe to use static array here */
-            sPointerCoords, /* same applies to coords */
-            event.getMetaState(),
-            event.getButtonState(),
-            event.getXPrecision(),
-            event.getYPrecision(),
-            event.getDeviceId(),
-            event.getEdgeFlags(),
-            event.getSource(),
-            event.getFlags());
+    MotionEvent result = MotionEvent.obtain(event.getDownTime(), event.getEventTime(), action, count, 
+        sPointerProps, /* props are copied and hence itis safe to use static array here */
+        sPointerCoords, /* same applies to coords */
+        event.getMetaState(), event.getButtonState(), event.getXPrecision(), event.getYPrecision(), event.getDeviceId(),
+        event.getEdgeFlags(), event.getSource(), event.getFlags());
     event.setLocation(oldX, oldY);
     result.setLocation(oldX, oldY);
     return result;
   }
 
   public final void handle(MotionEvent origEvent) {
-    if (!mEnabled || mState == STATE_CANCELLED || mState == STATE_FAILED
-            || mState == STATE_END || mTrackedPointersCount < 1) {
+    if (!mEnabled || mState == STATE_CANCELLED || mState == STATE_FAILED || mState == STATE_END
+        || mTrackedPointersCount < 1) {
       return;
     }
     MotionEvent event = adaptEvent(origEvent);
@@ -311,12 +306,16 @@ public class GestureHandler<T extends GestureHandler> {
       mXs[index] = event.getX(index);
       mYs[index] = event.getY(index);
     }
+    
     mWithinBounds = isWithinBounds(mView, mX, mY);
     if (mShouldCancelWhenOutside && !mWithinBounds) {
       if (mState == STATE_ACTIVE) {
         cancel();
       } else if (mState == STATE_BEGAN) {
         fail();
+      }
+      if (event != origEvent) {
+        event.recycle();
       }
       return;
     }
@@ -325,6 +324,21 @@ public class GestureHandler<T extends GestureHandler> {
     mLastY = GestureUtils.getLastPointerY(event, true);
     mLastEventOffsetX = event.getRawX() - event.getX();
     mLastEventOffsetY = event.getRawY() - event.getY();
+
+    int action = event.getActionMasked();
+    if(action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_POINTER_DOWN) {
+      if (mListener != null && !mListener.shouldStartGesture((T) this, event)) {
+        if (mState == STATE_BEGAN) {
+          fail();
+        } else {
+          fail();
+        }
+        if (event != origEvent) {
+          event.recycle();
+        }
+        return;
+      }
+    }
 
     onHandle(event);
     if (event != origEvent) {
@@ -344,9 +358,9 @@ public class GestureHandler<T extends GestureHandler> {
     onStateChange(newState, oldState);
   }
 
-  public boolean wantEvents() {
-    return mEnabled && mState != STATE_FAILED && mState != STATE_CANCELLED
-            && mState != STATE_END && mTrackedPointersCount > 0;
+  public boolean wantEvents(MotionEvent event) {
+    return mEnabled && mState != STATE_FAILED && mState != STATE_CANCELLED && mState != STATE_END
+        && mTrackedPointersCount > 0;
   }
 
   public int getState() {

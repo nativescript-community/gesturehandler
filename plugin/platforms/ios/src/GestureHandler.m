@@ -319,11 +319,18 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
     [self reset];
+    if (self.delegate && [self.delegate respondsToSelector:@selector(gestureHandler:shouldActivateForEvent:)]) {
+        if (![self.delegate gestureHandler:self shouldActivateForEvent:[self eventExtraData:gestureRecognizer]]) {
+          return FALSE;
+        }
+    }
     return YES;
 }
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
+  
+    
     // If hitSlop is set we use it to determine if a given gesture recognizer should start processing
     // touch stream. This only works for negative values of hitSlop as this method won't be triggered
     // unless touch startes in the bounds of the attached view. To acheve similar effect with positive
@@ -346,5 +353,6 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 //{
 //  //    [_eventDispatcher sendEvent:event];
 //}
+
 
 @end

@@ -165,6 +165,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
     hitSlop;
     @nativeProperty enabled: boolean;
     @nativeProperty shouldCancelWhenOutside: boolean;
+    shouldStartGesture:(arg)=>boolean
     manager: WeakRef<Manager>;
     touchListener: com.swmansion.gesturehandler.OnTouchEventListener<T>;
 
@@ -186,6 +187,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
         super.initNativeView(native, options);
         this.native.setTag(this.tag);
         this.touchListener = new com.swmansion.gesturehandler.OnTouchEventListener({
+            shouldStartGesture: this.handleShouldStartGesture.bind(this),
             onTouchEvent: this.onTouchEvent.bind(this),
             onStateChange: this.onStateChange.bind(this),
         });
@@ -197,6 +199,12 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
         this.native.setOnTouchEventListener(null);
         this.touchListener = null;
         super.disposeNativeView();
+    }
+    handleShouldStartGesture(handler: T, event: android.view.MotionEvent) {
+        if (this.shouldStartGesture) {
+            return this.shouldStartGesture(this.getExtraData(handler));
+        }
+        return true;
     }
     onTouchEvent(handler: T, event: android.view.MotionEvent) {
         const view = handler.getView() as any;

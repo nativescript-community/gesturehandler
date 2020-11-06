@@ -1,9 +1,12 @@
 package com.swmansion.gesturehandler;
 
+import android.util.Log;
+
 import android.os.Handler;
 import android.view.MotionEvent;
 
 public class TapGestureHandler extends GestureHandler<TapGestureHandler> {
+  private final String TAG = "TapGestureHandler";
   private static float MAX_VALUE_IGNORE = Float.MIN_VALUE;
   private static final long DEFAULT_MAX_DURATION_MS = 500;
   private static final long DEFAULT_MAX_DELAY_MS = 500;

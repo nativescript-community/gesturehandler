@@ -107,6 +107,7 @@ declare class GestureHandler extends NSObject implements UIGestureRecognizerDele
 }
 
 interface GestureHandlerDelegate {
+    gestureHandlerShouldActivateForEvent(handler: GestureHandler, extraData: NSDictionary<any, any>);
     gestureHandlerDidChangeStatePrevStateExtraDataView(handler: GestureHandler, state: GestureHandlerState, prevState: GestureHandlerState, extraData: NSDictionary<any, any>, view: UIView): void;
 
     gestureHandlerTouchEventOnViewStateExtraData(handler: GestureHandler, view: UIView, state: GestureHandlerState, extraData: NSDictionary<any, any>): void;

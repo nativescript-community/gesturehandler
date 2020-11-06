@@ -86,6 +86,7 @@
   [super touchesMoved:touches withEvent:event];
   if (self.state == UIGestureRecognizerStatePossible && [self shouldFailUnderCustomCriteria]) {
     self.state = UIGestureRecognizerStateFailed;
+    [self reset];
     return;
   }
   if ((self.state == UIGestureRecognizerStatePossible || self.state == UIGestureRecognizerStateChanged)) {
