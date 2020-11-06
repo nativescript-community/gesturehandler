@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.27](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.26...v0.1.27) (2020-11-06)
+
+
+### Bug Fixes
+
+* new option shouldStartGesture ([f895fbb](https://github.com/Akylas/nativescript-gesturehandler/commit/f895fbb3049979de681dbeeb32a863d1482e5ecc))
+
+
+
+
+
 ## [0.1.26](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.25...v0.1.26) (2020-10-21)
 
 **Note:** Version bump only for package @nativescript-community/gesturehandler
