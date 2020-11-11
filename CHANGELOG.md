@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.28](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.27...v0.1.28) (2020-11-11)
+
+
+### Bug Fixes
+
+* prevent unwanted and impossible touches on simulator ([8982fd1](https://github.com/Akylas/nativescript-gesturehandler/commit/8982fd1fecd62cecefe2e9adb0fb26ddcf655b0d))
+
+
+
+
+
 ## [0.1.27](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.26...v0.1.27) (2020-11-06)
 
 
