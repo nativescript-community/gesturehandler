@@ -329,8 +329,15 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer shouldReceiveTouch:(UITouch *)touch
 {
-  
-    
+#if TARGET_IPHONE_SIMULATOR
+    // we get unwanted touch on simulator which messes everything
+    UIView* view = gestureRecognizer.view;
+    CGPoint location = [touch locationInView:gestureRecognizer.view];
+    if (touch.phase == UITouchPhaseBegan && location.x == 0 && round(location.y) == view.window.bounds.size.height) {
+        return NO;
+    }
+#endif // TARGET_IPHONE_SIMULATOR
+
     // If hitSlop is set we use it to determine if a given gesture recognizer should start processing
     // touch stream. This only works for negative values of hitSlop as this method won't be triggered
     // unless touch startes in the bounds of the attached view. To acheve similar effect with positive
