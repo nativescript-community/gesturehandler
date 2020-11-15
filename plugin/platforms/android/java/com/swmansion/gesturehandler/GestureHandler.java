@@ -9,6 +9,7 @@ import java.util.Arrays;
 
 public class GestureHandler<T extends GestureHandler> {
   private final String TAG = "GestureHandler";
+  public static boolean debug = false;
 
   public static final int STATE_UNDETERMINED = 0;
   public static final int STATE_FAILED = 1;
@@ -452,6 +453,9 @@ public class GestureHandler<T extends GestureHandler> {
   }
 
   public final void fail() {
+    if (GestureHandler.debug) {
+      Log.d("JS", "GestureHandler fail " + this);
+    }
     if (mState == STATE_ACTIVE || mState == STATE_UNDETERMINED || mState == STATE_BEGAN) {
       moveToState(STATE_FAILED);
     }

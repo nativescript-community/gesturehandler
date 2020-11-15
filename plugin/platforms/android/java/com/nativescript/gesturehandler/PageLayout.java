@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.util.Log;
 
 import org.nativescript.widgets.ItemSpec;
 import org.nativescript.widgets.GridUnitType;
@@ -11,6 +12,7 @@ import org.nativescript.widgets.GridUnitType;
 import com.swmansion.gesturehandler.GestureHandlerOrchestrator;
 import com.swmansion.gesturehandler.GestureHandlerRegistryImpl;
 import com.swmansion.gesturehandler.PointerEventsConfig;
+import com.swmansion.gesturehandler.GestureHandler;
 import com.swmansion.gesturehandler.ViewConfigurationHelper;
 
 public class PageLayout extends org.nativescript.widgets.GridLayout {
@@ -30,6 +32,9 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
     private boolean mPassingTouch = false;
 
     public void setShouldIntercept(boolean value) {
+        if (GestureHandler.debug) {
+            Log.d("JS", "PageLayout setShouldIntercept " + value);
+        }
         this.mShouldIntercept = value;
     }
 
@@ -55,6 +60,9 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
     //     return super.dispatchTouchEvent(ev);
     // }
     public void tryCancelAllHandlers() {
+        if (GestureHandler.debug) {
+            Log.d("JS", "PageLayout tryCancelAllHandlers ");
+        }
         // In order to cancel handlers we activate handler that is hooked to the root view
         if (this.rootGestureHandler != null && this.rootGestureHandler.getState() == com.swmansion.gesturehandler.GestureHandler.STATE_BEGAN) {
             // Try activate main JS handler
@@ -64,6 +72,9 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
     }
 
     public void requestDisallowInterceptTouchEvent(boolean disallowIntercept) {
+        if (GestureHandler.debug) {
+            Log.d("JS", "PageLayout requestDisallowInterceptTouchEvent " + disallowIntercept + " " + this.mPassingTouch);
+        }
         // If this method gets called it means that some native view is attempting to grab lock for
         // touch event delivery. In that case we cancel all gesture recognizers
         if (this.mOrchestrator != null && !this.mPassingTouch) {
@@ -78,7 +89,9 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
         this.mPassingTouch = true;
         this.mOrchestrator.onTouchEvent(ev);
         this.mPassingTouch = false;
-
+        // if (GestureHandler.debug) {
+        //     Log.d("JS", "PageLayout dispatchTouchEventToOrchestrator " + this.mShouldIntercept);
+        // }
         return this.mShouldIntercept;
     }
 
@@ -106,7 +119,7 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
      * handler library logic. Unless this method is called (which happens as a result of instantiating
      * new gesture handler from JS) the root view component will just proxy all touch related methods
      * to its superclass. Thus in the "disabled" state all touch related events will fallback to
-     * default RN behavior.
+     * default behavior.
      */
     public void initialize() {
         this.mRegistry = new com.swmansion.gesturehandler.GestureHandlerRegistryImpl();
@@ -124,22 +137,17 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
             }
         };
         this.mOrchestrator = new com.swmansion.gesturehandler.GestureHandlerOrchestrator(this, this.mRegistry, this.configurationHelper);
-        // console.log(this.constructor.name, 'initialize', this.mOrchestrator, this.mRegistry);
         this.mOrchestrator.setMinimumAlphaForTraversal(0.01f);
 
         this.rootGestureHandler = new RootViewGestureHandler();
         this.rootGestureHandler.setTag(GESTURE_HANDLER_TAG);
         this.mRegistry.registerHandler(this.rootGestureHandler);
-        // registry.attachHandlerToView(this.rootGestureHandler.getTag(), this);
+        this.mRegistry.attachHandlerToView(GESTURE_HANDLER_TAG, this);
     }
 
     public void tearDown() {
         this.configurationHelper = null;
         this.mOrchestrator = null;
         this.mRegistry = null;
-        // if (this.mGestureRootHelper != null) {
-        //     this.mGestureRootHelper.tearDown();
-        //     this.mGestureRootHelper = null;
-        // }
     }
 }

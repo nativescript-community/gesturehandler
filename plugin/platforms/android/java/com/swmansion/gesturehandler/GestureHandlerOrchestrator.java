@@ -174,7 +174,11 @@ public class GestureHandlerOrchestrator {
 
   void onHandlerStateChange(GestureHandler handler, int newState, int prevState) {
     mHandlingChangeSemaphore += 1;
+    if (GestureHandler.debug) {
+      Log.d("JS", "GestureHandlerOrchestrator onHandlerStateChange " + handler + " " + prevState + " " + newState);
+    }
     if (isFinished(newState)) {
+      
       // if there were handlers awaiting completion of this handler, we can trigger
       // active state
       for (int i = 0; i < mAwaitingHandlersCount; i++) {
@@ -211,13 +215,6 @@ public class GestureHandlerOrchestrator {
     handler.mIsAwaiting = false;
     handler.mIsActive = true;
     handler.mActivationIndex = mActivationIndex++;
-
-    // TODO: for now we do it the same as android and disable
-    // native gestures once a gesture is recognized
-    long time = SystemClock.uptimeMillis();
-    MotionEvent event = MotionEvent.obtain(time, time, MotionEvent.ACTION_CANCEL, 0, 0, 0);
-    event.setAction(MotionEvent.ACTION_CANCEL); 
-    handler.getView().dispatchTouchEvent(event);
 
     int toCancelCount = 0;
     // Cancel all handlers that are required to be cancel upon current handler's
@@ -541,6 +538,9 @@ public class GestureHandlerOrchestrator {
 
   private static boolean shouldHandlerBeCancelledBy(GestureHandler handler, GestureHandler other) {
 
+    if (GestureHandler.debug) {
+      Log.d("JS", "GestureHandlerOrchestrator shouldHandlerBeCancelledBy " + handler + " " + other + " " + handler.hasCommonPointers(other) + " " + canRunSimultaneously(handler, other) + " " + handler.shouldBeCancelledBy(other));
+    }
     if (!handler.hasCommonPointers(other)) {
       // if two handlers share no common pointer one can never trigger cancel for the
       // other

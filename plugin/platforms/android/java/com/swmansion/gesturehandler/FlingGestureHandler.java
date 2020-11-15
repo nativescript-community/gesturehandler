@@ -2,8 +2,10 @@ package com.swmansion.gesturehandler;
 
 import android.os.Handler;
 import android.view.MotionEvent;
+import android.util.Log;
 
 public class FlingGestureHandler extends GestureHandler<FlingGestureHandler> {
+  private static final String TAG = "FlingGestureHandler";
   private static final long DEFAULT_MAX_DURATION_MS = 800;
   private static final long DEFAULT_MIN_ACCEPTABLE_DELTA = 160;
   private static final int DEFAULT_DIRECTION = DIRECTION_RIGHT | DIRECTION_LEFT | DIRECTION_UP | DIRECTION_DOWN;
@@ -74,6 +76,9 @@ public class FlingGestureHandler extends GestureHandler<FlingGestureHandler> {
   }
 
   private void endFling(MotionEvent event) {
+    if (GestureHandler.debug) {
+      Log.d("JS", "FlingGestureHandler endFling");
+    }
     if (!tryEndFling(event)) {
       fail();
     }
@@ -103,6 +108,9 @@ public class FlingGestureHandler extends GestureHandler<FlingGestureHandler> {
 
   @Override
   protected void onCancel() {
+    if (GestureHandler.debug) {
+      Log.d("JS", "FlingGestureHandler onCancel");
+    }
     if (mHandler != null) {
       mHandler.removeCallbacksAndMessages(null);
     }

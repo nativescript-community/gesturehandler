@@ -56,6 +56,10 @@ public class NativeViewGestureHandler extends GestureHandler<NativeViewGestureHa
     }
 
     boolean canBeInterrupted = !mDisallowInterruption;
+
+    if (GestureHandler.debug) {
+      Log.d("JS", "NativeViewGestureHandler shouldRecognizeSimultaneously " + canBeInterrupted);
+    }
     int state = getState();
     int otherState = handler.getState();
 
@@ -73,6 +77,10 @@ public class NativeViewGestureHandler extends GestureHandler<NativeViewGestureHa
 
   @Override
   public boolean shouldBeCancelledBy(GestureHandler handler) {
+
+    // if (GestureHandler.debug) {
+    //   Log.d("JS", "NativeViewGestureHandler shouldBeCancelledBy " + mDisallowInterruption);
+    // }
     return !mDisallowInterruption;
   }
 
@@ -80,40 +88,54 @@ public class NativeViewGestureHandler extends GestureHandler<NativeViewGestureHa
   protected void onHandle(MotionEvent event) {
     View view = getView();
     int state = getState();
+    if (GestureHandler.debug) {
+      Log.d("JS", "NativeViewGestureHandler onHandle " + state + " " + view +" " + event.getActionMasked() + " " + " " + mShouldActivateOnStart);
+    }
     if (event.getActionMasked() == MotionEvent.ACTION_UP) {
-      view.onTouchEvent(event);
+      view.dispatchTouchEvent(event);
       if ((state == STATE_UNDETERMINED || state == STATE_BEGAN) && view.isPressed()) {
         activate();
       }
       end();
     } else if (state == STATE_UNDETERMINED || state == STATE_BEGAN) {
+      
       if (mShouldActivateOnStart) {
         tryIntercept(view, event);
-        view.onTouchEvent(event);
+        view.dispatchTouchEvent(event);
         activate();
       } else if (tryIntercept(view, event)) {
-        view.onTouchEvent(event);
+        view.dispatchTouchEvent(event);
         activate();
       } else if (state != STATE_BEGAN) {
         begin();
       }
     } else if (state == STATE_ACTIVE) {
-      view.onTouchEvent(event);
+      view.dispatchTouchEvent(event);
     }
   }
 
   private static boolean tryIntercept(View view, MotionEvent event) {
     if (view instanceof ViewGroup && ((ViewGroup) view).onInterceptTouchEvent(event)) {
+      // if (GestureHandler.debug) {
+      //   Log.d("JS", "NativeViewGestureHandler tryIntercept true");
+      // }
       return true;
     }
+    // if (GestureHandler.debug) {
+    //   Log.d("JS", "NativeViewGestureHandler tryIntercept false");
+    // }
     return false;
   }
 
   @Override
   protected void onCancel() {
+
+    if (GestureHandler.debug) {
+      Log.d("JS", "NativeViewGestureHandler onCancel " + getView());
+    }
     long time = SystemClock.uptimeMillis();
     MotionEvent event = MotionEvent.obtain(time, time, MotionEvent.ACTION_CANCEL, 0, 0, 0);
     event.setAction(MotionEvent.ACTION_CANCEL);
-    getView().dispatchTouchEvent(event);
+    getView().onTouchEvent(event);
   }
 }

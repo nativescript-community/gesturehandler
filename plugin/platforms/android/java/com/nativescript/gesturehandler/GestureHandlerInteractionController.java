@@ -7,13 +7,13 @@ import android.view.View;
 import android.view.KeyEvent;
 import android.util.AttributeSet;
 import android.view.inputmethod.InputMethodManager;
+import android.util.Log;
 
 import com.swmansion.gesturehandler.GestureHandler;
 
 import java.util.HashMap;
 
-public class GestureHandlerInteractionController
-        implements com.swmansion.gesturehandler.GestureHandlerInteractionController {
+public class GestureHandlerInteractionController implements com.swmansion.gesturehandler.GestureHandlerInteractionController {
     private HashMap<Number, int[]> mWaitForRelations = new HashMap();
     private HashMap<Number, int[]> mSimultaneousRelations = new HashMap();
 
@@ -59,6 +59,9 @@ public class GestureHandlerInteractionController
 
     public boolean shouldRecognizeSimultaneously(GestureHandler handler, GestureHandler otherHandler) {
         int[] simultHandlerTags = mSimultaneousRelations.get(handler.getTag());
+        if (GestureHandler.debug) {
+            Log.d("JS", "GestureHandlerInteractionController shouldRecognizeSimultaneously " + handler + " " + otherHandler + " " + simultHandlerTags);
+        }
         if (simultHandlerTags != null) {
             for (int i = 0; i < simultHandlerTags.length; i++) {
                 if (simultHandlerTags[i] == otherHandler.getTag()) {
