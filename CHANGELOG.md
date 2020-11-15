@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.29](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.28...v0.1.29) (2020-11-15)
+
+
+### Bug Fixes
+
+* android fixes for native gestures ([c6321bb](https://github.com/Akylas/nativescript-gesturehandler/commit/c6321bb9ac0af4fe68636118cb334d548d4eafc6))
+* direction is now a number allowing masks ([7324cd9](https://github.com/Akylas/nativescript-gesturehandler/commit/7324cd90e984ef783f77db979134a281b24e68a2))
+
+
+
+
+
 ## [0.1.28](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.27...v0.1.28) (2020-11-11)
 
 
