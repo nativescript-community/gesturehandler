@@ -165,7 +165,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
     hitSlop;
     @nativeProperty enabled: boolean;
     @nativeProperty shouldCancelWhenOutside: boolean;
-    shouldStartGesture:(arg)=>boolean
+    shouldStartGesture: (arg) => boolean;
     manager: WeakRef<Manager>;
     touchListener: com.swmansion.gesturehandler.OnTouchEventListener<T>;
 
@@ -343,6 +343,13 @@ export class PinchGestureHandler extends Handler<com.swmansion.gesturehandler.Pi
     }
 }
 
+export enum FlingDirection {
+    DIRECTION_LEFT = com.swmansion.gesturehandler.GestureHandler.DIRECTION_LEFT,
+    DIRECTION_UP = com.swmansion.gesturehandler.GestureHandler.DIRECTION_UP,
+    DIRECTION_DOWN = com.swmansion.gesturehandler.GestureHandler.DIRECTION_DOWN,
+    DIRECTION_RIGHT = com.swmansion.gesturehandler.GestureHandler.DIRECTION_RIGHT,
+}
+
 function directionToString(direction: number) {
     switch (direction) {
         case com.swmansion.gesturehandler.GestureHandler.DIRECTION_RIGHT:
@@ -371,7 +378,7 @@ function directionFromString(direction: string) {
 
 export class FlingGestureHandler extends Handler<com.swmansion.gesturehandler.FlingGestureHandler, TapGestureHandlerOptions> {
     @nativeProperty numberOfPointers: number;
-    @nativeProperty({ converter: { fromNative: directionToString, toNative: directionFromString } }) direction: string;
+    @nativeProperty direction: number;
     createNative(options) {
         return new com.swmansion.gesturehandler.FlingGestureHandler();
     }

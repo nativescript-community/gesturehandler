@@ -21,6 +21,13 @@ import {
 import { observe as gestureObserve } from './gestures_override';
 export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType, ViewInitEvent, ViewDisposeEvent };
 
+export enum FlingDirection {
+    DIRECTION_LEFT = UISwipeGestureRecognizerDirection.Left,
+    DIRECTION_UP = UISwipeGestureRecognizerDirection.Up,
+    DIRECTION_DOWN = UISwipeGestureRecognizerDirection.Down,
+    DIRECTION_RIGHT = UISwipeGestureRecognizerDirection.Right,
+}
+
 let installed = false;
 export function install(overrideNGestures = false) {
     if (installed) {

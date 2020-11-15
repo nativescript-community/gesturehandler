@@ -6,6 +6,13 @@ import { HandlerType, OptionsTypeMap, TypeMap } from './gesturehandler.common';
 export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType } from './gesturehandler.common';
 // export * from './gesturehandler.ios';
 
+export enum FlingDirection {
+    DIRECTION_LEFT ,
+    DIRECTION_UP,
+    DIRECTION_DOWN,
+    DIRECTION_RIGHT,
+}
+
 export abstract class BaseNative<T, U extends {}> extends Observable {
     options?: U;
     native: T;
@@ -115,11 +122,11 @@ export class LongPressGestureHandler extends Handler<any, LongPressGestureHandle
 }
 export interface FlingGestureHandlerOptions extends HandlerOptions {
     numberOfPointers?: number;
-    direction?: string;
+    direction?: number;
 }
 export class FlingGestureHandler extends Handler<any, FlingGestureHandlerOptions> {
     numberOfPointers: number;
-    direction: string;
+    direction: number;
 }
 export interface PinchGestureHandlerOptions extends HandlerOptions {}
 export class PinchGestureHandler extends Handler<any, PinchGestureHandlerOptions> {}
