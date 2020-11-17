@@ -54,7 +54,6 @@
     });
     
     Class nodeClass = map[handlerName];
-    NSLog(@"Gesture handler test %@ %@", handlerName, map);
    if (!nodeClass) {
         NSLog(@"Gesture handler type %@ is not supported", handlerName);
         return nil;
