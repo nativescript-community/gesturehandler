@@ -171,6 +171,7 @@ export class HandlerDelegate extends NSObject implements GestureHandlerDelegate 
         if (owner && owner.options && owner.options.shouldStartGesture) {
             return owner.options.shouldStartGesture(toJsObject(extraData));
         }
+        return true;
     }
 }
 
