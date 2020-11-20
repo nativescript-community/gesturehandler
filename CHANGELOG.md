@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.32](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.31...v0.1.32) (2020-11-20)
+
+
+### Bug Fixes
+
+* android bug fix when touch event could be dispatched after view destroyed ([36161cc](https://github.com/Akylas/nativescript-gesturehandler/commit/36161cc83762cec679fcaecb5dc8f147064abcd6))
+
+
+
+
+
 ## [0.1.31](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.30...v0.1.31) (2020-11-19)
 
 
