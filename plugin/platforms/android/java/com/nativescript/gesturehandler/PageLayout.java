@@ -86,9 +86,11 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
     }
 
     public boolean dispatchTouchEventToOrchestrator(MotionEvent ev) {
-        this.mPassingTouch = true;
-        this.mOrchestrator.onTouchEvent(ev);
-        this.mPassingTouch = false;
+        if (this.mOrchestrator != null) {
+            this.mPassingTouch = true;
+            this.mOrchestrator.onTouchEvent(ev);
+            this.mPassingTouch = false;
+        }
         // if (GestureHandler.debug) {
         //     Log.d("JS", "PageLayout dispatchTouchEventToOrchestrator " + this.mShouldIntercept);
         // }
