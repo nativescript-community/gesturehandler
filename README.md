@@ -3,11 +3,12 @@
 [![GitHub forks](https://img.shields.io/github/forks/nativescript-community/gesturehandler.svg)](https://github.com/nativescript-community/gesturehandler/network)
 [![GitHub stars](https://img.shields.io/github/stars/nativescript-community/gesturehandler.svg)](https://github.com/nativescript-community/gesturehandler/stargazers)
 
-[![NPM](https://nodei.co/npm/@nativescript-community/gesturehandler.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/@nativescript-community/gesturehandler/)
 
 ## Installation
 
-* `tns plugin add @nativescript-community/gesturehandler`
+```shell
+tns plugin add @nativescript-community/gesturehandler
+```
 
 Be sure to run a new build after adding plugins to avoid any issues.
 
@@ -19,10 +20,6 @@ The source is based on the source code by [Krzysztof Magiera](https://github.com
 
 ## API
 
-First you need to install the plugin:
-```shell
-tns plugin add @nativescript-community/gesturehandler
-```
 We need to do some wiring when your app starts, so open `app.ts` and add this before creating any View/App/Frame:
 ##### TypeScript
 ```ts
