@@ -1,7 +1,7 @@
 {
     "name": "@nativescript-community/gesturehandler",
     "version": "0.1.32",
-    "description": "Nativescript plugin for gestures",
+    "description": "Declarative API exposing platform native touch and gesture system to NativeScript.",
     "main": "gesturehandler",
     "sideEffects": false,
     "typings": "gesturehandler.d.ts",
@@ -14,7 +14,10 @@
     "keywords": [
         "NativeScript",
         "JavaScript",
-        "iOS"
+        "iOS",
+        "Android",
+        "Vue",
+        "preview|https://raw.githubusercontent.com/nativescript-community/gesturehandler/master/images/demo.gif"
     ],
     "author": {
         "name": "Martin Guillon",
@@ -24,7 +27,10 @@
         "url": "https://github.com/nativescript-community/gesturehandler/issues"
     },
     "license": "Apache-2.0",
-    "homepage": "https://github.com/nativescript-community/gesturehandler",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nativescript-community/gesturehandler"
+    },
     "bootstrapper": "nativescript-plugin-seed",
     "dependencies": {
         "@nativescript-community/observable": "^2.0.8"
