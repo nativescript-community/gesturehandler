@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.35](https://github.com/nativescript-community/gesturehandler/compare/v0.1.34...v0.1.35) (2020-11-29)
+
+
+### Bug Fixes
+
+* android ensure we cancel events correctly ([30ffce3](https://github.com/nativescript-community/gesturehandler/commit/30ffce318b0c4221501b1d6e23c219fc4a8ab356))
+
+
+
+
+
 ## [0.1.34](https://github.com/nativescript-community/gesturehandler/compare/v0.1.33...v0.1.34) (2020-11-23)
 
 **Note:** Version bump only for package @nativescript-community/gesturehandler
