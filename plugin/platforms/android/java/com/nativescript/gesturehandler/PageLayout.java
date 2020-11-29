@@ -30,6 +30,7 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
 
     private boolean mShouldIntercept = false;
     private boolean mPassingTouch = false;
+    private boolean mDispatchToOrchestra = true;
 
     public void setShouldIntercept(boolean value) {
         if (GestureHandler.debug) {
@@ -40,6 +41,13 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
 
     public void setPassingTouch(boolean value) {
         this.mPassingTouch = value;
+    }
+
+    public void setDispatchToOrchestra(boolean value) {
+        if (GestureHandler.debug) {
+            Log.d("JS", "PageLayout setDispatchToOrchestra " + value);
+        }
+        this.mDispatchToOrchestra = value;
     }
 
     public GestureHandlerRegistryImpl registry() {
@@ -98,7 +106,7 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
     }
 
     public boolean dispatchTouchEvent(MotionEvent ev) {
-        if (this.dispatchTouchEventToOrchestrator(ev)) {
+        if (this.mDispatchToOrchestra && this.dispatchTouchEventToOrchestrator(ev)) {
             return true;
         }
         final boolean handled = super.dispatchTouchEvent(ev);

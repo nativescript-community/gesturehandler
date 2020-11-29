@@ -35,7 +35,9 @@ public class RootViewGestureHandler extends GestureHandler {
         final long time = SystemClock.uptimeMillis();
         final MotionEvent event = MotionEvent.obtain(time, time, MotionEvent.ACTION_CANCEL, 0, 0, 0);
         event.setAction(MotionEvent.ACTION_CANCEL);
-        getView().onTouchEvent(event);
+        getView().setDispatchToOrchestra(false);
+        getView().dispatchTouchEvent(event);
+        getView().setDispatchToOrchestra(true);
     }
     // public boolean shouldRecognizeSimultaneously(GestureHandler handler) {
     //     return true;
