@@ -5,7 +5,7 @@
 
 import Observable from '@nativescript-community/observable';
 import { EventData } from '@nativescript/core';
-import { View } from '@nativescript/core/ui';
+import { Property, View, booleanConverter } from '@nativescript/core/ui';
 import {
     FlingGestureHandler,
     FlingGestureHandlerOptions,
@@ -14,6 +14,7 @@ import {
     Handler,
     LongPressGestureHandler,
     LongPressGestureHandlerOptions,
+    Manager,
     NativePropertyOptions,
     NativeViewGestureHandler,
     NativeViewGestureHandlerOptions,
@@ -142,7 +143,7 @@ export abstract class BaseNative<T, U extends {}> extends Observable {
     }
 }
 
-export abstract class Manager extends Observable {
+export abstract class ManagerBase extends Observable {
     abstract createGestureHandler<T extends HandlerType>(handlerName: T, handlerTag: number, config?: OptionsTypeMap[T]): TypeMap[T];
 }
 
@@ -256,28 +257,49 @@ export function applyMixins(
 
 export const ViewInitEvent = 'ViewInitEvent';
 export const ViewDisposeEvent = 'ViewDisposeEvent';
+
+let NATIVE_GESTURE_TAG = 74000;
+export const exclusiveTouchProperty = new Property<View, boolean>({
+    name: 'exclusiveTouch',
+    defaultValue: false,
+    valueConverter: booleanConverter,
+});
 class ViewGestureExtended extends View {
+    exclusiveTouchGestureHandler: NativeViewGestureHandler;
     initNativeView() {
-        // console.log(this.constructor.name, 'initNativeView', this.nativeView);
         if (this.nativeView) {
             this.nativeView.nsView = new WeakRef(this);
         }
-
         this.notify({ eventName: ViewInitEvent, object: this });
     }
     disposeNativeView() {
-        // console.log(this.constructor.name, 'disposeNativeView', this.nativeView);
         if (this.nativeView) {
             this.nativeView.nsView = null;
         }
-        // console.log('disposeNativeView', this);
         this.notify({ eventName: ViewDisposeEvent, object: this });
+    }
+    [exclusiveTouchProperty.setNative](value: boolean) {
+        // console.log('exclusiveTouchProperty', this, value);
+        if (value) {
+            if (!this.exclusiveTouchGestureHandler) {
+                const gestureHandler = Manager.getInstance().createGestureHandler(HandlerType.NATIVE_VIEW, NATIVE_GESTURE_TAG++, {
+                    disallowInterruption: true,
+                    shouldActivateOnStart: true,
+                    shouldCancelWhenOutside: false,
+                });
+                this.exclusiveTouchGestureHandler = gestureHandler as any;
+            }
+            this.exclusiveTouchGestureHandler.attachToView(this);
+        } else if (this.exclusiveTouchGestureHandler) {
+            this.exclusiveTouchGestureHandler.detachFromView();
+        }
     }
 }
 
 let installed = false;
 export function overrideViewBase() {
     const NSView = require('@nativescript/core/ui/core/view').View;
+    exclusiveTouchProperty.register(NSView);
     applyMixins(NSView, [ViewGestureExtended]);
 }
 

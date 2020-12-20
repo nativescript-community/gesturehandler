@@ -19,7 +19,7 @@ import {
     GestureStateEventData,
     GestureTouchEventData,
     HandlerType,
-    Manager as ManagerBase,
+    ManagerBase,
     OptionsTypeMap,
     TypeMap,
     ViewDisposeEvent,
