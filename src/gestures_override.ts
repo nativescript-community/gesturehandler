@@ -1,5 +1,5 @@
 import { EventData, View } from '@nativescript/core';
-import { GestureEventData, GestureTypes, TouchAction, toString as gestureToString } from '@nativescript/core/ui/gestures';
+import { GestureEventData, GestureTypes, GesturesObserver as NGesturesObserver, TouchAction, toString as gestureToString } from '@nativescript/core/ui/gestures';
 import { layout } from '@nativescript/core/utils/utils';
 import { Manager } from './gesturehandler';
 import { GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureState, GestureStateEventData, HandlerType } from './gesturehandler.common';
@@ -20,6 +20,9 @@ export class GesturesObserver {
 
     public type: GestureTypes;
 
+    private nObserver?: NGesturesObserver;
+
+    //@ts-ignore
     public get callback(): (args: GestureEventData) => void {
         return this._callback;
     }
@@ -28,6 +31,7 @@ export class GesturesObserver {
         return this._target;
     }
 
+    //@ts-ignore
     public get context() {
         return this._context;
     }
@@ -68,10 +72,15 @@ export class GesturesObserver {
                     }
                 }
                 list.length = 0;
-
-                this.target._gestureObservers[this.type] = undefined;
-                delete this.target._gestureObservers[this.type];
+                if (this.target._gestureObservers[this.type]) {
+                    this.target._gestureObservers[this.type].detachFromView();
+                    delete this.target._gestureObservers[this.type];
+                }
             }
+        }
+        if (this.nObserver) {
+            this.nObserver.disconnect();
+            this.nObserver = null;
         }
         this._target = null;
         this._callback = null;
@@ -193,6 +202,12 @@ export class GesturesObserver {
             gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.rotation), this);
             gestureHandler.attachToView(target);
             target._gestureObservers[type] = gestureHandler;
+        }
+        if (type & GestureTypes.touch && global.isIOS) {
+            // let s not reimplement it for touch
+            const nObserver = new NGesturesObserver(target, this.callback, this.context);
+            nObserver.observe(type);
+            this.nObserver = nObserver;
         }
     }
 
