@@ -137,10 +137,6 @@ export abstract class BaseNative<T, U extends {}> extends Observable {
         return this.native;
     };
     abstract createNative(options: U): T;
-
-    log(...args) {
-        console.log(`[${this.constructor.name}]`, ...args);
-    }
 }
 
 export abstract class ManagerBase extends Observable {
@@ -284,7 +280,7 @@ class ViewGestureExtended extends View {
             if (!this.exclusiveTouchGestureHandler) {
                 const gestureHandler = Manager.getInstance().createGestureHandler(HandlerType.NATIVE_VIEW, NATIVE_GESTURE_TAG++, {
                     disallowInterruption: true,
-                    shouldActivateOnStart: true,
+                    shouldActivateOnStart: false,
                     shouldCancelWhenOutside: false,
                 });
                 this.exclusiveTouchGestureHandler = gestureHandler as any;
