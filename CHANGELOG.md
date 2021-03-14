@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.37](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.36...v0.1.37) (2021-03-14)
+
+
+### Bug Fixes
+
+* a lot of gesture overrides fixes ([c0976e2](https://github.com/Akylas/nativescript-gesturehandler/commit/c0976e2323733b5b723da330fe81b110517d72d8))
+* exclusive touch fix ([7cfe2d6](https://github.com/Akylas/nativescript-gesturehandler/commit/7cfe2d6042f22f1447e3a2d30a3632f83763a72f))
+* **ios:** override support for touch gesture ([64bd989](https://github.com/Akylas/nativescript-gesturehandler/commit/64bd989da67520f1a9ced397aae6308cef7df85c))
+
+
+
+
+
 ## [0.1.36](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.35...v0.1.36) (2020-12-20)
 
 
