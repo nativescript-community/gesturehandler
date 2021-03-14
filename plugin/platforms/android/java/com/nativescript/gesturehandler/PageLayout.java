@@ -99,17 +99,23 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
             this.mOrchestrator.onTouchEvent(ev);
             this.mPassingTouch = false;
         }
-        // if (GestureHandler.debug) {
-        //     Log.d("JS", "PageLayout dispatchTouchEventToOrchestrator " + this.mShouldIntercept);
-        // }
+        if (GestureHandler.debug) {
+            Log.d("JS", "PageLayout dispatchTouchEventToOrchestrator " + this.mShouldIntercept);
+        }
         return this.mShouldIntercept;
     }
 
     public boolean dispatchTouchEvent(MotionEvent ev) {
+        if (GestureHandler.debug) {
+            Log.d("JS", "PageLayout dispatchTouchEvent " + this.mDispatchToOrchestra);
+        }
         if (this.mDispatchToOrchestra && this.dispatchTouchEventToOrchestrator(ev)) {
             return true;
         }
         final boolean handled = super.dispatchTouchEvent(ev);
+        if (GestureHandler.debug) {
+            Log.d("JS", "PageLayout dispatchTouchEvent to children " + handled);
+        }
         // we need to always return true or gestures wont work on layouts because they don't handle touch so dispatchTouchEvent returns false
         return true;
     }
