@@ -29,13 +29,15 @@ export enum FlingDirection {
 }
 
 let installed = false;
+let installedOverrides = false;
 export function install(overrideNGestures = false) {
-    if (installed) {
-        return;
+    if (!installed) {
+        installed = true;
+        installBase();
     }
-    installed = true;
-    installBase();
-    if (overrideNGestures === true) {
+
+    if (overrideNGestures === true && !installedOverrides) {
+        installedOverrides = true;
         const NSView = require('@nativescript/core/ui/core/view').View;
         NSView.prototype._observe = function (type: GestureTypes, callback: (args: GestureEventData) => void, thisArg?: any): void {
             if (!this._gestureObservers[type]) {
@@ -43,9 +45,9 @@ export function install(overrideNGestures = false) {
             }
 
             this._gestureObservers[type].push(gestureObserve(this, type, callback, thisArg));
-            if (type & GestureTypes.touch && this.isLoaded && !this.touchListenerIsSet) {
-                this.setOnTouchListener();
-            }
+            // if (type & GestureTypes.touch && this.isLoaded && !this.touchListenerIsSet) {
+            //     this.setOnTouchListener();
+            // }
         };
     }
 }

@@ -46,62 +46,76 @@ class PageGestureExtended extends Page {
     }
 }
 let installed = false;
+let installedOverrides = false;
 export function install(overrideNGestures = false) {
-    if (installed) {
-        return;
+    console.log('install', overrideNGestures, installed, installedOverrides);
+    if (!installed) {
+        installed = true;
+        installBase();
+        const NSPage = require('@nativescript/core/ui/page').Page;
+        NSPage.prototype.createNativeView = function () {
+            if (!PageLayout) {
+                PageLayout = com.nativescript.gesturehandler.PageLayout;
+            }
+            const layout = new PageLayout(this._context);
+            this.gestureRegistry = layout.registry;
+            return layout;
+        };
+        applyMixins(NSPage, [PageGestureExtended]);
     }
-    installed = true;
-    installBase();
-    const NSPage = require('@nativescript/core/ui/page').Page;
-    NSPage.prototype.createNativeView = function () {
-        if (!PageLayout) {
-            PageLayout = com.nativescript.gesturehandler.PageLayout;
-        }
-        const layout = new PageLayout(this._context);
-        this.gestureRegistry = layout.registry;
-        return layout;
-    };
-    applyMixins(NSPage, [PageGestureExtended]);
-    if (overrideNGestures === true) {
+
+    if (overrideNGestures === true && !installedOverrides) {
+        installedOverrides = true;
         const NSView = require('@nativescript/core/ui/core/view').View;
+        const NSButtonBase = require('@nativescript/core/ui/button').ButtonBase;
+        const NSButton = require('@nativescript/core/ui/button').Button;
+        delete NSButtonBase.tapEvent;
+        // we need to disable on click listener
+        NSButton.prototype.initNativeView = function () {
+            NSButtonBase.prototype.initNativeView.call(this);
+        };
+        NSButton.prototype.disposeNativeView = function () {
+            NSButtonBase.prototype.disposeNativeView.call(this);
+        };
         NSView.prototype._observe = function (type: GestureTypes, callback: (args: GestureEventData) => void, thisArg?: any): void {
             if (!this._gestureObservers[type]) {
                 this._gestureObservers[type] = [];
             }
 
+            console.log('_observe', this, type, typeof this._gestureObservers[type]);
             this._gestureObservers[type].push(gestureObserve(this, type, callback, thisArg));
-            if (type & GestureTypes.touch && this.isLoaded && !this.touchListenerIsSet) {
+            if (this.isLoaded && !this.touchListenerIsSet) {
                 this.setOnTouchListener();
             }
         };
-        NSView.prototype.setOnTouchListener = function () {
-            if (!this.nativeViewProtected || !this.getGestureObservers(GestureTypes.touch)) {
-                return;
-            }
-            // do not set noop listener that handles the event (disabled listener) if IsUserInteractionEnabled is
-            // false as we might need the ability for the event to pass through to a parent view
-            this.touchListener =
-                this.touchListener ||
-                new android.view.View.OnTouchListener({
-                    onTouch: (view: android.view.View, event: android.view.MotionEvent) => {
-                        this.handleGestureTouch(event);
+        // NSView.prototype.setOnTouchListener = function () {
+        //     if (!this.nativeViewProtected || !this.getGestureObservers(GestureTypes.touch)) {
+        //         return;
+        //     }
+        //     // do not set noop listener that handles the event (disabled listener) if IsUserInteractionEnabled is
+        //     // false as we might need the ability for the event to pass through to a parent view
+        //     this.touchListener =
+        //         this.touchListener ||
+        //         new android.view.View.OnTouchListener({
+        //             onTouch: (view: android.view.View, event: android.view.MotionEvent) => {
+        //                 this.handleGestureTouch(event);
 
-                        const nativeView = this.nativeViewProtected;
-                        if (!nativeView || !nativeView.onTouchEvent) {
-                            return false;
-                        }
+        //                 const nativeView = this.nativeViewProtected;
+        //                 if (!nativeView || !nativeView.onTouchEvent) {
+        //                     return false;
+        //                 }
 
-                        return nativeView.onTouchEvent(event);
-                    },
-                });
-            this.nativeViewProtected.setOnTouchListener(this.touchListener);
+        //                 return nativeView.onTouchEvent(event);
+        //             },
+        //         });
+        //     this.nativeViewProtected.setOnTouchListener(this.touchListener);
 
-            this.touchListenerIsSet = true;
-
-            if (this.nativeViewProtected.setClickable) {
-                this.nativeViewProtected.setClickable(this.isUserInteractionEnabled);
-            }
-        };
+        //     this.touchListenerIsSet = true;
+        //     console.log('setOnTouchListener', this);
+        //     if (this.nativeViewProtected.setClickable) {
+        //         this.nativeViewProtected.setClickable(this.isUserInteractionEnabled);
+        //     }
+        // };
     }
 }
 

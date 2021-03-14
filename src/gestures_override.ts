@@ -14,7 +14,7 @@ let TAG = 0;
 export class GesturesObserver {
     private _callback: (args: GestureEventData) => void;
     private _target: View & {
-        _gestureObservers?: any;
+        _gestureHandlers?: any;
     };
     private _context: any;
 
@@ -72,9 +72,9 @@ export class GesturesObserver {
                     }
                 }
                 list.length = 0;
-                if (this.target._gestureObservers[this.type]) {
-                    this.target._gestureObservers[this.type].detachFromView();
-                    delete this.target._gestureObservers[this.type];
+                if (this.target._gestureHandlers && this.target._gestureHandlers[this.type]) {
+                    this.target._gestureHandlers[this.type].detachFromView();
+                    delete this.target._gestureHandlers[this.type];
                 }
             }
         }
@@ -145,63 +145,88 @@ export class GesturesObserver {
             }
         };
     }
-    private _attach(target: View, type: GestureTypes) {
+    private _attach(
+        target: View & {
+            _gestureHandlers?: any;
+        },
+        type: GestureTypes
+    ) {
         if (type & GestureTypes.touch) {
             this._notifyTouch = true;
         }
         const manager = Manager.getInstance();
+        if (!target._gestureHandlers) {
+            target._gestureHandlers = {};
+        }
+        let gestureHandler = target._gestureHandlers[type];
+
         if (type & GestureTypes.tap) {
-            const gestureHandler = manager.createGestureHandler(HandlerType.TAP, target['TAP_HANDLER_TAG'], {
-                waitFor: [target['LONGPRESS_HANDLER_TAG'], target['DOUBLE_TAP_HANDLER_TAG']],
-            });
+            if (!gestureHandler) {
+                gestureHandler = manager.createGestureHandler(HandlerType.TAP, target['TAP_HANDLER_TAG'], {
+                    waitFor: [target['LONGPRESS_HANDLER_TAG'], target['DOUBLE_TAP_HANDLER_TAG']],
+                });
+                gestureHandler.attachToView(target);
+                console.log('_attach', target, type);
+                target._gestureHandlers[type] = gestureHandler;
+            }
             gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.tap, GestureState.ACTIVE), this);
-            gestureHandler.attachToView(target);
-            target._gestureObservers[type] = gestureHandler;
         }
         if (type & GestureTypes.longPress) {
-            const gestureHandler = manager.createGestureHandler(HandlerType.LONG_PRESS, target['LONGPRESS_HANDLER_TAG']);
+            if (!gestureHandler) {
+                gestureHandler = manager.createGestureHandler(HandlerType.LONG_PRESS, target['LONGPRESS_HANDLER_TAG']);
+                gestureHandler.attachToView(target);
+                target._gestureHandlers[type] = gestureHandler;
+            }
             gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.longPress, GestureState.ACTIVE), this);
-            gestureHandler.attachToView(target);
-            target._gestureObservers[type] = gestureHandler;
         }
         if (type & GestureTypes.doubleTap) {
-            const gestureHandler = manager.createGestureHandler(HandlerType.TAP, target['DOUBLE_TAP_HANDLER_TAG'], {
-                numberOfTaps: 2,
-            });
+            if (!gestureHandler) {
+                gestureHandler = manager.createGestureHandler(HandlerType.TAP, target['DOUBLE_TAP_HANDLER_TAG'], {
+                    numberOfTaps: 2,
+                });
+                gestureHandler.attachToView(target);
+                target._gestureHandlers[type] = gestureHandler;
+            }
             gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.doubleTap), this);
-            gestureHandler.attachToView(target);
-            target._gestureObservers[type] = gestureHandler;
         }
 
         if (type & GestureTypes.pinch) {
-            const gestureHandler = manager.createGestureHandler(HandlerType.PINCH, TAG++);
+            if (!gestureHandler) {
+                gestureHandler = manager.createGestureHandler(HandlerType.PINCH, TAG++);
+                gestureHandler.attachToView(target);
+                target._gestureHandlers[type] = gestureHandler;
+            }
             gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.pinch), this);
             gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.pinch), this);
-            gestureHandler.attachToView(target);
-            target._gestureObservers[type] = gestureHandler;
         }
 
         if (type & GestureTypes.swipe) {
-            const gestureHandler = manager.createGestureHandler(HandlerType.FLING, TAG++);
+            if (!gestureHandler) {
+                gestureHandler = manager.createGestureHandler(HandlerType.FLING, TAG++);
+                gestureHandler.attachToView(target);
+                target._gestureHandlers[type] = gestureHandler;
+            }
             gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.swipe), this);
-            gestureHandler.attachToView(target);
-            target._gestureObservers[type] = gestureHandler;
         }
 
         if (type & GestureTypes.pan) {
-            const gestureHandler = manager.createGestureHandler(HandlerType.PAN, TAG++, {});
+            if (!gestureHandler) {
+                gestureHandler = manager.createGestureHandler(HandlerType.PAN, TAG++, {});
+                gestureHandler.attachToView(target);
+                target._gestureHandlers[type] = gestureHandler;
+            }
             gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.pan), this);
             gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.pan), this);
-            gestureHandler.attachToView(target);
-            target._gestureObservers[type] = gestureHandler;
         }
 
         if (type & GestureTypes.rotation) {
-            const gestureHandler = manager.createGestureHandler(HandlerType.ROTATION, TAG++, {});
+            if (!gestureHandler) {
+                gestureHandler = manager.createGestureHandler(HandlerType.ROTATION, TAG++, {});
+                gestureHandler.attachToView(target);
+                target._gestureHandlers[type] = gestureHandler;
+            }
             gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.rotation), this);
             gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.rotation), this);
-            gestureHandler.attachToView(target);
-            target._gestureObservers[type] = gestureHandler;
         }
         if (type & GestureTypes.touch && global.isIOS) {
             // let s not reimplement it for touch

@@ -7,7 +7,7 @@ export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, Gestu
 // export * from './gesturehandler.ios';
 
 export enum FlingDirection {
-    DIRECTION_LEFT ,
+    DIRECTION_LEFT,
     DIRECTION_UP,
     DIRECTION_DOWN,
     DIRECTION_RIGHT,
