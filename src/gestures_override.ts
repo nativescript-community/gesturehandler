@@ -166,7 +166,6 @@ export class GesturesObserver {
                     waitFor: [target['LONGPRESS_HANDLER_TAG'], target['DOUBLE_TAP_HANDLER_TAG']],
                 });
                 gestureHandler.attachToView(target);
-                console.log('_attach', target, type);
                 target._gestureHandlers[type] = gestureHandler;
             }
             gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.tap, GestureState.ACTIVE), this);
