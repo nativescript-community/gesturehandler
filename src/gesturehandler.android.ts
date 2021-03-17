@@ -48,7 +48,6 @@ class PageGestureExtended extends Page {
 let installed = false;
 let installedOverrides = false;
 export function install(overrideNGestures = false) {
-    console.log('install', overrideNGestures, installed, installedOverrides);
     if (!installed) {
         installed = true;
         installBase();
@@ -82,7 +81,6 @@ export function install(overrideNGestures = false) {
                 this._gestureObservers[type] = [];
             }
 
-            console.log('_observe', this, type, typeof this._gestureObservers[type]);
             this._gestureObservers[type].push(gestureObserve(this, type, callback, thisArg));
             if (this.isLoaded && !this.touchListenerIsSet) {
                 this.setOnTouchListener();
