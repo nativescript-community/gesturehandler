@@ -5,7 +5,7 @@
 
 import Observable from '@nativescript-community/observable';
 import { EventData } from '@nativescript/core';
-import { Property, View, booleanConverter } from '@nativescript/core/ui';
+import { CssProperty, Property, Style, View, booleanConverter } from '@nativescript/core/ui';
 import {
     FlingGestureHandler,
     FlingGestureHandlerOptions,
@@ -255,11 +255,6 @@ export const ViewInitEvent = 'ViewInitEvent';
 export const ViewDisposeEvent = 'ViewDisposeEvent';
 
 let NATIVE_GESTURE_TAG = 74000;
-export const exclusiveTouchProperty = new Property<View, boolean>({
-    name: 'exclusiveTouch',
-    defaultValue: false,
-    valueConverter: booleanConverter,
-});
 class ViewGestureExtended extends View {
     exclusiveTouchGestureHandler: NativeViewGestureHandler;
     initNativeView() {
@@ -292,14 +287,21 @@ class ViewGestureExtended extends View {
     }
 }
 
+export const exclusiveTouchProperty = new CssProperty<Style, boolean>({
+    name: 'exclusiveTouch',
+    cssName: 'exclusive-touch',
+    defaultValue: false,
+    valueConverter: booleanConverter,
+});
+exclusiveTouchProperty.register(Style);
+
 let installed = false;
 export function overrideViewBase() {
     const NSView = require('@nativescript/core/ui/core/view').View;
-    exclusiveTouchProperty.register(NSView);
     applyMixins(NSView, [ViewGestureExtended]);
 }
 
-export function install() {
+export function install(overrideNGestures?: boolean) {
     if (installed) {
         return;
     }

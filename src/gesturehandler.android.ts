@@ -50,7 +50,7 @@ let installedOverrides = false;
 export function install(overrideNGestures = false) {
     if (!installed) {
         installed = true;
-        installBase();
+        installBase(overrideNGestures);
         const NSPage = require('@nativescript/core/ui/page').Page;
         NSPage.prototype.createNativeView = function () {
             if (!PageLayout) {

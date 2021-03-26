@@ -33,7 +33,7 @@ let installedOverrides = false;
 export function install(overrideNGestures = false) {
     if (!installed) {
         installed = true;
-        installBase();
+        installBase(overrideNGestures);
     }
 
     if (overrideNGestures === true && !installedOverrides) {
