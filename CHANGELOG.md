@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.40](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.39...v0.1.40) (2021-03-26)
+
+
+### Bug Fixes
+
+* exclusiveTouch css prop ([22df7cf](https://github.com/Akylas/nativescript-gesturehandler/commit/22df7cf838ba6acdc96db2400460f54508e114f4))
+
+
+
+
+
 ## [0.1.39](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.38...v0.1.39) (2021-03-17)
 
 
