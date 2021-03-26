@@ -251,6 +251,13 @@ export function applyMixins(
     });
 }
 
+export const exclusiveTouchProperty = new CssProperty<Style, boolean>({
+    name: 'exclusiveTouch',
+    cssName: 'exclusive-touch',
+    defaultValue: false,
+    valueConverter: booleanConverter,
+});
+
 export const ViewInitEvent = 'ViewInitEvent';
 export const ViewDisposeEvent = 'ViewDisposeEvent';
 
@@ -287,12 +294,6 @@ class ViewGestureExtended extends View {
     }
 }
 
-export const exclusiveTouchProperty = new CssProperty<Style, boolean>({
-    name: 'exclusiveTouch',
-    cssName: 'exclusive-touch',
-    defaultValue: false,
-    valueConverter: booleanConverter,
-});
 exclusiveTouchProperty.register(Style);
 
 let installed = false;
