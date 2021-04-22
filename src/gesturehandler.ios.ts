@@ -186,6 +186,7 @@ export class Handler<T extends GestureHandler, U extends HandlerOptions> extends
         return null;
     }
     attachedView: View;
+    nativeGetterKey = 'nativeView';
     attachToView(view: View) {
         if (view === this.attachedView) {
             return;
@@ -194,13 +195,16 @@ export class Handler<T extends GestureHandler, U extends HandlerOptions> extends
             this.detachFromView(this.attachedView);
         }
         this.attachedView = view;
-        const tag = this.native.tag;
         this.delegate = HandlerDelegate.initWithOwner(new WeakRef(this));
         this.native.delegate = this.delegate;
-        this.manager.get().attachGestureHandler(tag, view);
+        this.manager.get().attachGestureHandler(this, view);
     }
     detachFromView(view?: View) {
-        if (view && view !== this.attachedView) {
+        if ((view && view !== this.attachedView) || !this.attachedView) {
+            return;
+        }
+
+        if (!this.attachedView) {
             return;
         }
         const tag = this.native.tag;
@@ -246,14 +250,15 @@ export class Manager extends ManagerBase {
     }
 
     viewListeners = new Map<View, Map<number, { init: () => void; dispose: () => void }>>();
-    attachGestureHandler(handlerTag: number, view: View) {
+    attachGestureHandler(handler: Handler<any, any>, view: View) {
+        const tag = handler.native.tag;
         if (view.nativeView) {
-            this.manager.attachGestureHandlerToView(handlerTag, view.nativeView);
+            this.manager.attachGestureHandlerToView(tag, view[handler.nativeGetterKey]);
         }
         const onInit = () => {
-            this.manager.attachGestureHandlerToView(handlerTag, view.nativeView);
+            this.manager.attachGestureHandlerToView(tag, view[handler.nativeGetterKey]);
         };
-        const onDispose = () => this.manager.dropGestureHandler(handlerTag);
+        const onDispose = () => this.manager.dropGestureHandler(tag);
         view.on(ViewInitEvent, onInit, this);
         view.on(ViewDisposeEvent, onDispose, this);
         let viewListeners = this.viewListeners.get(view);
@@ -261,7 +266,7 @@ export class Manager extends ManagerBase {
             viewListeners = new Map();
             this.viewListeners.set(view, viewListeners);
         }
-        viewListeners.set(handlerTag, {
+        viewListeners.set(tag, {
             init: onInit,
             dispose: onDispose,
         });

@@ -132,7 +132,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
         nativegetterName: 'getHitSlop',
         converter: {
             toNative(value) {
-                const HIT_SLOP_NONE = com.swmansion.gesturehandler.GestureHandler.HIT_SLOP_NONE;
+                const HIT_SLOP_NONE = GestureHandler.HIT_SLOP_NONE;
                 if (typeof value === 'number') {
                     const hitSlop = layout.toDevicePixels(value);
                     return [hitSlop, hitSlop, hitSlop, hitSlop, HIT_SLOP_NONE, HIT_SLOP_NONE];
@@ -180,6 +180,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
     shouldStartGesture: (arg) => boolean;
     manager: WeakRef<Manager>;
     touchListener: com.swmansion.gesturehandler.OnTouchEventListener<T>;
+    nativeGetterKey = 'nativeView';
 
     getExtraData(handler: T) {
         const numberOfPointers = handler.getNumberOfPointers();
@@ -276,7 +277,10 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
         this.manager.get().attachGestureHandler(this, view);
     }
     detachFromView(view?: View) {
-        if (view && view !== this.attachedView) {
+        if ((view && view !== this.attachedView) || !this.attachedView) {
+            return;
+        }
+        if (!this.attachedView) {
             return;
         }
         this.manager.get().detachGestureHandler(this, this.attachedView);
@@ -347,6 +351,10 @@ export class PinchGestureHandler extends Handler<com.swmansion.gesturehandler.Pi
     }
     getExtraData(handler: com.swmansion.gesturehandler.PinchGestureHandler) {
         return Object.assign(super.getExtraData(handler), {
+            x: layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
+            y: layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
+            absoluteX: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
+            absoluteY: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY()),
             scale: handler.getScale(),
             focalX: layout.toDeviceIndependentPixels(handler.getFocalPointX()),
             focalY: layout.toDeviceIndependentPixels(handler.getFocalPointY()),
@@ -355,20 +363,21 @@ export class PinchGestureHandler extends Handler<com.swmansion.gesturehandler.Pi
     }
 }
 
+const GestureHandler = com.swmansion.gesturehandler.GestureHandler;
 export enum FlingDirection {
-    DIRECTION_LEFT = com.swmansion.gesturehandler.GestureHandler.DIRECTION_LEFT,
-    DIRECTION_UP = com.swmansion.gesturehandler.GestureHandler.DIRECTION_UP,
-    DIRECTION_DOWN = com.swmansion.gesturehandler.GestureHandler.DIRECTION_DOWN,
-    DIRECTION_RIGHT = com.swmansion.gesturehandler.GestureHandler.DIRECTION_RIGHT,
+    DIRECTION_LEFT = GestureHandler.DIRECTION_LEFT,
+    DIRECTION_UP = GestureHandler.DIRECTION_UP,
+    DIRECTION_DOWN = GestureHandler.DIRECTION_DOWN,
+    DIRECTION_RIGHT = GestureHandler.DIRECTION_RIGHT,
 }
 
 function directionToString(direction: number) {
     switch (direction) {
-        case com.swmansion.gesturehandler.GestureHandler.DIRECTION_RIGHT:
+        case GestureHandler.DIRECTION_RIGHT:
             return 'right';
-        case com.swmansion.gesturehandler.GestureHandler.DIRECTION_UP:
+        case GestureHandler.DIRECTION_UP:
             return 'up';
-        case com.swmansion.gesturehandler.GestureHandler.DIRECTION_DOWN:
+        case GestureHandler.DIRECTION_DOWN:
             return 'down';
         default:
             return 'left';
@@ -378,13 +387,13 @@ function directionToString(direction: number) {
 function directionFromString(direction: string) {
     switch (direction) {
         case 'right':
-            return com.swmansion.gesturehandler.GestureHandler.DIRECTION_RIGHT;
+            return GestureHandler.DIRECTION_RIGHT;
         case 'up':
-            return com.swmansion.gesturehandler.GestureHandler.DIRECTION_UP;
+            return GestureHandler.DIRECTION_UP;
         case 'down':
-            return com.swmansion.gesturehandler.GestureHandler.DIRECTION_DOWN;
+            return GestureHandler.DIRECTION_DOWN;
         default:
-            return com.swmansion.gesturehandler.GestureHandler.DIRECTION_LEFT;
+            return GestureHandler.DIRECTION_LEFT;
     }
 }
 
@@ -407,14 +416,14 @@ export class LongPressGestureHandler extends Handler<com.swmansion.gesturehandle
         const context = Application.android.context as android.content.Context;
         return new com.swmansion.gesturehandler.LongPressGestureHandler(context);
     }
-    // getExtraData(handler: com.swmansion.gesturehandler.LongPressGestureHandler) {
-    //     return Object.assign(super.getExtraData(handler), {
-    //         x: layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
-    //         y: layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
-    //         absoluteX: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
-    //         absoluteY: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY())
-    //     });
-    // }
+    getExtraData(handler: com.swmansion.gesturehandler.LongPressGestureHandler) {
+        return Object.assign(super.getExtraData(handler), {
+            x: layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
+            y: layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
+            absoluteX: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
+            absoluteY: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY()),
+        });
+    }
 }
 export class RotationGestureHandler extends Handler<com.swmansion.gesturehandler.RotationGestureHandler, RotationGestureHandlerOptions> {
     createNative(options) {
@@ -422,6 +431,10 @@ export class RotationGestureHandler extends Handler<com.swmansion.gesturehandler
     }
     getExtraData(handler: com.swmansion.gesturehandler.RotationGestureHandler) {
         return Object.assign(super.getExtraData(handler), {
+            x: layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
+            y: layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
+            absoluteX: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
+            absoluteY: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY()),
             rotation: handler.getRotation(),
             anchorX: layout.toDeviceIndependentPixels(handler.getAnchorX()),
             anchorY: layout.toDeviceIndependentPixels(handler.getAnchorY()),
@@ -502,7 +515,7 @@ export class Manager extends ManagerBase {
                 const registry = page.registry;
                 if (registry) {
                     registry.registerHandler(nHandler);
-                    registry.attachHandlerToView(nHandler.getTag(), view.nativeView);
+                    registry.attachHandlerToView(nHandler.getTag(), view[handler.nativeGetterKey]);
                 }
             } else {
                 throw new Error('a page is needed to attach a gesture');

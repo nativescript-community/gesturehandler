@@ -264,6 +264,13 @@ export const ViewDisposeEvent = 'ViewDisposeEvent';
 let NATIVE_GESTURE_TAG = 74000;
 class ViewGestureExtended extends View {
     exclusiveTouchGestureHandler: NativeViewGestureHandler;
+
+    set exclusiveTouch(value) {
+        this.style['exclusiveTouch'] = value;
+    }
+    get exclusiveTouch() {
+        return this.style['exclusiveTouch'];
+    }
     initNativeView() {
         if (this.nativeView) {
             this.nativeView.nsView = new WeakRef(this);
@@ -273,6 +280,10 @@ class ViewGestureExtended extends View {
     disposeNativeView() {
         if (this.nativeView) {
             this.nativeView.nsView = null;
+        }
+        if (this.exclusiveTouchGestureHandler) {
+            this.exclusiveTouchGestureHandler.detachFromView();
+            this.exclusiveTouchGestureHandler = null;
         }
         this.notify({ eventName: ViewDisposeEvent, object: this });
     }
