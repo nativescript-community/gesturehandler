@@ -462,7 +462,7 @@ public class GestureHandlerOrchestrator {
     // TODO: ideally we should determine the pixel color under the given coordinates
     // and return
     // false if the color is transparent
-    boolean isLeafOrTransparent = !(view instanceof ViewGroup) || view.getBackground() != null;
+    boolean isLeafOrTransparent = view.isClickable() && (!(view instanceof ViewGroup || view instanceof android.view.TextureView) || view.getBackground() != null);
     return isLeafOrTransparent && isTransformedTouchPointInView(coords[0], coords[1], view);
   }
 
