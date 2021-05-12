@@ -7,6 +7,7 @@ import com.swmansion.gesturehandler.GestureHandler;
 import com.swmansion.gesturehandler.GestureHandlerRegistry;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.WeakHashMap;
 
 import androidx.annotation.Nullable;
@@ -25,6 +26,16 @@ public class GestureHandlerRegistryImpl implements GestureHandlerRegistry {
 
   public synchronized @Nullable GestureHandler getHandler(int handlerTag) {
     return mHandlers.get(handlerTag);
+  }
+
+  public synchronized ArrayList<GestureHandler> getAllHandlers() {
+    if (mHandlers == null)
+      return null;
+    ArrayList<GestureHandler> arrayList = new ArrayList<GestureHandler>(mHandlers.size());
+    for (int i = 0; i < mHandlers.size(); i++) {
+      arrayList.add(mHandlers.valueAt(i));
+    }
+    return arrayList;
   }
 
   public synchronized boolean attachHandlerToView(int handlerTag, android.view.View view) {

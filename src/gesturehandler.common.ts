@@ -30,6 +30,7 @@ import {
 
 export const GestureHandlerStateEvent = 'GestureHandlerStateEvent';
 export const GestureHandlerTouchEvent = 'GestureHandlerTouchEvent';
+export const ROOT_GESTURE_HANDLER_TAG = -12345;
 
 export enum HandlerType {
     PAN = 'pan',

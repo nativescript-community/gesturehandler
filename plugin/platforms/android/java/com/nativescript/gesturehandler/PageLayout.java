@@ -15,14 +15,17 @@ import com.swmansion.gesturehandler.PointerEventsConfig;
 import com.swmansion.gesturehandler.GestureHandler;
 import com.swmansion.gesturehandler.ViewConfigurationHelper;
 
+import java.util.ArrayList;
+
 public class PageLayout extends org.nativescript.widgets.GridLayout {
-    public PageLayout(Context context) {
+    public PageLayout(Context context, int rootGestureTag) {
         super(context);
+        mRootGestureTag = rootGestureTag;
         addRow(new ItemSpec(1, GridUnitType.auto));
         addRow(new ItemSpec(1, GridUnitType.star));
     }
-    private final static int GESTURE_HANDLER_TAG = -12345;
 
+    private int mRootGestureTag;
     private GestureHandlerOrchestrator mOrchestrator;
     private GestureHandlerRegistryImpl mRegistry;
     private ViewConfigurationHelper configurationHelper;
@@ -31,6 +34,7 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
     private boolean mShouldIntercept = false;
     private boolean mPassingTouch = false;
     private boolean mDispatchToOrchestra = true;
+    private boolean mShouldAddRootGesture = true;
 
     public void setShouldIntercept(boolean value) {
         if (GestureHandler.debug) {
@@ -41,6 +45,13 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
 
     public void setPassingTouch(boolean value) {
         this.mPassingTouch = value;
+    }
+    public void setShouldAddRootGesture(boolean value) {
+        this.mShouldAddRootGesture = value;
+    }
+
+    public int getRootGestureTag() {
+        return mRootGestureTag;
     }
 
     public void setDispatchToOrchestra(boolean value) {
@@ -71,12 +82,21 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
         if (GestureHandler.debug) {
             Log.d("JS", "PageLayout tryCancelAllHandlers ");
         }
-        // In order to cancel handlers we activate handler that is hooked to the root view
-        if (this.rootGestureHandler != null && this.rootGestureHandler.getState() == com.swmansion.gesturehandler.GestureHandler.STATE_BEGAN) {
-            // Try activate main JS handler
-            this.rootGestureHandler.activate();
-            this.rootGestureHandler.end();
+        ArrayList<GestureHandler> handlers = this.mRegistry.getAllHandlers();
+        if (handlers != null) {
+            for(int i = 0; i < handlers.size(); i++) {
+                GestureHandler handler = handlers.get(i);
+                if (handler != this.rootGestureHandler) {
+                    handler.cancel();
+                }
+            }
         }
+        // In order to cancel handlers we activate handler that is hooked to the root view
+        // if (this.rootGestureHandler != null && this.rootGestureHandler.getState() == com.swmansion.gesturehandler.GestureHandler.STATE_BEGAN) {
+        //     // Try activate main JS handler
+        //     this.rootGestureHandler.activate();
+        //     this.rootGestureHandler.end();
+        // }
     }
 
     public void requestDisallowInterceptTouchEvent(boolean disallowIntercept) {
@@ -156,9 +176,9 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
         this.mOrchestrator.setMinimumAlphaForTraversal(0.01f);
 
         this.rootGestureHandler = new RootViewGestureHandler();
-        this.rootGestureHandler.setTag(GESTURE_HANDLER_TAG);
+        this.rootGestureHandler.setTag(mRootGestureTag);
         this.mRegistry.registerHandler(this.rootGestureHandler);
-        this.mRegistry.attachHandlerToView(GESTURE_HANDLER_TAG, this);
+        this.mRegistry.attachHandlerToView(mRootGestureTag, this);
     }
 
     public void tearDown() {

@@ -27,6 +27,7 @@ import {
     applyMixins,
     install as installBase,
     nativeProperty,
+    ROOT_GESTURE_HANDLER_TAG,
 } from './gesturehandler.common';
 import { observe as gestureObserve } from './gestures_override';
 
@@ -47,6 +48,7 @@ class PageGestureExtended extends Page {
 }
 let installed = false;
 let installedOverrides = false;
+
 export function install(overrideNGestures = false) {
     if (!installed) {
         installed = true;
@@ -56,7 +58,7 @@ export function install(overrideNGestures = false) {
             if (!PageLayout) {
                 PageLayout = com.nativescript.gesturehandler.PageLayout;
             }
-            const layout = new PageLayout(this._context);
+            const layout = new PageLayout(this._context, ROOT_GESTURE_HANDLER_TAG);
             this.gestureRegistry = layout.registry;
             return layout;
         };
