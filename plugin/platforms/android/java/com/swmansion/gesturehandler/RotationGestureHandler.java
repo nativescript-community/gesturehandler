@@ -44,12 +44,16 @@ public class RotationGestureHandler extends GestureHandler<RotationGestureHandle
   @Override
   protected void onHandle(MotionEvent event) {
     int state = getState();
+    int activePointers = event.getPointerCount();
     if (state == STATE_UNDETERMINED) {
       mLastVelocity = 0f;
       mLastRotation = 0f;
-      mRotationGestureDetector = new RotationGestureDetector(mGestureListener);
+      if (mRotationGestureDetector == null) {
+        mRotationGestureDetector = new RotationGestureDetector(mGestureListener);
 
-      begin();
+      }
+
+        begin();
     }
 
     if (mRotationGestureDetector != null) {

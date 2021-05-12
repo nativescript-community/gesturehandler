@@ -51,27 +51,29 @@ public class PinchGestureHandler extends GestureHandler<PinchGestureHandler> {
 
   @Override
   protected void onHandle(MotionEvent event) {
+    int activePointers = event.getPointerCount();
 
     if (getState() == STATE_UNDETERMINED) {
-      Context context = getView().getContext();
-      mLastVelocity = 0f;
-      mLastScaleFactor = 1f;
-      mScaleGestureDetector = new ScaleGestureDetector(context, mGestureListener);
-      if (mSpanSlop != -1) {
-        mScaleGestureDetector.setSpanSlop(mSpanSlop);
+      if (mScaleGestureDetector == null) {
+        Context context = getView().getContext();
+        mLastVelocity = 0f;
+        mLastScaleFactor = 1f;
+        mScaleGestureDetector = new ScaleGestureDetector(context, mGestureListener);
+        if (mSpanSlop != -1) {
+          mScaleGestureDetector.setSpanSlop(mSpanSlop);
+        }
+        if (mMinSpan != -1) {
+          mScaleGestureDetector.setMinSpan(mMinSpan);
+        }
       }
-      if (mMinSpan != -1) {
-        mScaleGestureDetector.setMinSpan(mMinSpan);
-      }
-
       begin();
     }
+    
 
     if (mScaleGestureDetector != null) {
       mScaleGestureDetector.onTouchEvent(event);
     }
 
-    int activePointers = event.getPointerCount();
     if (event.getActionMasked() == MotionEvent.ACTION_POINTER_UP) {
       activePointers -= 1;
     }
