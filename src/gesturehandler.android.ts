@@ -188,8 +188,8 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
         const numberOfPointers = handler.getNumberOfPointers();
         const positions = [];
         for (let index = 0; index < numberOfPointers; index++) {
-            positions.push(handler.getXAtIndex(index));
-            positions.push(handler.getYAtIndex(index));
+            positions.push(layout.toDeviceIndependentPixels(handler.getXAtIndex(index)));
+            positions.push(layout.toDeviceIndependentPixels(handler.getYAtIndex(index)));
         }
         return {
             // x: layout.toDeviceIndependentPixels(handler.getX()),
