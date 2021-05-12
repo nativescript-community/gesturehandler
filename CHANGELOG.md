@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.43](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.42...v0.1.43) (2021-05-12)
+
+
+### Bug Fixes
+
+* **android:** allow touch through on non clickable view ([ee0bd9e](https://github.com/Akylas/nativescript-gesturehandler/commit/ee0bd9e444ec1840e77d615111261ad174359de9))
+* override rewrite to get closer to N ([5d03a7d](https://github.com/Akylas/nativescript-gesturehandler/commit/5d03a7dfd753f346465adc0a9c8b686b372822a1))
+* positions in dpi ([b8d6a3d](https://github.com/Akylas/nativescript-gesturehandler/commit/b8d6a3da6676c09f137bca697837e11d0a2b51b5))
+
+
+
+
+
 ## [0.1.42](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.41...v0.1.42) (2021-04-22)
 
 
