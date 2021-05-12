@@ -1,8 +1,8 @@
 import { EventData, View } from '@nativescript/core';
-import { GestureEventData, GestureTypes, GesturesObserver as NGesturesObserver, TouchAction, toString as gestureToString } from '@nativescript/core/ui/gestures';
+import { GestureEventData, GestureStateTypes, GestureTypes, GesturesObserver as NGesturesObserver, SwipeDirection, TouchAction, toString as gestureToString } from '@nativescript/core/ui/gestures';
 import { layout } from '@nativescript/core/utils/utils';
 import { Manager } from './gesturehandler';
-import { GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureState, GestureStateEventData, HandlerType } from './gesturehandler.common';
+import { GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureState, GestureStateEventData, HandlerType, ROOT_GESTURE_HANDLER_TAG } from './gesturehandler.common';
 
 export function observe(target: View, type: GestureTypes, callback: (args: GestureEventData) => void, context?: any): GesturesObserver {
     const observer = new GesturesObserver(target, callback, context);
@@ -47,6 +47,12 @@ export class GesturesObserver {
         if (!target['DOUBLE_TAP_HANDLER_TAG']) {
             target['DOUBLE_TAP_HANDLER_TAG'] = TAG++;
         }
+        if (!target['PINCH_HANDLER_TAG']) {
+            target['PINCH_HANDLER_TAG'] = TAG++;
+        }
+        if (!target['PAN_HANDLER_TAG']) {
+            target['PAN_HANDLER_TAG'] = TAG++;
+        }
         this._callback = callback;
         this._context = context;
     }
@@ -88,7 +94,7 @@ export class GesturesObserver {
     }
     private _notifyTouch: boolean;
 
-    private _eventData: TouchGestureEventData;
+    private _eventData: { [k: number]: CommonGestureEventData | TouchGestureEventData } = {};
 
     private _onTargetLoaded: (data: EventData) => void;
     private _onTargetUnloaded: (data: EventData) => void;
@@ -116,32 +122,49 @@ export class GesturesObserver {
         this._notifyTouch = false;
         this._eventData = null;
     }
+
+    private emitEvent(type: GestureTypes, event: GestureStateEventData) {
+        if (this.callback) {
+            let eventData = this._eventData[type] as CommonGestureEventData;
+            if (!eventData) {
+                switch (type) {
+                    case GestureTypes.pan:
+                        this._eventData[type] = eventData = new PanGestureEventData(type);
+                        break;
+                    case GestureTypes.pinch:
+                        this._eventData[type] = eventData = new PinchGestureEventData(type);
+                        break;
+                    case GestureTypes.swipe:
+                        this._eventData[type] = eventData = new SwipeGestureEventData(type);
+                        break;
+                    default:
+                        this._eventData[type] = eventData = new CommonGestureEventData(type);
+                        break;
+                }
+            }
+            eventData.prepare(this.target, event.data);
+            _executeCallback(this, eventData);
+            // this.callback.call(this._context, {
+            //     eventName: gestureToString(type),
+            //     object: event.data.view,
+            //     type,
+            //     ...event.data,
+            //     ...event.data.extraData,
+            // });
+        }
+    }
     private onGestureStateChange(type: GestureTypes, triggerOnstate = -1) {
         return (event: GestureStateEventData) => {
             if (triggerOnstate !== -1 && event.data.state !== triggerOnstate) {
                 return;
             }
-            if (this.callback) {
-                this.callback.call(this._context, {
-                    eventName: gestureToString(type),
-                    object: event.data.view,
-                    type,
-                    ...event.data,
-                    ...event.data.extraData,
-                });
-            }
+            this.emitEvent(type, event);
         };
     }
     private onGestureTouchChange(type: GestureTypes) {
         return (event: GestureStateEventData) => {
-            if (this.callback && event.data.state === GestureState.ACTIVE) {
-                this.callback.call(this._context, {
-                    eventName: gestureToString(type),
-                    object: event.data.view,
-                    type,
-                    ...event.data,
-                    ...event.data.extraData,
-                });
+            if (event.data.state === GestureState.ACTIVE) {
+                this.emitEvent(type, event);
             }
         };
     }
@@ -163,6 +186,7 @@ export class GesturesObserver {
         if (type & GestureTypes.tap) {
             if (!gestureHandler) {
                 gestureHandler = manager.createGestureHandler(HandlerType.TAP, target['TAP_HANDLER_TAG'], {
+                    simultaneousHandlers: [ROOT_GESTURE_HANDLER_TAG],
                     waitFor: [target['LONGPRESS_HANDLER_TAG'], target['DOUBLE_TAP_HANDLER_TAG']],
                 });
                 gestureHandler.attachToView(target);
@@ -172,7 +196,9 @@ export class GesturesObserver {
         }
         if (type & GestureTypes.longPress) {
             if (!gestureHandler) {
-                gestureHandler = manager.createGestureHandler(HandlerType.LONG_PRESS, target['LONGPRESS_HANDLER_TAG']);
+                gestureHandler = manager.createGestureHandler(HandlerType.LONG_PRESS, target['LONGPRESS_HANDLER_TAG'], {
+                    simultaneousHandlers: [ROOT_GESTURE_HANDLER_TAG],
+                });
                 gestureHandler.attachToView(target);
                 target._gestureHandlers[type] = gestureHandler;
             }
@@ -182,6 +208,7 @@ export class GesturesObserver {
             if (!gestureHandler) {
                 gestureHandler = manager.createGestureHandler(HandlerType.TAP, target['DOUBLE_TAP_HANDLER_TAG'], {
                     numberOfTaps: 2,
+                    simultaneousHandlers: [ROOT_GESTURE_HANDLER_TAG],
                 });
                 gestureHandler.attachToView(target);
                 target._gestureHandlers[type] = gestureHandler;
@@ -191,7 +218,9 @@ export class GesturesObserver {
 
         if (type & GestureTypes.pinch) {
             if (!gestureHandler) {
-                gestureHandler = manager.createGestureHandler(HandlerType.PINCH, TAG++);
+                gestureHandler = manager.createGestureHandler(HandlerType.PINCH, target['PINCH_HANDLER_TAG'], {
+                    simultaneousHandlers: [target['PAN_HANDLER_TAG'], ROOT_GESTURE_HANDLER_TAG],
+                });
                 gestureHandler.attachToView(target);
                 target._gestureHandlers[type] = gestureHandler;
             }
@@ -201,7 +230,9 @@ export class GesturesObserver {
 
         if (type & GestureTypes.swipe) {
             if (!gestureHandler) {
-                gestureHandler = manager.createGestureHandler(HandlerType.FLING, TAG++);
+                gestureHandler = manager.createGestureHandler(HandlerType.FLING, TAG++, {
+                    simultaneousHandlers: [ROOT_GESTURE_HANDLER_TAG],
+                });
                 gestureHandler.attachToView(target);
                 target._gestureHandlers[type] = gestureHandler;
             }
@@ -210,7 +241,9 @@ export class GesturesObserver {
 
         if (type & GestureTypes.pan) {
             if (!gestureHandler) {
-                gestureHandler = manager.createGestureHandler(HandlerType.PAN, TAG++, {});
+                gestureHandler = manager.createGestureHandler(HandlerType.PAN, target['PAN_HANDLER_TAG'], {
+                    simultaneousHandlers: [target['PINCH_HANDLER_TAG'], ROOT_GESTURE_HANDLER_TAG],
+                });
                 gestureHandler.attachToView(target);
                 target._gestureHandlers[type] = gestureHandler;
             }
@@ -220,7 +253,9 @@ export class GesturesObserver {
 
         if (type & GestureTypes.rotation) {
             if (!gestureHandler) {
-                gestureHandler = manager.createGestureHandler(HandlerType.ROTATION, TAG++, {});
+                gestureHandler = manager.createGestureHandler(HandlerType.ROTATION, TAG++, {
+                    simultaneousHandlers: [ROOT_GESTURE_HANDLER_TAG],
+                });
                 gestureHandler.attachToView(target);
                 target._gestureHandlers[type] = gestureHandler;
             }
@@ -237,11 +272,12 @@ export class GesturesObserver {
 
     public androidOnTouchEvent(motionEvent: android.view.MotionEvent) {
         if (this._notifyTouch) {
-            if (!this._eventData) {
-                this._eventData = new TouchGestureEventData();
+            let eventData = this._eventData[GestureTypes.touch];
+            if (!eventData) {
+                eventData = this._eventData[GestureTypes.touch] = new TouchGestureEventData();
             }
-            this._eventData.prepare(this.target, motionEvent);
-            _executeCallback(this, this._eventData);
+            eventData.prepare(this.target, motionEvent);
+            _executeCallback(this, eventData);
         }
     }
 }
@@ -262,7 +298,127 @@ class Pointer implements Pointer {
         return this.event.getY(this.android) / layout.getDisplayDensity();
     }
 }
-class TouchGestureEventData implements TouchGestureEventData {
+class GesturePointer {
+    android: number;
+    ios: number;
+    private event: any;
+    constructor(index: number, private x, private y) {
+        this.android = index;
+    }
+
+    getX(): number {
+        return this.x;
+    }
+
+    getY(): number {
+        return this.y;
+    }
+}
+
+class CommonGestureEventData implements GestureEventData {
+    ios;
+    android;
+    eventName: string;
+    type: GestureTypes;
+    view: View;
+    object: any;
+    eventData: {
+        state: GestureState;
+        ios?: any; // native View
+        android?: any; // native View
+        view?: View; // native View
+        extraData: {
+            numberOfPointers: number;
+            [k: string]: number | string;
+        };
+    };
+    state: GestureStateTypes;
+
+    private _activePointers: GesturePointer[];
+    private _allPointers: GesturePointer[];
+
+    constructor(type: GestureTypes) {
+        this.eventName = gestureToString(type);
+        this.type = type;
+    }
+
+    public prepare(view: View, eventData) {
+        this.view = view;
+        this.object = view;
+        this._activePointers = undefined;
+        this._allPointers = undefined;
+        this.eventData = eventData;
+        switch (this.eventData.state) {
+            case GestureState.BEGAN:
+                this.state = GestureStateTypes.began;
+                break;
+            case GestureState.CANCELLED:
+            case GestureState.FAILED:
+                this.state = GestureStateTypes.cancelled;
+                break;
+            case GestureState.ACTIVE:
+                this.state = GestureStateTypes.changed;
+                break;
+            case GestureState.END:
+                this.state = GestureStateTypes.ended;
+                break;
+        }
+    }
+
+    get extraData() {
+        return this.eventData.extraData;
+    }
+
+    getPointerCount(): number {
+        return this.extraData.numberOfPointers;
+    }
+
+    getActivePointers() {
+        // Only one active pointer in Android
+        if (!this._activePointers) {
+            const positions = this.extraData.positions;
+            this._activePointers = [new GesturePointer(0, positions[0], positions[1])];
+        }
+        return this._activePointers;
+    }
+
+    getAllPointers() {
+        if (!this._allPointers) {
+            this._allPointers = [];
+            const positions = this.extraData.positions;
+            for (let i = 0; i < this.getPointerCount(); i++) {
+                this._allPointers.push(new GesturePointer(i, positions[i * 2], positions[i * 2 + 1]));
+            }
+        }
+        return this._allPointers;
+    }
+
+    getX(): number {
+        return this.extraData.x as number;
+    }
+
+    getY(): number {
+        return this.extraData.y as number;
+    }
+
+    private getActionType(e: android.view.MotionEvent): string {
+        switch (e.getActionMasked()) {
+            case android.view.MotionEvent.ACTION_DOWN:
+            case android.view.MotionEvent.ACTION_POINTER_DOWN:
+                return TouchAction.down;
+            case android.view.MotionEvent.ACTION_MOVE:
+                return TouchAction.move;
+            case android.view.MotionEvent.ACTION_UP:
+            case android.view.MotionEvent.ACTION_POINTER_UP:
+                return TouchAction.up;
+            case android.view.MotionEvent.ACTION_CANCEL:
+                return TouchAction.cancel;
+        }
+
+        return '';
+    }
+}
+class TouchGestureEventData {
     eventName: string = gestureToString(GestureTypes.touch);
     type: GestureTypes = GestureTypes.touch;
     ios: any = undefined;
@@ -270,6 +426,7 @@ class TouchGestureEventData implements TouchGestureEventData {
     view: View;
     android: android.view.MotionEvent;
     object: any;
+    state: GestureStateTypes;
 
     private _activePointers: Pointer[];
     private _allPointers: Pointer[];
@@ -328,6 +485,34 @@ class TouchGestureEventData implements TouchGestureEventData {
         }
 
         return '';
+    }
+}
+
+function _getSwipeDirection(direction: string): SwipeDirection {
+    return SwipeDirection[direction];
+}
+class SwipeGestureEventData extends CommonGestureEventData {
+    get direction() {
+        return _getSwipeDirection(this.extraData.direction as string);
+    }
+}
+class PanGestureEventData extends CommonGestureEventData {
+    get deltaX() {
+        return this.eventData.extraData.translationX;
+    }
+    get deltaY() {
+        return this.eventData.extraData.translationY;
+    }
+}
+class PinchGestureEventData extends CommonGestureEventData {
+    getFocusX() {
+        return this.eventData.extraData.focalX;
+    }
+    getFocusY() {
+        return this.eventData.extraData.focalY;
+    }
+    get scale() {
+        return this.eventData.extraData.scale;
     }
 }
 
