@@ -348,12 +348,15 @@ public class GestureHandler<T extends GestureHandler> {
   }
 
   private void moveToState(int newState) {
+    if (mOrchestrator == null) {
+      // ignore not prepared
+      return;
+    }
     if (mState == newState) {
       return;
     }
     int oldState = mState;
     mState = newState;
-
     mOrchestrator.onHandlerStateChange(this, newState, oldState);
 
     onStateChange(newState, oldState);
