@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.44](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.43...v0.1.44) (2021-05-17)
+
+
+### Bug Fixes
+
+* **android:** prevent crash ([65ce28a](https://github.com/Akylas/nativescript-gesturehandler/commit/65ce28adbac2657dbd204e932757cc78db103874))
+
+
+
+
+
 ## [0.1.43](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.42...v0.1.43) (2021-05-12)
 
 
