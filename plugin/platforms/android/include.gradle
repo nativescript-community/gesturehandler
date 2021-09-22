@@ -1,5 +1,5 @@
 dependencies {
-    compile(name:'widgets-release', ext:'aar')
+    implementation files('../../../node_modules/@nativescript/core/platforms/android/widgets-release.aar')
     implementation "androidx.annotation:annotation:1.1.0"
 }
 repositories {
