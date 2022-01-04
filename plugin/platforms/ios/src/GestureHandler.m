@@ -125,6 +125,10 @@ CGRect GHHitSlopInsetRect(CGRect rect, RNGHHitSlop hitSlop) {
     _enabled = enabled;
     self.recognizer.enabled = enabled;
 }
+- (BOOL)enabled
+{
+    return _enabled;
+}
 
 - (void)bindToView:(UIView *)view
 {

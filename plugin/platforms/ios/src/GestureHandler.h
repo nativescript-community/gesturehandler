@@ -81,6 +81,9 @@ if (value != nil) recognizer.prop = [value type]; \
 @property(nonatomic) BOOL shouldCancelWhenOutside;
 @property (nullable, nonatomic, weak) id<GestureHandlerDelegate> delegate;
 
+- (void)setEnabled:(BOOL)enabled;
+- (void)setShouldCancelWhenOutside:(BOOL)value;
+
 - (void)bindToView:(nonnull UIView *)view;
 - (void)unbindFromView;
 - (void)configure:(nullable NSDictionary *)config NS_REQUIRES_SUPER;
