@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.49](https://github.com/nativescript-community/gesturehandler/compare/v0.1.48...v0.1.49) (2022-01-04)
+
+
+### Bug Fixes
+
+* **ios:** ensure `setEnabled` is available through JS for GestureHandler ([56ec946](https://github.com/nativescript-community/gesturehandler/commit/56ec94674699383160ff86ddf43a1edbe43bd506))
+
+
+
+
+
 ## [0.1.48](https://github.com/nativescript-community/gesturehandler/compare/v0.1.47...v0.1.48) (2021-10-11)
 
 **Note:** Version bump only for package @nativescript-community/gesturehandler
