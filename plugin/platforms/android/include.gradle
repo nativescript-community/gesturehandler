@@ -12,7 +12,6 @@ repositories {
             widgetsDir = '../../../node_modules/@akylas/nativescript/platforms/android'
         }
     }
-    println "\t + widgetsDir: $widgetsDir"
     flatDir {
         dirs "$widgetsDir"
     }
