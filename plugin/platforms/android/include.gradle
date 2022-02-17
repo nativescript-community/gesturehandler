@@ -1,10 +1,19 @@
+import groovy.json.JsonSlurper
 dependencies {
     implementation(name:'widgets-release', ext:'aar')
     implementation "androidx.annotation:annotation:1.1.0"
 }
 repositories {
-    mavenCentral()
+    def widgetsDir = '../../../node_modules/@nativescript/core/platforms/android'
+    def appPackageJsonFile = file("../../../package.json")
+    if (appPackageJsonFile.exists()) {
+        def appPackageJson = new JsonSlurper().parseText(appPackageJsonFile.text)
+        if (appPackageJson.dependencies['@akylas/nativescript'] != null) {
+            widgetsDir = '../../../node_modules/@akylas/nativescript/platforms/android'
+        }
+    }
+    println "\t + widgetsDir: $widgetsDir"
     flatDir {
-        dirs '../../../node_modules/@nativescript/core/platforms/android'
+        dirs "$widgetsDir"
     }
 }
