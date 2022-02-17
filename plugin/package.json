@@ -34,5 +34,6 @@
     "bootstrapper": "nativescript-plugin-seed",
     "dependencies": {
         "@nativescript-community/observable": "^2.0.8"
-    }
+    },
+    "gitHead": "531e9068c445832a6faf6bb8e227b738baa6ef18"
 }

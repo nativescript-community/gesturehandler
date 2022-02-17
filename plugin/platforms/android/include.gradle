@@ -4,12 +4,13 @@ dependencies {
     implementation "androidx.annotation:annotation:1.1.0"
 }
 repositories {
-    def widgetsDir = '../../../node_modules/@nativescript/core/platforms/android'
-    def appPackageJsonFile = file("../../../package.json")
+    def appDir = "$rootDir/../../.."
+    def widgetsDir = "$appDir/node_modules/@nativescript/core/platforms/android"
+    def appPackageJsonFile = file("$appDir/package.json")
     if (appPackageJsonFile.exists()) {
         def appPackageJson = new JsonSlurper().parseText(appPackageJsonFile.text)
         if (appPackageJson.dependencies['@akylas/nativescript'] != null) {
-            widgetsDir = '../../../node_modules/@akylas/nativescript/platforms/android'
+            widgetsDir = "$appDir/node_modules/@akylas/nativescript/platforms/android"
         }
     }
     flatDir {
