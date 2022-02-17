@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.51](https://github.com/nativescript-community/gesturehandler/compare/v0.1.50...v0.1.51) (2022-02-17)
+
+
+### Bug Fixes
+
+* allow plugin to work with @akylas/nativescript fork ([aad3276](https://github.com/nativescript-community/gesturehandler/commit/aad3276d5abe54e79f9b955672007e2c67cb43fb))
+
+
+
+
+
 ## [0.1.50](https://github.com/nativescript-community/gesturehandler/compare/v0.1.49...v0.1.50) (2022-01-04)
 
 
