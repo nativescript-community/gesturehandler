@@ -5,12 +5,12 @@ repositories {
     mavenCentral()
     google()
      flatDir {
-        dirs '../../../node_modules/@nativescript/core/platforms/android'
+        dirs "$rootDir/node_modules/@nativescript/core/platforms/android"
     }
 }
 dependencies {
-    implementation files('/Volumes/dev/androidSDK/platforms/android-28/android.jar')
-    compile(name:'widgets-release', ext:'aar')
+    implementation files("${System.getenv('ANDROID_HOME')}/platforms/android-32/android.jar")
+    implementation(name:'widgets-release', ext:'aar')
     implementation "androidx.annotation:annotation:1.1.0"
 }
 sourceSets {
