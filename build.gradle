@@ -4,7 +4,7 @@ apply plugin: 'java'
 repositories {
     mavenCentral()
     google()
-     flatDir {
+    flatDir {
         dirs "$rootDir/node_modules/@nativescript/core/platforms/android"
     }
 }
