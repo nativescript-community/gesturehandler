@@ -40,7 +40,7 @@
 - (id)initWithGestureHandler:(GestureHandler*)gestureHandler
 {
   if ((self = [super initWithTarget:gestureHandler action:@selector(handleGesture:)])) {
-    _gestureHandler = gestureHandler;
+    _gestureHandler = (TapGestureHandler*)gestureHandler;
     _tapsSoFar = 0;
     _numberOfTaps = 1;
     _minPointers = 1;
