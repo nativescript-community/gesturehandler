@@ -21,13 +21,13 @@ import {
     HandlerType,
     ManagerBase,
     OptionsTypeMap,
+    ROOT_GESTURE_HANDLER_TAG,
     TypeMap,
     ViewDisposeEvent,
     ViewInitEvent,
     applyMixins,
     install as installBase,
     nativeProperty,
-    ROOT_GESTURE_HANDLER_TAG,
 } from './gesturehandler.common';
 import { observe as gestureObserve } from './gestures_override';
 
@@ -70,7 +70,7 @@ export function install(overrideNGestures = false) {
         const NSView = require('@nativescript/core/ui/core/view').View;
         const NSButtonBase = require('@nativescript/core/ui/button').ButtonBase;
         const NSButton = require('@nativescript/core/ui/button').Button;
-        delete NSButtonBase.tapEvent;
+        delete NSButton.tapEvent;
         // we need to disable on click listener
         NSButton.prototype.initNativeView = function () {
             NSButtonBase.prototype.initNativeView.call(this);
