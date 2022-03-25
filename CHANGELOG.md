@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.53](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.52...v0.1.53) (2022-03-25)
+
+
+### Bug Fixes
+
+* **android:** override N gesture working with button ([a5fc49c](https://github.com/Akylas/nativescript-gesturehandler/commit/a5fc49ca85e289991caeac028f70aaaf27d48b7a))
+
+
+
+
+
 ## [0.1.52](https://github.com/Akylas/nativescript-gesturehandler/compare/v0.1.51...v0.1.52) (2022-02-17)
 
 
