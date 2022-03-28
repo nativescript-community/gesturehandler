@@ -9,7 +9,7 @@
         "build": "npm run tsc && npm run readme",
         "build.win": "npm run tsc.win && npm run readme",
         "build.all": "npm run build && npm run build.angular",
-        "build.all.win": "npm run build .win&& npm run build.angular.win",
+        "build.all.win": "npm run build .win && npm run build.angular.win",
         "build.angular": "../../node_modules/.bin/ng-packagr -p ../../src/gesturehandler/angular/package.json -c ../../src/gesturehandler/angular/tsconfig.json",
         "build.angular.win": "..\\..\\node_modules\\.bin\\ng-packagr -p ..\\..\\src\\gesturehandler\\angular\\package.json -c ..\\..\\src\\gesturehandler\\angular\\tsconfig.json",
         "readme": "../../node_modules/.bin/readme generate -c ../../tools/readme/blueprint.json",
