@@ -1,0 +1,52 @@
+{
+    "name": "@nativescript-community/gesturehandler",
+    "version": "0.1.53",
+    "description": "Declarative API exposing platform native touch and gesture system to NativeScript.",
+    "main": "gesturehandler",
+    "sideEffects": false,
+    "typings": "gesturehandler.d.ts",
+    "scripts": {
+        "build": "npm run tsc && npm run readme",
+        "build.win": "npm run tsc.win && npm run readme",
+        "build.all": "npm run build && npm run build.angular",
+        "build.all.win": "npm run build .win&& npm run build.angular.win",
+        "build.angular": "../../node_modules/.bin/ng-packagr -p ../../src/gesturehandler/angular/package.json -c ../../src/gesturehandler/angular/tsconfig.json",
+        "build.angular.win": "..\\..\\node_modules\\.bin\\ng-packagr -p ..\\..\\src\\gesturehandler\\angular\\package.json -c ..\\..\\src\\gesturehandler\\angular\\tsconfig.json",
+        "readme": "../../node_modules/.bin/readme generate -c ../../tools/readme/blueprint.json",
+        "tsc": "../../node_modules/.bin/cpy '**/*.d.ts' '../../packages/gesturehandler' --parents --cwd=../../src/gesturehandler && ../../node_modules/.bin/tsc -skipLibCheck -d",
+        "tsc.win": "..\\..\\node_modules\\.bin\\cpy '**\\*.d.ts' '..\\..\\packages\\gesturehandler' --parents --cwd=..\\..\\src\\gesturehandler && ..\\..\\node_modules\\.bin\\tsc -skipLibCheck -d",
+        "clean": "../../node_modules/.bin/rimraf ./*.d.ts ./*.js ./*.js.map",
+        "clean.win": "..\\..\\node_modules\\.bin\\rimraf .\\*.d.ts .\\*.js .\\*.js.map"
+    },
+    "nativescript": {
+        "platforms": {
+            "android": "6.2.1",
+            "ios": "6.2.1"
+        }
+    },
+    "keywords": [
+        "NativeScript",
+        "JavaScript",
+        "iOS",
+        "Android",
+        "Vue",
+        "preview|https://raw.githubusercontent.com/nativescript-community/gesturehandler/master/images/demo.gif"
+    ],
+    "author": {
+        "name": "Martin Guillon",
+        "email": "martin.guillon@akylas.fr"
+    },
+    "bugs": {
+        "url": "https://github.com/nativescript-community/gesturehandler/issues"
+    },
+    "license": "Apache-2.0",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/nativescript-community/gesturehandler"
+    },
+    "bootstrapper": "nativescript-plugin-seed",
+    "dependencies": {
+        "@nativescript-community/observable": "^2.0.10"
+    },
+    "gitHead": "531e9068c445832a6faf6bb8e227b738baa6ef18"
+}
