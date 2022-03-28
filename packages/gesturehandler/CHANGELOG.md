@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/nativescript-community/gesturehandler/compare/v0.1.53...v0.2.0) (2022-03-28)
+
+
+### Features
+
+* added `GestureRootView` to allow the plugin to work ([4167112](https://github.com/nativescript-community/gesturehandler/commit/4167112b698cf67bda568bce55cf647600ed5b78))
+
+
+
+
+
 ## [0.1.53](https://github.com/nativescript-community/gesturehandler/compare/v0.1.52...v0.1.53) (2022-03-25)
 
 **Note:** Version bump only for package @nativescript-community/gesturehandler
