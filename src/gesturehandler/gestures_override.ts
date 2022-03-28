@@ -58,7 +58,6 @@ export class GesturesObserver {
     }
 
     public disconnect() {
-        console.log('disconnect');
         this._detach();
 
         if (this.target) {
@@ -80,8 +79,6 @@ export class GesturesObserver {
                 }
                 list.length = 0;
 
-                this.target._gestureObservers[this.type].disconnect();
-                // this.target._gestureObservers[this.type] = undefined;
                 delete this.target._gestureObservers[this.type];
                 if (this.target._gestureHandlers && this.target._gestureHandlers[this.type]) {
                     delete this.target._gestureHandlers[this.type];
