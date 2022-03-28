@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/nativescript-community/gesturehandler/compare/v0.2.0...v0.2.1) (2022-03-28)
+
+
+### Bug Fixes
+
+* detach fix ([440ca63](https://github.com/nativescript-community/gesturehandler/commit/440ca633dee2b5efbf9f0f26062b5bf0f348354d))
+
+
+
+
+
 # [0.2.0](https://github.com/nativescript-community/gesturehandler/compare/v0.1.53...v0.2.0) (2022-03-28)
 
 
