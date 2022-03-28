@@ -1,22 +1,65 @@
-[![npm](https://img.shields.io/npm/v/@nativescript-community/gesturehandler.svg)](https://www.npmjs.com/package/@nativescript-community/gesturehandler)
-[![npm](https://img.shields.io/npm/dt/@nativescript-community/gesturehandler.svg?label=npm%20downloads)](https://www.npmjs.com/package/@nativescript-community/gesturehandler)
-[![GitHub forks](https://img.shields.io/github/forks/nativescript-community/gesturehandler.svg)](https://github.com/nativescript-community/gesturehandler/network)
-[![GitHub stars](https://img.shields.io/github/stars/nativescript-community/gesturehandler.svg)](https://github.com/nativescript-community/gesturehandler/stargazers)
+<!-- ⚠️ This README has been generated from the file(s) "blueprint.md" ⚠️-->
+<!--  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      DO NOT EDIT THIS READEME DIRECTLY! Edit "bluesprint.md" instead.
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<h1 align="center">@nativescript-community/gesturehandler</h1>
+<p align="center">
+		<a href="https://npmcharts.com/compare/@nativescript-community/gesturehandler?minimal=true"><img alt="Downloads per month" src="https://img.shields.io/npm/dm/@nativescript-community/gesturehandler.svg" height="20"/></a>
+<a href="https://www.npmjs.com/package/@nativescript-community/gesturehandler"><img alt="NPM Version" src="https://img.shields.io/npm/v/@nativescript-community/gesturehandler.svg" height="20"/></a>
+	</p>
 
+<p align="center">
+  <b>Declarative API exposing platform native touch and gesture system to NativeScript.</b></br>
+  <sub><sub>
+</p>
+
+<br />
+
+
+
+[](#table-of-contents)
+
+## Table of Contents
+
+* [Installation](#installation)
+* [API](#api)
+			* [TypeScript](#typescript)
+* [GestureRootView](#gesturerootview)
+* [Overriding Nativescript gestures](#overriding-nativescript-gestures)
+* [Credits](#credits)
+	* [Examples:](#examples)
+* [Demos and Development](#demos-and-development)
+	* [Setup](#setup)
+	* [Build](#build)
+	* [Demos](#demos)
+* [Questions](#questions)
+
+
+[](#installation)
 
 ## Installation
+Run the following command from the root of your project:
 
-```shell
-tns plugin add @nativescript-community/gesturehandler
-```
+`ns plugin add @nativescript-community/gesturehandler`
 
-Be sure to run a new build after adding plugins to avoid any issues.
 
----
-
-This is a port of [react-native-gesturehandler](https://kmagiera.github.io/react-native-gesture-handler/).
-The source is based on the source code by [Krzysztof Magiera](https://github.com/kmagiera). Dont hesitate to go and thank him for his work!
-
+[](#api)
 
 ## API
 
@@ -54,3 +97,80 @@ Right now you must not forget to store the ```gestureHandler``` somewhere or the
 
 Now about the API. All the gestures for the react counterpart exist with the same options and the same event ```extraData```.
 
+
+[](#gesturerootview)
+
+## GestureRootView
+
+For the gestures to work correctly we need a `root` view which knows how to handle the gestures.
+If using `Page` (thus `Frame`) you don't need to do anything.
+In case you don't (drawer root view, modals, ...) then you can wrap your views in a `GestureRootView` which inherits `GridLayout`
+
+
+[](#overriding-nativescript-gestures)
+
+## Overriding Nativescript gestures
+
+This plugin can also override N gestures completely. This would give much more control over gestures and especially would allow to correctly handle simultaneous gestures likes `tap` and `longpress`
+
+To do that 
+
+
+[](#credits)
+
+## Credits
+
+This is a port of [react-native-gesturehandler](https://kmagiera.github.io/react-native-gesture-handler/).
+The source is based on the source code by [Krzysztof Magiera](https://github.com/kmagiera). Dont hesitate to go and thank him for his work!
+
+
+
+### Examples:
+
+- [Basic](demo-snippets/vue/Basic.vue)
+  - A basic example showing that overriding N gestures works, even in modals
+
+
+[](#demos-and-development)
+
+## Demos and Development
+
+
+### Setup
+
+To run the demos, you must clone this repo **recursively**.
+
+```
+git clone https://github.com/@nativescript-community/gesturehandler.git --recursive
+```
+
+**Install Dependencies:**
+```bash
+npm i # or 'yarn install' or 'pnpm install'
+```
+
+**Interactive Menu:**
+
+To start the interactive menu, run `npm start` (or `yarn start` or `pnpm start`). This will list all of the commonly used scripts.
+
+### Build
+
+```bash
+npm run build
+
+npm run build.angular # or for Angular
+```
+
+### Demos
+
+```bash
+npm run demo.[ng|react|svelte|vue].[ios|android]
+
+npm run demo.svelte.ios # Example
+```
+
+[](#questions)
+
+## Questions
+
+If you have any questions/issues/comments please feel free to create an issue or start a conversation in the [NativeScript Community Discord](https://nativescript.org/discord).
