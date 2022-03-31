@@ -60,7 +60,7 @@ public class LongPressGestureHandler extends GestureHandler<LongPressGestureHand
       // calculate distance from start
       float deltaX = event.getRawX() - mStartX;
       float deltaY = event.getRawY() - mStartY;
-      float distSq = deltaX * deltaX + deltaY * deltaY;
+      float distSq = (float)Math.sqrt((double)(deltaX * deltaX + deltaY * deltaY));
       if (distSq > mMaxDistSq) {
         if (getState() == STATE_ACTIVE) {
           cancel();
