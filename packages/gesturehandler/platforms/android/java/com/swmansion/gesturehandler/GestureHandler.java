@@ -329,11 +329,7 @@ public class GestureHandler<T extends GestureHandler> {
     int action = event.getActionMasked();
     if(action == MotionEvent.ACTION_DOWN || action == MotionEvent.ACTION_POINTER_DOWN) {
       if (mListener != null && !mListener.shouldStartGesture((T) this, event)) {
-        if (mState == STATE_BEGAN) {
-          fail();
-        } else {
-          fail();
-        }
+        fail();
         if (event != origEvent) {
           event.recycle();
         }
