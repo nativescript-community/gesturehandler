@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.2](https://github.com/nativescript-community/gesturehandler/compare/v0.2.1...v0.2.2) (2022-03-31)
+
+
+### Bug Fixes
+
+* **android:** longpress not always recognized ([0ce2ce6](https://github.com/nativescript-community/gesturehandler/commit/0ce2ce681debb8f915467907c54fa9ec55a88f35))
+
+
+
+
+
 ## [0.2.1](https://github.com/nativescript-community/gesturehandler/compare/v0.2.0...v0.2.1) (2022-03-28)
 
 
