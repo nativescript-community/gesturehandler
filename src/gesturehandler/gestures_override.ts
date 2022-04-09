@@ -221,7 +221,7 @@ export class GesturesObserver {
                 gestureHandler.attachToView(target);
                 target._gestureHandlers[type] = gestureHandler;
             }
-            gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.doubleTap), this);
+            gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.doubleTap, GestureState.ACTIVE), this);
         }
 
         if (type & GestureTypes.pinch) {
@@ -232,7 +232,7 @@ export class GesturesObserver {
                 gestureHandler.attachToView(target);
                 target._gestureHandlers[type] = gestureHandler;
             }
-            gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.pinch), this);
+            gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.pinch, GestureState.ACTIVE), this);
             gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.pinch), this);
         }
 
@@ -244,7 +244,7 @@ export class GesturesObserver {
                 gestureHandler.attachToView(target);
                 target._gestureHandlers[type] = gestureHandler;
             }
-            gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.swipe), this);
+            gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.swipe, GestureState.ACTIVE), this);
         }
 
         if (type & GestureTypes.pan) {
@@ -255,7 +255,7 @@ export class GesturesObserver {
                 gestureHandler.attachToView(target);
                 target._gestureHandlers[type] = gestureHandler;
             }
-            gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.pan), this);
+            gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.pan, GestureState.ACTIVE), this);
             gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.pan), this);
         }
 
@@ -267,7 +267,7 @@ export class GesturesObserver {
                 gestureHandler.attachToView(target);
                 target._gestureHandlers[type] = gestureHandler;
             }
-            gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.rotation), this);
+            gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.rotation, GestureState.ACTIVE), this);
             gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.rotation), this);
         }
         if (type & GestureTypes.touch && global.isIOS) {
