@@ -130,13 +130,13 @@ export abstract class BaseNative<T, U extends {}> extends Observable {
     disposeNativeView() {
         this.native = null;
     }
-    getNative = () => {
+    getNative() {
         if (!this.native) {
             this.native = this.createNative(this.options);
             this.initNativeView(this.native, this.options);
         }
         return this.native;
-    };
+    }
     abstract createNative(options: U): T;
 }
 
