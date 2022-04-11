@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.3](https://github.com/nativescript-community/gesturehandler/compare/v2.0.2...v2.0.3) (2022-04-11)
+
+
+### Bug Fixes
+
+* **android:** gesture not being detached correctly ([8dca885](https://github.com/nativescript-community/gesturehandler/commit/8dca88585023738f0e3a1e001af5b80cd27794a6))
+* N gesture override fixes and faster load/unload ([4209244](https://github.com/nativescript-community/gesturehandler/commit/42092441dcac6df41944e841e87dc7c3dff74f55))
+
+
+
+
+
 ## [2.0.2](https://github.com/nativescript-community/gesturehandler/compare/v2.0.1...v2.0.2) (2022-04-09)
 
 
