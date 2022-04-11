@@ -531,7 +531,7 @@ export class Manager extends ManagerBase {
         return handler as any;
     }
 
-    findRegistry(view: View) {
+    findRegistry(view: View): com.swmansion.gesturehandler.GestureHandlerRegistryImpl {
         let registry: com.swmansion.gesturehandler.GestureHandlerRegistryImpl;
         const page = view.page as PageGestureExtended;
         if (page) {
@@ -548,7 +548,7 @@ export class Manager extends ManagerBase {
         }
         return registry;
     }
-    attachGestureHandlerToView(handler: Handler<any, any>, view: View) {
+    attachGestureHandlerToView<T extends com.swmansion.gesturehandler.GestureHandler<any> = com.swmansion.gesturehandler.GestureHandler<any>>(handler: Handler<T, any>, view: View) {
         const nHandler = handler.getNative();
         if (nHandler) {
             const registry = this.findRegistry(view);
@@ -561,18 +561,18 @@ export class Manager extends ManagerBase {
         }
     }
 
-    detachGestureHandlerFromView(handler: Handler<any, any>, view: View) {
+    detachGestureHandlerFromView<T extends com.swmansion.gesturehandler.GestureHandler<any> = com.swmansion.gesturehandler.GestureHandler<any>>(handler: Handler<T, any>, view: View) {
         const nHandler = handler.getNative();
         if (nHandler) {
             const registry = this.findRegistry(view);
             if (registry) {
-                registry.dropHandler(handler.getNative());
+                registry.dropHandler(nHandler.getTag());
             }
         }
     }
 
     viewListeners = new Map<View, Map<number, { init: () => void; dispose: () => void }>>();
-    attachGestureHandler(handler: Handler<any, any>, view: View) {
+    attachGestureHandler<T extends com.swmansion.gesturehandler.GestureHandler<any> = com.swmansion.gesturehandler.GestureHandler<any>>(handler: Handler<T, any>, view: View) {
         if (view.nativeView) {
             this.attachGestureHandlerToView(handler, view);
         }
@@ -590,7 +590,7 @@ export class Manager extends ManagerBase {
             dispose: onDispose,
         });
     }
-    detachGestureHandler(handler: Handler<any, any>, view: View) {
+    detachGestureHandler<T extends com.swmansion.gesturehandler.GestureHandler<any> = com.swmansion.gesturehandler.GestureHandler<any>>(handler: Handler<T, any>, view: View) {
         if (view) {
             const viewListeners = this.viewListeners.get(view);
             if (viewListeners) {
