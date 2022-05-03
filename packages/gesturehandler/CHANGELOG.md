@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.4](https://github.com/nativescript-community/gesturehandler/compare/v2.0.3...v2.0.4) (2022-05-03)
+
+
+### Bug Fixes
+
+* **android:** build fix with pnpm ([90b3a95](https://github.com/nativescript-community/gesturehandler/commit/90b3a953c8cf5f6ec2d488814c1e9d752591de3a))
+
+
+
+
+
 ## [2.0.3](https://github.com/nativescript-community/gesturehandler/compare/v2.0.2...v2.0.3) (2022-04-11)
 
 **Note:** Version bump only for package @nativescript-community/gesturehandler
