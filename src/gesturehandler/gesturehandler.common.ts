@@ -260,7 +260,12 @@ export const exclusiveTouchProperty = new CssProperty<Style, boolean>({
     defaultValue: false,
     valueConverter: booleanConverter,
 });
-
+export const disallowInterceptTouchProperty = new CssProperty<Style, boolean>({
+    name: 'disallowInterceptTouch',
+    cssName: 'disallow-intercept-touch',
+    defaultValue: false,
+    valueConverter: booleanConverter,
+});
 export const ViewInitEvent = 'ViewInitEvent';
 export const ViewDisposeEvent = 'ViewDisposeEvent';
 
@@ -291,7 +296,6 @@ class ViewGestureExtended extends View {
         this.notify({ eventName: ViewDisposeEvent, object: this });
     }
     [exclusiveTouchProperty.setNative](value: boolean) {
-        // console.log('exclusiveTouchProperty', this, value);
         if (value) {
             if (!this.exclusiveTouchGestureHandler) {
                 const gestureHandler = Manager.getInstance().createGestureHandler(HandlerType.NATIVE_VIEW, NATIVE_GESTURE_TAG++, {
@@ -306,9 +310,34 @@ class ViewGestureExtended extends View {
             this.exclusiveTouchGestureHandler.detachFromView();
         }
     }
+    onTouch(event) {
+        if (__ANDROID__) {
+            const mask = event.android.getActionMasked();
+            if (mask === 0 /* android.view.MotionEvent.ACTION_DOWN */) {
+                this.nativeViewProtected.requestDisallowInterceptTouchEvent(true);
+            } else if (mask === 3 /* android.view.MotionEvent.ACTION_CANCEL */ || mask === 1 /* android.view.MotionEvent.ACTION_UP */) {
+                this.nativeViewProtected.requestDisallowInterceptTouchEvent(false);
+            }
+        }
+    }
+    disallowInterceptTouchEventRegistered = false;
+    [disallowInterceptTouchProperty.setNative](value) {
+        if (__ANDROID__) {
+            if (value) {
+                if (!this.disallowInterceptTouchEventRegistered) {
+                    this.disallowInterceptTouchEventRegistered = true;
+                    this.on('touch', this.onTouch, this);
+                }
+            } else if (this.disallowInterceptTouchEventRegistered) {
+                this.disallowInterceptTouchEventRegistered = false;
+                this.off('touch', this.onTouch, this);
+            }
+        }
+    }
 }
 
 exclusiveTouchProperty.register(Style);
+disallowInterceptTouchProperty.register(Style);
 
 let installed = false;
 export function overrideViewBase() {
