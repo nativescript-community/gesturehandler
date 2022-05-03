@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.5](https://github.com/nativescript-community/gesturehandler/compare/v2.0.4...v2.0.5) (2022-05-03)
+
+
+### Features
+
+* **android:** disallowInterceptTouch ([d71c630](https://github.com/nativescript-community/gesturehandler/commit/d71c63029cf4d9c01b4872bb93ce4433a9b9aecc))
+
+
+
+
+
 ## [2.0.4](https://github.com/nativescript-community/gesturehandler/compare/v2.0.3...v2.0.4) (2022-05-03)
 
 
