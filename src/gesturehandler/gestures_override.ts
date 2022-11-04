@@ -178,6 +178,13 @@ export class GesturesObserver {
     private _attach(target: View, type: GestureTypes) {
         if (type & GestureTypes.touch) {
             this._notifyTouch = true;
+            if (__IOS__) {
+                // let s not reimplement it for touch
+                const nObserver = new NGesturesObserver(target, this.callback, this.context);
+                nObserver.observe(type);
+                this.nObserver = nObserver;
+            }
+            return;
         }
         const manager = Manager.getInstance();
         // if (!target._gestureHandlers) {
@@ -237,12 +244,6 @@ export class GesturesObserver {
                 gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.rotation, GestureState.ACTIVE), this);
                 gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.rotation), this);
             }
-        }
-        if (type & GestureTypes.touch && global.isIOS) {
-            // let s not reimplement it for touch
-            const nObserver = new NGesturesObserver(target, this.callback, this.context);
-            nObserver.observe(type);
-            this.nObserver = nObserver;
         }
         gestureHandler.attachToView(target);
         this.gestureHandler = gestureHandler;
