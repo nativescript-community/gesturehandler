@@ -1,8 +1,4 @@
 /* eslint-disable no-redeclare */
-// import { launchEvent } from '@nativescript/core/application';
-// console.log(launchEvent);
-// console.log('gestures common', global.NativeScriptHasInitGlobal);
-
 import Observable from '@nativescript-community/observable';
 import { EventData, GridLayout } from '@nativescript/core';
 import { CssProperty, Property, Style, View, booleanConverter } from '@nativescript/core/ui';
@@ -66,7 +62,7 @@ export interface TypeMap {
 
 function createGetter(key: string, options: NativePropertyOptions) {
     // console.log('createGetter', key, options);
-    const nativeGetterName = ((global.isAndroid ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
+    const nativeGetterName = ((__ANDROID__ ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
     const converter = options.converter;
     return function () {
         let result;
@@ -82,7 +78,7 @@ function createGetter(key: string, options: NativePropertyOptions) {
     };
 }
 function createSetter(key, options: NativePropertyOptions) {
-    const nativeSetterName = ((global.isAndroid ? options.android : options.ios) || options).nativeSetterName || 'set' + key.charAt(0).toUpperCase() + key.slice(1);
+    const nativeSetterName = ((__ANDROID__ ? options.android : options.ios) || options).nativeSetterName || 'set' + key.charAt(0).toUpperCase() + key.slice(1);
     return function (newVal) {
         this.options[key] = newVal;
         if (this.native && this.native[nativeSetterName]) {
