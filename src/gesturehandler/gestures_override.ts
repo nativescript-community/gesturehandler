@@ -1,6 +1,6 @@
 import { EventData, View } from '@nativescript/core';
 import { GestureEventData, GestureStateTypes, GestureTypes, GesturesObserver as NGesturesObserver, SwipeDirection, TouchAction, toString as gestureToString } from '@nativescript/core/ui/gestures';
-import { layout } from '@nativescript/core/utils/utils';
+import { layout } from '@nativescript/core/utils/layout-helper';
 import { Handler, Manager } from './gesturehandler';
 import { GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureState, GestureStateEventData, HandlerType, ROOT_GESTURE_HANDLER_TAG } from './gesturehandler.common';
 

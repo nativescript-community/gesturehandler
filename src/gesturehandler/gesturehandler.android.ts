@@ -1,7 +1,7 @@
 import { Application, View } from '@nativescript/core';
 import { GestureEventData, GestureTypes } from '@nativescript/core/ui/gestures';
 import { Page } from '@nativescript/core/ui/page';
-import { layout } from '@nativescript/core/utils/utils';
+import { layout } from '@nativescript/core/utils/layout-helper';
 import {
     HandlerOptions,
     LongPressGestureHandlerOptions,
@@ -229,7 +229,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
             onStateChange: this.onStateChange.bind(this),
         });
         native.setOnTouchEventListener(this.touchListener);
-        this.manager.get().configureInteractions(this, options);
+        this.manager?.get()?.configureInteractions(this, options);
     }
     disposeNativeView() {
         this.native.setInteractionController(null);
@@ -252,7 +252,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
                 state: handler.getState(),
                 android: view,
                 extraData: this.getExtraData(handler),
-                view: view.nsView ? view.nsView.get() : null,
+                view: view.nsView ? view.nsView?.get() : null,
             },
         });
     }
@@ -266,7 +266,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
                 prevState,
                 android: view,
                 extraData: this.getExtraData(handler),
-                view: view.nsView ? view.nsView.get() : null,
+                view: view.nsView ? view.nsView?.get() : null,
             },
         });
     }
@@ -298,7 +298,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
             this.detachFromView(this.attachedView);
         }
         this.attachedView = view;
-        this.manager.get().attachGestureHandler(this, view);
+        this.manager?.get()?.attachGestureHandler(this, view);
     }
     detachFromView(view?: View) {
         if ((view && view !== this.attachedView) || !this.attachedView) {
@@ -307,7 +307,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
         if (!this.attachedView) {
             return;
         }
-        this.manager.get().detachGestureHandler(this, this.attachedView);
+        this.manager?.get()?.detachGestureHandler(this, this.attachedView);
         this.attachedView = null;
     }
 }
