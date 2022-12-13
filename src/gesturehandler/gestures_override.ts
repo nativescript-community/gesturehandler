@@ -1,6 +1,5 @@
-import { EventData, View } from '@nativescript/core';
+import { EventData, Utils, View } from '@nativescript/core';
 import { GestureEventData, GestureStateTypes, GestureTypes, GesturesObserver as NGesturesObserver, SwipeDirection, TouchAction, toString as gestureToString } from '@nativescript/core/ui/gestures';
-import { layout } from '@nativescript/core/utils/layout-helper';
 import { Handler, Manager } from './gesturehandler';
 import { GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureState, GestureStateEventData, HandlerType, ROOT_GESTURE_HANDLER_TAG } from './gesturehandler.common';
 
@@ -270,11 +269,11 @@ class Pointer implements Pointer {
     }
 
     getX(): number {
-        return this.event.getX(this.android) / layout.getDisplayDensity();
+        return this.event.getX(this.android) / Utils.layout.getDisplayDensity();
     }
 
     getY(): number {
-        return this.event.getY(this.android) / layout.getDisplayDensity();
+        return this.event.getY(this.android) / Utils.layout.getDisplayDensity();
     }
 }
 class GesturePointer {
