@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.8](https://github.com/nativescript-community/gesturehandler/compare/v2.0.7...v2.0.8) (2022-12-16)
+
+
+### Bug Fixes
+
+* N 8.4 final fix ([19b554d](https://github.com/nativescript-community/gesturehandler/commit/19b554d004967b23068eb558e5dd042813b23bca))
+
+
+
+
+
 ## [2.0.7](https://github.com/nativescript-community/gesturehandler/compare/v2.0.6...v2.0.7) (2022-12-01)
 
 **Note:** Version bump only for package nativescript-gesturehandler
