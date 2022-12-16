@@ -15,13 +15,13 @@
         "build.watch": "lerna run build.watch --parallel",
         "build.all": "lerna run build.all",
         "build.angular": "lerna run build.angular",
-        "clean": "rimraf 'packages/**/*.d.ts' 'packages/**/*.js' 'packages/**/*.js.map' 'packages/**/*.metada 'packages/**/angular/ng-package.json'",
+        "clean": "rimraf 'packages/**/*.d.ts' 'packages/**/*.js' 'packages/**/*.js.map' 'packages/**/*.metada' 'packages/**/angular/ng-package.json'",
         "commitmsg": "commitlint -e $GIT_PARAMS",
-        "demo.ng.android": "cd ./demo-ng && ns run android --no-hmr",
+        "demo.ng.android": "cd ./demo-ng && ns run android --no-hmr --env.watchNodeModules",
         "demo.ng.clean": "cd ./demo-ng && ns clean",
-        "demo.ng.ios": "cd ./demo-ng && ns run ios --no-hmr",
+        "demo.ng.ios": "cd ./demo-ng && ns run ios --no-hmr --env.watchNodeModules",
         "postinstall": "npm run setup",
-        "publish": "npm run clean && npm run build.all && lerna publish --create-release=github --force-publish",
+        "publish": "npm run clean && npm run build.all && npm run readme && lerna publish --no-private --create-release=github --force-publish",
         "readme": "node ./tools/readme.js",
         "setup": "npm run submodules && ts-patch install",
         "start": "./node_modules/.bin/ntl -A -s 15 -o",
@@ -31,7 +31,7 @@
         "tsc": "cpy '**/*.d.ts' '../plugin' --parents --cwd=src && tsc -skipLibCheck -d",
         "update": "node ./tools/update.js",
         "doc": "node tools/builddoc.mjs && git add docs/* && git commit -m \"chore:doc\"",
-        "fullclean": "npm run clean && rimraf 'packages/**/node_modules' 'package-lock.json' 'pnpm-lock.yaml' 'node_modules'"
+        "fullclean": "npm run clean && rimraf 'packages/**/node_modules' 'demo-*/hooks' 'package-lock.json' 'pnpm-lock.yaml' 'node_modules'"
     },
     "commitlint": {
         "extends": [
@@ -59,11 +59,16 @@
         "@nativescript-community/observable": "^2.0.10"
     },
     "workspaces": [
-        "packages/*"
+        "packages/*",
+        "demo-vue",
+        "demo-ng",
+        "demo-svelte",
+        "demo-react",
+        "demo-snippets"
     ],
     "engines": {
         "npm": "please use yarn or pnpm",
-        "yarn": ">= 1.19.1",
-        "pnpm": ">= 7.0.0"
+        "yarn": ">=1.19.1",
+        "pnpm": ">=7.0.0"
     }
 }
