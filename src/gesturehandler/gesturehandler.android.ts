@@ -1,7 +1,6 @@
-import { Application, View } from '@nativescript/core';
+import { Application, Utils, View } from '@nativescript/core';
 import { GestureEventData, GestureTypes } from '@nativescript/core/ui/gestures';
 import { Page } from '@nativescript/core/ui/page';
-import { layout } from '@nativescript/core/utils/layout-helper';
 import {
     HandlerOptions,
     LongPressGestureHandlerOptions,
@@ -159,7 +158,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
             toNative(value) {
                 const HIT_SLOP_NONE = GestureHandler.HIT_SLOP_NONE;
                 if (typeof value === 'number') {
-                    const hitSlop = layout.toDevicePixels(value);
+                    const hitSlop = Utils.layout.toDevicePixels(value);
                     return [hitSlop, hitSlop, hitSlop, hitSlop, HIT_SLOP_NONE, HIT_SLOP_NONE];
                 } else {
                     let left = HIT_SLOP_NONE,
@@ -169,36 +168,37 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
                     let width = HIT_SLOP_NONE,
                         height = HIT_SLOP_NONE;
                     if (value.hasOwnProperty(KEY_HIT_SLOP_HORIZONTAL)) {
-                        const horizontalPad = layout.toDevicePixels(value[KEY_HIT_SLOP_HORIZONTAL]);
+                        const horizontalPad = Utils.layout.toDevicePixels(value[KEY_HIT_SLOP_HORIZONTAL]);
                         left = right = horizontalPad;
                     }
                     if (value.hasOwnProperty(KEY_HIT_SLOP_VERTICAL)) {
-                        const verticalPad = layout.toDevicePixels(value[KEY_HIT_SLOP_VERTICAL]);
+                        const verticalPad = Utils.layout.toDevicePixels(value[KEY_HIT_SLOP_VERTICAL]);
                         top = bottom = verticalPad;
                     }
                     if (value.hasOwnProperty(KEY_HIT_SLOP_LEFT)) {
-                        left = layout.toDevicePixels(value[KEY_HIT_SLOP_LEFT]);
+                        left = Utils.layout.toDevicePixels(value[KEY_HIT_SLOP_LEFT]);
                     }
                     if (value.hasOwnProperty(KEY_HIT_SLOP_TOP)) {
-                        top = layout.toDevicePixels(value[KEY_HIT_SLOP_TOP]);
+                        top = Utils.layout.toDevicePixels(value[KEY_HIT_SLOP_TOP]);
                     }
                     if (value.hasKey(KEY_HIT_SLOP_RIGHT)) {
-                        right = layout.toDevicePixels(value[KEY_HIT_SLOP_RIGHT]);
+                        right = Utils.layout.toDevicePixels(value[KEY_HIT_SLOP_RIGHT]);
                     }
                     if (value.hasOwnProperty(KEY_HIT_SLOP_BOTTOM)) {
-                        bottom = layout.toDevicePixels(value[KEY_HIT_SLOP_BOTTOM]);
+                        bottom = Utils.layout.toDevicePixels(value[KEY_HIT_SLOP_BOTTOM]);
                     }
                     if (value.hasOwnProperty(KEY_HIT_SLOP_WIDTH)) {
-                        width = layout.toDevicePixels(value[KEY_HIT_SLOP_WIDTH]);
+                        width = Utils.layout.toDevicePixels(value[KEY_HIT_SLOP_WIDTH]);
                     }
                     if (value.hasOwnProperty(KEY_HIT_SLOP_HEIGHT)) {
-                        height = layout.toDevicePixels(value[KEY_HIT_SLOP_HEIGHT]);
+                        height = Utils.layout.toDevicePixels(value[KEY_HIT_SLOP_HEIGHT]);
                     }
                     return [left, top, right, bottom, width, height];
                 }
             },
         },
-    }) hitSlop;
+    })
+        hitSlop;
     @nativeProperty enabled: boolean;
     @nativeProperty shouldCancelWhenOutside: boolean;
     shouldStartGesture: (arg) => boolean;
@@ -210,12 +210,12 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
         const numberOfPointers = handler.getNumberOfPointers();
         const positions = [];
         for (let index = 0; index < numberOfPointers; index++) {
-            positions.push(layout.toDeviceIndependentPixels(handler.getXAtIndex(index)));
-            positions.push(layout.toDeviceIndependentPixels(handler.getYAtIndex(index)));
+            positions.push(Utils.layout.toDeviceIndependentPixels(handler.getXAtIndex(index)));
+            positions.push(Utils.layout.toDeviceIndependentPixels(handler.getYAtIndex(index)));
         }
         return {
-            // x: layout.toDeviceIndependentPixels(handler.getX()),
-            // y: layout.toDeviceIndependentPixels(handler.getY()),
+            // x: Utils.layout.toDeviceIndependentPixels(handler.getX()),
+            // y: Utils.layout.toDeviceIndependentPixels(handler.getY()),
             positions,
             numberOfPointers,
         };
@@ -318,34 +318,34 @@ export class TapGestureHandler extends Handler<com.swmansion.gesturehandler.TapG
     @nativeProperty maxDelayMs: number;
     @nativeProperty({ nativeSetterName: 'setMaxDx' }) maxDeltaX: number;
     @nativeProperty({ nativeSetterName: 'setMaxDy' }) maxDeltaY: number;
-    @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) maxDist: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) maxDist: number;
     @nativeProperty({ nativeSetterName: 'setMinNumberOfPointers' }) minPointers: number;
     createNative(options) {
         return new com.swmansion.gesturehandler.TapGestureHandler();
     }
     getExtraData(handler: com.swmansion.gesturehandler.TapGestureHandler) {
         return Object.assign(super.getExtraData(handler), {
-            x: layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
-            y: layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
-            absoluteX: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
-            absoluteY: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY()),
+            x: Utils.layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
+            y: Utils.layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
+            absoluteX: Utils.layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
+            absoluteY: Utils.layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY()),
         });
     }
 }
 
 export class PanGestureHandler extends Handler<com.swmansion.gesturehandler.PanGestureHandler, PanGestureHandlerOptions> {
-    @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) minDist: number;
-    @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) activeOffsetXStart: number;
-    @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) activeOffsetXEnd: number;
-    @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) failOffsetXStart: number;
-    @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) failOffsetXEnd: number;
-    @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) activeOffsetYStart: number;
-    @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) activeOffsetYEnd: number;
-    @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) failOffsetYStart: number;
-    @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) failOffsetYEnd: number;
-    @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) minVelocity: number;
-    @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) minVelocityX: number;
-    @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) minVelocityY: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) minDist: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) activeOffsetXStart: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) activeOffsetXEnd: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) failOffsetXStart: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) failOffsetXEnd: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) activeOffsetYStart: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) activeOffsetYEnd: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) failOffsetYStart: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) failOffsetYEnd: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) minVelocity: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) minVelocityX: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) minVelocityY: number;
     @nativeProperty minPointers: number;
     @nativeProperty maxPointers: number;
     @nativeProperty({ nativeSetterName: 'setAverageTouches' }) avgTouches: number;
@@ -356,32 +356,32 @@ export class PanGestureHandler extends Handler<com.swmansion.gesturehandler.PanG
     }
     getExtraData(handler: com.swmansion.gesturehandler.PanGestureHandler) {
         return Object.assign(super.getExtraData(handler), {
-            x: layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
-            y: layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
-            absoluteX: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
-            absoluteY: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY()),
-            translationX: layout.toDeviceIndependentPixels(handler.getTranslationX()),
-            translationY: layout.toDeviceIndependentPixels(handler.getTranslationY()),
-            velocityX: layout.toDeviceIndependentPixels(handler.getVelocityX()),
-            velocityY: layout.toDeviceIndependentPixels(handler.getVelocityY()),
+            x: Utils.layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
+            y: Utils.layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
+            absoluteX: Utils.layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
+            absoluteY: Utils.layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY()),
+            translationX: Utils.layout.toDeviceIndependentPixels(handler.getTranslationX()),
+            translationY: Utils.layout.toDeviceIndependentPixels(handler.getTranslationY()),
+            velocityX: Utils.layout.toDeviceIndependentPixels(handler.getVelocityX()),
+            velocityY: Utils.layout.toDeviceIndependentPixels(handler.getVelocityY()),
         });
     }
 }
 
 export class PinchGestureHandler extends Handler<com.swmansion.gesturehandler.PinchGestureHandler, PinchGestureHandlerOptions> {
-    @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) minSpan: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) minSpan: number;
     createNative(options) {
         return new com.swmansion.gesturehandler.PinchGestureHandler();
     }
     getExtraData(handler: com.swmansion.gesturehandler.PinchGestureHandler) {
         return Object.assign(super.getExtraData(handler), {
-            x: layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
-            y: layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
-            absoluteX: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
-            absoluteY: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY()),
+            x: Utils.layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
+            y: Utils.layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
+            absoluteX: Utils.layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
+            absoluteY: Utils.layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY()),
             scale: handler.getScale(),
-            focalX: layout.toDeviceIndependentPixels(handler.getFocalPointX()),
-            focalY: layout.toDeviceIndependentPixels(handler.getFocalPointY()),
+            focalX: Utils.layout.toDeviceIndependentPixels(handler.getFocalPointX()),
+            focalY: Utils.layout.toDeviceIndependentPixels(handler.getFocalPointY()),
             velocity: handler.getVelocity(),
         });
     }
@@ -435,17 +435,17 @@ export class FlingGestureHandler extends Handler<com.swmansion.gesturehandler.Fl
 }
 export class LongPressGestureHandler extends Handler<com.swmansion.gesturehandler.LongPressGestureHandler, LongPressGestureHandlerOptions> {
     @nativeProperty minDurationMs: number;
-    @nativeProperty({ converter: { fromNative: layout.toDevicePixels } }) maxDist: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) maxDist: number;
     createNative(options) {
         const context = Application.android.context as android.content.Context;
         return new com.swmansion.gesturehandler.LongPressGestureHandler(context);
     }
     getExtraData(handler: com.swmansion.gesturehandler.LongPressGestureHandler) {
         return Object.assign(super.getExtraData(handler), {
-            x: layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
-            y: layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
-            absoluteX: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
-            absoluteY: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY()),
+            x: Utils.layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
+            y: Utils.layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
+            absoluteX: Utils.layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
+            absoluteY: Utils.layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY()),
         });
     }
 }
@@ -455,13 +455,13 @@ export class RotationGestureHandler extends Handler<com.swmansion.gesturehandler
     }
     getExtraData(handler: com.swmansion.gesturehandler.RotationGestureHandler) {
         return Object.assign(super.getExtraData(handler), {
-            x: layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
-            y: layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
-            absoluteX: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
-            absoluteY: layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY()),
+            x: Utils.layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
+            y: Utils.layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
+            absoluteX: Utils.layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
+            absoluteY: Utils.layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY()),
             rotation: handler.getRotation(),
-            anchorX: layout.toDeviceIndependentPixels(handler.getAnchorX()),
-            anchorY: layout.toDeviceIndependentPixels(handler.getAnchorY()),
+            anchorX: Utils.layout.toDeviceIndependentPixels(handler.getAnchorX()),
+            anchorY: Utils.layout.toDeviceIndependentPixels(handler.getAnchorY()),
             velocity: handler.getVelocity(),
         });
     }

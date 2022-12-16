@@ -1,7 +1,7 @@
 /* eslint-disable no-redeclare */
 import Observable from '@nativescript-community/observable';
 import { EventData, GridLayout } from '@nativescript/core';
-import { CssProperty, Property, Style, View, booleanConverter } from '@nativescript/core/ui';
+import { CssProperty, Style, View, booleanConverter } from '@nativescript/core/ui';
 import {
     FlingGestureHandler,
     FlingGestureHandlerOptions,
