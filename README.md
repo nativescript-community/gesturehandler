@@ -6,6 +6,11 @@
 
 ### Repo Setup
 
+The repo uses submodules. If you did not clone with ` --recursive` then you need to call
+```
+git submodule update --init
+```
+
 The package manager used to install and link dependencies must be `pnpm` or `yarn`. `npm` wont work.
 
 To develop and test:
@@ -52,6 +57,16 @@ Then update common files
 npm run sync
 ```
 Then you can run `yarn|pnpm`, commit changed files if any
+
+### Update readme 
+```bash
+npm run readme
+```
+
+### Update doc 
+```bash
+npm run doc
+```
 
 ### Publish
 
@@ -110,12 +125,9 @@ npm run publish
 * [Credits](#credits)
 	* [Examples:](#examples)
 * [Demos and Development](#demos-and-development)
-	* [Repo Setup](#repo-setup)
+	* [Setup](#setup)
 	* [Build](#build)
 	* [Demos](#demos)
-* [Contributing](#contributing)
-	* [Update repo ](#update-repo-)
-	* [Publish](#publish)
 * [Questions](#questions)
 
 
@@ -222,13 +234,18 @@ The source is based on the source code by [Krzysztof Magiera](https://github.com
 ## Demos and Development
 
 
-### Repo Setup
+### Setup
 
-The package manager used to install and link dependencies must be `pnpm` or `yarn`. `npm` wont work.
+To run the demos, you must clone this repo **recursively**.
 
-To develop and test:
-if you use `yarn` then run `yarn`
-if you use `pnpm` then run `pnpm i`
+```
+git clone https://github.com/@nativescript-community/gesturehandler.git --recursive
+```
+
+**Install Dependencies:**
+```bash
+npm i # or 'yarn install' or 'pnpm install'
+```
 
 **Interactive Menu:**
 
@@ -237,7 +254,9 @@ To start the interactive menu, run `npm start` (or `yarn start` or `pnpm start`)
 ### Build
 
 ```bash
-npm run build.all
+npm run build
+
+npm run build.angular # or for Angular
 ```
 
 ### Demos
@@ -247,41 +266,6 @@ npm run demo.[ng|react|svelte|vue].[ios|android]
 
 npm run demo.svelte.ios # Example
 ```
-
-
-[](#contributing)
-
-
-[](#contributing)
-
-## Contributing
-
-### Update repo 
-
-You can update the repo files quite easily
-
-First update the submodules
-
-```bash
-npm run update
-```
-
-Then commit the changes
-Then update common files
-
-```bash
-npm run sync
-```
-Then you can run `yarn|pnpm`, commit changed files if any
-
-### Publish
-
-The publishing is completely handled by `lerna` (you can add `-- --bump major` to force a major release)
-Simply run 
-```shell
-npm run publish
-```
-
 
 [](#questions)
 
