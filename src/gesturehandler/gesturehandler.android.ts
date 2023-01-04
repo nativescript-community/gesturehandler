@@ -197,8 +197,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
                 }
             },
         },
-    })
-        hitSlop;
+    }) hitSlop;
     @nativeProperty enabled: boolean;
     @nativeProperty shouldCancelWhenOutside: boolean;
     shouldStartGesture: (arg) => boolean;

@@ -61,19 +61,16 @@ export interface TypeMap {
 }
 
 function createGetter(key: string, options: NativePropertyOptions) {
-    // console.log('createGetter', key, options);
     const nativeGetterName = ((__ANDROID__ ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
     const converter = options.converter;
     return function () {
         let result;
-        // console.log('getter', key, nativeGetterName);
         if (this.native && this.native[nativeGetterName]) {
             result = this.native[nativeGetterName]();
         } else {
             result = this.options[key] || options.defaultValue;
         }
         result = converter && converter.fromNative ? converter.fromNative.call(this, result, key) : result;
-        // console.log('getter', key, options, nativeGetterName, !!getConverter, result);
         return result;
     };
 }

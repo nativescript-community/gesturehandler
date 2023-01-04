@@ -1,3 +1,3 @@
 module.exports = {
-    extends: './tools/.eslintrc.js'
+    extends: './tools/.eslintrc.js',
 };
