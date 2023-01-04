@@ -196,27 +196,27 @@ export class GesturesObserver {
             if (type & GestureTypes.tap) {
                 gestureHandler = manager.createGestureHandler(HandlerType.TAP, target['TAP_HANDLER_TAG'], {
                     simultaneousHandlers: [ROOT_GESTURE_HANDLER_TAG],
-                    waitFor: [target['LONGPRESS_HANDLER_TAG'], target['DOUBLE_TAP_HANDLER_TAG']],
+                    waitFor: [target['LONGPRESS_HANDLER_TAG'], target['DOUBLE_TAP_HANDLER_TAG']]
                 });
                 gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.tap, GestureState.ACTIVE), this);
             }
             if (type & GestureTypes.longPress) {
                 gestureHandler = manager.createGestureHandler(HandlerType.LONG_PRESS, target['LONGPRESS_HANDLER_TAG'], {
-                    simultaneousHandlers: [ROOT_GESTURE_HANDLER_TAG],
+                    simultaneousHandlers: [ROOT_GESTURE_HANDLER_TAG]
                 });
                 gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.longPress, GestureState.ACTIVE), this);
             }
             if (type & GestureTypes.doubleTap) {
                 gestureHandler = manager.createGestureHandler(HandlerType.TAP, target['DOUBLE_TAP_HANDLER_TAG'], {
                     numberOfTaps: 2,
-                    simultaneousHandlers: [ROOT_GESTURE_HANDLER_TAG],
+                    simultaneousHandlers: [ROOT_GESTURE_HANDLER_TAG]
                 });
                 gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.doubleTap, GestureState.ACTIVE), this);
             }
 
             if (type & GestureTypes.pinch) {
                 gestureHandler = manager.createGestureHandler(HandlerType.PINCH, target['PINCH_HANDLER_TAG'], {
-                    simultaneousHandlers: [target['PAN_HANDLER_TAG'], ROOT_GESTURE_HANDLER_TAG],
+                    simultaneousHandlers: [target['PAN_HANDLER_TAG'], ROOT_GESTURE_HANDLER_TAG]
                 });
                 gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.pinch, GestureState.ACTIVE), this);
                 gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.pinch), this);
@@ -224,14 +224,14 @@ export class GesturesObserver {
 
             if (type & GestureTypes.swipe) {
                 gestureHandler = manager.createGestureHandler(HandlerType.FLING, TAG++, {
-                    simultaneousHandlers: [ROOT_GESTURE_HANDLER_TAG],
+                    simultaneousHandlers: [ROOT_GESTURE_HANDLER_TAG]
                 });
                 gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.swipe, GestureState.ACTIVE), this);
             }
 
             if (type & GestureTypes.pan) {
                 gestureHandler = manager.createGestureHandler(HandlerType.PAN, target['PAN_HANDLER_TAG'], {
-                    simultaneousHandlers: [target['PINCH_HANDLER_TAG'], ROOT_GESTURE_HANDLER_TAG],
+                    simultaneousHandlers: [target['PINCH_HANDLER_TAG'], ROOT_GESTURE_HANDLER_TAG]
                 });
                 gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.pan, GestureState.ACTIVE), this);
                 gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.pan), this);
@@ -239,7 +239,7 @@ export class GesturesObserver {
 
             if (type & GestureTypes.rotation) {
                 gestureHandler = manager.createGestureHandler(HandlerType.ROTATION, TAG++, {
-                    simultaneousHandlers: [ROOT_GESTURE_HANDLER_TAG],
+                    simultaneousHandlers: [ROOT_GESTURE_HANDLER_TAG]
                 });
                 gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.rotation, GestureState.ACTIVE), this);
                 gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.rotation), this);

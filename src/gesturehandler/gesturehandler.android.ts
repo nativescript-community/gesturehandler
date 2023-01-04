@@ -8,7 +8,7 @@ import {
     PanGestureHandlerOptions,
     PinchGestureHandlerOptions,
     RotationGestureHandlerOptions,
-    TapGestureHandlerOptions,
+    TapGestureHandlerOptions
 } from './gesturehandler';
 import {
     BaseGestureRootView,
@@ -27,7 +27,7 @@ import {
     ViewInitEvent,
     applyMixins,
     install as installBase,
-    nativeProperty,
+    nativeProperty
 } from './gesturehandler.common';
 import { observe as gestureObserve } from './gestures_override';
 
@@ -195,8 +195,8 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
                     }
                     return [left, top, right, bottom, width, height];
                 }
-            },
-        },
+            }
+        }
     }) hitSlop;
     @nativeProperty enabled: boolean;
     @nativeProperty shouldCancelWhenOutside: boolean;
@@ -216,7 +216,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
             // x: Utils.layout.toDeviceIndependentPixels(handler.getX()),
             // y: Utils.layout.toDeviceIndependentPixels(handler.getY()),
             positions,
-            numberOfPointers,
+            numberOfPointers
         };
     }
     initNativeView(native: T, options: U) {
@@ -225,7 +225,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
         this.touchListener = new com.swmansion.gesturehandler.OnTouchEventListener({
             shouldStartGesture: this.handleShouldStartGesture.bind(this),
             onTouchEvent: this.onTouchEvent.bind(this),
-            onStateChange: this.onStateChange.bind(this),
+            onStateChange: this.onStateChange.bind(this)
         });
         native.setOnTouchEventListener(this.touchListener);
         this.manager?.get()?.configureInteractions(this, options);
@@ -251,8 +251,8 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
                 state: handler.getState(),
                 android: view,
                 extraData: this.getExtraData(handler),
-                view: view.nsView ? view.nsView?.get() : null,
-            },
+                view: view.nsView ? view.nsView?.get() : null
+            }
         });
     }
     onStateChange(handler: T, state: number, prevState: number) {
@@ -265,8 +265,8 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
                 prevState,
                 android: view,
                 extraData: this.getExtraData(handler),
-                view: view.nsView ? view.nsView?.get() : null,
-            },
+                view: view.nsView ? view.nsView?.get() : null
+            }
         });
     }
 
@@ -327,7 +327,7 @@ export class TapGestureHandler extends Handler<com.swmansion.gesturehandler.TapG
             x: Utils.layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
             y: Utils.layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
             absoluteX: Utils.layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
-            absoluteY: Utils.layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY()),
+            absoluteY: Utils.layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY())
         });
     }
 }
@@ -362,7 +362,7 @@ export class PanGestureHandler extends Handler<com.swmansion.gesturehandler.PanG
             translationX: Utils.layout.toDeviceIndependentPixels(handler.getTranslationX()),
             translationY: Utils.layout.toDeviceIndependentPixels(handler.getTranslationY()),
             velocityX: Utils.layout.toDeviceIndependentPixels(handler.getVelocityX()),
-            velocityY: Utils.layout.toDeviceIndependentPixels(handler.getVelocityY()),
+            velocityY: Utils.layout.toDeviceIndependentPixels(handler.getVelocityY())
         });
     }
 }
@@ -381,7 +381,7 @@ export class PinchGestureHandler extends Handler<com.swmansion.gesturehandler.Pi
             scale: handler.getScale(),
             focalX: Utils.layout.toDeviceIndependentPixels(handler.getFocalPointX()),
             focalY: Utils.layout.toDeviceIndependentPixels(handler.getFocalPointY()),
-            velocity: handler.getVelocity(),
+            velocity: handler.getVelocity()
         });
     }
 }
@@ -391,7 +391,7 @@ export enum FlingDirection {
     DIRECTION_LEFT = GestureHandler.DIRECTION_LEFT,
     DIRECTION_UP = GestureHandler.DIRECTION_UP,
     DIRECTION_DOWN = GestureHandler.DIRECTION_DOWN,
-    DIRECTION_RIGHT = GestureHandler.DIRECTION_RIGHT,
+    DIRECTION_RIGHT = GestureHandler.DIRECTION_RIGHT
 }
 
 function directionToString(direction: number) {
@@ -428,7 +428,7 @@ export class FlingGestureHandler extends Handler<com.swmansion.gesturehandler.Fl
     }
     getExtraData(handler: com.swmansion.gesturehandler.FlingGestureHandler) {
         return Object.assign(super.getExtraData(handler), {
-            direction: directionToString(handler.getRecognizedDirection()),
+            direction: directionToString(handler.getRecognizedDirection())
         });
     }
 }
@@ -444,7 +444,7 @@ export class LongPressGestureHandler extends Handler<com.swmansion.gesturehandle
             x: Utils.layout.toDeviceIndependentPixels(handler.getLastRelativePositionX()),
             y: Utils.layout.toDeviceIndependentPixels(handler.getLastRelativePositionY()),
             absoluteX: Utils.layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionX()),
-            absoluteY: Utils.layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY()),
+            absoluteY: Utils.layout.toDeviceIndependentPixels(handler.getLastAbsolutePositionY())
         });
     }
 }
@@ -461,7 +461,7 @@ export class RotationGestureHandler extends Handler<com.swmansion.gesturehandler
             rotation: handler.getRotation(),
             anchorX: Utils.layout.toDeviceIndependentPixels(handler.getAnchorX()),
             anchorY: Utils.layout.toDeviceIndependentPixels(handler.getAnchorY()),
-            velocity: handler.getVelocity(),
+            velocity: handler.getVelocity()
         });
     }
 }
@@ -474,7 +474,7 @@ export class NativeViewGestureHandler extends Handler<com.swmansion.gesturehandl
     }
     getExtraData(handler: com.swmansion.gesturehandler.NativeViewGestureHandler) {
         return Object.assign(super.getExtraData(handler), {
-            pointerInside: handler.isWithinBounds(),
+            pointerInside: handler.isWithinBounds()
         });
     }
 }
@@ -586,7 +586,7 @@ export class Manager extends ManagerBase {
         }
         viewListeners.set(handler.getTag(), {
             init: onInit,
-            dispose: onDispose,
+            dispose: onDispose
         });
     }
     detachGestureHandler<T extends com.swmansion.gesturehandler.GestureHandler<any> = com.swmansion.gesturehandler.GestureHandler<any>>(handler: Handler<T, any>, view: View) {
