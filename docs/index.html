@@ -1,0 +1,265 @@
+<!DOCTYPE html><html class="default" lang="en"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="IE=edge"/><title>Documentation</title><meta name="description" content="Documentation for Documentation"/><meta name="viewport" content="width=device-width, initial-scale=1"/><link rel="stylesheet" href="assets/style.css"/><link rel="stylesheet" href="assets/highlight.css"/><script async src="assets/search.js" id="search-script"></script></head><body><script>document.documentElement.dataset.theme = localStorage.getItem("tsd-theme") || "os"</script><header class="tsd-page-toolbar">
+<div class="tsd-toolbar-contents container">
+<div class="table-cell" id="tsd-search" data-base=".">
+<div class="field"><label for="tsd-search-field" class="tsd-widget tsd-toolbar-icon search no-caption"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M15.7824 13.833L12.6666 10.7177C12.5259 10.5771 12.3353 10.499 12.1353 10.499H11.6259C12.4884 9.39596 13.001 8.00859 13.001 6.49937C13.001 2.90909 10.0914 0 6.50048 0C2.90959 0 0 2.90909 0 6.49937C0 10.0896 2.90959 12.9987 6.50048 12.9987C8.00996 12.9987 9.39756 12.4863 10.5008 11.6239V12.1332C10.5008 12.3332 10.5789 12.5238 10.7195 12.6644L13.8354 15.7797C14.1292 16.0734 14.6042 16.0734 14.8948 15.7797L15.7793 14.8954C16.0731 14.6017 16.0731 14.1267 15.7824 13.833ZM6.50048 10.499C4.29094 10.499 2.50018 8.71165 2.50018 6.49937C2.50018 4.29021 4.28781 2.49976 6.50048 2.49976C8.71001 2.49976 10.5008 4.28708 10.5008 6.49937C10.5008 8.70852 8.71314 10.499 6.50048 10.499Z" fill="var(--color-text)"></path></svg></label><input type="text" id="tsd-search-field" aria-label="Search"/></div>
+<div class="field">
+<div id="tsd-toolbar-links"><a href="https://docs.nativescript.org">Nativescript Doc</a></div></div>
+<ul class="results">
+<li class="state loading">Preparing search index...</li>
+<li class="state failure">The search index is not available</li></ul><a href="index.html" class="title">Documentation</a></div>
+<div class="table-cell" id="tsd-widgets"><a href="#" class="tsd-widget tsd-toolbar-icon menu no-caption" data-toggle="menu" aria-label="Menu"><svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="1" y="3" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="7" width="14" height="2" fill="var(--color-text)"></rect><rect x="1" y="11" width="14" height="2" fill="var(--color-text)"></rect></svg></a></div></div></header>
+<div class="container container-main">
+<div class="col-8 col-content">
+<div class="tsd-page-title">
+<h2>Documentation</h2></div>
+<div class="tsd-panel tsd-typography"><!-- ⚠️ This README has been generated from the file(s) "blueprint.md" ⚠️-->
+<p><a href="#demos-and-development"></a></p>
+
+<a href="#demos-and-development" id="demos-and-development" style="color: inherit; text-decoration: none;">
+  <h2>Demos and Development</h2>
+</a>
+
+<a href="#repo-setup" id="repo-setup" style="color: inherit; text-decoration: none;">
+  <h3>Repo Setup</h3>
+</a>
+<p>The repo uses submodules. If you did not clone with <code> --recursive</code> then you need to call</p>
+<pre><code><span class="hl-0">git</span><span class="hl-1"> </span><span class="hl-0">submodule</span><span class="hl-1"> </span><span class="hl-0">update</span><span class="hl-1"> --</span><span class="hl-0">init</span>
+</code></pre>
+<p>The package manager used to install and link dependencies must be <code>pnpm</code> or <code>yarn</code>. <code>npm</code> wont work.</p>
+<p>To develop and test:
+if you use <code>yarn</code> then run <code>yarn</code>
+if you use <code>pnpm</code> then run <code>pnpm i</code></p>
+<p><strong>Interactive Menu:</strong></p>
+<p>To start the interactive menu, run <code>npm start</code> (or <code>yarn start</code> or <code>pnpm start</code>). This will list all of the commonly used scripts.</p>
+
+<a href="#build" id="build" style="color: inherit; text-decoration: none;">
+  <h3>Build</h3>
+</a>
+<pre><code class="language-bash"><span class="hl-1">npm run build.all</span>
+</code></pre>
+
+<a href="#demos" id="demos" style="color: inherit; text-decoration: none;">
+  <h3>Demos</h3>
+</a>
+<pre><code class="language-bash"><span class="hl-1">npm run demo.[ng|react|svelte|vue].[ios|android]</span><br/><br/><span class="hl-1">npm run demo.svelte.ios </span><span class="hl-2"># Example</span>
+</code></pre>
+<p><a href="#contributing"></a></p>
+
+<a href="#contributing" id="contributing" style="color: inherit; text-decoration: none;">
+  <h2>Contributing</h2>
+</a>
+
+<a href="#update-repo" id="update-repo" style="color: inherit; text-decoration: none;">
+  <h3>Update repo</h3>
+</a>
+<p>You can update the repo files quite easily</p>
+<p>First update the submodules</p>
+<pre><code class="language-bash"><span class="hl-1">npm run update</span>
+</code></pre>
+<p>Then commit the changes
+Then update common files</p>
+<pre><code class="language-bash"><span class="hl-1">npm run sync</span>
+</code></pre>
+<p>Then you can run <code>yarn|pnpm</code>, commit changed files if any</p>
+
+<a href="#update-readme" id="update-readme" style="color: inherit; text-decoration: none;">
+  <h3>Update readme</h3>
+</a>
+<pre><code class="language-bash"><span class="hl-1">npm run readme</span>
+</code></pre>
+
+<a href="#update-doc" id="update-doc" style="color: inherit; text-decoration: none;">
+  <h3>Update doc</h3>
+</a>
+<pre><code class="language-bash"><span class="hl-1">npm run doc</span>
+</code></pre>
+
+<a href="#publish" id="publish" style="color: inherit; text-decoration: none;">
+  <h3>Publish</h3>
+</a>
+<p>The publishing is completely handled by <code>lerna</code> (you can add <code>-- --bump major</code> to force a major release)
+Simply run </p>
+<pre><code class="language-shell"><span class="hl-1">npm run publish</span>
+</code></pre>
+<p><br><br><!-- ⚠️ This README has been generated from the file(s) "blueprint.md" ⚠️--></p>
+<!--  !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      DO NOT EDIT THIS READEME DIRECTLY! Edit "bluesprint.md" instead.
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+      !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!! -->
+<h1 align="center">@nativescript-community/gesturehandler</h1>
+<p align="center">
+        <a href="https://npmcharts.com/compare/@nativescript-community/gesturehandler?minimal=true"><img alt="Downloads per month" src="https://img.shields.io/npm/dm/@nativescript-community/gesturehandler.svg" height="20"/></a>
+<a href="https://www.npmjs.com/package/@nativescript-community/gesturehandler"><img alt="NPM Version" src="https://img.shields.io/npm/v/@nativescript-community/gesturehandler.svg" height="20"/></a>
+    </p>
+
+<p align="center">
+  <b>Declarative API exposing platform native touch and gesture system to NativeScript.</b></br>
+  <sub><sub>
+</p>
+
+<br />
+
+
+
+<p><a href="#table-of-contents"></a></p>
+<p><a href="#table-of-contents"></a></p>
+
+<a href="#table-of-contents" id="table-of-contents" style="color: inherit; text-decoration: none;">
+  <h2>Table of Contents</h2>
+</a>
+<ul>
+<li><a href="#installation">Installation</a></li>
+<li><a href="#api">API</a>
+      * <a href="#typescript">TypeScript</a></li>
+<li><a href="#gesturerootview">GestureRootView</a></li>
+<li><a href="#overriding-nativescript-gestures">Overriding Nativescript gestures</a></li>
+<li><a href="#credits">Credits</a><ul>
+<li><a href="#examples">Examples:</a></li>
+</ul>
+</li>
+<li><a href="#demos-and-development">Demos and Development</a><ul>
+<li><a href="#setup">Setup</a></li>
+<li><a href="#build">Build</a></li>
+<li><a href="#demos">Demos</a></li>
+</ul>
+</li>
+<li><a href="#questions">Questions</a></li>
+</ul>
+<p><a href="#installation"></a></p>
+<p><a href="#installation"></a></p>
+
+<a href="#installation" id="installation" style="color: inherit; text-decoration: none;">
+  <h2>Installation</h2>
+</a>
+<p>Run the following command from the root of your project:</p>
+<p><code>ns plugin add @nativescript-community/gesturehandler</code></p>
+<p><a href="#api"></a></p>
+<p><a href="#api"></a></p>
+
+<a href="#api" id="api" style="color: inherit; text-decoration: none;">
+  <h2>API</h2>
+</a>
+<p>We need to do some wiring when your app starts, so open <code>app.ts</code> and add this before creating any View/App/Frame:</p>
+
+<a href="#typescript" id="typescript" style="color: inherit; text-decoration: none;">
+  <h5>TypeScript</h5>
+</a>
+<pre><code class="language-ts"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-0">install</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-4">&quot;@nativescript-community/gesturehandler&quot;</span><span class="hl-1">;</span><br/><span class="hl-5">install</span><span class="hl-1">();</span>
+</code></pre>
+<p>You create a gesture handler using something like this:</p>
+<pre><code class="language-typescript"><span class="hl-3">import</span><span class="hl-1"> { </span><span class="hl-0">GestureHandlerTouchEvent</span><span class="hl-1">, </span><span class="hl-0">GestureHandlerStateEvent</span><span class="hl-1">, </span><span class="hl-0">GestureStateEventData</span><span class="hl-1">, </span><span class="hl-0">GestureTouchEventData</span><span class="hl-1">, </span><span class="hl-0">HandlerType</span><span class="hl-1"> } </span><span class="hl-3">from</span><span class="hl-1"> </span><span class="hl-4">&#39;@nativescript-community/gesturehandler&#39;</span><span class="hl-1">;</span><br/><br/><br/><span class="hl-6">function</span><span class="hl-1"> </span><span class="hl-5">onGestureTouch</span><span class="hl-1">(</span><span class="hl-0">args</span><span class="hl-1">: </span><span class="hl-7">GestureTouchEventData</span><span class="hl-1">) {</span><br/><span class="hl-1">    </span><span class="hl-6">const</span><span class="hl-1"> { </span><span class="hl-8">state</span><span class="hl-1">, </span><span class="hl-8">extraData</span><span class="hl-1">, </span><span class="hl-8">view</span><span class="hl-1"> } = </span><span class="hl-0">args</span><span class="hl-1">.</span><span class="hl-0">data</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-0">view</span><span class="hl-1">.</span><span class="hl-0">translateX</span><span class="hl-1"> = </span><span class="hl-0">extraData</span><span class="hl-1">.</span><span class="hl-0">translationX</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-0">view</span><span class="hl-1">.</span><span class="hl-0">translateY</span><span class="hl-1"> = </span><span class="hl-0">extraData</span><span class="hl-1">.</span><span class="hl-0">translationY</span><span class="hl-1">;</span><br/><span class="hl-1">}</span><br/><span class="hl-6">function</span><span class="hl-1"> </span><span class="hl-5">onGestureState</span><span class="hl-1">(</span><span class="hl-0">args</span><span class="hl-1">: </span><span class="hl-7">GestureStateEventData</span><span class="hl-1">) {</span><br/><span class="hl-1">    </span><span class="hl-6">const</span><span class="hl-1"> { </span><span class="hl-8">state</span><span class="hl-1">, </span><span class="hl-8">prevState</span><span class="hl-1">, </span><span class="hl-8">extraData</span><span class="hl-1">, </span><span class="hl-8">view</span><span class="hl-1"> } = </span><span class="hl-0">args</span><span class="hl-1">.</span><span class="hl-0">data</span><span class="hl-1">;</span><br/><span class="hl-1">    </span><span class="hl-0">console</span><span class="hl-1">.</span><span class="hl-5">log</span><span class="hl-1">(</span><span class="hl-4">&#39;onGestureState&#39;</span><span class="hl-1">, </span><span class="hl-0">state</span><span class="hl-1">, </span><span class="hl-0">prevState</span><span class="hl-1">, </span><span class="hl-0">view</span><span class="hl-1">, </span><span class="hl-0">extraData</span><span class="hl-1">);</span><br/><span class="hl-1">}</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-8">manager</span><span class="hl-1"> = </span><span class="hl-0">Manager</span><span class="hl-1">.</span><span class="hl-5">getInstance</span><span class="hl-1">();</span><br/><span class="hl-6">const</span><span class="hl-1"> </span><span class="hl-8">gestureHandler</span><span class="hl-1"> = = </span><span class="hl-0">manager</span><span class="hl-1">.</span><span class="hl-5">createGestureHandler</span><span class="hl-1">(</span><span class="hl-0">HandlerType</span><span class="hl-1">.</span><span class="hl-8">PAN</span><span class="hl-1">, </span><span class="hl-9">10</span><span class="hl-1">, {</span><br/><span class="hl-1">    </span><span class="hl-0">shouldCancelWhenOutside:</span><span class="hl-1"> </span><span class="hl-6">false</span><br/><span class="hl-1">});</span><br/><span class="hl-0">gestureHandler</span><span class="hl-1">.</span><span class="hl-5">on</span><span class="hl-1">(</span><span class="hl-0">GestureHandlerTouchEvent</span><span class="hl-1">, </span><span class="hl-0">onGestureTouch</span><span class="hl-1">, </span><span class="hl-6">this</span><span class="hl-1">);</span><br/><span class="hl-0">gestureHandler</span><span class="hl-1">.</span><span class="hl-5">on</span><span class="hl-1">(</span><span class="hl-0">GestureHandlerStateEvent</span><span class="hl-1">, </span><span class="hl-0">onGestureState</span><span class="hl-1">, </span><span class="hl-6">this</span><span class="hl-1">);</span><br/><span class="hl-0">gestureHandler</span><span class="hl-1">.</span><span class="hl-5">attachToView</span><span class="hl-1">(</span><span class="hl-0">view</span><span class="hl-1">);</span>
+</code></pre>
+<p>Right now you must not forget to store the <code>gestureHandler</code> somewhere or the gesture won&#39;t work on iOS (native object being released). This will be fixed in future versions.</p>
+<p>Now about the API. All the gestures for the react counterpart exist with the same options and the same event <code>extraData</code>.</p>
+<p><a href="#gesturerootview"></a></p>
+<p><a href="#gesturerootview"></a></p>
+
+<a href="#gesturerootview" id="gesturerootview" style="color: inherit; text-decoration: none;">
+  <h2>GestureRootView</h2>
+</a>
+<p>For the gestures to work correctly we need a <code>root</code> view which knows how to handle the gestures.
+If using <code>Page</code> (thus <code>Frame</code>) you don&#39;t need to do anything.
+In case you don&#39;t (drawer root view, modals, ...) then you can wrap your views in a <code>GestureRootView</code> which inherits <code>GridLayout</code></p>
+<p><a href="#overriding-nativescript-gestures"></a></p>
+<p><a href="#overriding-nativescript-gestures"></a></p>
+
+<a href="#overriding-nativescript-gestures" id="overriding-nativescript-gestures" style="color: inherit; text-decoration: none;">
+  <h2>Overriding Nativescript gestures</h2>
+</a>
+<p>This plugin can also override N gestures completely. This would give much more control over gestures and especially would allow to correctly handle simultaneous gestures likes <code>tap</code> and <code>longpress</code></p>
+<p>To do that </p>
+<p><a href="#credits"></a></p>
+<p><a href="#credits"></a></p>
+
+<a href="#credits" id="credits" style="color: inherit; text-decoration: none;">
+  <h2>Credits</h2>
+</a>
+<p>This is a port of <a href="https://kmagiera.github.io/react-native-gesture-handler/">react-native-gesturehandler</a>.
+The source is based on the source code by <a href="https://github.com/kmagiera">Krzysztof Magiera</a>. Dont hesitate to go and thank him for his work!</p>
+
+<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
+  <h3>Examples:</h3>
+</a>
+<ul>
+<li><a href="demo-snippets/vue/Basic.vue">Basic</a><ul>
+<li>A basic example showing that overriding N gestures works, even in modals</li>
+</ul>
+</li>
+</ul>
+<p><a href="#demos-and-development"></a></p>
+<p><a href="#demos-and-development"></a></p>
+
+<a href="#demos-and-development-1" id="demos-and-development-1" style="color: inherit; text-decoration: none;">
+  <h2>Demos and Development</h2>
+</a>
+
+<a href="#setup" id="setup" style="color: inherit; text-decoration: none;">
+  <h3>Setup</h3>
+</a>
+<p>To run the demos, you must clone this repo <strong>recursively</strong>.</p>
+<pre><code><span class="hl-0">git</span><span class="hl-1"> </span><span class="hl-0">clone</span><span class="hl-1"> </span><span class="hl-10">https</span><span class="hl-1">:</span><span class="hl-2">//github.com/@nativescript-community/gesturehandler.git --recursive</span>
+</code></pre>
+<p><strong>Install Dependencies:</strong></p>
+<pre><code class="language-bash"><span class="hl-1">npm i </span><span class="hl-2"># or &#39;yarn install&#39; or &#39;pnpm install&#39;</span>
+</code></pre>
+<p><strong>Interactive Menu:</strong></p>
+<p>To start the interactive menu, run <code>npm start</code> (or <code>yarn start</code> or <code>pnpm start</code>). This will list all of the commonly used scripts.</p>
+
+<a href="#build-1" id="build-1" style="color: inherit; text-decoration: none;">
+  <h3>Build</h3>
+</a>
+<pre><code class="language-bash"><span class="hl-1">npm run build</span><br/><br/><span class="hl-1">npm run build.angular </span><span class="hl-2"># or for Angular</span>
+</code></pre>
+
+<a href="#demos-1" id="demos-1" style="color: inherit; text-decoration: none;">
+  <h3>Demos</h3>
+</a>
+<pre><code class="language-bash"><span class="hl-1">npm run demo.[ng|react|svelte|vue].[ios|android]</span><br/><br/><span class="hl-1">npm run demo.svelte.ios </span><span class="hl-2"># Example</span>
+</code></pre>
+<p><a href="#questions"></a></p>
+<p><a href="#questions"></a></p>
+
+<a href="#questions" id="questions" style="color: inherit; text-decoration: none;">
+  <h2>Questions</h2>
+</a>
+<p>If you have any questions/issues/comments please feel free to create an issue or start a conversation in the <a href="https://nativescript.org/discord">NativeScript Community Discord</a>.</p>
+</div></div>
+<div class="col-4 col-menu menu-sticky-wrap menu-highlight">
+<div class="tsd-navigation settings">
+<details class="tsd-index-accordion"><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Settings</h3></summary>
+<div class="tsd-accordion-details">
+<div class="tsd-filter-visibility">
+<h4 class="uppercase">Member Visibility</h4><form>
+<ul id="tsd-filter-options">
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-protected" name="protected"/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Protected</span></label></li>
+<li class="tsd-filter-item"><label class="tsd-filter-input"><input type="checkbox" id="tsd-filter-inherited" name="inherited" checked/><svg width="32" height="32" viewBox="0 0 32 32" aria-hidden="true"><rect class="tsd-checkbox-background" width="30" height="30" x="1" y="1" rx="6" fill="none"></rect><path class="tsd-checkbox-checkmark" d="M8.35422 16.8214L13.2143 21.75L24.6458 10.25" stroke="none" stroke-width="3.5" stroke-linejoin="round" fill="none"></path></svg><span>Inherited</span></label></li></ul></form></div>
+<div class="tsd-theme-toggle">
+<h4 class="uppercase">Theme</h4><select id="theme"><option value="os">OS</option><option value="light">Light</option><option value="dark">Dark</option></select></div></div></details></div>
+<nav class="tsd-navigation primary">
+<details class="tsd-index-accordion" open><summary class="tsd-accordion-summary">
+<h3><svg width="20" height="20" viewBox="0 0 24 24" fill="none"><path d="M4.93896 8.531L12 15.591L19.061 8.531L16.939 6.409L12 11.349L7.06098 6.409L4.93896 8.531Z" fill="var(--color-text)"></path></svg> Modules</h3></summary>
+<div class="tsd-accordion-details">
+<ul>
+<li class="current selected"><a href="modules.html">Documentation</a>
+<ul>
+<li class="tsd-kind-module"><a href="modules/gesturehandler.html">gesturehandler</a></li>
+<li class="tsd-kind-module"><a href="modules/gesturehandler_common.html">gesturehandler.common</a></li></ul></li></ul></div></details></nav></div></div>
+<div class="container tsd-generator">
+<p>Generated using <a href="https://typedoc.org/" target="_blank">TypeDoc</a></p></div>
+<div class="overlay"></div><script src="assets/main.js"></script></body></html>
