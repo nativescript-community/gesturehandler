@@ -2191,21 +2191,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nativescript-community/gesturehandler@file:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3D91dea2%26locator%3Droot-workspace-0b6124%2540workspace%253A.":
+"@nativescript-community/gesturehandler@file:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3Dd06f62%26locator%3Droot-workspace-0b6124%2540workspace%253A.":
   version: 2.0.8
-  resolution: "@nativescript-community/gesturehandler@file:../packages/gesturehandler#../packages/gesturehandler::hash=7911be&locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3D91dea2%26locator%3Droot-workspace-0b6124%2540workspace%253A."
+  resolution: "@nativescript-community/gesturehandler@file:../packages/gesturehandler#../packages/gesturehandler::hash=ee9d44&locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3Dd06f62%26locator%3Droot-workspace-0b6124%2540workspace%253A."
   dependencies:
     "@nativescript-community/observable": ^2.0.10
-  checksum: 4d133b508d76163a7caf47542c6dc80277a351cd76ef6e5d68aa588386eec65ce0c175d258447889eabbbcb6bd83de7688665a9b97424d44a24d6a3b24b18fc6
+  checksum: b6d95259f9b7789b5df289cb6e27c46549b73c9802ff2b7f093280c30759b46209af149f8f8c58bd1c09f97c1de1e3f6e335bafafe065c536e78b5e286263e06
   languageName: node
   linkType: hard
 
 "@nativescript-community/gesturehandler@file:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40workspace%3Ademo-snippets":
   version: 2.0.8
-  resolution: "@nativescript-community/gesturehandler@file:../packages/gesturehandler#../packages/gesturehandler::hash=7911be&locator=%40nativescript-community%2Ftemplate-snippet%40workspace%3Ademo-snippets"
+  resolution: "@nativescript-community/gesturehandler@file:../packages/gesturehandler#../packages/gesturehandler::hash=ee9d44&locator=%40nativescript-community%2Ftemplate-snippet%40workspace%3Ademo-snippets"
   dependencies:
     "@nativescript-community/observable": ^2.0.10
-  checksum: 4d133b508d76163a7caf47542c6dc80277a351cd76ef6e5d68aa588386eec65ce0c175d258447889eabbbcb6bd83de7688665a9b97424d44a24d6a3b24b18fc6
+  checksum: b6d95259f9b7789b5df289cb6e27c46549b73c9802ff2b7f093280c30759b46209af149f8f8c58bd1c09f97c1de1e3f6e335bafafe065c536e78b5e286263e06
   languageName: node
   linkType: hard
 
@@ -2299,10 +2299,10 @@ __metadata:
 
 "@nativescript-community/template-snippet@file:demo-snippets::locator=root-workspace-0b6124%40workspace%3A.":
   version: 0.0.1
-  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=91dea2&locator=root-workspace-0b6124%40workspace%3A."
+  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=d06f62&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@nativescript-community/gesturehandler": "file:../packages/gesturehandler"
-  checksum: 6170335c315ccc865997aacc74fb4c3537c2b2f04be2acb25f6f996e81a02a78ca70e53c0af414022bb8708676e77dabff55d41c04274901faf42fbbf42716a4
+  checksum: acbfe4c3cc606980222cf76c839abff2f9ef7a3f6b45a7c0183079bc374f1fbf74da47998011146a53286151517c246c9fcf96ac8ac16126c17ff4ea96ebc375
   languageName: node
   linkType: hard
 
