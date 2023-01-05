@@ -2191,21 +2191,21 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nativescript-community/gesturehandler@file:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3Dd06f62%26locator%3Droot-workspace-0b6124%2540workspace%253A.":
+"@nativescript-community/gesturehandler@file:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3D32bfd5%26locator%3Droot-workspace-0b6124%2540workspace%253A.":
   version: 2.0.8
-  resolution: "@nativescript-community/gesturehandler@file:../packages/gesturehandler#../packages/gesturehandler::hash=ee9d44&locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3Dd06f62%26locator%3Droot-workspace-0b6124%2540workspace%253A."
+  resolution: "@nativescript-community/gesturehandler@file:../packages/gesturehandler#../packages/gesturehandler::hash=ea6b79&locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3D32bfd5%26locator%3Droot-workspace-0b6124%2540workspace%253A."
   dependencies:
     "@nativescript-community/observable": ^2.0.10
-  checksum: b6d95259f9b7789b5df289cb6e27c46549b73c9802ff2b7f093280c30759b46209af149f8f8c58bd1c09f97c1de1e3f6e335bafafe065c536e78b5e286263e06
+  checksum: cb7d5c6632f011d24458f0a2c2ce2af0e9ff77e6686bcd3283febc2998a719737437353f602f554da0dc4e2b48f4e91780acda64da2e3a71eed7df8c056daef7
   languageName: node
   linkType: hard
 
 "@nativescript-community/gesturehandler@file:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40workspace%3Ademo-snippets":
   version: 2.0.8
-  resolution: "@nativescript-community/gesturehandler@file:../packages/gesturehandler#../packages/gesturehandler::hash=ee9d44&locator=%40nativescript-community%2Ftemplate-snippet%40workspace%3Ademo-snippets"
+  resolution: "@nativescript-community/gesturehandler@file:../packages/gesturehandler#../packages/gesturehandler::hash=ea6b79&locator=%40nativescript-community%2Ftemplate-snippet%40workspace%3Ademo-snippets"
   dependencies:
     "@nativescript-community/observable": ^2.0.10
-  checksum: b6d95259f9b7789b5df289cb6e27c46549b73c9802ff2b7f093280c30759b46209af149f8f8c58bd1c09f97c1de1e3f6e335bafafe065c536e78b5e286263e06
+  checksum: cb7d5c6632f011d24458f0a2c2ce2af0e9ff77e6686bcd3283febc2998a719737437353f602f554da0dc4e2b48f4e91780acda64da2e3a71eed7df8c056daef7
   languageName: node
   linkType: hard
 
@@ -2226,7 +2226,7 @@ __metadata:
 
 "@nativescript-community/plugin-seed-tools@file:tools::locator=root-workspace-0b6124%40workspace%3A.":
   version: 1.0.0
-  resolution: "@nativescript-community/plugin-seed-tools@file:tools#tools::hash=3ae8e5&locator=root-workspace-0b6124%40workspace%3A."
+  resolution: "@nativescript-community/plugin-seed-tools@file:tools#tools::hash=9bfd32&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@angular/animations": ~14.2.12
     "@angular/common": ~14.2.12
@@ -2285,7 +2285,7 @@ __metadata:
     vue: ~2.6.14
     yargs: ^17.6.2
     zone.js: ~0.12.0
-  checksum: 6451cb14f6d6dacb9ce41995afb3ce8327250d56039942127c5b740fe8d8c245ab905719503431158daaaaf982818ffc4a192a5d24e794c7a7d677c1282235ba
+  checksum: fb291c67d524f3d2594301c09a508a61603acd005ab85e7c3f8be560a395af76023df5843ed11e34d3cead5e99fbd79fbc92fb18ddb8c4719438ea904b41a5b5
   languageName: node
   linkType: hard
 
@@ -2299,10 +2299,10 @@ __metadata:
 
 "@nativescript-community/template-snippet@file:demo-snippets::locator=root-workspace-0b6124%40workspace%3A.":
   version: 0.0.1
-  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=d06f62&locator=root-workspace-0b6124%40workspace%3A."
+  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=32bfd5&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@nativescript-community/gesturehandler": "file:../packages/gesturehandler"
-  checksum: acbfe4c3cc606980222cf76c839abff2f9ef7a3f6b45a7c0183079bc374f1fbf74da47998011146a53286151517c246c9fcf96ac8ac16126c17ff4ea96ebc375
+  checksum: 72a1dd965bce75ab0c4ea181869f67c1eab48d9455db3a208f63a211c84508a9560909767293b0acde6602fc926a717e4cd6b411f99abbee268c5d34bf1c1257
   languageName: node
   linkType: hard
 
