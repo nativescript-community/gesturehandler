@@ -50,6 +50,8 @@
 	* [Demos](#demos)
 * [Contributing](#contributing)
 	* [Update repo ](#update-repo-)
+	* [Update readme ](#update-readme-)
+	* [Update doc ](#update-doc-)
 	* [Publish](#publish)
 * [Questions](#questions)
 
@@ -141,6 +143,11 @@ The source is based on the source code by [Krzysztof Magiera](https://github.com
 
 ### Repo Setup
 
+The repo uses submodules. If you did not clone with ` --recursive` then you need to call
+```
+git submodule update --init
+```
+
 The package manager used to install and link dependencies must be `pnpm` or `yarn`. `npm` wont work.
 
 To develop and test:
@@ -187,6 +194,16 @@ Then update common files
 npm run sync
 ```
 Then you can run `yarn|pnpm`, commit changed files if any
+
+### Update readme 
+```bash
+npm run readme
+```
+
+### Update doc 
+```bash
+npm run doc
+```
 
 ### Publish
 
