@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.9](https://github.com/nativescript-community/gesturehandler/compare/v2.0.8...v2.0.9) (2023-03-08)
+
+
+### Bug Fixes
+
+* GestureRootView layout fix ([611b4e2](https://github.com/nativescript-community/gesturehandler/commit/611b4e210d9b40044026fd7981d2ca4d2a72e1a3))
+
+
+
+
+
 ## [2.0.8](https://github.com/nativescript-community/gesturehandler/compare/v2.0.7...v2.0.8) (2022-12-16)
 
 **Note:** Version bump only for package @nativescript-community/gesturehandler
