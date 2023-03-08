@@ -6,7 +6,7 @@
     "sideEffects": false,
     "typings": "gesturehandler.d.ts",
     "scripts": {
-        "build": "npm run tsc && npm run readme",
+        "build": "npm run tsc",
         "build.win": "npm run tsc.win && npm run readme",
         "build.all": "npm run build",
         "build.all.win": "npm run build .win",
