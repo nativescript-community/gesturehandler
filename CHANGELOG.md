@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.10](https://github.com/nativescript-community/gesturehandler/compare/v2.0.9...v2.0.10) (2023-04-28)
+
+
+### Bug Fixes
+
+* **android:** prevent gesture activation when outside the visible rect of a view ([5426539](https://github.com/nativescript-community/gesturehandler/commit/54265393d4f626ebac34c0eacbcbe56ed71a3bdb))
+
+
+
+
+
 ## [2.0.9](https://github.com/nativescript-community/gesturehandler/compare/v2.0.8...v2.0.9) (2023-03-08)
 
 
