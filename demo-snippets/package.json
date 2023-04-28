@@ -3,6 +3,6 @@
     "private": true,
     "version": "0.0.1",
     "dependencies": {
-        "@nativescript-community/gesturehandler": "file:../packages/gesturehandler"
+        "@nativescript-community/gesturehandler": "link:../packages/gesturehandler"
     }
 }
