@@ -35,15 +35,15 @@ export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, Gestu
 
 let PageLayout: typeof com.nativescript.gesturehandler.PageLayout;
 class PageGestureExtended extends Page {
-    nativeView: com.nativescript.gesturehandler.PageLayout;
+    nativeViewProtected: com.nativescript.gesturehandler.PageLayout;
     initNativeView() {
-        this.nativeView.initialize();
+        this.nativeViewProtected.initialize();
     }
     disposeNativeView() {
-        this.nativeView.tearDown();
+        this.nativeViewProtected.tearDown();
     }
     get registry() {
-        return this.nativeView && this.nativeView.registry();
+        return this.nativeViewProtected && this.nativeViewProtected.registry();
     }
 }
 let installed = false;
