@@ -65,7 +65,7 @@ public class GestureHandler<T extends GestureHandler> {
   private float mLastX, mLastY;
   private float mLastEventOffsetX, mLastEventOffsetY;
 
-  private boolean mShouldCancelWhenOutside = true;
+  private boolean mShouldCancelWhenOutside = false;
   private int mNumberOfPointers = 0;
 
   private GestureHandlerOrchestrator mOrchestrator;
