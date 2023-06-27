@@ -202,7 +202,7 @@ public class GestureHandler<T extends GestureHandler> {
 
     mView = view;
     mOrchestrator = orchestrator;
-    onPrepare()
+    onPrepare();
   }
   protected void onPrepare() {}
 
