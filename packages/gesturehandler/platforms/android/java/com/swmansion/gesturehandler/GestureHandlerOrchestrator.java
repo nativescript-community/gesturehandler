@@ -565,6 +565,7 @@ public class GestureHandlerOrchestrator {
   private static Rect sClipRect = new Rect();
 
   private static boolean isTransformedTouchPointInView(float x, float y, View child) {
+    // TODO: can we find a way to cache sClipRect as call it quite a lot?
     if  (!child.getLocalVisibleRect(sClipRect)) {
       return false;
     }

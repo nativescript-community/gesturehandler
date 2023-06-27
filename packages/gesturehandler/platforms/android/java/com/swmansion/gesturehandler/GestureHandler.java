@@ -202,7 +202,9 @@ public class GestureHandler<T extends GestureHandler> {
 
     mView = view;
     mOrchestrator = orchestrator;
+    onPrepare()
   }
+  protected void onPrepare() {}
 
   private int findNextLocalPointerId() {
     int localPointerId = 0;
@@ -405,6 +407,7 @@ public class GestureHandler<T extends GestureHandler> {
 
   public boolean isWithinBounds(View view, float posX, float posY) {
 
+    // TODO: can we find a way to cache sClipRect ?
     if  (!view.getLocalVisibleRect(sClipRect)) {
       return false;
     }

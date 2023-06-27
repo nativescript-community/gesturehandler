@@ -16,6 +16,11 @@ public class NativeViewGestureHandler extends GestureHandler<NativeViewGestureHa
     setShouldCancelWhenOutside(true);
   }
 
+  protected void onPrepare() {
+    
+  }
+
+
   public NativeViewGestureHandler setShouldActivateOnStart(boolean shouldActivateOnStart) {
     mShouldActivateOnStart = shouldActivateOnStart;
     return this;
