@@ -353,7 +353,7 @@ export class PanGestureHandler extends Handler<com.swmansion.gesturehandler.PanG
     @nativeProperty({ nativeSetterName: 'setAverageTouches' }) avgTouches: number;
     @nativeProperty numberOfPointers: number;
     createNative(options) {
-        const context = Application.android.context as android.content.Context;
+        const context = Utils.android.getApplicationContext() as android.content.Context;
         return new com.swmansion.gesturehandler.PanGestureHandler(context);
     }
     getExtraData(handler: com.swmansion.gesturehandler.PanGestureHandler) {
@@ -439,7 +439,7 @@ export class LongPressGestureHandler extends Handler<com.swmansion.gesturehandle
     @nativeProperty minDurationMs: number;
     @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) maxDist: number;
     createNative(options) {
-        const context = Application.android.context as android.content.Context;
+        const context = Utils.android.getApplicationContext() as android.content.Context;
         return new com.swmansion.gesturehandler.LongPressGestureHandler(context);
     }
     getExtraData(handler: com.swmansion.gesturehandler.LongPressGestureHandler) {
