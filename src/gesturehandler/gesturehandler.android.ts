@@ -80,11 +80,14 @@ export function install(overrideNGestures = false) {
                 PageLayout = com.nativescript.gesturehandler.PageLayout;
             }
             const layout = new PageLayout(this._context, ROOT_GESTURE_HANDLER_TAG);
+
+            //@ts-ignore
             if (layout.addRowsFromJSON) {
+                //@ts-ignore
                 layout.addRowsFromJSON(
                     JSON.stringify([
                         { value: 1, type: 0 /* org.nativescript.widgets.GridUnitType.auto */ },
-                        { value: 1, type: 2 /* org.nativescript.widgets.GridUnitType.star */ },
+                        { value: 1, type: 2 /* org.nativescript.widgets.GridUnitType.star */ }
                     ])
                 );
             } else {
@@ -209,7 +212,8 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
                 }
             }
         }
-    }) hitSlop;
+    })
+    hitSlop;
     @nativeProperty enabled: boolean;
     @nativeProperty shouldCancelWhenOutside: boolean;
     shouldStartGesture: (arg) => boolean;

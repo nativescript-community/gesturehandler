@@ -6,7 +6,7 @@ import { GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureState, Gestu
 
 export function observe(target: View, type: GestureTypes, callback: (args: GestureEventData) => void, context?: any): GesturesObserver {
     if (!callback) {
-        return;
+        return null;
     }
     const observer = new GesturesObserver(target, callback, context);
     observer.observe(type);
