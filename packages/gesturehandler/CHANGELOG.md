@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.13](https://github.com/nativescript-community/gesturehandler/compare/v2.0.12...v2.0.13) (2023-10-12)
+
+
+### Bug Fixes
+
+* **android:** recycle MotionEvent when necessary ([d61e704](https://github.com/nativescript-community/gesturehandler/commit/d61e704c60f43c1daca00a362ed6584517958595))
+
+
+
+
+
 ## [2.0.12](https://github.com/nativescript-community/gesturehandler/compare/v2.0.11...v2.0.12) (2023-06-27)
 
 

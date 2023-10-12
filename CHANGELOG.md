@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.13](https://github.com/nativescript-community/gesturehandler/compare/v2.0.12...v2.0.13) (2023-10-12)
+
+
+### Bug Fixes
+
+* **android:** recycle MotionEvent when necessary ([d61e704](https://github.com/nativescript-community/gesturehandler/commit/d61e704c60f43c1daca00a362ed6584517958595))
+* **android:** support new optimized GridLayout (not yet released) ([8c03991](https://github.com/nativescript-community/gesturehandler/commit/8c03991bbee26e160c8328aabcf7f0afd099c2f8))
+* ensure we release all callbacks (N gesture override) ([dcd430a](https://github.com/nativescript-community/gesturehandler/commit/dcd430a5bc1e061a879e159eceb75ce121b17d66))
+
+
+
+
+
 ## [2.0.12](https://github.com/nativescript-community/gesturehandler/compare/v2.0.11...v2.0.12) (2023-06-27)
 
 
