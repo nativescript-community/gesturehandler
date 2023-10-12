@@ -16,7 +16,7 @@ dependencies {
 sourceSets {
     main {
         java {
-            srcDirs = ["plugin/platforms/android/java"]
+            srcDirs = ["packages/gesturehandler/platforms/android/java"]
         }
     }
 }
