@@ -5,6 +5,9 @@ import { Handler, Manager } from './gesturehandler';
 import { GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureState, GestureStateEventData, HandlerType, ROOT_GESTURE_HANDLER_TAG } from './gesturehandler.common';
 
 export function observe(target: View, type: GestureTypes, callback: (args: GestureEventData) => void, context?: any): GesturesObserver {
+    if (!callback) {
+        return;
+    }
     const observer = new GesturesObserver(target, callback, context);
     observer.observe(type);
     return observer;
@@ -123,6 +126,8 @@ export class GesturesObserver {
 
     private _detach() {
         if (this.gestureHandler) {
+            this.gestureHandler.off(GestureHandlerStateEvent);
+            this.gestureHandler.off(GestureHandlerTouchEvent);
             this.gestureHandler.detachFromView(this.target);
             // delete this.target._gestureHandlers[this.type];
         }
