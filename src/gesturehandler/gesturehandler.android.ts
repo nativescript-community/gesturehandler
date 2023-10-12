@@ -80,8 +80,17 @@ export function install(overrideNGestures = false) {
                 PageLayout = com.nativescript.gesturehandler.PageLayout;
             }
             const layout = new PageLayout(this._context, ROOT_GESTURE_HANDLER_TAG);
-            layout.addRow(new org.nativescript.widgets.ItemSpec(1, org.nativescript.widgets.GridUnitType.auto));
-            layout.addRow(new org.nativescript.widgets.ItemSpec(1, org.nativescript.widgets.GridUnitType.star));
+            if (layout.addRowsFromJSON) {
+                layout.addRowsFromJSON(
+                    JSON.stringify([
+                        { value: 1, type: 0 /* org.nativescript.widgets.GridUnitType.auto */ },
+                        { value: 1, type: 2 /* org.nativescript.widgets.GridUnitType.star */ },
+                    ])
+                );
+            } else {
+                layout.addRow(new org.nativescript.widgets.ItemSpec(1, org.nativescript.widgets.GridUnitType.auto));
+                layout.addRow(new org.nativescript.widgets.ItemSpec(1, org.nativescript.widgets.GridUnitType.star));
+            }
 
             // this.gestureRegistry = layout.registry();
             return layout;
