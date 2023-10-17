@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.14](https://github.com/nativescript-community/gesturehandler/compare/v2.0.13...v2.0.14) (2023-10-17)
+
+
+### Bug Fixes
+
+* **android:** gradle improvement ([8a6f823](https://github.com/nativescript-community/gesturehandler/commit/8a6f823f74a2757d44fc4ec543ced5ea01da99c0))
+
+
+
+
+
 ## [2.0.13](https://github.com/nativescript-community/gesturehandler/compare/v2.0.12...v2.0.13) (2023-10-12)
 
 
