@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.16](https://github.com/nativescript-community/gesturehandler/compare/v2.0.15...v2.0.16) (2023-10-18)
+
+
+### Bug Fixes
+
+* **android:** fix for events not working after view unload/load ([46ce86c](https://github.com/nativescript-community/gesturehandler/commit/46ce86c4acc5163b1a3e4d4e7977de14e87dc5ec))
+
+
+
+
+
 ## [2.0.15](https://github.com/nativescript-community/gesturehandler/compare/v2.0.14...v2.0.15) (2023-10-17)
 
 
