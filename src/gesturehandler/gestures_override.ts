@@ -126,10 +126,10 @@ export class GesturesObserver {
 
     private _detach() {
         if (this.gestureHandler) {
-            this.gestureHandler.off(GestureHandlerStateEvent);
-            this.gestureHandler.off(GestureHandlerTouchEvent);
+            // dont detach events. It will be done on dispose
+            // this.gestureHandler.off(GestureHandlerStateEvent);
+            // this.gestureHandler.off(GestureHandlerTouchEvent);
             this.gestureHandler.detachFromView(this.target);
-            // delete this.target._gestureHandlers[this.type];
         }
         this._notifyTouch = false;
         this._eventData = {};
