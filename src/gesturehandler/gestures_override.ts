@@ -223,7 +223,7 @@ export class GesturesObserver {
                 gestureHandler = manager.createGestureHandler(HandlerType.PINCH, target['PINCH_HANDLER_TAG'], {
                     simultaneousHandlers: [target['PAN_HANDLER_TAG'], ROOT_GESTURE_HANDLER_TAG]
                 });
-                gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.pinch, GestureState.ACTIVE), this);
+                gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.pinch), this);
                 gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.pinch), this);
             }
 
@@ -238,7 +238,7 @@ export class GesturesObserver {
                 gestureHandler = manager.createGestureHandler(HandlerType.PAN, target['PAN_HANDLER_TAG'], {
                     simultaneousHandlers: [target['PINCH_HANDLER_TAG'], ROOT_GESTURE_HANDLER_TAG]
                 });
-                gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.pan, GestureState.ACTIVE), this);
+                gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.pan), this);
                 gestureHandler.on(GestureHandlerTouchEvent, this.onGestureTouchChange(GestureTypes.pan), this);
             }
 
