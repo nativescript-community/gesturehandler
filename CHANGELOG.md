@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.18](https://github.com/nativescript-community/gesturehandler/compare/v2.0.17...v2.0.18) (2023-11-08)
+
+
+### Bug Fixes
+
+* override send all state events for app to handle ([b707c58](https://github.com/nativescript-community/gesturehandler/commit/b707c58f8d5e8989ce1124a9256b350fda22bf85))
+
+
+
+
+
 ## [2.0.17](https://github.com/nativescript-community/gesturehandler/compare/v2.0.16...v2.0.17) (2023-10-18)
 
 **Note:** Version bump only for package gesturehandler
