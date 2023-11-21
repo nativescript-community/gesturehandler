@@ -10,7 +10,7 @@ export enum FlingDirection {
     DIRECTION_LEFT,
     DIRECTION_UP,
     DIRECTION_DOWN,
-    DIRECTION_RIGHT,
+    DIRECTION_RIGHT
 }
 
 export abstract class BaseNative<T, U extends {}> extends Observable {
@@ -65,7 +65,7 @@ export abstract class Handler<T, U extends HandlerOptions> extends BaseNative<T,
     getView(): View;
     cancel();
     attachToView(view: View);
-    detachFromView(view?: View);
+    detachFromView(view?: View, drop?: boolean);
 }
 export interface TapGestureHandlerOptions extends HandlerOptions {
     numberOfTaps?: number;

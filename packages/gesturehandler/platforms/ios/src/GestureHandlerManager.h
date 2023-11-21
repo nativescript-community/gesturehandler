@@ -16,6 +16,7 @@
 - (void)updateGestureHandler:(nonnull NSNumber *)handlerTag config:(nonnull NSDictionary *)config;
 
 - (void)dropGestureHandler:(nonnull NSNumber *)handlerTag;
+- (void)detachGestureHandler:(nonnull NSNumber *)handlerTag;
 
 //- (void)handleSetJSResponder:(nonnull UIView *)view
 //        blockNativeResponder:(nonnull NSNumber *)blockNativeResponder;

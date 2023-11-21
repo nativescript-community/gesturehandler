@@ -195,14 +195,14 @@ export class Handler<T extends GestureHandler, U extends HandlerOptions> extends
             return;
         }
         if (this.attachedView) {
-            this.detachFromView(this.attachedView);
+            this.detachFromView(this.attachedView, false);
         }
         this.attachedView = view;
         this.delegate = HandlerDelegate.initWithOwner(new WeakRef(this));
         this.native.delegate = this.delegate;
         this.manager.get().attachGestureHandler(this, view);
     }
-    detachFromView(view?: View) {
+    detachFromView(view?: View, drop = true) {
         if ((view && view !== this.attachedView) || !this.attachedView) {
             return;
         }
@@ -212,7 +212,7 @@ export class Handler<T extends GestureHandler, U extends HandlerOptions> extends
         }
         const tag = this.native.tag;
         this.delegate = this.native.delegate = null;
-        this.manager.get().detachGestureHandler(tag, this.attachedView);
+        this.manager.get().detachGestureHandler(tag, this.attachedView, drop);
         this.attachedView = null;
     }
     getTag() {
@@ -274,9 +274,11 @@ export class Manager extends ManagerBase {
             dispose: onDispose
         });
     }
-    detachGestureHandler(handlerTag: number, view: View) {
-        if (view.nativeView) {
+    detachGestureHandler(handlerTag: number, view: View, drop = true) {
+        if (drop) {
             this.manager.dropGestureHandler(handlerTag);
+        } else {
+            this.manager.detachGestureHandler(handlerTag);
         }
         if (view) {
             const viewListeners = this.viewListeners.get(view);
