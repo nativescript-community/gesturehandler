@@ -11,7 +11,7 @@
     </Page>
 </template>
 
-<script>
+<script lang="ts">
 import ModalView from './ModalView.vue';
 export default {
     data() {
@@ -19,9 +19,9 @@ export default {
             items: [
                 { title: 'First', color: '#e67e22' },
                 { title: 'Second', color: '#3498db' },
-                { title: 'Third', color: '#e74c3c' },
-                { title: 'Fourth', color: '#9b59b6' },
-            ],
+                { title: 'Third', color: '#e74Fc3c' },
+                { title: 'Fourth', color: '#9b59b6' }
+            ]
         };
     },
     methods: {
@@ -29,10 +29,10 @@ export default {
             console.log('openModal');
             console.log('openModal', ModalView);
             this.$showModal(ModalView, {
-                fullscreen: false,
+                fullscreen: false
             });
-        },
-    },
+        }
+    }
 };
 </script>
 

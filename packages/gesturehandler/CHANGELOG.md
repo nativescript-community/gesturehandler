@@ -3,6 +3,112 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.18](https://github.com/nativescript-community/gesturehandler/compare/v2.0.17...v2.0.18) (2023-11-08)
+
+**Note:** Version bump only for package @nativescript-community/gesturehandler
+
+
+
+
+
+## [2.0.17](https://github.com/nativescript-community/gesturehandler/compare/v2.0.16...v2.0.17) (2023-10-18)
+
+**Note:** Version bump only for package @nativescript-community/gesturehandler
+
+
+
+
+
+## [2.0.16](https://github.com/nativescript-community/gesturehandler/compare/v2.0.15...v2.0.16) (2023-10-18)
+
+**Note:** Version bump only for package @nativescript-community/gesturehandler
+
+
+
+
+
+## [2.0.15](https://github.com/nativescript-community/gesturehandler/compare/v2.0.14...v2.0.15) (2023-10-17)
+
+
+### Bug Fixes
+
+* **android:** build fix ([953b861](https://github.com/nativescript-community/gesturehandler/commit/953b861041b6543ce87a08c8c851cf42786d9d14))
+
+
+
+
+
+## [2.0.14](https://github.com/nativescript-community/gesturehandler/compare/v2.0.13...v2.0.14) (2023-10-17)
+
+
+### Bug Fixes
+
+* **android:** gradle improvement ([8a6f823](https://github.com/nativescript-community/gesturehandler/commit/8a6f823f74a2757d44fc4ec543ced5ea01da99c0))
+
+
+
+
+
+## [2.0.13](https://github.com/nativescript-community/gesturehandler/compare/v2.0.12...v2.0.13) (2023-10-12)
+
+
+### Bug Fixes
+
+* **android:** recycle MotionEvent when necessary ([d61e704](https://github.com/nativescript-community/gesturehandler/commit/d61e704c60f43c1daca00a362ed6584517958595))
+
+
+
+
+
+## [2.0.12](https://github.com/nativescript-community/gesturehandler/compare/v2.0.11...v2.0.12) (2023-06-27)
+
+
+### Bug Fixes
+
+* **android:** broken build ([0a42307](https://github.com/nativescript-community/gesturehandler/commit/0a423078a415d113222fa745b3666cd64d58b0ce))
+
+
+
+
+
+## [2.0.11](https://github.com/nativescript-community/gesturehandler/compare/v2.0.10...v2.0.11) (2023-06-27)
+
+**Note:** Version bump only for package @nativescript-community/gesturehandler
+
+
+
+
+
+## [2.0.10](https://github.com/nativescript-community/gesturehandler/compare/v2.0.9...v2.0.10) (2023-04-28)
+
+
+### Bug Fixes
+
+* **android:** prevent gesture activation when outside the visible rect of a view ([5426539](https://github.com/nativescript-community/gesturehandler/commit/54265393d4f626ebac34c0eacbcbe56ed71a3bdb))
+
+
+
+
+
+## [2.0.9](https://github.com/nativescript-community/gesturehandler/compare/v2.0.8...v2.0.9) (2023-03-08)
+
+
+### Bug Fixes
+
+* GestureRootView layout fix ([611b4e2](https://github.com/nativescript-community/gesturehandler/commit/611b4e210d9b40044026fd7981d2ca4d2a72e1a3))
+
+
+
+
+
+## [2.0.8](https://github.com/nativescript-community/gesturehandler/compare/v2.0.7...v2.0.8) (2022-12-16)
+
+**Note:** Version bump only for package @nativescript-community/gesturehandler
+
+
+
+
+
 ## [2.0.7](https://github.com/nativescript-community/gesturehandler/compare/v2.0.6...v2.0.7) (2022-12-01)
 
 **Note:** Version bump only for package @nativescript-community/gesturehandler

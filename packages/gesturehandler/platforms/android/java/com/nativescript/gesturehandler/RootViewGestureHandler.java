@@ -38,6 +38,7 @@ public class RootViewGestureHandler extends GestureHandler {
         getView().setDispatchToOrchestra(false);
         getView().dispatchTouchEvent(event);
         getView().setDispatchToOrchestra(true);
+        event.recycle();
     }
     // public boolean shouldRecognizeSimultaneously(GestureHandler handler) {
     //     return true;

@@ -1,7 +1,7 @@
 /* eslint-disable no-redeclare */
 import Observable from '@nativescript-community/observable';
 import { EventData, GridLayout } from '@nativescript/core';
-import { CssProperty, Property, Style, View, booleanConverter } from '@nativescript/core/ui';
+import { CssProperty, Style, View, booleanConverter } from '@nativescript/core/ui';
 import {
     FlingGestureHandler,
     FlingGestureHandlerOptions,
@@ -21,7 +21,7 @@ import {
     RotationGestureHandler,
     RotationGestureHandlerOptions,
     TapGestureHandler,
-    TapGestureHandlerOptions,
+    TapGestureHandlerOptions
 } from './gesturehandler';
 
 export const GestureHandlerStateEvent = 'GestureHandlerStateEvent';
@@ -36,7 +36,7 @@ export enum HandlerType {
     NATIVE_VIEW = 'nativeView',
     PINCH = 'pinch',
     ROTATION = 'rotation',
-    FORCE_TOUCH = 'forceTouch',
+    FORCE_TOUCH = 'forceTouch'
 }
 
 export interface OptionsTypeMap {
@@ -61,19 +61,16 @@ export interface TypeMap {
 }
 
 function createGetter(key: string, options: NativePropertyOptions) {
-    // console.log('createGetter', key, options);
     const nativeGetterName = ((__ANDROID__ ? options.android : options.ios) || options).nativeGetterName || 'get' + key.charAt(0).toUpperCase() + key.slice(1);
     const converter = options.converter;
     return function () {
         let result;
-        // console.log('getter', key, nativeGetterName);
         if (this.native && this.native[nativeGetterName]) {
             result = this.native[nativeGetterName]();
         } else {
             result = this.options[key] || options.defaultValue;
         }
         result = converter && converter.fromNative ? converter.fromNative.call(this, result, key) : result;
-        // console.log('getter', key, options, nativeGetterName, !!getConverter, result);
         return result;
     };
 }
@@ -93,7 +90,7 @@ function nativePropertyGenerator(target: Object, key: string, options?: NativePr
         get: createGetter(key, options),
         set: createSetter(key, options),
         enumerable: true,
-        configurable: true,
+        configurable: true
     });
 }
 export function nativeProperty(target: any, k?, desc?: PropertyDescriptor): any;
@@ -146,7 +143,7 @@ export enum GestureState {
     BEGAN,
     CANCELLED,
     ACTIVE,
-    END,
+    END
 }
 
 export interface GestureStateEventData extends EventData {
@@ -254,13 +251,13 @@ export const exclusiveTouchProperty = new CssProperty<Style, boolean>({
     name: 'exclusiveTouch',
     cssName: 'exclusive-touch',
     defaultValue: false,
-    valueConverter: booleanConverter,
+    valueConverter: booleanConverter
 });
 export const disallowInterceptTouchProperty = new CssProperty<Style, boolean>({
     name: 'disallowInterceptTouch',
     cssName: 'disallow-intercept-touch',
     defaultValue: false,
-    valueConverter: booleanConverter,
+    valueConverter: booleanConverter
 });
 export const ViewInitEvent = 'ViewInitEvent';
 export const ViewDisposeEvent = 'ViewDisposeEvent';
@@ -297,7 +294,7 @@ class ViewGestureExtended extends View {
                 const gestureHandler = Manager.getInstance().createGestureHandler(HandlerType.NATIVE_VIEW, NATIVE_GESTURE_TAG++, {
                     disallowInterruption: true,
                     shouldActivateOnStart: false,
-                    shouldCancelWhenOutside: false,
+                    shouldCancelWhenOutside: false
                 });
                 this.exclusiveTouchGestureHandler = gestureHandler as any;
             }

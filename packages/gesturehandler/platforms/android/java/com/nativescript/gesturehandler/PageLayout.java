@@ -21,8 +21,6 @@ public class PageLayout extends org.nativescript.widgets.GridLayout {
     public PageLayout(Context context, int rootGestureTag) {
         super(context);
         mRootGestureTag = rootGestureTag;
-        addRow(new ItemSpec(1, GridUnitType.auto));
-        addRow(new ItemSpec(1, GridUnitType.star));
     }
 
     private int mRootGestureTag;

@@ -17,7 +17,7 @@ import {
     ViewDisposeEvent,
     ViewInitEvent,
     install as installBase,
-    nativeProperty,
+    nativeProperty
 } from './gesturehandler.common';
 import { observe as gestureObserve } from './gestures_override';
 export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType, ViewInitEvent, ViewDisposeEvent };
@@ -26,7 +26,7 @@ export enum FlingDirection {
     DIRECTION_LEFT = UISwipeGestureRecognizerDirection.Left,
     DIRECTION_UP = UISwipeGestureRecognizerDirection.Up,
     DIRECTION_DOWN = UISwipeGestureRecognizerDirection.Down,
-    DIRECTION_RIGHT = UISwipeGestureRecognizerDirection.Right,
+    DIRECTION_RIGHT = UISwipeGestureRecognizerDirection.Right
 }
 
 let installed = false;
@@ -151,8 +151,8 @@ export class HandlerDelegate extends NSObject implements GestureHandlerDelegate 
                     prevState,
                     ios: view,
                     extraData: toJsObject(extraData),
-                    view: view.nsView ? view.nsView.get() : null,
-                },
+                    view: view.nsView ? view.nsView.get() : null
+                }
             });
         }
     }
@@ -166,8 +166,8 @@ export class HandlerDelegate extends NSObject implements GestureHandlerDelegate 
                     state,
                     ios: view,
                     extraData: toJsObject(extraData),
-                    view: view.nsView ? view.nsView.get() : null,
-                },
+                    view: view.nsView ? view.nsView.get() : null
+                }
             });
         }
     }
@@ -271,7 +271,7 @@ export class Manager extends ManagerBase {
         }
         viewListeners.set(tag, {
             init: onInit,
-            dispose: onDispose,
+            dispose: onDispose
         });
     }
     detachGestureHandler(handlerTag: number, view: View) {

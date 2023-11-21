@@ -4,6 +4,7 @@ import android.util.Log;
 
 import android.graphics.Matrix;
 import android.graphics.PointF;
+import android.graphics.Rect;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -288,23 +289,61 @@ public class GestureHandlerOrchestrator {
       mPreparedHandlers[i].cancel();
     }
   }
+/**
+   * Transforms an event in the coordinates of wrapperView into the coordinate space of the received view.
+   *
+   * This modifies and returns the same event as it receives
+   *
+   * @param view - view to which coordinate space the event should be transformed
+   * @param event - event to transform
+   */
+  private MotionEvent transformEventToViewCoords(View view, MotionEvent event) {
+    if (view == null) {
+      return event;
+    }
 
-  private void deliverEventToGestureHandler(GestureHandler handler, MotionEvent event) {
-    if (!isViewAttachedUnderWrapper(handler.getView())) {
+    ViewGroup parent = null;
+    if (view.getParent() instanceof ViewGroup) { 
+      parent = (ViewGroup)view.getParent();
+    }
+    // Events are passed down to the orchestrator by the wrapperView, so they are already in the
+    // relevant coordinate space. We want to stop traversing the tree when we reach it.
+    if (parent != mWrapperView) {
+      transformEventToViewCoords(parent, event);
+    }
+
+    if (parent != null) {
+      float localX = event.getX() + parent.getScrollX() - view.getLeft();
+      float localY = event.getY() + parent.getScrollY() - view.getTop();
+      event.setLocation(localX, localY);
+    }
+    Matrix matrix = view.getMatrix();
+    if (!matrix.isIdentity()) {
+      Matrix inverseMatrix = sInverseMatrix;
+      matrix.invert(inverseMatrix);
+      event.transform(inverseMatrix);
+    }
+
+    return event;
+  }
+  private void deliverEventToGestureHandler(GestureHandler handler, MotionEvent sourceEvent) {
+    View view = handler.getView();
+    if (!isViewAttachedUnderWrapper(view)) {
       handler.cancel();
       return;
     }
-    if (!handler.wantEvents(event)) {
+    if (!handler.wantEvents(sourceEvent)) {
       return;
     }
-    int action = event.getActionMasked();
+    int action = sourceEvent.getActionMasked();
+    MotionEvent event = transformEventToViewCoords(view, MotionEvent.obtain(sourceEvent));
     if (handler.mIsAwaiting && action == MotionEvent.ACTION_MOVE) {
       return;
     }
-    float[] coords = sTempCoords;
-    extractCoordsForView(handler.getView(), event, coords);
-    float oldX = event.getX();
-    float oldY = event.getY();
+    // float[] coords = sTempCoords;
+    // extractCoordsForView(view, event, coords);
+    // float oldX = event.getX();
+    // float oldY = event.getY();
     // TODO: we may conside scaling events if necessary using MotionEvent.transform
     // for now the events are only offset to the top left corner of the view but if
     // view or any ot the parents is scaled the other pointers position will not
@@ -314,12 +353,12 @@ public class GestureHandlerOrchestrator {
     // approach when we want to use pointer coordinates to calculate velocity or
     // distance
     // for pinch so I don't know yet if we should transform or not...
-    event.setLocation(coords[0], coords[1]);
+    // event.setLocation(coords[0], coords[1]);
     handler.handle(event);
     if (handler.mIsActive) {
       handler.dispatchTouchEvent(event);
     }
-    event.setLocation(oldX, oldY);
+    // event.setLocation(oldX, oldY);
     // if event was of type UP or POINTER_UP we request handler to stop tracking now
     // that
     // the event has been dispatched
@@ -523,8 +562,14 @@ public class GestureHandlerOrchestrator {
     return !(view instanceof ViewGroup) || mViewConfigHelper.isViewClippingChildren((ViewGroup) view);
   }
 
+  private static Rect sClipRect = new Rect();
+
   private static boolean isTransformedTouchPointInView(float x, float y, View child) {
-    return x >= 0 && x <= child.getWidth() && y >= 0 && y < child.getHeight();
+    // TODO: can we find a way to cache sClipRect as call it quite a lot?
+    if  (!child.getLocalVisibleRect(sClipRect)) {
+      return false;
+    }
+    return x >= sClipRect.left && x <= sClipRect.right && y >= sClipRect.top && y <= sClipRect.bottom;
   }
 
   private static boolean shouldHandlerWaitForOther(GestureHandler handler, GestureHandler other) {

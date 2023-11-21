@@ -4,6 +4,7 @@ import android.util.Log;
 
 import android.view.MotionEvent;
 import android.view.View;
+import android.graphics.Rect;
 
 import java.util.Arrays;
 
@@ -35,6 +36,7 @@ public class GestureHandler<T extends GestureHandler> {
   private static int MAX_POINTERS_COUNT = 12;
   private static MotionEvent.PointerProperties[] sPointerProps;
   private static MotionEvent.PointerCoords[] sPointerCoords;
+  private static Rect sClipRect = new Rect();
 
   private static void initPointerProps(int size) {
     if (sPointerProps == null) {
@@ -200,7 +202,9 @@ public class GestureHandler<T extends GestureHandler> {
 
     mView = view;
     mOrchestrator = orchestrator;
+    onPrepare();
   }
+  protected void onPrepare() {}
 
   private int findNextLocalPointerId() {
     int localPointerId = 0;
@@ -402,10 +406,15 @@ public class GestureHandler<T extends GestureHandler> {
   }
 
   public boolean isWithinBounds(View view, float posX, float posY) {
-    float left = 0;
-    float top = 0;
-    float right = view.getWidth();
-    float bottom = view.getHeight();
+
+    // TODO: can we find a way to cache sClipRect ?
+    if  (!view.getLocalVisibleRect(sClipRect)) {
+      return false;
+    }
+    float left = sClipRect.left;
+    float top = sClipRect.top;
+    float right = sClipRect.right - sClipRect.left;
+    float bottom = sClipRect.bottom - sClipRect.top;
     if (mHitSlop != null) {
       float padLeft = mHitSlop[HIT_SLOP_LEFT_IDX];
       float padTop = mHitSlop[HIT_SLOP_TOP_IDX];
