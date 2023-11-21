@@ -1962,9 +1962,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nativescript-community/gesturehandler@link:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3Dafbdd9%26locator%3Droot-workspace-0b6124%2540workspace%253A.":
+"@nativescript-community/gesturehandler@link:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3D964479%26locator%3Droot-workspace-0b6124%2540workspace%253A.":
   version: 0.0.0-use.local
-  resolution: "@nativescript-community/gesturehandler@link:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3Dafbdd9%26locator%3Droot-workspace-0b6124%2540workspace%253A."
+  resolution: "@nativescript-community/gesturehandler@link:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3D964479%26locator%3Droot-workspace-0b6124%2540workspace%253A."
   languageName: node
   linkType: soft
 
@@ -1991,7 +1991,7 @@ __metadata:
 
 "@nativescript-community/plugin-seed-tools@file:tools::locator=root-workspace-0b6124%40workspace%3A.":
   version: 1.0.0
-  resolution: "@nativescript-community/plugin-seed-tools@file:tools#tools::hash=2e83fa&locator=root-workspace-0b6124%40workspace%3A."
+  resolution: "@nativescript-community/plugin-seed-tools@file:tools#tools::hash=794d3f&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@angular/animations": ~16.2.8
     "@angular/common": ~16.2.8
@@ -2056,7 +2056,7 @@ __metadata:
     vue: ~2.6.14
     yargs: ^17.7.2
     zone.js: ~0.14.0
-  checksum: 50c8b546290f44beebfa0401d7acb26557c2e77a0637649f9a2498f8124fbd1fe03c7a2e1a8d50362185b104d27922c12ea8b44bb69ffc7a78ba9c2a8d8829fb
+  checksum: a2945d2bcdc80d8c5ffb0e6f17e7ebfd853452581dae89673279ac95b70259fd9adef433e014fce58c5244af4531eece250bebe5dda0e6596defd276847808c0
   languageName: node
   linkType: hard
 
@@ -2070,10 +2070,10 @@ __metadata:
 
 "@nativescript-community/template-snippet@file:demo-snippets::locator=root-workspace-0b6124%40workspace%3A.":
   version: 0.0.1
-  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=afbdd9&locator=root-workspace-0b6124%40workspace%3A."
+  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=964479&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@nativescript-community/gesturehandler": "link:../packages/gesturehandler"
-  checksum: 16de8d41dfec53f677eb19f6859b881192b4068604700d605eeb717a78caf9b64927a282ecc961c3a7aacd70986172cb6615cdd3a8229809b28168bd78370364
+  checksum: 9b2a2007424862ff317ca9b366229e6eed3a5f7b24ce25fb620e9efc28ac2f9009cad88bf5d969473b6bb89653d11909da6fce5ebec555ac25c43868ab606f75
   languageName: node
   linkType: hard
 
@@ -8111,7 +8111,7 @@ __metadata:
 
 "fsevents@patch:fsevents@^2.3.2#~builtin<compat/fsevents>, fsevents@patch:fsevents@~2.3.2#~builtin<compat/fsevents>":
   version: 2.3.2
-  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=18f3a7"
+  resolution: "fsevents@patch:fsevents@npm%3A2.3.2#~builtin<compat/fsevents>::version=2.3.2&hash=df0bf1"
   dependencies:
     node-gyp: latest
   conditions: os=darwin
@@ -14198,7 +14198,7 @@ __metadata:
 
 "resolve@patch:resolve@^1.1.6#~builtin<compat/resolve>, resolve@patch:resolve@^1.1.7#~builtin<compat/resolve>, resolve@patch:resolve@^1.10.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.20.0#~builtin<compat/resolve>, resolve@patch:resolve@^1.22.1#~builtin<compat/resolve>, resolve@patch:resolve@^1.9.0#~builtin<compat/resolve>":
   version: 1.22.1
-  resolution: "resolve@patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=07638b"
+  resolution: "resolve@patch:resolve@npm%3A1.22.1#~builtin<compat/resolve>::version=1.22.1&hash=c3c19d"
   dependencies:
     is-core-module: ^2.9.0
     path-parse: ^1.0.7
@@ -14211,7 +14211,7 @@ __metadata:
 
 "resolve@patch:resolve@^2.0.0-next.4#~builtin<compat/resolve>":
   version: 2.0.0-next.4
-  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.4#~builtin<compat/resolve>::version=2.0.0-next.4&hash=07638b"
+  resolution: "resolve@patch:resolve@npm%3A2.0.0-next.4#~builtin<compat/resolve>::version=2.0.0-next.4&hash=c3c19d"
   dependencies:
     is-core-module: ^2.9.0
     path-parse: ^1.0.7
@@ -16344,7 +16344,7 @@ __metadata:
 
 "typescript@patch:typescript@^3.5.3#~builtin<compat/typescript>":
   version: 3.9.10
-  resolution: "typescript@patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=a1c5e5"
+  resolution: "typescript@patch:typescript@npm%3A3.9.10#~builtin<compat/typescript>::version=3.9.10&hash=3bd3d3"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
@@ -16354,7 +16354,7 @@ __metadata:
 
 "typescript@patch:typescript@^4.6.4 || ^5.2.2#~builtin<compat/typescript>":
   version: 5.3.2
-  resolution: "typescript@patch:typescript@npm%3A5.3.2#~builtin<compat/typescript>::version=5.3.2&hash=a1c5e5"
+  resolution: "typescript@patch:typescript@npm%3A5.3.2#~builtin<compat/typescript>::version=5.3.2&hash=29ae49"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
@@ -16364,7 +16364,7 @@ __metadata:
 
 "typescript@patch:typescript@~4.2.3#~builtin<compat/typescript>":
   version: 4.2.4
-  resolution: "typescript@patch:typescript@npm%3A4.2.4#~builtin<compat/typescript>::version=4.2.4&hash=a1c5e5"
+  resolution: "typescript@patch:typescript@npm%3A4.2.4#~builtin<compat/typescript>::version=4.2.4&hash=334f98"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
@@ -16374,21 +16374,21 @@ __metadata:
 
 "typescript@patch:typescript@~4.8.4#~builtin<compat/typescript>":
   version: 4.8.4
-  resolution: "typescript@patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=a1c5e5"
+  resolution: "typescript@patch:typescript@npm%3A4.8.4#~builtin<compat/typescript>::version=4.8.4&hash=1a91c8"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 563a0ef47abae6df27a9a3ab38f75fc681f633ccf1a3502b1108e252e187787893de689220f4544aaf95a371a4eb3141e4a337deb9895de5ac3c1ca76430e5f0
+  checksum: c981e82b77a5acdcc4e69af9c56cdecf5b934a87a08e7b52120596701e389a878b8e3f860e73ffb287bf649cc47a8c741262ce058148f71de4cdd88bb9c75153
   languageName: node
   linkType: hard
 
 "typescript@patch:typescript@~4.9.5#~builtin<compat/typescript>":
   version: 4.9.5
-  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=a1c5e5"
+  resolution: "typescript@patch:typescript@npm%3A4.9.5#~builtin<compat/typescript>::version=4.9.5&hash=289587"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 2eee5c37cad4390385db5db5a8e81470e42e8f1401b0358d7390095d6f681b410f2c4a0c496c6ff9ebd775423c7785cdace7bcdad76c7bee283df3d9718c0f20
+  checksum: 1f8f3b6aaea19f0f67cba79057674ba580438a7db55057eb89cc06950483c5d632115c14077f6663ea76fd09fce3c190e6414bb98582ec80aa5a4eaf345d5b68
   languageName: node
   linkType: hard
 
@@ -17130,9 +17130,9 @@ __metadata:
   linkType: hard
 
 "word-wrap@npm:^1.2.3":
-  version: 1.2.3
-  resolution: "word-wrap@npm:1.2.3"
-  checksum: 30b48f91fcf12106ed3186ae4fa86a6a1842416df425be7b60485de14bec665a54a68e4b5156647dec3a70f25e84d270ca8bc8cd23182ed095f5c7206a938c1f
+  version: 1.2.5
+  resolution: "word-wrap@npm:1.2.5"
+  checksum: f93ba3586fc181f94afdaff3a6fef27920b4b6d9eaefed0f428f8e07adea2a7f54a5f2830ce59406c8416f033f86902b91eb824072354645eea687dff3691ccb
   languageName: node
   linkType: hard
 
