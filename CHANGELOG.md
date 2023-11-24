@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.20](https://github.com/nativescript-community/gesturehandler/compare/v2.0.19...v2.0.20) (2023-11-24)
+
+### Bug Fixes
+
+* **ios:** revert last changes and fixed it the right way ([57ca0b2](https://github.com/nativescript-community/gesturehandler/commit/57ca0b263f3f330af8c803c844528f328755c112))
+
+### Reverts
+
+* Revert "fix(ios): prevent error while overriding N gestures" ([96aa1f2](https://github.com/nativescript-community/gesturehandler/commit/96aa1f291ec23b3d06a2bcd81d738ef3d810e1e9))
+
 ## [2.0.19](https://github.com/nativescript-community/gesturehandler/compare/v2.0.18...v2.0.19) (2023-11-21)
 
 ### Bug Fixes
