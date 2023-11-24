@@ -68,6 +68,10 @@
 }
 
 
+- (void)registerGestureHandler:(nonnull GestureHandler *)gestureHandler
+{
+    [_registry registerGestureHandler:gestureHandler];
+}
 - (void)attachGestureHandler:(nonnull NSNumber *)handlerTag
                toView:(nonnull UIView *)view
 {

@@ -254,6 +254,7 @@ export class Manager extends ManagerBase {
 
     viewListeners = new Map<View, Map<number, { init: () => void; dispose: () => void }>>();
     attachGestureHandler(handler: Handler<any, any>, view: View) {
+        this.manager.registerGestureHandler(handler.native);
         const tag = handler.native.tag;
         if (view.nativeView) {
             this.manager.attachGestureHandlerToView(tag, view[handler.nativeGetterKey]);

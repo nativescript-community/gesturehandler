@@ -28,7 +28,9 @@
 
 - (void)registerGestureHandler:(GestureHandler *)gestureHandler
 {
+ if ([_handlers objectForKey:gestureHandler.tag] == nil) { 
     _handlers[gestureHandler.tag] = gestureHandler;
+ }
 }
 
 - (void)attachHandlerWithTag:(NSNumber *)handlerTag toView:(UIView *)view
