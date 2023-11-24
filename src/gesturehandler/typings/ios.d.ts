@@ -157,7 +157,6 @@ declare class GestureHandlerManager extends NSObject {
     createGestureHandlerTagConfig(handlerName: string, handlerTag: number, config: NSDictionary<any, any>): GestureHandler;
 
     dropGestureHandler(handlerTag: number): void;
-    detachGestureHandler(handlerTag: number): void;
 
     updateGestureHandlerConfig(handlerTag: number, config: NSDictionary<any, any>): void;
 }

@@ -46,9 +46,4 @@
     [_handlers removeObjectForKey:handlerTag];
 }
 
-- (void)detachHandlerWithTag:(NSNumber *)handlerTag
-{
-    GestureHandler *handler = _handlers[handlerTag];
-    [handler unbindFromView];
-}
 @end

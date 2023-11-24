@@ -88,10 +88,6 @@
     [_registry dropHandlerWithTag:handlerTag];
 }
 
-- (void)detachGestureHandler:(NSNumber *)handlerTag
-{
-    [_registry detachHandlerWithTag:handlerTag];
-}
 //- (void)handleSetJSResponder:(NSNumber *)viewTag blockNativeResponder:(NSNumber *)blockNativeResponder
 //{
 //    if ([blockNativeResponder boolValue]) {

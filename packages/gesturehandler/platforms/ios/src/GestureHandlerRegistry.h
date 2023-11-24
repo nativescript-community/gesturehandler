@@ -14,7 +14,5 @@
 - (void)registerGestureHandler:(nonnull GestureHandler *)gestureHandler;
 - (void)attachHandlerWithTag:(nonnull NSNumber *)handlerTag toView:(nonnull UIView *)view;
 - (void)dropHandlerWithTag:(nonnull NSNumber *)handlerTag;
-- (void)detachHandlerWithTag:(nonnull NSNumber *)handlerTag;
-- (void)detachHandlerWithTag:(nonnull NSNumber *)handlerTag;
 
 @end

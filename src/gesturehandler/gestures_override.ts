@@ -60,7 +60,7 @@ export class GesturesObserver {
     }
 
     public disconnect() {
-        this._detach(true);
+        this._detach();
 
         if (this.target) {
             this.target.off('loaded', this._onTargetLoaded);
@@ -123,12 +123,12 @@ export class GesturesObserver {
         }
     }
 
-    private _detach(drop = false) {
+    private _detach() {
         if (this.gestureHandler) {
             // dont detach events. It will be done on dispose
             // this.gestureHandler.off(GestureHandlerStateEvent);
             // this.gestureHandler.off(GestureHandlerTouchEvent);
-            this.gestureHandler.detachFromView(this.target, drop);
+            this.gestureHandler.detachFromView(this.target);
         }
         this._notifyTouch = false;
         this._eventData = {};
