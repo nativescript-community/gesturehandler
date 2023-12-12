@@ -260,6 +260,9 @@ export class Manager extends ManagerBase {
             this.manager.attachGestureHandlerToView(tag, view[handler.nativeGetterKey]);
         }
         const onInit = () => {
+            // we need to ensure the handler is registered
+            // in case it was dropped in dispose
+            this.manager.registerGestureHandler(handler.native);
             this.manager.attachGestureHandlerToView(tag, view[handler.nativeGetterKey]);
         };
         const onDispose = () => this.manager.dropGestureHandler(tag);
