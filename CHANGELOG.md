@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.22](https://github.com/nativescript-community/gesturehandler/compare/v2.0.21...v2.0.22) (2023-12-12)
+
+### Bug Fixes
+
+* **ios:** error after dispose of a view ([ce70cd5](https://github.com/nativescript-community/gesturehandler/commit/ce70cd5525ae4684833dd84152930e68409f84b7))
+
 ## [2.0.21](https://github.com/nativescript-community/gesturehandler/compare/v2.0.20...v2.0.21) (2023-11-24)
 
 **Note:** Version bump only for package nativescript-gesturehandler
