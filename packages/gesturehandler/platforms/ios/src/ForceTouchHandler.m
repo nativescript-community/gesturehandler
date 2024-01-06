@@ -135,26 +135,26 @@
 }
 
 //
-//- (void) setMaxForce:(NSNumber *) value {
-//  ((ForceTouchGestureRecognizer *)_recognizer).maxForce = [value integerValue];
-//}
+- (void) setMaxForce:(NSInteger) value {
+  ((ForceTouchGestureRecognizer *)_recognizer).maxForce = value;
+}
 //
 //- (NSNumber *) maxForce {
 //  return [NSNumber numberWithInteger: ((ForceTouchGestureRecognizer *)_recognizer).maxForce];
 //}
 //
-//- (void) setMinForce:(NSNumber *) value {
-//  ((ForceTouchGestureRecognizer *)_recognizer).minForce = [value integerValue];
-//}
+- (void) setMinForce:(NSInteger) value {
+  ((ForceTouchGestureRecognizer *)_recognizer).minForce = value;
+}
 //
 //- (NSNumber *) minForce {
 //  return [NSNumber numberWithInteger: ((ForceTouchGestureRecognizer *)_recognizer).minForce];
 //}
 //
 //
-//- (void) setFeedbackOnActivation:(NSNumber *) value {
-//  ((ForceTouchGestureRecognizer *)_recognizer).feedbackOnActivation = [value boolValue];
-//}
+- (void) setFeedbackOnActivation:(Boolean) value {
+  ((ForceTouchGestureRecognizer *)_recognizer).feedbackOnActivation = value;
+}
 //
 //- (NSNumber *) feedbackOnActivation {
 //  return [NSNumber numberWithBool: ((ForceTouchGestureRecognizer *)_recognizer).feedbackOnActivation];

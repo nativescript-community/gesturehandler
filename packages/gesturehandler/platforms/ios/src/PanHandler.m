@@ -238,5 +238,41 @@
   return result;
 }
 
+- (void)setMinDist:(CGFloat)value {
+  ((BetterPanGestureRecognizer*)_recognizer).minDistSq = value * value;
+}
+- (void)setMinVelocityX:(CGFloat)value {
+  ((BetterPanGestureRecognizer*)_recognizer).minVelocityX = value;
+}
+- (void)setMinVelocityY:(CGFloat)value {
+  ((BetterPanGestureRecognizer*)_recognizer).minVelocityY = value;
+}
+- (void)setMinVelocitySq:(CGFloat)value {
+  ((BetterPanGestureRecognizer*)_recognizer).minVelocitySq = value;
+}
+- (void)setActiveOffsetXStart:(CGFloat)value {
+  ((BetterPanGestureRecognizer*)_recognizer).activeOffsetXStart = value;
+}
+- (void)setActiveOffsetXEnd:(CGFloat)value {
+  ((BetterPanGestureRecognizer*)_recognizer).activeOffsetXEnd = value;
+}
+- (void)setFailOffsetXStart:(CGFloat)value {
+  ((BetterPanGestureRecognizer*)_recognizer).failOffsetXStart = value;
+}
+- (void)setFailOffsetXEnd:(CGFloat)value {
+  ((BetterPanGestureRecognizer*)_recognizer).failOffsetXEnd = value;
+}
+- (void)setActiveOffsetYStart:(CGFloat)value {
+  ((BetterPanGestureRecognizer*)_recognizer).activeOffsetYStart = value;
+}
+- (void)setActiveOffsetYEnd:(CGFloat)value {
+  ((BetterPanGestureRecognizer*)_recognizer).activeOffsetYEnd = value;
+}
+- (void)setFailOffsetYStart:(CGFloat)value {
+  ((BetterPanGestureRecognizer*)_recognizer).failOffsetYStart = value;
+}
+- (void)setFailOffsetYEnd:(CGFloat)value {
+  ((BetterPanGestureRecognizer*)_recognizer).failOffsetYEnd = value;
+}
 @end
 

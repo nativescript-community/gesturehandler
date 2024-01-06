@@ -224,5 +224,27 @@
   return result;
 }
 
+
+- (void)setMaxDist:(CGFloat)value {
+  ((BetterTapGestureRecognizer*)_recognizer).maxDistSq = value * value;
+}
+- (void)setNumberOfTaps:(NSUInteger)value {
+  ((BetterTapGestureRecognizer*)_recognizer).numberOfTaps = value;
+}
+- (void)setMaxDelayMs:(CGFloat)value {
+  ((BetterTapGestureRecognizer*)_recognizer).maxDelay = value / 1000.0;
+}
+- (void)setMaxDurationMs:(CGFloat)value {
+  ((BetterTapGestureRecognizer*)_recognizer).maxDuration = value / 1000.0;
+}
+- (void)setMaxDeltaX:(CGFloat)value {
+  ((BetterTapGestureRecognizer*)_recognizer).maxDeltaX = value;
+}
+- (void)setMaxDeltaY:(CGFloat)value {
+  ((BetterTapGestureRecognizer*)_recognizer).maxDeltaY = value;
+}
+- (void)setMinPointers:(NSInteger)value {
+  ((BetterTapGestureRecognizer*)_recognizer).minPointers = value;
+}
 @end
 

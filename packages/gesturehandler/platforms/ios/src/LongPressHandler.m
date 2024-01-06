@@ -69,17 +69,17 @@
 }
 
 //
-//- (void) setMinDurationMs:(NSNumber *) value {
-//  ((UILongPressGestureRecognizer *)_recognizer).minimumPressDuration = [value floatValue] / 1000.0;
-//}
+- (void) setMinDurationMs:(CGFloat) value {
+  ((UILongPressGestureRecognizer *)_recognizer).minimumPressDuration = value / 1000.0;
+}
 //
 //- (NSNumber *) minDurationMs {
 //  return [NSNumber numberWithFloat: ((UILongPressGestureRecognizer *)_recognizer).minimumPressDuration * 1000.0];
 //}
 //
-//- (void) setMaxDist:(NSNumber *) value {
-//  ((UILongPressGestureRecognizer *)_recognizer).allowableMovement = [value floatValue];
-//}
+- (void) setMaxDist:(CGFloat) value {
+  ((UILongPressGestureRecognizer *)_recognizer).allowableMovement = value;
+}
 //
 //- (NSNumber *) maxDist {
 //  return [NSNumber numberWithFloat: ((UILongPressGestureRecognizer *)_recognizer).allowableMovement];

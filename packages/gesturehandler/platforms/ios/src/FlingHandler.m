@@ -89,17 +89,17 @@
     [_bottomrecognizer.view removeGestureRecognizer:_bottomrecognizer];
     _bottomrecognizer.delegate = nil;
 }
-//- (void) setDirection:(NSNumber *) value {
-//  ((UISwipeGestureRecognizer *)_recognizer).direction = [value integerValue];
-//}
+- (void) setDirection:(NSInteger) value {
+  ((UISwipeGestureRecognizer *)_recognizer).direction = value;
+}
 //
 //- (NSNumber *) direction {
 //    return [NSNumber numberWithInteger: ((UISwipeGestureRecognizer *)_recognizer).direction];
 //}
 //
-//- (void) setNumberOfTouchesRequired:(NSNumber *) value {
-//  ((UISwipeGestureRecognizer *)_recognizer).numberOfTouchesRequired = [value integerValue];
-//}
+- (void) setNumberOfTouchesRequired:(NSInteger) value {
+  ((UISwipeGestureRecognizer *)_recognizer).numberOfTouchesRequired = value;
+}
 //
 //- (NSNumber *) numberOfTouchesRequired {
 //  return [NSNumber numberWithInteger: ((UISwipeGestureRecognizer *)_recognizer).numberOfTouchesRequired];
