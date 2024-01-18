@@ -235,6 +235,8 @@ public class PanGestureHandler extends GestureHandler<PanGestureHandler> {
       mStartY = mLastY;
       mOffsetX = 0;
       mOffsetY = 0;
+      mLastVelocityX = 0;
+      mLastVelocityY = 0;
       mVelocityTracker = VelocityTracker.obtain();
       addVelocityMovement(mVelocityTracker, event);
       begin();
