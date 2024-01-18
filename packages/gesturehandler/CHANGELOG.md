@@ -3,6 +3,16 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.23](https://github.com/nativescript-community/gesturehandler/compare/v2.0.22...v2.0.23) (2024-01-06)
+
+### Bug Fixes
+
+* **ios:** allow to dynamically change handler properties ([133a749](https://github.com/nativescript-community/gesturehandler/commit/133a7499c1085abaa17d862c6fdad46e1fe00c64))
+
+## [2.0.22](https://github.com/nativescript-community/gesturehandler/compare/v2.0.21...v2.0.22) (2023-12-12)
+
+**Note:** Version bump only for package @nativescript-community/gesturehandler
+
 ## [2.0.21](https://github.com/nativescript-community/gesturehandler/compare/v2.0.20...v2.0.21) (2023-11-24)
 
 **Note:** Version bump only for package @nativescript-community/gesturehandler

@@ -53,16 +53,16 @@
 }
 
 //
-//- (void) setShouldActivateOnStart:(NSNumber *) value {
-//  _shouldActivateOnStart = [value boolValue];
-//}
+- (void) setShouldActivateOnStart:(Boolean) value {
+  _shouldActivateOnStart = value;
+}
 //
 //- (NSNumber *) shouldActivateOnStart {
 //  return [NSNumber numberWithBool: _shouldActivateOnStart];
 //}
-//- (void) setDisallowInterruption:(NSNumber *) value {
-//  _disallowInterruption = [value boolValue];
-//}
+- (void) setDisallowInterruption:(Boolean) value {
+  _disallowInterruption = value;
+}
 //
 //- (NSNumber *) disallowInterruption {
 //  return [NSNumber numberWithBool: _disallowInterruption];

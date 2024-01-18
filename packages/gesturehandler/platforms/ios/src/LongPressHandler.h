@@ -9,4 +9,7 @@
 #import "GestureHandler.h"
 
 @interface LongPressGestureHandler : GestureHandler
+
+- (void) setMinDurationMs:(CGFloat) value;
+- (void) setMaxDist:(CGFloat) value;
 @end

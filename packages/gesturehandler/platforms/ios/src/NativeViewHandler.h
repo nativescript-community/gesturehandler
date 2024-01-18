@@ -12,4 +12,6 @@
 @end
 
 @interface NativeViewGestureHandler : GestureHandler
+- (void)setShouldActivateOnStart:(Boolean)value;
+- (void)setDisallowInterruption:(Boolean)value;
 @end

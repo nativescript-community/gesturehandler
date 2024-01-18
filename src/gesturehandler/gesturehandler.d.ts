@@ -133,7 +133,9 @@ export class FlingGestureHandler extends Handler<any, FlingGestureHandlerOptions
     numberOfPointers: number;
     direction: number;
 }
-export interface PinchGestureHandlerOptions extends HandlerOptions {}
+export interface PinchGestureHandlerOptions extends HandlerOptions {
+    minSpan?: number; // Android only
+}
 export class PinchGestureHandler extends Handler<any, PinchGestureHandlerOptions> {}
 export interface RotationGestureHandlerOptions extends HandlerOptions {}
 export class RotationGestureHandler extends Handler<any, RotationGestureHandlerOptions> {}
@@ -141,10 +143,12 @@ export class RotationGestureHandler extends Handler<any, RotationGestureHandlerO
 export interface ForceTouchGestureHandlerOptions extends HandlerOptions {
     minForce?: number;
     maxForce?: number;
+    feedbackOnActivation?: boolean;
 }
 export class ForceTouchGestureHandler extends Handler<any, ForceTouchGestureHandlerOptions> {
     minForce: number;
     maxForce: number;
+    feedbackOnActivation: boolean;
 }
 
 export class Manager extends Observable {

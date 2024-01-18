@@ -10,4 +10,11 @@
 
 @interface TapGestureHandler : GestureHandler
 -(void)resetStored;
+- (void)setMaxDist:(CGFloat)value;
+- (void)setNumberOfTaps:(NSUInteger)value;
+- (void)setMaxDelayMs:(CGFloat)value;
+- (void)setMaxDurationMs:(CGFloat)value;
+- (void)setMaxDeltaX:(CGFloat)value;
+- (void)setMaxDeltaY:(CGFloat)value;
+- (void)setMinPointers:(NSInteger)value;
 @end

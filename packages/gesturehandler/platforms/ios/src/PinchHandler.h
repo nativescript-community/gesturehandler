@@ -9,4 +9,5 @@
 #import "GestureHandler.h"
 
 @interface PinchGestureHandler : GestureHandler
+
 @end

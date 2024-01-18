@@ -1,7 +1,17 @@
-import { View } from '@nativescript/core/ui';
+import { Utils, View } from '@nativescript/core';
 import { GestureEventData, GestureTypes } from '@nativescript/core/ui/gestures';
 import { getClass } from '@nativescript/core/utils/types';
-import { HandlerOptions } from './gesturehandler';
+import {
+    FlingGestureHandlerOptions,
+    ForceTouchGestureHandlerOptions,
+    HandlerOptions,
+    LongPressGestureHandlerOptions,
+    NativeViewGestureHandlerOptions,
+    PanGestureHandlerOptions,
+    PinchGestureHandlerOptions,
+    RotationGestureHandlerOptions,
+    TapGestureHandlerOptions
+} from './gesturehandler';
 import {
     BaseGestureRootView,
     BaseNative,
@@ -107,7 +117,7 @@ function getValueForClass(val) {
 
         default:
             console.log(
-                "Please report this at https://github.com/farfromrefug/@nativescript-community/gesturehandler-febase/issues: iOS toJsObject is missing a converter for class '" +
+                "Please report this at https://github.com/farfromrefug/@nativescript-community/gesturehandler/issues: iOS toJsObject is missing a converter for class '" +
                     getClass(val) +
                     "'. Casting to String as a fallback."
             );
@@ -229,6 +239,57 @@ export class Handler<T extends GestureHandler, U extends HandlerOptions> extends
     }
 }
 
+export class TapHandler extends Handler<TapGestureHandler, TapGestureHandlerOptions> {
+    @nativeProperty numberOfTaps: number;
+    @nativeProperty maxDurationMs: number;
+    @nativeProperty maxDelayMs: number;
+    @nativeProperty maxDeltaX: number;
+    @nativeProperty maxDeltaY: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) maxDist: number;
+    @nativeProperty minPointers: number;
+}
+
+export class PanHandler extends Handler<PanGestureHandler, PanGestureHandlerOptions> {
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) minDist: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) activeOffsetXStart: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) activeOffsetXEnd: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) failOffsetXStart: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) failOffsetXEnd: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) activeOffsetYStart: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) activeOffsetYEnd: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) failOffsetYStart: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) failOffsetYEnd: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) minVelocity: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) minVelocityX: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) minVelocityY: number;
+    @nativeProperty minPointers: number;
+    @nativeProperty maxPointers: number;
+    @nativeProperty({ nativeSetterName: 'setAverageTouches' }) avgTouches: number;
+    @nativeProperty numberOfPointers: number;
+}
+
+export class PinchHandler extends Handler<PinchGestureHandler, PinchGestureHandlerOptions> {
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) minSpan: number;
+}
+
+export class FlingHandler extends Handler<FlingGestureHandler, FlingGestureHandlerOptions> {
+    @nativeProperty numberOfPointers: number;
+    @nativeProperty direction: number;
+}
+export class ForceTouchGestureHandler extends Handler<ForceTouchHandler, ForceTouchGestureHandlerOptions> {
+    @nativeProperty minForce: number;
+    @nativeProperty maxForce: number;
+}
+export class LongPressHandler extends Handler<LongPressGestureHandler, LongPressGestureHandlerOptions> {
+    @nativeProperty minDurationMs: number;
+    @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) maxDist: number;
+}
+export class RotationHandler extends Handler<RotationGestureHandler, RotationGestureHandlerOptions> {}
+
+export class NativeViewHandler extends Handler<NativeViewGestureHandler, NativeViewGestureHandlerOptions> {
+    @nativeProperty shouldActivateOnStart: boolean;
+    @nativeProperty disallowInterruption: boolean;
+}
 export class Manager extends ManagerBase {
     _manager: GestureHandlerManager;
     get manager() {
@@ -247,7 +308,36 @@ export class Manager extends ManagerBase {
     }
     createGestureHandler<T extends HandlerType>(handlerName: T, handlerTag: number, config?: OptionsTypeMap[T]): TypeMap[T] {
         const nHandler = this.manager.createGestureHandlerTagConfig(handlerName, handlerTag, config ? NSDictionary.dictionaryWithDictionary(config as any) : null);
-        const result = new Handler(config, nHandler);
+        let result: Handler<any, any>;
+        switch (handlerName) {
+            case 'tap':
+                result = new TapHandler(config, nHandler);
+                break;
+            case 'pan':
+                result = new PanHandler(config, nHandler);
+                break;
+            case 'fling':
+                result = new FlingHandler(config, nHandler);
+                break;
+            case 'longPress':
+                result = new LongPressHandler(config, nHandler);
+                break;
+            case 'nativeView':
+                result = new NativeViewHandler(config, nHandler);
+                break;
+            case 'pinch':
+                result = new PinchHandler(config, nHandler);
+                break;
+            case 'rotation':
+                result = new RotationHandler(config, nHandler);
+                break;
+            case 'forceTouch':
+                result = new ForceTouchGestureHandler(config, nHandler);
+                break;
+            default:
+                result = new Handler(config, nHandler);
+                break;
+        }
         result.manager = new WeakRef(this);
         return result as any;
     }
@@ -260,6 +350,9 @@ export class Manager extends ManagerBase {
             this.manager.attachGestureHandlerToView(tag, view[handler.nativeGetterKey]);
         }
         const onInit = () => {
+            // we need to ensure the handler is registered
+            // in case it was dropped in dispose
+            this.manager.registerGestureHandler(handler.native);
             this.manager.attachGestureHandlerToView(tag, view[handler.nativeGetterKey]);
         };
         const onDispose = () => this.manager.dropGestureHandler(tag);
