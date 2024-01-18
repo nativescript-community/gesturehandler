@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.24](https://github.com/nativescript-community/gesturehandler/compare/v2.0.23...v2.0.24) (2024-01-18)
+
+### Bug Fixes
+
+* **android:** pan gesture velocity fix ([b8ec041](https://github.com/nativescript-community/gesturehandler/commit/b8ec0415bd7c6938e41d1184a25d8aa514e5e557))
+* pass the handler to the gesture event (N gesture override) to allow canceling the event ([d7ad3ad](https://github.com/nativescript-community/gesturehandler/commit/d7ad3ad6bfb617815b35232849b321d29dc98d2c))
+
 ## [2.0.23](https://github.com/nativescript-community/gesturehandler/compare/v2.0.22...v2.0.23) (2024-01-06)
 
 ### Bug Fixes
