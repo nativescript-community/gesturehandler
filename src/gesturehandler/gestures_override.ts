@@ -152,6 +152,7 @@ export class GesturesObserver {
                         this._eventData[type] = eventData = new CommonGestureEventData(type);
                         break;
                 }
+                eventData.handler = this.gestureHandler;
             }
             eventData.prepare(this.target, event.data);
             _executeCallback(this, eventData);
@@ -258,6 +259,7 @@ export class GesturesObserver {
             let eventData = this._eventData[GestureTypes.touch];
             if (!eventData) {
                 eventData = this._eventData[GestureTypes.touch] = new TouchGestureEventData();
+                eventData.handler = this.gestureHandler;
             }
             eventData.prepare(this.target, motionEvent);
             _executeCallback(this, eventData);
@@ -316,6 +318,7 @@ class CommonGestureEventData implements GestureEventData {
         };
     };
     state: GestureStateTypes;
+    handler: Handler<any, any>;
 
     private _activePointers: GesturePointer[];
     private _allPointers: GesturePointer[];
@@ -410,6 +413,7 @@ class TouchGestureEventData {
     android: android.view.MotionEvent;
     object: any;
     state: GestureStateTypes;
+    handler: Handler<any, any>;
 
     private _activePointers: Pointer[];
     private _allPointers: Pointer[];
