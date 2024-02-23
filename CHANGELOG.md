@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.27](https://github.com/nativescript-community/gesturehandler/compare/v2.0.26...v2.0.27) (2024-02-23)
+
+### Bug Fixes
+
+* **android:** edge case of gesture not working with bottomSheet ([20e4bb7](https://github.com/nativescript-community/gesturehandler/commit/20e4bb7a28a47d4c45ebac04c64d299bf66cde9f))
+
 ## [2.0.26](https://github.com/nativescript-community/gesturehandler/compare/v2.0.25...v2.0.26) (2024-02-23)
 
 ### Bug Fixes

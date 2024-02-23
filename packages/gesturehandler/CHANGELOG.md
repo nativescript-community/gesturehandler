@@ -3,6 +3,10 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.27](https://github.com/nativescript-community/gesturehandler/compare/v2.0.26...v2.0.27) (2024-02-23)
+
+**Note:** Version bump only for package @nativescript-community/gesturehandler
+
 ## [2.0.26](https://github.com/nativescript-community/gesturehandler/compare/v2.0.25...v2.0.26) (2024-02-23)
 
 ### Bug Fixes
