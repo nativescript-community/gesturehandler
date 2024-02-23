@@ -1913,9 +1913,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nativescript-community/gesturehandler@link:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3D548d15%26locator%3Droot-workspace-0b6124%2540workspace%253A.":
+"@nativescript-community/gesturehandler@link:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3D964479%26locator%3Droot-workspace-0b6124%2540workspace%253A.":
   version: 0.0.0-use.local
-  resolution: "@nativescript-community/gesturehandler@link:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3D548d15%26locator%3Droot-workspace-0b6124%2540workspace%253A."
+  resolution: "@nativescript-community/gesturehandler@link:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3D964479%26locator%3Droot-workspace-0b6124%2540workspace%253A."
   languageName: node
   linkType: soft
 
@@ -1942,7 +1942,7 @@ __metadata:
 
 "@nativescript-community/plugin-seed-tools@file:tools::locator=root-workspace-0b6124%40workspace%3A.":
   version: 1.0.0
-  resolution: "@nativescript-community/plugin-seed-tools@file:tools#tools::hash=fbbd1d&locator=root-workspace-0b6124%40workspace%3A."
+  resolution: "@nativescript-community/plugin-seed-tools@file:tools#tools::hash=d8ec7e&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@angular/animations": "npm:~17.0.8"
     "@angular/common": "npm:~17.0.8"
@@ -2007,16 +2007,16 @@ __metadata:
     vue: "npm:^2.7.16"
     yargs: "npm:^17.7.2"
     zone.js: "npm:~0.14.2"
-  checksum: 09210fd9baf054eb97e6fa3af74a196a2289607a5f8eb2eee297e1264c771fcec69d06de714862c45763085e486a43400ddd7642fe48c4f2113ed4ea83247d7e
+  checksum: 20d0fbef6f95fa6aa9fb3e5a8acb66c587b3f51c91c259b2aaba4194d32d29abfac06488958195af93edcf0f352c5ae6ddbb350acc895bd78a1f9bfd88544e70
   languageName: node
   linkType: hard
 
 "@nativescript-community/template-snippet@file:demo-snippets::locator=root-workspace-0b6124%40workspace%3A.":
   version: 0.0.1
-  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=548d15&locator=root-workspace-0b6124%40workspace%3A."
+  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=964479&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@nativescript-community/gesturehandler": "link:../packages/gesturehandler"
-  checksum: deb9ba19b471cbc7d8b546f3aa5eac47412070417e3e77dd906e8159f4e00f701d305ede9f7292f55f5e672b3047e9de1337e22e99a45993804fff2ec01cc05a
+  checksum: 9b2a2007424862ff317ca9b366229e6eed3a5f7b24ce25fb620e9efc28ac2f9009cad88bf5d969473b6bb89653d11909da6fce5ebec555ac25c43868ab606f75
   languageName: node
   linkType: hard
 
@@ -15783,11 +15783,11 @@ __metadata:
 
 "typescript@patch:typescript@npm%3A5.3.1-rc#optional!builtin<compat/typescript>":
   version: 5.3.1-rc
-  resolution: "typescript@patch:typescript@npm%3A5.3.1-rc#optional!builtin<compat/typescript>::version=5.3.1-rc&hash=e012d7"
+  resolution: "typescript@patch:typescript@npm%3A5.3.1-rc#optional!builtin<compat/typescript>::version=5.3.1-rc&hash=29ae49"
   bin:
     tsc: bin/tsc
     tsserver: bin/tsserver
-  checksum: 7f15bd5095e38645991fc6ec6d34fa8c13c1ab245653e8cb0a9f8139a70d758c1a086d00538a2f4ec127834dd838428816e1ab954dccf6c62c884bd69a638e92
+  checksum: 19a9788c785f7dcd2cb1872af5ee28d26212e2c8b1dc46e8051eb671a3ba5a1e733831ccde13ba3ecdad8c3cf1c2dab0722643846e029a0dc7a482df87ac93c5
   languageName: node
   linkType: hard
 
