@@ -79,6 +79,12 @@
   }
 #endif
   [super touchesBegan:touches withEvent:event];
+
+  // we check for active before UIGestureRecognizerStateBegan because otherwise
+  // we dont behave as Android and activate on first touch
+  if (![_gestureHandler.delegate gestureHandler:_gestureHandler shouldActivateForEvent:[_gestureHandler eventExtraData:self]]) {
+    self.state = UIGestureRecognizerStateFailed;
+  }
 }
 
 - (void)touchesMoved:(NSSet<UITouch *> *)touches withEvent:(UIEvent *)event
@@ -187,6 +193,7 @@
 {
   if ((self = [super initWithTag:tag])) {
     _recognizer = [[BetterPanGestureRecognizer alloc] initWithGestureHandler:self];
+    self.activateOnBegin = NO;
   }
   return self;
 }
@@ -275,4 +282,3 @@
   ((BetterPanGestureRecognizer*)_recognizer).failOffsetYEnd = value;
 }
 @end
-
