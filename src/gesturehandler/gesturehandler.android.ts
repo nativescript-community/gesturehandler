@@ -548,18 +548,22 @@ export class Manager extends ManagerBase {
 
     findRegistry(view: View): com.swmansion.gesturehandler.GestureHandlerRegistryImpl {
         let registry: com.swmansion.gesturehandler.GestureHandlerRegistryImpl;
+        let parent = view.parent;
+        // first test for GestureRootView
+        // otherwise it could fail with components like BottomSheet
+        // where the bottomSheet parent is set to app rootView (which could be a page)
+        // thus the registry to add the handler would not be the same
+        // as the one use for touch
+        while (parent) {
+            if (parent instanceof GestureRootView) {
+                return parent.registry;
+            }
+            parent = parent.parent;
+        }
+
         const page = view.page as PageGestureExtended;
         if (page) {
             registry = page.registry;
-        } else {
-            // no root page try to find a parent GestureRootView
-            let parent = view.parent;
-            while (parent) {
-                if (parent instanceof GestureRootView) {
-                    return parent.registry;
-                }
-                parent = parent.parent;
-            }
         }
         return registry;
     }
