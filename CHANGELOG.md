@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.26](https://github.com/nativescript-community/gesturehandler/compare/v2.0.25...v2.0.26) (2024-02-23)
+
+### Bug Fixes
+
+* **ios:** fling gesture fix ([f58dd24](https://github.com/nativescript-community/gesturehandler/commit/f58dd246e7158b1173f4c79ddb08340cf4583812))
+* **ios:** test for gesture activation on first touch like Android ([780700b](https://github.com/nativescript-community/gesturehandler/commit/780700bafca703653d1c44c49bdc66c74e7df471))
+
+## [2.0.25](https://github.com/nativescript-community/gesturehandler/compare/v2.0.24...v2.0.25) (2024-02-02)
+
+### Bug Fixes
+
+* **ios:** trigger the longPress gesture on begin ([b2b9ffa](https://github.com/nativescript-community/gesturehandler/commit/b2b9ffaedfd7aab5abd31a01d0803460c9f1aaf0))
+
 ## [2.0.24](https://github.com/nativescript-community/gesturehandler/compare/v2.0.23...v2.0.24) (2024-01-18)
 
 ### Bug Fixes

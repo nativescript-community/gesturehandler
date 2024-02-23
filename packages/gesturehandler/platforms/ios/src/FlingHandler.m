@@ -14,7 +14,7 @@
 - (instancetype)initWithTag:(NSNumber *)tag
 {
     if ((self = [super initWithTag:tag])) {
-        self.direction = UISwipeGestureRecognizerDirectionLeft | UISwipeGestureRecognizerDirectionRight |   UISwipeGestureRecognizerDirectionUp | UISwipeGestureRecognizerDirectionDown;
+      _direction = UISwipeGestureRecognizerDirectionLeft | UISwipeGestureRecognizerDirectionRight |   UISwipeGestureRecognizerDirectionUp | UISwipeGestureRecognizerDirectionDown;
         _recognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
         [(UISwipeGestureRecognizer*)_recognizer setDirection:UISwipeGestureRecognizerDirectionLeft];
         _rightrecognizer = [[UISwipeGestureRecognizer alloc] initWithTarget:self action:@selector(handleGesture:)];
@@ -34,17 +34,17 @@
   
   id prop = config[@"direction"];
   if (prop != nil) {
-    self.direction = [prop integerValue];
-    if ((self.direction & UISwipeGestureRecognizerDirectionLeft) == 0)  {
+    _direction = [prop integerValue];
+    if ((_direction & UISwipeGestureRecognizerDirectionLeft) == 0)  {
       _recognizer.enabled = NO;
     }
-    if ((self.direction & UISwipeGestureRecognizerDirectionRight) == 0)  {
+    if ((_direction & UISwipeGestureRecognizerDirectionRight) == 0)  {
       _rightrecognizer.enabled = NO;
     }
-    if ((self.direction & UISwipeGestureRecognizerDirectionUp) == 0)  {
+    if ((_direction & UISwipeGestureRecognizerDirectionUp) == 0)  {
       _toprecognizer.enabled = NO;
     }
-    if ((self.direction & UISwipeGestureRecognizerDirectionDown) == 0)  {
+    if ((_direction & UISwipeGestureRecognizerDirectionDown) == 0)  {
       _bottomrecognizer.enabled = NO;
     }
   }
@@ -90,7 +90,11 @@
     _bottomrecognizer.delegate = nil;
 }
 - (void) setDirection:(NSInteger) value {
-  ((UISwipeGestureRecognizer *)_recognizer).direction = value;
+  _direction = value;
+  _recognizer.enabled = (_direction & UISwipeGestureRecognizerDirectionLeft) != 0;
+  _rightrecognizer.enabled = (_direction & UISwipeGestureRecognizerDirectionRight) != 0;
+  _toprecognizer.enabled = (_direction & UISwipeGestureRecognizerDirectionUp) != 0;
+  _bottomrecognizer.enabled = (_direction & UISwipeGestureRecognizerDirectionDown) != 0;
 }
 //
 //- (NSNumber *) direction {
@@ -128,4 +132,3 @@
   return result;
 }
 @end
-

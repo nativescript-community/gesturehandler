@@ -70,6 +70,7 @@ CGRect GHHitSlopInsetRect(CGRect rect, RNGHHitSlop hitSlop) {
         _tag = tag;
         _lastState = GestureHandlerStateUndetermined;
         _hitSlop = RNGHHitSlopEmpty;
+        _activateOnBegin = YES;
     }
     return self;
 }
@@ -323,7 +324,7 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
     [self reset];
-    if (self.delegate && [self.delegate respondsToSelector:@selector(gestureHandler:shouldActivateForEvent:)]) {
+    if (self.activateOnBegin && self.delegate && [self.delegate respondsToSelector:@selector(gestureHandler:shouldActivateForEvent:)]) {
         if (![self.delegate gestureHandler:self shouldActivateForEvent:[self eventExtraData:gestureRecognizer]]) {
           return FALSE;
         }

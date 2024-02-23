@@ -78,6 +78,7 @@ if (value != nil) recognizer.prop = [value type]; \
 //@property (nonatomic, weak, nullable) id<GestureHandlerEventEmitter> emitter;
 @property (nonatomic, readonly, nullable) UIGestureRecognizer *recognizer;
 @property (nonatomic) BOOL enabled;
+@property (nonatomic) BOOL activateOnBegin;
 @property(nonatomic) BOOL shouldCancelWhenOutside;
 @property (nullable, nonatomic, weak) id<GestureHandlerDelegate> delegate;
 

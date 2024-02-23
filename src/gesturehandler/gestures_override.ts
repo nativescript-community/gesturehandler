@@ -209,7 +209,7 @@ export class GesturesObserver {
                 gestureHandler = manager.createGestureHandler(HandlerType.LONG_PRESS, target['LONGPRESS_HANDLER_TAG'], {
                     simultaneousHandlers: [ROOT_GESTURE_HANDLER_TAG]
                 });
-                gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.longPress, GestureState.ACTIVE), this);
+                gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.longPress, __IOS__  ? GestureState.BEGAN : GestureState.ACTIVE), this);
             }
             if (type & GestureTypes.doubleTap) {
                 gestureHandler = manager.createGestureHandler(HandlerType.TAP, target['DOUBLE_TAP_HANDLER_TAG'], {
