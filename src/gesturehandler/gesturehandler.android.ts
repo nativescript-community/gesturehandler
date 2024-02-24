@@ -558,6 +558,10 @@ export class Manager extends ManagerBase {
             if (parent instanceof GestureRootView) {
                 return parent.registry;
             }
+            // we need to break if it is a modal page or we will get the wrong registry
+            if (parent['_dialogFragment']) {
+                break;
+            }
             parent = parent.parent;
         }
 
