@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.28](https://github.com/nativescript-community/gesturehandler/compare/v2.0.27...v2.0.28) (2024-02-24)
+
+### Bug Fixes
+
+* **android:** edge case for modal dialogs and registry ([1494fe2](https://github.com/nativescript-community/gesturehandler/commit/1494fe258910ab537676ce5f0c1d08c3ce142525))
+
 ## [2.0.27](https://github.com/nativescript-community/gesturehandler/compare/v2.0.26...v2.0.27) (2024-02-23)
 
 ### Bug Fixes
