@@ -10,7 +10,7 @@
         "build.win": "npm run tsc.win && npm run readme",
         "build.all": "npm run build",
         "build.all.win": "npm run build .win",
-        "build.angular": "ng-packagr -p ../../src/gesturehandler/angular/package.json -c ../../src/gesturehandler/angular/tsconfig.json",
+        "build.angular": "ng-packagr -p ../../src/gesturehandler/angular/package.json -c ../../src/gesturehandler/angular/tsconfig.json && rm angular/.npmignore",
         "build.angular.win": ".ng-packagr -p ..\\..\\src\\gesturehandler\\angular\\package.json -c ..\\..\\src\\gesturehandler\\angular\\tsconfig.json",
         "readme": "readme generate -c ../../tools/readme/blueprint.json",
         "tsc": "cpy '**/*.d.ts' '../../packages/gesturehandler' --parents --cwd=../../src/gesturehandler && tsc -skipLibCheck -d",
