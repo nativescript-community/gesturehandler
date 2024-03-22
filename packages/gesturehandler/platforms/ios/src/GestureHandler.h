@@ -94,6 +94,7 @@ if (value != nil) recognizer.prop = [value type]; \
 - (nullable NSMutableDictionary *)eventExtraData:(nonnull id)recognizer;
 
 - (void)reset;
+- (void)cancel;
 - (void)sendEventsInState:(GestureHandlerState)state
            forView:(nonnull UIView *)view
             withExtraData:(nullable NSDictionary*)extraData;

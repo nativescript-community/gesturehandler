@@ -313,6 +313,11 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 {
     _lastState = GestureHandlerStateUndetermined;
 }
+- (void)cancel
+{
+    _recognizer.enabled = NO;
+    _recognizer.enabled = YES;
+    [self reset];
 
  - (BOOL)containsPointInView
  {

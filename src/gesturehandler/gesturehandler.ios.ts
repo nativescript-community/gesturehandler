@@ -235,7 +235,7 @@ export class Handler<T extends GestureHandler, U extends HandlerOptions> extends
         return this.attachedView;
     }
     cancel() {
-        this.native.reset();
+        this.native.cancel();
     }
 }
 
