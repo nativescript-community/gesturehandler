@@ -93,6 +93,8 @@ if (value != nil) recognizer.prop = [value type]; \
 - (GestureHandlerState)state;
 - (nullable NSMutableDictionary *)eventExtraData:(nonnull id)recognizer;
 
+- (CGPoint) locationInView:(UIView*)view;
+- (CGPoint) locationOfTouch:(NSUInteger)index inView:(UIView*)view;
 - (void)reset;
 - (void)cancel;
 - (void)sendEventsInState:(GestureHandlerState)state
@@ -100,4 +102,3 @@ if (value != nil) recognizer.prop = [value type]; \
             withExtraData:(nullable NSDictionary*)extraData;
 
 @end
-

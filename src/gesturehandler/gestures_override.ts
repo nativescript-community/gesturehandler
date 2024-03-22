@@ -99,7 +99,7 @@ export class GesturesObserver {
     private _notifyTouch: boolean;
 
     private gestureHandler: Handler<any, any>;
-    private _eventData: { [k: number]: CommonGestureEventData | TouchGestureEventData } = {};
+    private _eventData: { [k: number]: CommonGestureEventData | AndroidTouchGestureEventData } = {};
 
     private _onTargetLoaded: (data: EventData) => void;
     private _onTargetUnloaded: (data: EventData) => void;
@@ -154,7 +154,7 @@ export class GesturesObserver {
                 }
                 eventData.handler = this.gestureHandler;
             }
-            eventData.prepare(this.target, event.data);
+            eventData.prepare(this.target, event);
             _executeCallback(this, eventData);
             // this.callback.call(this._context, {
             //     eventName: gestureToString(type),
@@ -209,7 +209,7 @@ export class GesturesObserver {
                 gestureHandler = manager.createGestureHandler(HandlerType.LONG_PRESS, target['LONGPRESS_HANDLER_TAG'], {
                     simultaneousHandlers: [ROOT_GESTURE_HANDLER_TAG]
                 });
-                gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.longPress, __IOS__  ? GestureState.BEGAN : GestureState.ACTIVE), this);
+                gestureHandler.on(GestureHandlerStateEvent, this.onGestureStateChange(GestureTypes.longPress, __IOS__ ? GestureState.BEGAN : GestureState.ACTIVE), this);
             }
             if (type & GestureTypes.doubleTap) {
                 gestureHandler = manager.createGestureHandler(HandlerType.TAP, target['DOUBLE_TAP_HANDLER_TAG'], {
@@ -258,7 +258,7 @@ export class GesturesObserver {
         if (this._notifyTouch) {
             let eventData = this._eventData[GestureTypes.touch];
             if (!eventData) {
-                eventData = this._eventData[GestureTypes.touch] = new TouchGestureEventData();
+                eventData = this._eventData[GestureTypes.touch] = new AndroidTouchGestureEventData();
                 eventData.handler = this.gestureHandler;
             }
             eventData.prepare(this.target, motionEvent);
@@ -267,11 +267,14 @@ export class GesturesObserver {
     }
 }
 
-class Pointer implements Pointer {
+class AndroidPointer implements AndroidPointer {
     public android: number;
     public ios: any = undefined;
 
-    constructor(id: number, private event: android.view.MotionEvent) {
+    constructor(
+        id: number,
+        private event: android.view.MotionEvent
+    ) {
         this.android = id;
     }
 
@@ -287,7 +290,11 @@ class GesturePointer {
     android: number;
     ios: number;
     private event: any;
-    constructor(index: number, private x, private y) {
+    constructor(
+        index: number,
+        private x,
+        private y
+    ) {
         this.android = index;
     }
 
@@ -300,6 +307,32 @@ class GesturePointer {
     }
 }
 
+class Pointer {
+    _location: CGPoint;
+    ios: GestureHandler;
+    _view: View;
+    get location() {
+        if (!this._location) {
+            this._location = this.ios.locationInView(this._view.nativeViewProtected);
+        }
+
+        return this._location;
+    }
+
+    constructor(touch, targetView, location?) {
+        this._location = location;
+        this.ios = touch;
+        this._view = targetView;
+    }
+
+    getX() {
+        return this.location.x;
+    }
+
+    getY() {
+        return this.location.y;
+    }
+}
 class CommonGestureEventData implements GestureEventData {
     ios;
     android;
@@ -320,20 +353,22 @@ class CommonGestureEventData implements GestureEventData {
     state: GestureStateTypes;
     handler: Handler<any, any>;
 
-    private _activePointers: GesturePointer[];
-    private _allPointers: GesturePointer[];
+    private _activePointers: (GesturePointer | Pointer)[];
+    private _allPointers: (GesturePointer | Pointer)[];
 
     constructor(type: GestureTypes) {
         this.eventName = gestureToString(type);
         this.type = type;
     }
 
-    public prepare(view: View, eventData) {
+    public prepare(view: View, event) {
         this.view = view;
         this.object = view;
+        this.ios = event.ios;
+        this.android = event.android;
         this._activePointers = undefined;
         this._allPointers = undefined;
-        this.eventData = eventData;
+        this.eventData = event.data;
         switch (this.eventData.state) {
             case GestureState.BEGAN:
                 this.state = GestureStateTypes.began;
@@ -362,8 +397,12 @@ class CommonGestureEventData implements GestureEventData {
     getActivePointers() {
         // Only one active pointer in Android
         if (!this._activePointers) {
-            const positions = this.extraData.positions;
-            this._activePointers = [new GesturePointer(0, positions[0], positions[1])];
+            if (__ANDROID__) {
+                const positions = this.extraData.positions;
+                this._activePointers = [new GesturePointer(0, positions[0], positions[1])];
+            } else {
+                this._activePointers = [new Pointer(this.ios, this.view)];
+            }
         }
         return this._activePointers;
     }
@@ -373,7 +412,11 @@ class CommonGestureEventData implements GestureEventData {
             this._allPointers = [];
             const positions = this.extraData.positions;
             for (let i = 0; i < this.getPointerCount(); i++) {
-                this._allPointers.push(new GesturePointer(i, positions[i * 2], positions[i * 2 + 1]));
+                if (__ANDROID__) {
+                    this._allPointers.push(new GesturePointer(i, positions[i * 2], positions[i * 2 + 1]));
+                } else {
+                    this._allPointers = [new Pointer(this.ios, this.view, { x: positions[i * 2], y: positions[i * 2 + 1] })];
+                }
             }
         }
         return this._allPointers;
@@ -404,7 +447,7 @@ class CommonGestureEventData implements GestureEventData {
         return '';
     }
 }
-class TouchGestureEventData {
+class AndroidTouchGestureEventData {
     eventName: string = gestureToString(GestureTypes.touch);
     type: GestureTypes = GestureTypes.touch;
     ios: any = undefined;
@@ -415,8 +458,8 @@ class TouchGestureEventData {
     state: GestureStateTypes;
     handler: Handler<any, any>;
 
-    private _activePointers: Pointer[];
-    private _allPointers: Pointer[];
+    private _activePointers: AndroidPointer[];
+    private _allPointers: AndroidPointer[];
 
     public prepare(view: View, e: android.view.MotionEvent) {
         this.view = view;
@@ -431,19 +474,19 @@ class TouchGestureEventData {
         return this.android.getPointerCount();
     }
 
-    getActivePointers(): Pointer[] {
+    getActivePointers(): AndroidPointer[] {
         // Only one active pointer in Android
         if (!this._activePointers) {
-            this._activePointers = [new Pointer(this.android.getActionIndex(), this.android)];
+            this._activePointers = [new AndroidPointer(this.android.getActionIndex(), this.android)];
         }
         return this._activePointers;
     }
 
-    getAllPointers(): Pointer[] {
+    getAllPointers(): AndroidPointer[] {
         if (!this._allPointers) {
             this._allPointers = [];
             for (let i = 0; i < this.getPointerCount(); i++) {
-                this._allPointers.push(new Pointer(i, this.android));
+                this._allPointers.push(new AndroidPointer(i, this.android));
             }
         }
         return this._allPointers;

@@ -159,7 +159,7 @@ export class HandlerDelegate extends NSObject implements GestureHandlerDelegate 
                 data: {
                     state,
                     prevState,
-                    ios: view,
+                    ios: handler,
                     extraData: toJsObject(extraData),
                     view: view.nsView ? view.nsView.get() : null
                 }
@@ -174,7 +174,7 @@ export class HandlerDelegate extends NSObject implements GestureHandlerDelegate 
                 object: owner,
                 data: {
                     state,
-                    ios: view,
+                    ios: handler,
                     extraData: toJsObject(extraData),
                     view: view.nsView ? view.nsView.get() : null
                 }

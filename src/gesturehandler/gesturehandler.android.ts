@@ -265,7 +265,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
             object: this,
             data: {
                 state: handler.getState(),
-                android: view,
+                android: handler,
                 extraData: this.getExtraData(handler),
                 view: view.nsView ? view.nsView?.get() : null
             }
@@ -279,7 +279,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
             data: {
                 state,
                 prevState,
-                android: view,
+                android: handler,
                 extraData: this.getExtraData(handler),
                 view: view.nsView ? view.nsView?.get() : null
             }
