@@ -364,8 +364,8 @@ class CommonGestureEventData implements GestureEventData {
     public prepare(view: View, event) {
         this.view = view;
         this.object = view;
-        this.ios = event.ios;
-        this.android = event.android;
+        this.ios = event.data.ios;
+        this.android = event.data.android;
         this._activePointers = undefined;
         this._allPointers = undefined;
         this.eventData = event.data;
