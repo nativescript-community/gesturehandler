@@ -92,6 +92,8 @@ declare class GestureHandler extends NSObject implements UIGestureRecognizerDele
     performSelectorWithObjectWithObject(aSelector: string, object1: any, object2: any): any;
 
     reset(): void;
+    cancel(): void;
+    locationInView(view: UIView): CGPoint;
 
     respondsToSelector(aSelector: string): boolean;
 

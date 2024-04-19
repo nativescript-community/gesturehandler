@@ -313,12 +313,25 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 {
     _lastState = GestureHandlerStateUndetermined;
 }
+- (void)cancel
+{
+    _recognizer.enabled = NO;
+    _recognizer.enabled = YES;
+    [self reset];
+}
 
  - (BOOL)containsPointInView
  {
      CGPoint pt = [_recognizer locationInView:_recognizer.view];
      CGRect hitFrame = GHHitSlopInsetRect(_recognizer.view.bounds, _hitSlop);
      return CGRectContainsPoint(hitFrame, pt);
+ }
+
+ - (CGPoint) locationInView:(UIView*)view {
+    return [_recognizer locationInView:view];
+ }
+ - (CGPoint) locationOfTouch:(NSUInteger)index inView:(UIView*)view {
+    return [_recognizer locationOfTouch:index inView:view];
  }
 
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
