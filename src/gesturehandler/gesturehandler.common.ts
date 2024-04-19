@@ -108,7 +108,10 @@ export function nativeProperty(...args) {
     }
 }
 export abstract class BaseNative<T, U extends {}> extends Observable {
-    constructor(public options?: U, native?: T) {
+    constructor(
+        public options?: U,
+        native?: T
+    ) {
         super();
         if (native) {
             this.native = native;
