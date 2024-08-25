@@ -547,6 +547,9 @@ export class Manager extends ManagerBase {
     }
 
     findRegistry(view: View): com.swmansion.gesturehandler.GestureHandlerRegistryImpl {
+        if (view instanceof GestureRootView) {
+            return view.registry;
+        }
         let registry: com.swmansion.gesturehandler.GestureHandlerRegistryImpl;
         let parent = view.parent;
         // first test for GestureRootView
