@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.32](https://github.com/nativescript-community/gesturehandler/compare/v2.0.31...v2.0.32) (2024-08-25)
+
+### Bug Fixes
+
+* **android:** fix issue with adding tap event to gesturerootview without a page parent ([8b4965f](https://github.com/nativescript-community/gesturehandler/commit/8b4965fd85633d1f8cd383d478e15eb987a77179))
+
 ## [2.0.31](https://github.com/nativescript-community/gesturehandler/compare/v2.0.30...v2.0.31) (2024-04-19)
 
 ### Bug Fixes
