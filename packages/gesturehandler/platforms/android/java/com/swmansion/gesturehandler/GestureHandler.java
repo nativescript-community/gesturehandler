@@ -226,20 +226,20 @@ public class GestureHandler<T extends GestureHandler> {
     if (isTrackingPointer(pointerId)) {
       return;
     }
-    trackedPointerIDs[pointerId] = findNextLocalPointerId();
-    trackedPointersIDsCount++;
+    mTrackedPointerIDs[pointerId] = findNextLocalPointerId();
+    mTrackedPointersCount++;
   }
 
   public void stopTrackingPointer(int pointerId) {
     if (!isTrackingPointer(pointerId)) {
       return;
     }
-    trackedPointerIDs[pointerId] = -1;
-    trackedPointersIDsCount--;
+    mTrackedPointerIDs[pointerId] = -1;
+    mTrackedPointersCount--;
   }
 
   private boolean isTrackingPointer(int pointerId) {
-    return trackedPointerIDs[pointerId] != -1;
+    return mTrackedPointerIDs[pointerId] != -1;
   }
 
   private boolean needAdapt(MotionEvent event) {
