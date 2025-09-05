@@ -3,6 +3,13 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.33](https://github.com/nativescript-community/gesturehandler/compare/v2.0.32...v2.0.33) (2025-09-05)
+
+### Bug Fixes
+
+* **android:** edge case where gesture would not be recognized (view half way hidden) ([ef139bd](https://github.com/nativescript-community/gesturehandler/commit/ef139bd26377b868b4f73f5d75eecf71b043bc7a))
+* **android:** Fix onTouches* callbacks being called for all gestures https://github.com/software-mansion/react-native-gesture-handler/pull/3596 ([6e2751e](https://github.com/nativescript-community/gesturehandler/commit/6e2751e34511bac503c4fa8f65bd5baa9f25e8f1))
+
 ## [2.0.32](https://github.com/nativescript-community/gesturehandler/compare/v2.0.31...v2.0.32) (2024-08-25)
 
 ### Bug Fixes
