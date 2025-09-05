@@ -413,8 +413,8 @@ public class GestureHandler<T extends GestureHandler> {
     }
     float left = sClipRect.left;
     float top = sClipRect.top;
-    float right = sClipRect.right - sClipRect.left;
-    float bottom = sClipRect.bottom - sClipRect.top;
+    float right = left + sClipRect.right - sClipRect.left;
+    float bottom = top + sClipRect.bottom - sClipRect.top;
     if (mHitSlop != null) {
       float padLeft = mHitSlop[HIT_SLOP_LEFT_IDX];
       float padTop = mHitSlop[HIT_SLOP_TOP_IDX];
