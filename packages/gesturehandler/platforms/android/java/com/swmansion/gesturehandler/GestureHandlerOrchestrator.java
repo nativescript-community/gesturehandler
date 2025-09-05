@@ -332,7 +332,7 @@ public class GestureHandlerOrchestrator {
       handler.cancel();
       return;
     }
-    if (!handler.wantEvents(sourceEvent)) {
+    if (!handler.wantsEvent(sourceEvent)) {
       return;
     }
     int action = sourceEvent.getActionMasked();

@@ -223,17 +223,23 @@ public class GestureHandler<T extends GestureHandler> {
   }
 
   public void startTrackingPointer(int pointerId) {
-    if (mTrackedPointerIDs[pointerId] == -1) {
-      mTrackedPointerIDs[pointerId] = findNextLocalPointerId();
-      mTrackedPointersCount++;
+    if (isTrackingPointer(pointerId)) {
+      return;
     }
+    trackedPointerIDs[pointerId] = findNextLocalPointerId();
+    trackedPointersIDsCount++;
   }
 
   public void stopTrackingPointer(int pointerId) {
-    if (mTrackedPointerIDs[pointerId] != -1) {
-      mTrackedPointerIDs[pointerId] = -1;
-      mTrackedPointersCount--;
+    if (!isTrackingPointer(pointerId)) {
+      return;
     }
+    trackedPointerIDs[pointerId] = -1;
+    trackedPointersIDsCount--;
+  }
+
+  private boolean isTrackingPointer(int pointerId) {
+    return trackedPointerIDs[pointerId] != -1;
   }
 
   private boolean needAdapt(MotionEvent event) {
@@ -362,9 +368,9 @@ public class GestureHandler<T extends GestureHandler> {
     onStateChange(newState, oldState);
   }
 
-  public boolean wantEvents(MotionEvent event) {
+  public boolean wantsEvent(MotionEvent event) {
     return mEnabled && mState != STATE_FAILED && mState != STATE_CANCELLED && mState != STATE_END
-        && mTrackedPointersCount > 0;
+        && isTrackingPointer(event.getPointerId(event.getActionIndex()));
   }
 
   public int getState() {
