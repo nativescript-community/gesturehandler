@@ -16,3 +16,15 @@ declare namespace com {
         }
     }
 }
+
+// TODO: to be removed once @nativescript/types-android is fixed https://github.com/NativeScript/NativeScript/pull/10791
+declare namespace org {
+    namespace nativescript {
+        namespace widgets {
+            interface GridLayout {
+                addRow(itemSpec: ItemSpec): void;
+                addColumn(itemSpec: ItemSpec): void;
+            }
+        }
+    }
+}
