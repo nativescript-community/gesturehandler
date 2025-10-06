@@ -1856,6 +1856,7 @@ __metadata:
     "@typescript-eslint/parser": "npm:7.10.0"
     "@vue/runtime-core": "npm:3.5.22"
     "@vue/runtime-dom": "npm:3.5.22"
+    conventional-changelog-conventionalcommits: "npm:9.1.0"
     copy-webpack-plugin: "npm:13.0.1"
     cpy-cli: "npm:3.1.1"
     eslint: "npm:8.57.0"
@@ -5431,6 +5432,15 @@ __metadata:
   dependencies:
     compare-func: "npm:^2.0.0"
   checksum: 10/856e4652015d6ff5a192e2051efe4eb0d57534da304a3bfa6eb1e1ed06c995fe6d7c91d46e7a6de95baea52f7ccaad3ffe18260c972d40bad862f85d00c7b437
+  languageName: node
+  linkType: hard
+
+"conventional-changelog-conventionalcommits@npm:9.1.0":
+  version: 9.1.0
+  resolution: "conventional-changelog-conventionalcommits@npm:9.1.0"
+  dependencies:
+    compare-func: "npm:^2.0.0"
+  checksum: 10/932522a9eb2f19f8b6efc05f1de0b8d4775842e2156c2c58358d25069bfc43ca1a6198fb07666d7abc83695a10591787c23b7ff2e1e2d73ac484cfb2f57f5f7f
   languageName: node
   linkType: hard
 
