@@ -1797,9 +1797,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nativescript-community/gesturehandler@link:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3Df97886%26locator%3Droot-workspace-0b6124%2540workspace%253A.":
+"@nativescript-community/gesturehandler@link:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3D964479%26locator%3Droot-workspace-0b6124%2540workspace%253A.":
   version: 0.0.0-use.local
-  resolution: "@nativescript-community/gesturehandler@link:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3Df97886%26locator%3Droot-workspace-0b6124%2540workspace%253A."
+  resolution: "@nativescript-community/gesturehandler@link:../packages/gesturehandler::locator=%40nativescript-community%2Ftemplate-snippet%40file%3Ademo-snippets%23demo-snippets%3A%3Ahash%3D964479%26locator%3Droot-workspace-0b6124%2540workspace%253A."
   languageName: node
   linkType: soft
 
@@ -1824,9 +1824,9 @@ __metadata:
   languageName: node
   linkType: hard
 
-"@nativescript-community/plugin-seed-tools@file:tools::locator=root-workspace-0b6124%40workspace%3A.":
-  version: 1.0.0
-  resolution: "@nativescript-community/plugin-seed-tools@file:tools#tools::hash=2300d2&locator=root-workspace-0b6124%40workspace%3A."
+"@nativescript-community/plugin-seed-tools@portal:tools::locator=root-workspace-0b6124%40workspace%3A.":
+  version: 0.0.0-use.local
+  resolution: "@nativescript-community/plugin-seed-tools@portal:tools::locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@angular/animations": "npm:20.3.3"
     "@angular/common": "npm:20.3.3"
@@ -1889,16 +1889,15 @@ __metadata:
     typescript-eslint: "npm:7.8.0"
     vue: "npm:2.7.16"
     yargs: "npm:17.7.2"
-  checksum: 10/f2fcbeee33eb965f4dbc2dabdc848789bd76867d7237b7cdb32c58bca221a5d876ab96d70c6c449acd440de585bed727b05acd67d7e6fe8751aced1ad3eec378
   languageName: node
-  linkType: hard
+  linkType: soft
 
 "@nativescript-community/template-snippet@file:demo-snippets::locator=root-workspace-0b6124%40workspace%3A.":
   version: 0.0.1
-  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=f97886&locator=root-workspace-0b6124%40workspace%3A."
+  resolution: "@nativescript-community/template-snippet@file:demo-snippets#demo-snippets::hash=964479&locator=root-workspace-0b6124%40workspace%3A."
   dependencies:
     "@nativescript-community/gesturehandler": "link:../packages/gesturehandler"
-  checksum: 10/cc06523bae2561bbddf173685bc79ca3901b351cc892d2d5d3044f2c48dd03dfd5a931309ce83b40a42eed2485cda1984b8a958375063ace202975a4447701c4
+  checksum: 10/9b2a2007424862ff317ca9b366229e6eed3a5f7b24ce25fb620e9efc28ac2f9009cad88bf5d969473b6bb89653d11909da6fce5ebec555ac25c43868ab606f75
   languageName: node
   linkType: hard
 
@@ -13196,7 +13195,7 @@ __metadata:
   resolution: "root-workspace-0b6124@workspace:."
   dependencies:
     "@nativescript-community/observable": "npm:2.0.11"
-    "@nativescript-community/plugin-seed-tools": "file:tools"
+    "@nativescript-community/plugin-seed-tools": "portal:tools"
     "@nativescript-community/template-snippet": "file:demo-snippets"
   languageName: unknown
   linkType: soft

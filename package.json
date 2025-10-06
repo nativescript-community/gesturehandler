@@ -41,7 +41,7 @@
     },
     "dependencies": {
         "@nativescript-community/observable": "2.0.11",
-        "@nativescript-community/plugin-seed-tools": "file:tools",
+        "@nativescript-community/plugin-seed-tools": "portal:tools",
         "@nativescript-community/template-snippet": "file:demo-snippets"
     },
     "ntl": {
