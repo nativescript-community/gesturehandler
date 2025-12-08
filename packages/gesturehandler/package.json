@@ -1,6 +1,6 @@
 {
     "name": "@nativescript-community/gesturehandler",
-    "version": "2.0.37",
+    "version": "2.0.38",
     "description": "Declarative API exposing platform native touch and gesture system to NativeScript.",
     "main": "gesturehandler",
     "sideEffects": false,
