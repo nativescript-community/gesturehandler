@@ -6,6 +6,18 @@ import { BaseGestureRootView, HandlerType, OptionsTypeMap, TypeMap } from './ges
 export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, GestureStateEventData, GestureTouchEventData, HandlerType } from './gesturehandler.common';
 // export * from './gesturehandler.ios';
 
+declare module '@nativescript/core/ui/core/view' {
+    interface View {
+        tapGestureOptions: Partial<TapGestureHandlerOptions>;
+        panGestureOptions: Partial<PanGestureHandlerOptions>;
+        doubleTapGestureOptions: Partial<TapGestureHandlerOptions>;
+        longPressGestureOptions: Partial<LongPressGestureHandlerOptions>;
+        swipeGestureOptions: Partial<FlingGestureHandlerOptions>;
+        pinchGestureOptions: Partial<PinchGestureHandlerOptions>;
+        rotationGestureOptions: Partial<RotationGestureHandlerOptions>;
+    }
+}
+
 export enum FlingDirection {
     DIRECTION_LEFT,
     DIRECTION_UP,
