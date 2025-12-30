@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.39](https://github.com/nativescript-community/gesturehandler/compare/v2.0.38...v2.0.39) (2025-12-30)
+
+### Bug Fixes
+
+* N gesture override more options (gesture options) ([a9e8933](https://github.com/nativescript-community/gesturehandler/commit/a9e893383ce4b795e82d89e8a0f3f4ac56de2d07))
+
 ## [2.0.38](https://github.com/nativescript-community/gesturehandler/compare/v2.0.37...v2.0.38) (2025-12-08)
 
 ### Bug Fixes
