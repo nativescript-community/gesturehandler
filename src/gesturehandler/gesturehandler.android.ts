@@ -125,6 +125,10 @@ export function install(overrideNGestures = false) {
                 this.setOnTouchListener();
             }
         };
+
+        NSView.prototype.getGestureHandler = function (type: GestureTypes): Handler<any, any>[] {
+            return this._gestureObservers[type].map((obs) => obs.gestureHandler as Handler<any, any>);
+        };
         // NSView.prototype.setOnTouchListener = function () {
         //     if (!this.nativeViewProtected || !this.getGestureObservers(GestureTypes.touch)) {
         //         return;

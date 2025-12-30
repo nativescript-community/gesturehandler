@@ -8,13 +8,14 @@ export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, Gestu
 
 declare module '@nativescript/core/ui/core/view' {
     interface View {
-        tapGestureOptions: Partial<TapGestureHandlerOptions>;
-        panGestureOptions: Partial<PanGestureHandlerOptions>;
-        doubleTapGestureOptions: Partial<TapGestureHandlerOptions>;
-        longPressGestureOptions: Partial<LongPressGestureHandlerOptions>;
-        swipeGestureOptions: Partial<FlingGestureHandlerOptions>;
-        pinchGestureOptions: Partial<PinchGestureHandlerOptions>;
-        rotationGestureOptions: Partial<RotationGestureHandlerOptions>;
+        getGestureHandler(type: GestureTypes): Handler<any, any>[];
+        tapGestureOptions: Partial<TapGestureHandlerOptions> | ((view: View, tag: number, rootTag: number) => Partial<TapGestureHandlerOptions>);
+        panGestureOptions: Partial<PanGestureHandlerOptions> | ((view: View, tag: number, rootTag: number) => Partial<PanGestureHandlerOptions>);
+        doubleTapGestureOptions: Partial<TapGestureHandlerOptions> | ((view: View, tag: number, rootTag: number) => Partial<TapGestureHandlerOptions>);
+        longPressGestureOptions: Partial<LongPressGestureHandlerOptions> | ((view: View, tag: number, rootTag: number) => Partial<LongPressGestureHandlerOptions>);
+        swipeGestureOptions: Partial<FlingGestureHandlerOptions> | ((view: View, tag: number, rootTag: number) => Partial<FlingGestureHandlerOptions>);
+        pinchGestureOptions: Partial<PinchGestureHandlerOptions> | ((view: View, tag: number, rootTag: number) => Partial<PinchGestureHandlerOptions>);
+        rotationGestureOptions: Partial<RotationGestureHandlerOptions> | ((view: View, tag: number, rootTag: number) => Partial<RotationGestureHandlerOptions>);
     }
 }
 
@@ -22,7 +23,7 @@ export enum FlingDirection {
     DIRECTION_LEFT,
     DIRECTION_UP,
     DIRECTION_DOWN,
-    DIRECTION_RIGHT,
+    DIRECTION_RIGHT
 }
 
 export abstract class BaseNative<T, U extends {}> extends Observable {
