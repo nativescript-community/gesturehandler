@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.40](https://github.com/nativescript-community/gesturehandler/compare/v2.0.39...v2.0.40) (2026-02-11)
+
+### Bug Fixes
+
+* exclusiveTouch property fix ([18a5473](https://github.com/nativescript-community/gesturehandler/commit/18a54736df9052dbce527ead596500d543970786))
+
 ## [2.0.39](https://github.com/nativescript-community/gesturehandler/compare/v2.0.38...v2.0.39) (2025-12-30)
 
 ### Bug Fixes
