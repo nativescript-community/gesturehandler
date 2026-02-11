@@ -1,7 +1,7 @@
 /* eslint-disable no-redeclare */
 import Observable from '@nativescript-community/observable';
 import { EventData, GridLayout } from '@nativescript/core';
-import { CssProperty, Style, View, booleanConverter } from '@nativescript/core/ui';
+import { CssProperty, Property, Style, View, booleanConverter } from '@nativescript/core/ui';
 import {
     FlingGestureHandler,
     FlingGestureHandlerOptions,
@@ -250,15 +250,13 @@ export function applyMixins(
     });
 }
 
-export const exclusiveTouchProperty = new CssProperty<Style, boolean>({
+export const exclusiveTouchProperty = new Property<View, boolean>({
     name: 'exclusiveTouch',
-    cssName: 'exclusive-touch',
     defaultValue: false,
     valueConverter: booleanConverter
 });
-export const disallowInterceptTouchProperty = new CssProperty<Style, boolean>({
+export const disallowInterceptTouchProperty = new Property<View, boolean>({
     name: 'disallowInterceptTouch',
-    cssName: 'disallow-intercept-touch',
     defaultValue: false,
     valueConverter: booleanConverter
 });
@@ -269,12 +267,6 @@ let NATIVE_GESTURE_TAG = 74000;
 class ViewGestureExtended extends View {
     exclusiveTouchGestureHandler: NativeViewGestureHandler;
 
-    set exclusiveTouch(value) {
-        this.style['exclusiveTouch'] = value;
-    }
-    get exclusiveTouch() {
-        return this.style['exclusiveTouch'];
-    }
     initNativeView() {
         if (this.nativeView) {
             this.nativeView.nsView = new WeakRef(this);
@@ -292,27 +284,39 @@ class ViewGestureExtended extends View {
         this.notify({ eventName: ViewDisposeEvent, object: this });
     }
     [exclusiveTouchProperty.setNative](value: boolean) {
-        if (value) {
-            if (!this.exclusiveTouchGestureHandler) {
-                const gestureHandler = Manager.getInstance().createGestureHandler(HandlerType.NATIVE_VIEW, NATIVE_GESTURE_TAG++, {
-                    disallowInterruption: true,
-                    shouldActivateOnStart: false,
-                    shouldCancelWhenOutside: false
-                });
-                this.exclusiveTouchGestureHandler = gestureHandler as any;
+        if (__ANDROID__) {
+            if (value) {
+                if (!this.exclusiveTouchGestureHandler) {
+                    const gestureHandler = Manager.getInstance().createGestureHandler(HandlerType.NATIVE_VIEW, NATIVE_GESTURE_TAG++, {
+                        disallowInterruption: true,
+                        shouldActivateOnStart: true,
+                        allowSameViewGestures: true,
+                        shouldCancelWhenOutside: false
+                    });
+                    this.exclusiveTouchGestureHandler = gestureHandler as any;
+                }
+                this.exclusiveTouchGestureHandler.attachToView(this);
+            } else if (this.exclusiveTouchGestureHandler) {
+                this.exclusiveTouchGestureHandler.detachFromView();
             }
-            this.exclusiveTouchGestureHandler.attachToView(this);
-        } else if (this.exclusiveTouchGestureHandler) {
-            this.exclusiveTouchGestureHandler.detachFromView();
+        } else {
+            (this.nativeViewProtected as UIView).exclusiveTouch = value;
         }
     }
     onTouch(event) {
         if (__ANDROID__) {
             const mask = event.android.getActionMasked();
-            if (mask === 0 /* android.view.MotionEvent.ACTION_DOWN */) {
-                this.nativeViewProtected.requestDisallowInterceptTouchEvent(true);
-            } else if (mask === 3 /* android.view.MotionEvent.ACTION_CANCEL */ || mask === 1 /* android.view.MotionEvent.ACTION_UP */) {
-                this.nativeViewProtected.requestDisallowInterceptTouchEvent(false);
+
+            let nativeView = this.nativeViewProtected;
+            if (!nativeView.requestDisallowInterceptTouchEvent) {
+                nativeView = nativeView.getParent();
+            }
+            if (nativeView) {
+                if (mask === 0 /* android.view.MotionEvent.ACTION_DOWN */) {
+                    nativeView.requestDisallowInterceptTouchEvent(true);
+                } else if (mask === 3 /* android.view.MotionEvent.ACTION_CANCEL */ || mask === 1 /* android.view.MotionEvent.ACTION_UP */) {
+                    nativeView.requestDisallowInterceptTouchEvent(false);
+                }
             }
         }
     }
@@ -332,8 +336,8 @@ class ViewGestureExtended extends View {
     }
 }
 
-exclusiveTouchProperty.register(Style);
-disallowInterceptTouchProperty.register(Style);
+exclusiveTouchProperty.register(View);
+disallowInterceptTouchProperty.register(View);
 
 let installed = false;
 export function overrideViewBase() {

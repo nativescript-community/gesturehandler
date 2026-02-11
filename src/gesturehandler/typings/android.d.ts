@@ -102,6 +102,7 @@ declare namespace com {
                 public toString(): string;
                 public begin(): void;
                 public setShouldCancelWhenOutside(param0: boolean): T;
+                public setAllowSameViewGestures(param0: boolean): T;
                 public wantEvents(event: globalAndroid.view.MotionEvent): boolean;
                 public onReset(): void;
                 public setOnTouchEventListener(param0: OnTouchEventListener<T>): GestureHandler<any>;

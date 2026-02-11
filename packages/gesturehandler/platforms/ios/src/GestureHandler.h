@@ -80,10 +80,12 @@ if (value != nil) recognizer.prop = [value type]; \
 @property (nonatomic) BOOL enabled;
 @property (nonatomic) BOOL activateOnBegin;
 @property(nonatomic) BOOL shouldCancelWhenOutside;
+@property(nonatomic) BOOL allowSameViewGestures;
 @property (nullable, nonatomic, weak) id<GestureHandlerDelegate> delegate;
 
 - (void)setEnabled:(BOOL)enabled;
 - (void)setShouldCancelWhenOutside:(BOOL)value;
+- (void)setAllowSameViewGestures:(BOOL)value;
 
 - (void)bindToView:(nonnull UIView *)view;
 - (void)unbindFromView;

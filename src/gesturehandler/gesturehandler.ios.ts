@@ -198,6 +198,7 @@ export class Handler<T extends GestureHandler, U extends HandlerOptions> extends
     delegate: HandlerDelegate;
     @nativeProperty enabled: boolean;
     @nativeProperty shouldCancelWhenOutside: boolean;
+    @nativeProperty allowSameViewGestures: boolean;
     createNative() {
         return null;
     }

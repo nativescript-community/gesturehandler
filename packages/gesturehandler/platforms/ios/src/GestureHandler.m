@@ -90,8 +90,10 @@ CGRect GHHitSlopInsetRect(CGRect rect, RNGHHitSlop hitSlop) {
     prop = config[@"shouldCancelWhenOutside"];
     if (prop != nil) {
         _shouldCancelWhenOutside = [prop boolValue];
-    // } else {
-        // _shouldCancelWhenOutside = NO;
+    }
+    prop = config[@"allowSameViewGestures"];
+    if (prop != nil) {
+        _allowSameViewGestures = [prop boolValue];
     }
 
     prop = config[@"hitSlop"];
@@ -290,7 +292,10 @@ shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecog
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
 shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-   if (gestureRecognizer.view == otherGestureRecognizer.view && [gestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]]  && [otherGestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]]) {
+    if (gestureRecognizer.view == otherGestureRecognizer.view && gestureRecognizer.allowSameViewGestures) {
+      return YES;
+    }
+    if (gestureRecognizer.view == otherGestureRecognizer.view && [gestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]]  && [otherGestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]]) {
       return YES;
     }
     if (_recognizer.state == UIGestureRecognizerStateBegan && _recognizer.state == UIGestureRecognizerStatePossible) {

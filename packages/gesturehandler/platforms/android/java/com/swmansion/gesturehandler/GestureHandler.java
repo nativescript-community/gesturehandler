@@ -66,6 +66,7 @@ public class GestureHandler<T extends GestureHandler> {
   private float mLastEventOffsetX, mLastEventOffsetY;
 
   private boolean mShouldCancelWhenOutside = false;
+  private boolean mAllowSameViewGestures = false;
   private int mNumberOfPointers = 0;
 
   private GestureHandlerOrchestrator mOrchestrator;
@@ -104,6 +105,13 @@ public class GestureHandler<T extends GestureHandler> {
 
   public T setShouldCancelWhenOutside(boolean shouldCancelWhenOutside) {
     mShouldCancelWhenOutside = shouldCancelWhenOutside;
+    return (T) this;
+  }
+  public T setAllowSameViewGestures(boolean allowSameViewGestures) {
+    if (GestureHandler.debug) {
+      Log.d("JS", "setAllowSameViewGestures " + this + " value: " + allowSameViewGestures);
+    }
+    mAllowSameViewGestures = allowSameViewGestures;
     return (T) this;
   }
 
@@ -190,6 +198,10 @@ public class GestureHandler<T extends GestureHandler> {
 
   public boolean isWithinBounds() {
     return mWithinBounds;
+  }
+
+  public boolean isAllowingSameViewGestures() {
+    return mAllowSameViewGestures;
   }
 
   public final void prepare(View view, GestureHandlerOrchestrator orchestrator) {

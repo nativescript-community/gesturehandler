@@ -220,6 +220,7 @@ export abstract class Handler<T extends com.swmansion.gesturehandler.GestureHand
     hitSlop;
     @nativeProperty enabled: boolean;
     @nativeProperty shouldCancelWhenOutside: boolean;
+    @nativeProperty allowSameViewGestures: boolean;
     shouldStartGesture: (arg) => boolean;
     manager: WeakRef<Manager>;
     touchListener: com.swmansion.gesturehandler.OnTouchEventListener<T>;

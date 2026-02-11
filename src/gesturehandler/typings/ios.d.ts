@@ -34,6 +34,7 @@ declare class GestureHandler extends NSObject implements UIGestureRecognizerDele
     readonly recognizer: UIGestureRecognizer;
 
     shouldCancelWhenOutside: boolean;
+    allowSameViewGestures: boolean;
 
     readonly tag: number;
 

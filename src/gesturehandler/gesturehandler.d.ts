@@ -61,6 +61,7 @@ export interface HandlerOptions {
     [k: string]: any;
     enabled?: boolean;
     shouldCancelWhenOutside?: boolean;
+    allowSameViewGestures?: boolean;
     waitFor?: number[];
     simultaneousHandlers?: number[];
     /**
@@ -73,6 +74,7 @@ export interface HandlerOptions {
 export abstract class Handler<T, U extends HandlerOptions> extends BaseNative<T, U> {
     enabled: boolean;
     shouldCancelWhenOutside: boolean;
+    allowSameViewGestures: boolean;
     setTag(tag: number);
     getTag(): number;
     getView(): View;

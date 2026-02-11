@@ -59,6 +59,9 @@ public class GestureHandlerInteractionController implements com.swmansion.gestur
 
     public boolean shouldRecognizeSimultaneously(GestureHandler handler, GestureHandler otherHandler) {
         int[] simultHandlerTags = mSimultaneousRelations.get(handler.getTag());
+        if (handler.getView() == otherHandler.getView() && (handler.isAllowingSameViewGestures() || otherHandler.isAllowingSameViewGestures() )) {
+            return true;
+        }
         if (GestureHandler.debug) {
             Log.d("JS", "GestureHandlerInteractionController shouldRecognizeSimultaneously " + handler + " " + otherHandler + " " + simultHandlerTags);
         }
