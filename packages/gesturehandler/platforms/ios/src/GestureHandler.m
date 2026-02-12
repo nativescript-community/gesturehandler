@@ -292,18 +292,18 @@ shouldRequireFailureOfGestureRecognizer:(UIGestureRecognizer *)otherGestureRecog
 - (BOOL)gestureRecognizer:(UIGestureRecognizer *)gestureRecognizer
 shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherGestureRecognizer
 {
-    if (gestureRecognizer.view == otherGestureRecognizer.view && gestureRecognizer.allowSameViewGestures) {
-      return YES;
-    }
     if (gestureRecognizer.view == otherGestureRecognizer.view && [gestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]]  && [otherGestureRecognizer isKindOfClass:[UISwipeGestureRecognizer class]]) {
       return YES;
     }
     if (_recognizer.state == UIGestureRecognizerStateBegan && _recognizer.state == UIGestureRecognizerStatePossible) {
         return YES;
     }
-    if ([_simultaneousHandlers count]) {
-        GestureHandler *handler = [GestureHandler findGestureHandlerByRecognizer:otherGestureRecognizer];
-        if (handler != nil) {
+    GestureHandler *handler = [GestureHandler findGestureHandlerByRecognizer:otherGestureRecognizer];
+    if (handler != nil) {
+        if (gestureRecognizer.view == otherGestureRecognizer.view && (_allowSameViewGestures || handler.allowSameViewGestures)) {
+            return YES;
+        }
+        if ([_simultaneousHandlers count]) {
             for (NSNumber *handlerTag in _simultaneousHandlers) {
                 if ([handler.tag isEqual:handlerTag]) {
                     return YES;
