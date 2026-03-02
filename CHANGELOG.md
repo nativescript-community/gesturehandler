@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.42](https://github.com/nativescript-community/gesturehandler/compare/v2.0.41...v2.0.42) (2026-03-02)
+
+### Bug Fixes
+
+* android method to disable all current gestures ([1630b15](https://github.com/nativescript-community/gesturehandler/commit/1630b15f0624a4e49dc90bd8c3da7498135b0656))
+
 ## [2.0.41](https://github.com/nativescript-community/gesturehandler/compare/v2.0.40...v2.0.41) (2026-02-12)
 
 ### Bug Fixes
