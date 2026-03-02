@@ -169,6 +169,7 @@ export class ForceTouchGestureHandler extends Handler<any, ForceTouchGestureHand
 export class Manager extends Observable {
     static getInstance(): Manager;
     createGestureHandler<T extends HandlerType>(handlerName: T, handlerTag: number, config?: OptionsTypeMap[T]): TypeMap[T];
+    findRootView(view: View): BaseGestureRootView;
 }
 export function install(overrideNGestures?: boolean);
 

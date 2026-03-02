@@ -175,7 +175,9 @@ export interface GestureTouchEventData extends EventData {
     };
 }
 
-export class BaseGestureRootView extends GridLayout {}
+export class BaseGestureRootView extends GridLayout {
+    tryCancelAllHandlers() {}
+}
 
 export function applyMixins(
     derivedCtor: any,
@@ -267,6 +269,11 @@ let NATIVE_GESTURE_TAG = 74000;
 class ViewGestureExtended extends View {
     exclusiveTouchGestureHandler: NativeViewGestureHandler;
 
+    cancelAllGestures() {
+        const rootView = Manager.getInstance().findRootView(this);
+        console.log('cancelAllGestures', rootView);
+        rootView.tryCancelAllHandlers?.();
+    }
     initNativeView() {
         if (this.nativeView) {
             this.nativeView.nsView = new WeakRef(this);

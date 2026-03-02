@@ -36,6 +36,9 @@ export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, Gestu
 let PageLayout: typeof com.nativescript.gesturehandler.PageLayout;
 class PageGestureExtended extends Page {
     nativeViewProtected: com.nativescript.gesturehandler.PageLayout;
+    tryCancelAllHandlers() {
+        this.nativeView?.tryCancelAllHandlers();
+    }
     initNativeView() {
         this.nativeViewProtected.initialize();
     }
@@ -50,6 +53,9 @@ let installed = false;
 let installedOverrides = false;
 
 export class GestureRootView extends BaseGestureRootView {
+    tryCancelAllHandlers() {
+        this.nativeView?.tryCancelAllHandlers();
+    }
     createNativeView() {
         if (!PageLayout) {
             PageLayout = com.nativescript.gesturehandler.PageLayout;
@@ -550,12 +556,10 @@ export class Manager extends ManagerBase {
         }
         return handler as any;
     }
-
-    findRegistry(view: View): com.swmansion.gesturehandler.GestureHandlerRegistryImpl {
+    findRootView(view: View): PageGestureExtended | GestureRootView {
         if (view instanceof GestureRootView) {
-            return view.registry;
+            return view;
         }
-        let registry: com.swmansion.gesturehandler.GestureHandlerRegistryImpl;
         let parent = view.parent;
         // first test for GestureRootView
         // otherwise it could fail with components like BottomSheet
@@ -564,7 +568,7 @@ export class Manager extends ManagerBase {
         // as the one use for touch
         while (parent) {
             if (parent instanceof GestureRootView) {
-                return parent.registry;
+                return parent;
             }
             // we need to break if it is a modal page or we will get the wrong registry
             if (parent['_dialogFragment']) {
@@ -574,10 +578,10 @@ export class Manager extends ManagerBase {
         }
 
         const page = view.page as PageGestureExtended;
-        if (page) {
-            registry = page.registry;
-        }
-        return registry;
+        return page;
+    }
+    findRegistry(view: View): com.swmansion.gesturehandler.GestureHandlerRegistryImpl {
+        return this.findRootView(view)?.registry;
     }
     attachGestureHandlerToView<T extends com.swmansion.gesturehandler.GestureHandler<any> = com.swmansion.gesturehandler.GestureHandler<any>>(handler: Handler<T, any>, view: View) {
         const nHandler = handler.getNative();
