@@ -271,7 +271,6 @@ class ViewGestureExtended extends View {
 
     cancelAllGestures() {
         const rootView = Manager.getInstance().findRootView(this);
-        console.log('cancelAllGestures', rootView);
         rootView.tryCancelAllHandlers?.();
     }
     initNativeView() {
