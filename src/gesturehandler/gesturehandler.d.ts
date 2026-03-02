@@ -8,6 +8,7 @@ export { GestureState, GestureHandlerStateEvent, GestureHandlerTouchEvent, Gestu
 
 declare module '@nativescript/core/ui/core/view' {
     interface View {
+        cancelAllGestures();
         getGestureHandler(type: GestureTypes): Handler<any, any>[];
         tapGestureOptions: Partial<TapGestureHandlerOptions> | ((view: View, tag: number, rootTag: number) => Partial<TapGestureHandlerOptions>);
         panGestureOptions: Partial<PanGestureHandlerOptions> | ((view: View, tag: number, rootTag: number) => Partial<PanGestureHandlerOptions>);
