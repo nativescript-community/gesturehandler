@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.0.44](https://github.com/nativescript-community/gesturehandler/compare/v2.0.43...v2.0.44) (2026-04-21)
+
+### Bug Fixes
+
+* **ios:** add missing findRootView and findRegistry to Manager to fix ([609cf1c](https://github.com/nativescript-community/gesturehandler/commit/609cf1cbfb3b5ca2f70351c7ae4f362d1f679c51))
+
 ## [2.0.43](https://github.com/nativescript-community/gesturehandler/compare/v2.0.42...v2.0.43) (2026-03-02)
 
 ### Bug Fixes
