@@ -372,6 +372,22 @@ export class Manager extends ManagerBase {
             dispose: onDispose
         });
     }
+    findRootView(view: View): GestureRootView | View {
+        if (view instanceof GestureRootView) {
+            return view;
+        }
+        let parent = view.parent;
+        while (parent) {
+            if (parent instanceof GestureRootView) {
+                return parent;
+            }
+            parent = parent.parent;
+        }
+        return view.page;
+    }
+    findRegistry(view: View) {
+        return this.findRootView(view)?.['registry'];
+    }
     detachGestureHandler(handlerTag: number, view: View) {
         if (view.nativeView) {
             this.manager.dropGestureHandler(handlerTag);
