@@ -1,5 +1,6 @@
 import { Utils, View } from '@nativescript/core';
 import { GestureEventData, GestureTypes } from '@nativescript/core/ui/gestures';
+import { Page } from '@nativescript/core/ui/page';
 import { getClass } from '@nativescript/core/utils/types';
 import {
     FlingGestureHandlerOptions,
@@ -23,9 +24,11 @@ import {
     HandlerType,
     ManagerBase,
     OptionsTypeMap,
+    ROOT_GESTURE_HANDLER_TAG,
     TypeMap,
     ViewDisposeEvent,
     ViewInitEvent,
+    applyMixins,
     install as installBase,
     nativeProperty
 } from './gesturehandler.common';
@@ -39,12 +42,20 @@ export enum FlingDirection {
     DIRECTION_RIGHT = UISwipeGestureRecognizerDirection.Right
 }
 
+class PageGestureExtended extends Page {
+    tryCancelAllHandlers() {
+        Manager.getInstance().cancelAllHandlers(this);
+    }
+}
+
 let installed = false;
 let installedOverrides = false;
 export function install(overrideNGestures = false) {
     if (!installed) {
         installed = true;
         installBase(overrideNGestures);
+        const NSPage = require('@nativescript/core/ui/page').Page;
+        applyMixins(NSPage, [PageGestureExtended]);
     }
 
     if (overrideNGestures === true && !installedOverrides) {
@@ -128,7 +139,11 @@ function getValueForClass(val) {
     }
 }
 
-export class GestureRootView extends BaseGestureRootView {}
+export class GestureRootView extends BaseGestureRootView {
+    tryCancelAllHandlers() {
+        Manager.getInstance().cancelAllHandlers(this);
+    }
+}
 
 @NativeClass
 export class HandlerDelegate extends NSObject implements GestureHandlerDelegate {
@@ -347,9 +362,11 @@ export class Manager extends ManagerBase {
     }
 
     viewListeners = new Map<View, Map<number, { init: () => void; dispose: () => void }>>();
+    attachedHandlers = new Map<number, Handler<any, any>>();
     attachGestureHandler(handler: Handler<any, any>, view: View) {
         this.manager.registerGestureHandler(handler.native);
         const tag = handler.native.tag;
+        this.attachedHandlers.set(tag, handler);
         if (view.nativeView) {
             this.manager.attachGestureHandlerToView(tag, view[handler.nativeGetterKey]);
         }
@@ -388,7 +405,22 @@ export class Manager extends ManagerBase {
     findRegistry(view: View) {
         return this.findRootView(view)?.['registry'];
     }
+    // Android cancels every handler of the root view native registry (but the root handler itself)
+    // in PageLayout.tryCancelAllHandlers. iOS has no such native registry so we keep track of the
+    // attached handlers and cancel the ones sharing the same root view.
+    cancelAllHandlers(rootView: View) {
+        this.attachedHandlers.forEach((handler) => {
+            if (handler.getTag() === ROOT_GESTURE_HANDLER_TAG) {
+                return;
+            }
+            const view = handler.getView();
+            if (view && this.findRootView(view) === rootView) {
+                handler.cancel();
+            }
+        });
+    }
     detachGestureHandler(handlerTag: number, view: View) {
+        this.attachedHandlers.delete(handlerTag);
         if (view.nativeView) {
             this.manager.dropGestureHandler(handlerTag);
         }

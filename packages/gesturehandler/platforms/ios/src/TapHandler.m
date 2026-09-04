@@ -129,7 +129,7 @@
   if (TEST_MAX_IF_NOT_NAN(fabs(trans.y), _maxDeltaY)) {
     return YES;
   }
-  if (TEST_MAX_IF_NOT_NAN(fabs(trans.y * trans.y + trans.x + trans.x), _maxDistSq)) {
+  if (TEST_MAX_IF_NOT_NAN(trans.x * trans.x + trans.y * trans.y, _maxDistSq)) {
     return YES;
   }
   return NO;
