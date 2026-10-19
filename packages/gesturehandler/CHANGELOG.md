@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.0](https://github.com/nativescript-community/gesturehandler/compare/v2.0.45...v2.1.0) (2026-10-19)
+
+### Features
+
+* **ios:** let the pan handler react to scroll events like the mouse wheel ([25bc959](https://github.com/nativescript-community/gesturehandler/commit/25bc959145d55b59bf0ee029dc8210d3eea3200b))
+
 ## [2.0.45](https://github.com/nativescript-community/gesturehandler/compare/v2.0.44...v2.0.45) (2026-09-04)
 
 ### Bug Fixes
