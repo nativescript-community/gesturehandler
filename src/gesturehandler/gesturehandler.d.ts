@@ -112,6 +112,10 @@ export interface PanGestureHandlerOptions extends HandlerOptions {
     activeOffsetYEnd?: number;
     failOffsetYStart?: number;
     failOffsetYEnd?: number;
+    /** iOS only: UIScrollTypeMask of the scroll events (mouse wheel, trackpad) the pan also reacts to: 1 discrete, 2 continuous, 3 both. 0 (default) = touches only.
+     * `shouldStartGesture` is called for them too, to let a parent scroll view take the scroll instead.
+     */
+    allowedScrollTypes?: number;
 }
 
 export class PanGestureHandler extends Handler<any, PanGestureHandlerOptions> {
@@ -124,6 +128,7 @@ export class PanGestureHandler extends Handler<any, PanGestureHandlerOptions> {
     activeOffsetYEnd: number;
     failOffsetYStart: number;
     failOffsetYEnd: number;
+    allowedScrollTypes: number;
 }
 export interface NativeViewGestureHandlerOptions extends HandlerOptions {
     shouldActivateOnStart?: boolean;

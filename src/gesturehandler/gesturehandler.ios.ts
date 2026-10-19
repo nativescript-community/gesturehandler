@@ -283,6 +283,7 @@ export class PanHandler extends Handler<PanGestureHandler, PanGestureHandlerOpti
     @nativeProperty({ converter: { fromNative: Utils.layout.toDevicePixels } }) minVelocityY: number;
     @nativeProperty minPointers: number;
     @nativeProperty maxPointers: number;
+    @nativeProperty allowedScrollTypes: number;
     @nativeProperty({ nativeSetterName: 'setAverageTouches' }) avgTouches: number;
     @nativeProperty numberOfPointers: number;
 }

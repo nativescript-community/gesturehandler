@@ -342,7 +342,9 @@ shouldRecognizeSimultaneouslyWithGestureRecognizer:(UIGestureRecognizer *)otherG
 - (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 {
     [self reset];
-    if (self.activateOnBegin && self.delegate && [self.delegate respondsToSelector:@selector(gestureHandler:shouldActivateForEvent:)]) {
+    // a scroll event (mouse wheel) is a pan without any touch: it never goes through touchesBegan
+    BOOL isScrollEvent = [gestureRecognizer isKindOfClass:[UIPanGestureRecognizer class]] && gestureRecognizer.numberOfTouches == 0;
+    if ((self.activateOnBegin || isScrollEvent) && self.delegate && [self.delegate respondsToSelector:@selector(gestureHandler:shouldActivateForEvent:)]) {
         if (![self.delegate gestureHandler:self shouldActivateForEvent:[self eventExtraData:gestureRecognizer]]) {
           return FALSE;
         }
