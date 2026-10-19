@@ -27,6 +27,7 @@
 
 
 - (id)initWithGestureHandler:(GestureHandler*)gestureHandler;
+- (BOOL)shouldFailForScrollEvent;
 
 @end
 
@@ -125,6 +126,17 @@
   [super reset];
 }
 
+// a scroll event (mouse wheel) has no touches, so touchesMoved never checks the fail offsets for it:
+// a scroll mostly along an axis that has a fail offset never begins, and goes to the parent scroll view
+- (BOOL)shouldFailForScrollEvent
+{
+  CGPoint trans = [self translationInView:self.view];
+  if (fabs(trans.x) > fabs(trans.y)) {
+    return !isnan(_failOffsetXStart) || !isnan(_failOffsetXEnd);
+  }
+  return !isnan(_failOffsetYStart) || !isnan(_failOffsetYEnd);
+}
+
 - (void)updateHasCustomActivationCriteria
 {
   _hasCustomActivationCriteria = !isnan(_minDistSq)
@@ -198,6 +210,15 @@
   return self;
 }
 
+- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
+{
+  BetterPanGestureRecognizer *recognizer = (BetterPanGestureRecognizer *)_recognizer;
+  if (gestureRecognizer == recognizer && recognizer.numberOfTouches == 0 && [recognizer shouldFailForScrollEvent]) {
+    return NO;
+  }
+  return [super gestureRecognizerShouldBegin:gestureRecognizer];
+}
+
 - (void)configure:(NSDictionary *)config
 {
   [super configure:config];
@@ -217,6 +238,10 @@
 #if !TARGET_OS_TV
   APPLY_NAMED_INT_PROP(minimumNumberOfTouches, @"minPointers");
   APPLY_NAMED_INT_PROP(maximumNumberOfTouches, @"maxPointers");
+  // mouse wheel and trackpad scrolls (Mac Catalyst, iPad pointer): UIScrollTypeMask, 0 = none
+  if (@available(iOS 13.4, macCatalyst 13.4, *)) {
+    APPLY_NAMED_INT_PROP(allowedScrollTypesMask, @"allowedScrollTypes");
+  }
 #endif
     
   id prop = config[@"minDist"];
