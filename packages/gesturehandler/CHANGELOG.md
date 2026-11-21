@@ -3,6 +3,12 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [2.1.1](https://github.com/nativescript-community/gesturehandler/compare/v2.1.0...v2.1.1) (2026-11-21)
+
+### Bug Fixes
+
+* **android:** hit test rotated and scaled views in bounds checks ([4fedaf8](https://github.com/nativescript-community/gesturehandler/commit/4fedaf8bdd6cfc69333ad05ed8f4a5d32fd06ae1))
+
 ## [2.1.0](https://github.com/nativescript-community/gesturehandler/compare/v2.0.45...v2.1.0) (2026-10-19)
 
 ### Features
