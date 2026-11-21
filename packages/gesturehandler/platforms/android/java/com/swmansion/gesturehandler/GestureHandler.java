@@ -425,14 +425,25 @@ public class GestureHandler<T extends GestureHandler> {
 
   public boolean isWithinBounds(View view, float posX, float posY) {
 
-    // TODO: can we find a way to cache sClipRect ?
-    if  (!view.getLocalVisibleRect(sClipRect)) {
-      return false;
+    float left;
+    float top;
+    float right;
+    float bottom;
+    if (GestureHandlerOrchestrator.hasRotationOrScale(view)) {
+      left = 0;
+      top = 0;
+      right = view.getWidth();
+      bottom = view.getHeight();
+    } else {
+      // TODO: can we find a way to cache sClipRect ?
+      if  (!view.getLocalVisibleRect(sClipRect)) {
+        return false;
+      }
+      left = sClipRect.left;
+      top = sClipRect.top;
+      right = sClipRect.right;
+      bottom = sClipRect.bottom;
     }
-    float left = sClipRect.left;
-    float top = sClipRect.top;
-    float right = left + sClipRect.right - sClipRect.left;
-    float bottom = top + sClipRect.bottom - sClipRect.top;
     if (mHitSlop != null) {
       float padLeft = mHitSlop[HIT_SLOP_LEFT_IDX];
       float padTop = mHitSlop[HIT_SLOP_TOP_IDX];
