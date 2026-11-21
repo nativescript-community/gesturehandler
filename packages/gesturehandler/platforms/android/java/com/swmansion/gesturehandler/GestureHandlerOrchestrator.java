@@ -564,7 +564,22 @@ public class GestureHandlerOrchestrator {
 
   private static Rect sClipRect = new Rect();
 
+  // getLocalVisibleRect gives a shifted rect when the view or an ancestor is rotated or scaled
+  static boolean hasRotationOrScale(View view) {
+    while (view != null) {
+      if (view.getRotation() != 0 || view.getRotationX() != 0 || view.getRotationY() != 0 || view.getScaleX() != 1 || view.getScaleY() != 1) {
+        return true;
+      }
+      Object parent = view.getParent();
+      view = parent instanceof View ? (View) parent : null;
+    }
+    return false;
+  }
+
   private static boolean isTransformedTouchPointInView(float x, float y, View child) {
+    if (hasRotationOrScale(child)) {
+      return x >= 0 && x <= child.getWidth() && y >= 0 && y <= child.getHeight();
+    }
     // TODO: can we find a way to cache sClipRect as call it quite a lot?
     if  (!child.getLocalVisibleRect(sClipRect)) {
       return false;
