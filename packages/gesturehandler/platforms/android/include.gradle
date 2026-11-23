@@ -1,9 +1,18 @@
 import groovy.json.JsonSlurper
 
+apply plugin: "org.nativescript.api"
+
 dependencies {
     implementation "androidx.annotation:annotation:1.1.0"
 
-    if (project.hasProperty("tempBuild")) {
+    // In this plugin's own aar build the CLI runs only this block and the next one, and loads
+    // org.nativescript:gradle-api there only on CLIs that support it, so look the extension up
+    // instead of assuming it and keep the older code as the fallback.
+    def ns = project.extensions.findByName("nativescript")
+    def core = (ns != null && ns.pluginBuild) ? (ns.findPlugin("@nativescript/core") ?: ns.findPlugin("@akylas/nativescript")) : null
+    if (core != null) {
+        compileOnly core.artifacts
+    } else if (project.hasProperty("tempBuild")) {
         // we need to copy the code in both places as N main gradle system does not support top level code
         // for now we support only @nativescript/core and @akylas/nativescript
         // we should have a more generic way
@@ -26,7 +35,9 @@ dependencies {
     }
 }
 repositories {
-	if (project.hasProperty("tempBuild")) {
+    def ns = project.extensions.findByName("nativescript")
+    def core = (ns != null && ns.pluginBuild) ? (ns.findPlugin("@nativescript/core") ?: ns.findPlugin("@akylas/nativescript")) : null
+	if (core == null && project.hasProperty("tempBuild")) {
 	    // we need to copy the code in both places as N main gradle system does not support top level code
 	    // for now we support only @nativescript/core and @akylas/nativescript
 	    // we should have a more generic way
