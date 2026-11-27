@@ -1,56 +1,15 @@
-import groovy.json.JsonSlurper
-
-apply plugin: "org.nativescript.api"
-
 dependencies {
     implementation "androidx.annotation:annotation:1.1.0"
 
-    // In this plugin's own aar build the CLI runs only this block and the next one, and loads
-    // org.nativescript:gradle-api there only on CLIs that support it, so look the extension up
-    // instead of assuming it and keep the older code as the fallback.
-    def ns = project.extensions.findByName("nativescript")
-    def core = (ns != null && ns.pluginBuild) ? (ns.findPlugin("@nativescript/core") ?: ns.findPlugin("@akylas/nativescript")) : null
-    if (core != null) {
+    if (project.hasProperty("tempBuild")) {
+        // NativeScript CLIs before 9.2 don't load org.nativescript:gradle-api in this plugin's own aar build.
+        if (project.extensions.findByName("nativescript") == null) {
+            throw new GradleException("@nativescript-community/gesturehandler needs NativeScript CLI 9.2 or newer: npm i -D nativescript@latest")
+        }
+        def core = nativescript.findPlugin("@nativescript/core") ?: nativescript.findPlugin("@akylas/nativescript")
+        if (core == null) {
+            throw new GradleException("@nativescript-community/gesturehandler needs @nativescript/core or @akylas/nativescript")
+        }
         compileOnly core.artifacts
-    } else if (project.hasProperty("tempBuild")) {
-        // we need to copy the code in both places as N main gradle system does not support top level code
-        // for now we support only @nativescript/core and @akylas/nativescript
-        // we should have a more generic way
-		def widgetsDir = "$USER_PROJECT_ROOT/node_modules/@nativescript/core/platforms/android"
-        def appPackageJsonFile = file("$USER_PROJECT_ROOT/package.json")
-        if (appPackageJsonFile.exists()) {
-            def appPackageJson = new JsonSlurper().parseText(appPackageJsonFile.text)
-            if (appPackageJson.dependencies['@akylas/nativescript'] != null) {
-                widgetsDir = "$USER_PROJECT_ROOT/node_modules/@akylas/nativescript/platforms/android"
-            }
-        }
-
-        // if ui-mobile-base is provided as source the name is nativescript.aar
-	  	//else use widget-release.aar
-      	if (file("$widgetsDir/widgets-release.aar").exists()) {
-            implementation(name:'widgets-release', ext:'aar')
-        } else {
-            implementation(name:'nativescript', ext:'aar')
-        }
     }
-}
-repositories {
-    def ns = project.extensions.findByName("nativescript")
-    def core = (ns != null && ns.pluginBuild) ? (ns.findPlugin("@nativescript/core") ?: ns.findPlugin("@akylas/nativescript")) : null
-	if (core == null && project.hasProperty("tempBuild")) {
-	    // we need to copy the code in both places as N main gradle system does not support top level code
-	    // for now we support only @nativescript/core and @akylas/nativescript
-	    // we should have a more generic way
-	    def widgetsDir = "$USER_PROJECT_ROOT/node_modules/@nativescript/core/platforms/android"
-	    def appPackageJsonFile = file("$USER_PROJECT_ROOT/package.json")
-	    if (appPackageJsonFile.exists()) {
-	        def appPackageJson = new JsonSlurper().parseText(appPackageJsonFile.text)
-	        if (appPackageJson.dependencies['@akylas/nativescript'] != null) {
-	            widgetsDir = "$USER_PROJECT_ROOT/node_modules/@akylas/nativescript/platforms/android"
-	        }
-	    }
-	    flatDir {
-	        dirs "$widgetsDir"
-	    }
-	}
 }

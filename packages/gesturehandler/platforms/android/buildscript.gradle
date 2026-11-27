@@ -2,5 +2,5 @@ repositories {
     mavenCentral()
 }
 dependencies {
-    classpath "org.nativescript:gradle-api:0.1.0-alpha.1"
+    classpath "org.nativescript:gradle-api:0.1.0-alpha.2"
 }
